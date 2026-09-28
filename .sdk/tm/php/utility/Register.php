@@ -1,0 +1,70 @@
+<?php
+declare(strict_types=1);
+
+// Novu SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+NovuUtility::setRegistrar(function (NovuUtility $u): void {
+    $u->clean = [NovuClean::class, 'call'];
+    $u->done = [NovuDone::class, 'call'];
+    $u->make_error = [NovuMakeError::class, 'call'];
+    $u->feature_add = [NovuFeatureAdd::class, 'call'];
+    $u->feature_hook = [NovuFeatureHook::class, 'call'];
+    $u->feature_init = [NovuFeatureInit::class, 'call'];
+    $u->fetcher = [NovuFetcher::class, 'call'];
+    $u->make_fetch_def = [NovuMakeFetchDef::class, 'call'];
+    $u->make_context = [NovuMakeContext::class, 'call'];
+    $u->make_options = [NovuMakeOptions::class, 'call'];
+    $u->make_request = [NovuMakeRequest::class, 'call'];
+    $u->make_response = [NovuMakeResponse::class, 'call'];
+    $u->make_result = [NovuMakeResult::class, 'call'];
+    $u->make_point = [NovuMakePoint::class, 'call'];
+    $u->make_spec = [NovuMakeSpec::class, 'call'];
+    $u->make_url = [NovuMakeUrl::class, 'call'];
+    $u->param = [NovuParam::class, 'call'];
+    $u->prepare_auth = [NovuPrepareAuth::class, 'call'];
+    $u->prepare_body = [NovuPrepareBody::class, 'call'];
+    $u->prepare_headers = [NovuPrepareHeaders::class, 'call'];
+    $u->prepare_method = [NovuPrepareMethod::class, 'call'];
+    $u->prepare_params = [NovuPrepareParams::class, 'call'];
+    $u->prepare_path = [NovuPreparePath::class, 'call'];
+    $u->prepare_query = [NovuPrepareQuery::class, 'call'];
+    $u->graphql_body = [NovuGraphql::class, 'body'];
+    $u->graphql_errors = [NovuGraphql::class, 'errors'];
+    $u->result_basic = [NovuResultBasic::class, 'call'];
+    $u->result_body = [NovuResultBody::class, 'call'];
+    $u->result_headers = [NovuResultHeaders::class, 'call'];
+    $u->transform_request = [NovuTransformRequest::class, 'call'];
+    $u->transform_response = [NovuTransformResponse::class, 'call'];
+});

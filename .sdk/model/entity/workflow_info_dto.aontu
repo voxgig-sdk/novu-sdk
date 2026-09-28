@@ -1,0 +1,96 @@
+# Entity: workflow_info_dto
+
+main: kit: entity: workflow_info_dto: {
+
+  alias: field: {}
+
+  fields: {
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The name of the workflow"
+      t: "`$STRING`"
+    }
+    workflowId: {
+      h: "Workflow Id"
+      n: "workflowId"
+      r: true
+      sh: "The unique identifier of the workflow"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "workflow_info_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/layouts/{layoutId}/usage"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "layout_id"
+                or: "layout_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/layouts/{layoutId}/usage"
+          q: {
+            exist: [
+              "idempotency_key"
+              "layout_id"
+            ]
+          }
+          r: {
+            param: {
+              layoutId: "layout_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "layouts"
+            }
+            {
+              var: "layout_id"
+            }
+            {
+              lit: "usage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.workflows`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.layout")]
+  ]
+
+}

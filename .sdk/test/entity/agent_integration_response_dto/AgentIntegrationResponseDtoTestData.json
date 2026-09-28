@@ -1,0 +1,82 @@
+{
+  "existing": {
+    "agent_integration_response_dto": {
+      "AGENT_INTEGRATION_RESPONSE_DTO00": {
+        "agentId": "s6e",
+        "connectedAt": {},
+        "createdAt": "s70",
+        "environmentId": "s71",
+        "exceedsPlanLimit": true,
+        "id": "AGENT_INTEGRATION_RESPONSE_DTO00",
+        "integration": {},
+        "integrationIdentifier": "s75",
+        "organizationId": "s76",
+        "providerId": "s77",
+        "updatedAt": "s78",
+        "identifier": "IDENTIFIER01",
+        "agent_id": "AGENT01",
+        "agent_integration_id": "AGENT_INTEGRATION01"
+      },
+      "AGENT_INTEGRATION_RESPONSE_DTO01": {
+        "agentId": "sdc",
+        "connectedAt": {},
+        "createdAt": "sde",
+        "environmentId": "sdf",
+        "exceedsPlanLimit": true,
+        "id": "AGENT_INTEGRATION_RESPONSE_DTO01",
+        "integration": {},
+        "integrationIdentifier": "se3",
+        "organizationId": "se4",
+        "providerId": "se5",
+        "updatedAt": "se6",
+        "identifier": "IDENTIFIER01",
+        "agent_id": "AGENT01",
+        "agent_integration_id": "AGENT_INTEGRATION01"
+      },
+      "AGENT_INTEGRATION_RESPONSE_DTO02": {
+        "agentId": "s14a",
+        "connectedAt": {},
+        "createdAt": "s14c",
+        "environmentId": "s14d",
+        "exceedsPlanLimit": true,
+        "id": "AGENT_INTEGRATION_RESPONSE_DTO02",
+        "integration": {},
+        "integrationIdentifier": "s151",
+        "organizationId": "s152",
+        "providerId": "s153",
+        "updatedAt": "s154",
+        "identifier": "IDENTIFIER01",
+        "agent_id": "AGENT01",
+        "agent_integration_id": "AGENT_INTEGRATION01"
+      }
+    }
+  },
+  "new": {
+    "agent_integration_response_dto": {
+      "agent_integration_response_dto_ref01": {
+        "agentId": "s1b8",
+        "connectedAt": {},
+        "createdAt": "s1ba",
+        "environmentId": "s1bb",
+        "exceedsPlanLimit": true,
+        "integration": {},
+        "integrationIdentifier": "s1bf",
+        "organizationId": "s1c0",
+        "providerId": "s1c1",
+        "updatedAt": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/agents/{identifier}/integrations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v1/agents/{identifier}/integrations/{agentIntegrationId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

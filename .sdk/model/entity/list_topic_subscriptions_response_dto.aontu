@@ -1,0 +1,337 @@
+# Entity: list_topic_subscriptions_response_dto
+
+main: kit: entity: list_topic_subscriptions_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    contextKeys: {
+      h: "Context Keys"
+      n: "contextKeys"
+      r: false
+      sh: "Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)"
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "The date and time the subscription was created"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The identifier of the subscription"
+      t: "`$STRING`"
+    }
+    identifier: {
+      h: "Identifier"
+      n: "identifier"
+      r: true
+      sh: "The identifier of the subscription"
+      t: "`$STRING`"
+    }
+    preferences: {
+      h: "Preferences"
+      n: "preferences"
+      r: false
+      sh: "The preferences for workflows in this subscription"
+      t: "`$ARRAY`"
+    }
+    subscriber: {
+      h: "Subscriber"
+      n: "subscriber"
+      r: true
+      sh: "Subscriber information"
+      t: "`$ANY`"
+    }
+    topic: {
+      h: "Topic"
+      n: "topic"
+      r: true
+      sh: "Topic information"
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "list_topic_subscriptions_response_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/subscribers/{subscriberId}/subscriptions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: [
+                  "tenant:org-123"
+                  "region:us-east-1"
+                ]
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "include_cursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "key"
+                or: "key"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "order_by"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "order_direction"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/subscribers/{subscriberId}/subscriptions"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "context_key"
+              "idempotency_key"
+              "include_cursor"
+              "key"
+              "limit"
+              "order_by"
+              "order_direction"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "subscriptions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/topics/{topicKey}/subscriptions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "topic_key"
+                or: "topic_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: [
+                  "tenant:org-123"
+                  "region:us-east-1"
+                ]
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "include_cursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "order_by"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "order_direction"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/topics/{topicKey}/subscriptions"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "context_key"
+              "idempotency_key"
+              "include_cursor"
+              "limit"
+              "order_by"
+              "order_direction"
+              "subscriber_id"
+              "topic_key"
+            ]
+          }
+          r: {
+            param: {
+              topicKey: "topic_key"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "topics"
+            }
+            {
+              var: "topic_key"
+            }
+            {
+              lit: "subscriptions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+    [path("$.main.kit.entity.topic")]
+  ]
+
+}

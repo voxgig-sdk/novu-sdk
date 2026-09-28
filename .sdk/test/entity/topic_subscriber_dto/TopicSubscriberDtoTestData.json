@@ -1,0 +1,58 @@
+{
+  "existing": {
+    "topic_subscriber_dto": {
+      "TOPIC_SUBSCRIBER_DTO00": {
+        "environmentId": "s3c",
+        "externalSubscriberId": "s3d",
+        "organizationId": "s3e",
+        "subscriberId": "s3f",
+        "topicId": "s40",
+        "topicKey": "s41",
+        "external_subscriber_id": "EXTERNAL_SUBSCRIBER01",
+        "topic_id": "TOPIC01",
+        "id": "TOPIC_SUBSCRIBER_DTO00"
+      },
+      "TOPIC_SUBSCRIBER_DTO01": {
+        "environmentId": "s78",
+        "externalSubscriberId": "s79",
+        "organizationId": "s7a",
+        "subscriberId": "s7b",
+        "topicId": "s7c",
+        "topicKey": "s7d",
+        "external_subscriber_id": "EXTERNAL_SUBSCRIBER01",
+        "topic_id": "TOPIC01",
+        "id": "TOPIC_SUBSCRIBER_DTO01"
+      },
+      "TOPIC_SUBSCRIBER_DTO02": {
+        "environmentId": "sb4",
+        "externalSubscriberId": "sb5",
+        "organizationId": "sb6",
+        "subscriberId": "sb7",
+        "topicId": "sb8",
+        "topicKey": "sb9",
+        "external_subscriber_id": "EXTERNAL_SUBSCRIBER01",
+        "topic_id": "TOPIC01",
+        "id": "TOPIC_SUBSCRIBER_DTO02"
+      }
+    }
+  },
+  "new": {
+    "topic_subscriber_dto": {
+      "topic_subscriber_dto_ref01": {
+        "environmentId": "sf0",
+        "externalSubscriberId": "sf1",
+        "organizationId": "sf2",
+        "subscriberId": "sf3",
+        "topicId": "sf4",
+        "topicKey": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /v1/topics/{topicKey}/subscribers/{externalSubscriberId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "environment_tags_dto": {
+      "ENVIRONMENT_TAGS_DTO00": {
+        "id": "ENVIRONMENT_TAGS_DTO00"
+      },
+      "ENVIRONMENT_TAGS_DTO01": {
+        "id": "ENVIRONMENT_TAGS_DTO01"
+      },
+      "ENVIRONMENT_TAGS_DTO02": {
+        "id": "ENVIRONMENT_TAGS_DTO02"
+      }
+    }
+  },
+  "new": {
+    "environment_tags_dto": {
+      "environment_tags_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /v2/environments/{environmentId}/tags": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

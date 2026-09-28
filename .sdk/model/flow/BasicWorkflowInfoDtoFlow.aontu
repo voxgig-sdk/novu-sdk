@@ -1,0 +1,26 @@
+# BasicWorkflowInfoDtoFlow
+
+main: kit: flow: BasicWorkflowInfoDtoFlow:
+{
+  entity: "workflow_info_dto",
+  kind: "basic",
+  name: "BasicWorkflowInfoDtoFlow",
+  step: [
+    {
+      m: {
+        layout_id: "layout01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "workflow_info_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWorkflowInfoDtoFlow"
+}

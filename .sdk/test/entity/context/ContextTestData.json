@@ -1,0 +1,55 @@
+{
+  "existing": {
+    "context": {
+      "CONTEXT00": {
+        "bridgeUrl": "s28",
+        "data": {},
+        "id": "CONTEXT00",
+        "type": "s2b"
+      },
+      "CONTEXT01": {
+        "bridgeUrl": "s50",
+        "data": {},
+        "id": "CONTEXT01",
+        "type": "s53"
+      },
+      "CONTEXT02": {
+        "bridgeUrl": "s78",
+        "data": {},
+        "id": "CONTEXT02",
+        "type": "s7b"
+      }
+    }
+  },
+  "new": {
+    "context": {
+      "context_ref01": {
+        "bridgeUrl": "sa0",
+        "data": {},
+        "type": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/contexts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/contexts/{type}/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/contexts/{type}/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/contexts/{type}/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# BasicActivityNotificationResponseDtoFlow
+
+main: kit: flow: BasicActivityNotificationResponseDtoFlow:
+{
+  entity: "activity_notification_response_dto",
+  kind: "basic",
+  name: "BasicActivityNotificationResponseDtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "activity_notification_response_dto_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "activity_notification_response_dto_ref01",
+        srcdatavar: "activity_notification_response_dto_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "activity_notification_response_dto01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-activity_notification_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActivityNotificationResponseDtoFlow"
+}

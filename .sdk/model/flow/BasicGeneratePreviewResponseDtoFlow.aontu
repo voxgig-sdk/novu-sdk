@@ -1,0 +1,23 @@
+# BasicGeneratePreviewResponseDtoFlow
+
+main: kit: flow: BasicGeneratePreviewResponseDtoFlow:
+{
+  entity: "generate_preview_response_dto",
+  kind: "basic",
+  name: "BasicGeneratePreviewResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "generate_preview_response_dto_ref01"
+      }
+
+      m: {
+        step_id: "step01",
+        workflow_id: "workflow01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicGeneratePreviewResponseDtoFlow"
+}

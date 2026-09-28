@@ -1,0 +1,91 @@
+# Entity: webhook_result_dto
+
+main: kit: entity: webhook_result_dto: {
+
+  alias: field: {}
+
+  name: "webhook_result_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/inbound-webhooks/delivery-providers/{environmentId}/{integrationId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "environment_id"
+                or: "environment_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "integration_id"
+                or: "integration_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/inbound-webhooks/delivery-providers/{environmentId}/{integrationId}"
+          q: {
+            exist: [
+              "environment_id"
+              "idempotency_key"
+              "integration_id"
+            ]
+          }
+          r: {
+            param: {
+              environmentId: "environment_id"
+              integrationId: "integration_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "inbound-webhooks"
+            }
+            {
+              lit: "delivery-providers"
+            }
+            {
+              var: "environment_id"
+            }
+            {
+              var: "integration_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

@@ -1,0 +1,162 @@
+# Entity: translation_group_dto
+
+main: kit: entity: translation_group_dto: {
+
+  alias: field: {}
+
+  fields: {
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "Creation timestamp"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    locales: {
+      h: "Locales"
+      n: "locales"
+      r: true
+      sh: "Array of available locales for this resource"
+      t: "`$ARRAY`"
+    }
+    outdatedLocales: {
+      h: "Outdated Locales"
+      n: "outdatedLocales"
+      r: false
+      sh: "Locales that are outdated compared to the default locale (only present when there are outdated locales)"
+      t: "`$ARRAY`"
+    }
+    resourceId: {
+      h: "Resource Id"
+      n: "resourceId"
+      r: true
+      sh: "Resource identifier (slugified ID)"
+      t: "`$STRING`"
+    }
+    resourceName: {
+      h: "Resource Name"
+      n: "resourceName"
+      r: true
+      sh: "Resource name (e.g., workflow name)"
+      t: "`$STRING`"
+    }
+    resourceType: {
+      h: "Resource Type"
+      n: "resourceType"
+      r: true
+      sh: "Resource type"
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      sh: "Last update timestamp"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      resource_id: "resourceId"
+      resource_type: "resourceType"
+    }
+    name: "id"
+    parts: [
+      "resource_type"
+      "resource_id"
+    ]
+    sep: "/"
+  }
+
+  name: "translation_group_dto"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/translations/group/{resourceType}/{resourceId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "welcome-email"
+                k: "param"
+                n: "resource_id"
+                or: "resource_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "workflow"
+                k: "param"
+                n: "resource_type"
+                or: "resource_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/translations/group/{resourceType}/{resourceId}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "resource_id"
+              "resource_type"
+            ]
+          }
+          r: {
+            param: {
+              resourceId: "resource_id"
+              resourceType: "resource_type"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+            {
+              lit: "group"
+            }
+            {
+              var: "resource_type"
+            }
+            {
+              var: "resource_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

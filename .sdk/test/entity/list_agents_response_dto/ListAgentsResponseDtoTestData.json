@@ -1,0 +1,100 @@
+{
+  "existing": {
+    "list_agents_response_dto": {
+      "LIST_AGENTS_RESPONSE_DTO00": {
+        "active": true,
+        "behavior": {},
+        "bridgeUrl": "sc0",
+        "createdAt": "sc1",
+        "createdBy": "sc2",
+        "description": "sc3",
+        "devBridgeActive": true,
+        "devBridgeUrl": "sc5",
+        "environmentId": "sc6",
+        "exceedsPlanLimit": false,
+        "id": "LIST_AGENTS_RESPONSE_DTO00",
+        "identifier": "sc9",
+        "integrations": [],
+        "managedRuntime": "scb",
+        "name": "scc",
+        "organizationId": "scd",
+        "runtime": "sce",
+        "updatedAt": "scf",
+        "visibility": "sd0"
+      },
+      "LIST_AGENTS_RESPONSE_DTO01": {
+        "active": true,
+        "behavior": {},
+        "bridgeUrl": "s17e",
+        "createdAt": "s17f",
+        "createdBy": "s180",
+        "description": "s181",
+        "devBridgeActive": true,
+        "devBridgeUrl": "s183",
+        "environmentId": "s184",
+        "exceedsPlanLimit": false,
+        "id": "LIST_AGENTS_RESPONSE_DTO01",
+        "identifier": "s187",
+        "integrations": [],
+        "managedRuntime": "s189",
+        "name": "s18a",
+        "organizationId": "s18b",
+        "runtime": "s18c",
+        "updatedAt": "s18d",
+        "visibility": "s18e"
+      },
+      "LIST_AGENTS_RESPONSE_DTO02": {
+        "active": true,
+        "behavior": {},
+        "bridgeUrl": "s23c",
+        "createdAt": "s23d",
+        "createdBy": "s23e",
+        "description": "s23f",
+        "devBridgeActive": true,
+        "devBridgeUrl": "s241",
+        "environmentId": "s242",
+        "exceedsPlanLimit": false,
+        "id": "LIST_AGENTS_RESPONSE_DTO02",
+        "identifier": "s245",
+        "integrations": [],
+        "managedRuntime": "s247",
+        "name": "s248",
+        "organizationId": "s249",
+        "runtime": "s24a",
+        "updatedAt": "s24b",
+        "visibility": "s24c"
+      }
+    }
+  },
+  "new": {
+    "list_agents_response_dto": {
+      "list_agents_response_dto_ref01": {
+        "active": true,
+        "behavior": {},
+        "bridgeUrl": "s2fa",
+        "createdAt": "s2fb",
+        "createdBy": "s2fc",
+        "description": "s2fd",
+        "devBridgeActive": true,
+        "devBridgeUrl": "s2ff",
+        "environmentId": "s300",
+        "exceedsPlanLimit": false,
+        "identifier": "s303",
+        "integrations": [],
+        "managedRuntime": "s305",
+        "name": "s306",
+        "organizationId": "s307",
+        "runtime": "s308",
+        "updatedAt": "s309",
+        "visibility": "s30a"
+      }
+    }
+  },
+  "requests": {
+    "GET /v1/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

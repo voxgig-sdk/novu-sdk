@@ -1,0 +1,18 @@
+# BasicGenerateChatOAuthUrlResponseDtoFlow
+
+main: kit: flow: BasicGenerateChatOAuthUrlResponseDtoFlow:
+{
+  entity: "generate_chat_o_auth_url_response_dto",
+  kind: "basic",
+  name: "BasicGenerateChatOAuthUrlResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "generate_chat_o_auth_url_response_dto_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicGenerateChatOAuthUrlResponseDtoFlow"
+}

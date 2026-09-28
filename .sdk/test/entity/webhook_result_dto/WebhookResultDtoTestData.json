@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "webhook_result_dto": {
+      "WEBHOOK_RESULT_DTO00": {
+        "environment_id": "ENVIRONMENT01",
+        "integration_id": "INTEGRATION01",
+        "id": "WEBHOOK_RESULT_DTO00"
+      },
+      "WEBHOOK_RESULT_DTO01": {
+        "environment_id": "ENVIRONMENT01",
+        "integration_id": "INTEGRATION01",
+        "id": "WEBHOOK_RESULT_DTO01"
+      },
+      "WEBHOOK_RESULT_DTO02": {
+        "environment_id": "ENVIRONMENT01",
+        "integration_id": "INTEGRATION01",
+        "id": "WEBHOOK_RESULT_DTO02"
+      }
+    }
+  },
+  "new": {
+    "webhook_result_dto": {
+      "webhook_result_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /v2/inbound-webhooks/delivery-providers/{environmentId}/{integrationId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

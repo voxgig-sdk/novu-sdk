@@ -1,0 +1,61 @@
+# BasicTranslationFlow
+
+main: kit: flow: BasicTranslationFlow:
+{
+  entity: "translation",
+  kind: "basic",
+  name: "BasicTranslationFlow",
+  step: [
+    {
+      i: {
+        ref: "translation_ref01"
+      }
+
+      m: {
+        resource_id: "resource01",
+        resource_type: "resource_type01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "translation_ref01",
+        srcdatavar: "translation_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "translation01",
+        resource_id: "resource01",
+        resource_type: "resource_type01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-translation_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "translation_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "translation01",
+        resource_type: "resource_type01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicTranslationFlow"
+}

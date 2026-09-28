@@ -1,0 +1,202 @@
+# Entity: step
+
+main: kit: entity: step: {
+
+  alias: field: {}
+
+  fields: {
+    controlValues: {
+      h: "Control Values"
+      n: "controlValues"
+      r: false
+      sh: "Control values for the step (alias for controls.values)"
+      t: "`$OBJECT`"
+    }
+    controls: {
+      h: "Controls"
+      n: "controls"
+      r: true
+      sh: "Controls metadata for the step"
+      t: "`$ANY`"
+      union: {
+        branches: 5
+        count: 2
+        depth: 14
+      }
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Database identifier of the step"
+      t: "`$STRING`"
+    }
+    issues: {
+      h: "Issues"
+      n: "issues"
+      r: false
+      sh: "Issues associated with the step"
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "Name of the step"
+      t: "`$STRING`"
+    }
+    origin: {
+      h: "Origin"
+      n: "origin"
+      r: true
+      sh: "Workflow origin"
+      t: "`$STRING`"
+    }
+    providerOverrides: {
+      h: "Provider Overrides"
+      n: "providerOverrides"
+      r: false
+      sh: "Per-provider content overrides keyed by providerId."
+      t: "`$OBJECT`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      sh: "Slug of the step"
+      t: "`$STRING`"
+    }
+    stepId: {
+      h: "Step Id"
+      n: "stepId"
+      r: true
+      sh: "Unique identifier of the step"
+      t: "`$STRING`"
+    }
+    stepResolverHash: {
+      h: "Step Resolver Hash"
+      n: "stepResolverHash"
+      r: false
+      sh: "Hash identifying the deployed Cloudflare Worker for this step"
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: true
+      sh: "Type of the step"
+      t: "`$STRING`"
+    }
+    variables: {
+      h: "Variables"
+      n: "variables"
+      r: true
+      sh: "JSON Schema for variables, follows the JSON Schema standard"
+      t: "`$OBJECT`"
+    }
+    workflowDatabaseId: {
+      h: "Workflow Database Id"
+      n: "workflowDatabaseId"
+      r: true
+      sh: "Workflow database identifier"
+      t: "`$STRING`"
+    }
+    workflowId: {
+      h: "Workflow Id"
+      n: "workflowId"
+      r: true
+      sh: "Workflow identifier"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "step"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/workflows/{workflowId}/steps/{stepId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "step_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "workflow_id"
+                or: "workflow_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/workflows/{workflowId}/steps/{stepId}"
+          q: {
+            exist: [
+              "id"
+              "idempotency_key"
+              "workflow_id"
+            ]
+          }
+          r: {
+            param: {
+              stepId: "id"
+              workflowId: "workflow_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "workflows"
+            }
+            {
+              var: "workflow_id"
+            }
+            {
+              lit: "steps"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.workflow")]
+  ]
+
+}

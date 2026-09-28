@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "subscriber_notifications_response_dto": {
+      "SUBSCRIBER_NOTIFICATIONS_RESPONSE_DTO00": {
+        "id": "SUBSCRIBER_NOTIFICATIONS_RESPONSE_DTO00"
+      },
+      "SUBSCRIBER_NOTIFICATIONS_RESPONSE_DTO01": {
+        "id": "SUBSCRIBER_NOTIFICATIONS_RESPONSE_DTO01"
+      },
+      "SUBSCRIBER_NOTIFICATIONS_RESPONSE_DTO02": {
+        "id": "SUBSCRIBER_NOTIFICATIONS_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "subscriber_notifications_response_dto": {
+      "subscriber_notifications_response_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /v2/subscribers/{subscriberId}/notifications": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

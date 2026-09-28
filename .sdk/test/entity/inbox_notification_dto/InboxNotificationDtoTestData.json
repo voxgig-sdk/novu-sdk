@@ -1,0 +1,168 @@
+{
+  "existing": {
+    "inbox_notification_dto": {
+      "INBOX_NOTIFICATION_DTO00": {
+        "archivedAt": "sfa",
+        "avatar": "sfb",
+        "body": "sfc",
+        "channelType": "sfd",
+        "createdAt": "sfe",
+        "data": {},
+        "deliveredAt": [],
+        "firstSeenAt": "s101",
+        "id": "INBOX_NOTIFICATION_DTO00",
+        "isArchived": false,
+        "isRead": true,
+        "isSeen": false,
+        "isSnoozed": true,
+        "primaryAction": "s107",
+        "readAt": "s108",
+        "redirect": "s109",
+        "secondaryAction": "s10a",
+        "severity": "s10b",
+        "snoozeUntil": "s10c",
+        "snoozedUntil": "s10d",
+        "subject": "s10e",
+        "tags": [],
+        "to": "s110",
+        "transactionId": "s111",
+        "workflow": "s112",
+        "action_type": "ACTION_TYPE01",
+        "notification_id": "NOTIFICATION01",
+        "subscriber_id": "SUBSCRIBER01"
+      },
+      "INBOX_NOTIFICATION_DTO01": {
+        "archivedAt": "s1f4",
+        "avatar": "s1f5",
+        "body": "s1f6",
+        "channelType": "s1f7",
+        "createdAt": "s1f8",
+        "data": {},
+        "deliveredAt": [],
+        "firstSeenAt": "s1fb",
+        "id": "INBOX_NOTIFICATION_DTO01",
+        "isArchived": false,
+        "isRead": true,
+        "isSeen": false,
+        "isSnoozed": true,
+        "primaryAction": "s201",
+        "readAt": "s202",
+        "redirect": "s203",
+        "secondaryAction": "s204",
+        "severity": "s205",
+        "snoozeUntil": "s206",
+        "snoozedUntil": "s207",
+        "subject": "s208",
+        "tags": [],
+        "to": "s20a",
+        "transactionId": "s20b",
+        "workflow": "s20c",
+        "action_type": "ACTION_TYPE01",
+        "notification_id": "NOTIFICATION01",
+        "subscriber_id": "SUBSCRIBER01"
+      },
+      "INBOX_NOTIFICATION_DTO02": {
+        "archivedAt": "s2ee",
+        "avatar": "s2ef",
+        "body": "s2f0",
+        "channelType": "s2f1",
+        "createdAt": "s2f2",
+        "data": {},
+        "deliveredAt": [],
+        "firstSeenAt": "s2f5",
+        "id": "INBOX_NOTIFICATION_DTO02",
+        "isArchived": false,
+        "isRead": true,
+        "isSeen": false,
+        "isSnoozed": true,
+        "primaryAction": "s2fb",
+        "readAt": "s2fc",
+        "redirect": "s2fd",
+        "secondaryAction": "s2fe",
+        "severity": "s2ff",
+        "snoozeUntil": "s300",
+        "snoozedUntil": "s301",
+        "subject": "s302",
+        "tags": [],
+        "to": "s304",
+        "transactionId": "s305",
+        "workflow": "s306",
+        "action_type": "ACTION_TYPE01",
+        "notification_id": "NOTIFICATION01",
+        "subscriber_id": "SUBSCRIBER01"
+      }
+    }
+  },
+  "new": {
+    "inbox_notification_dto": {
+      "inbox_notification_dto_ref01": {
+        "archivedAt": "s3e8",
+        "avatar": "s3e9",
+        "body": "s3ea",
+        "channelType": "s3eb",
+        "createdAt": "s3ec",
+        "data": {},
+        "deliveredAt": [],
+        "firstSeenAt": "s3ef",
+        "isArchived": false,
+        "isRead": true,
+        "isSeen": false,
+        "isSnoozed": true,
+        "primaryAction": "s3f5",
+        "readAt": "s3f6",
+        "redirect": "s3f7",
+        "secondaryAction": "s3f8",
+        "severity": "s3f9",
+        "snoozeUntil": "s3fa",
+        "snoozedUntil": "s3fb",
+        "subject": "s3fc",
+        "tags": [],
+        "to": "s3fe",
+        "transactionId": "s3ff",
+        "workflow": "s400"
+      }
+    }
+  },
+  "requests": {
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/archive": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/read": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/unread": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

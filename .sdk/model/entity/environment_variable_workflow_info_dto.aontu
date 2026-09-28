@@ -1,0 +1,97 @@
+# Entity: environment_variable_workflow_info_dto
+
+main: kit: entity: environment_variable_workflow_info_dto: {
+
+  alias: field: {}
+
+  fields: {
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The name of the workflow"
+      t: "`$STRING`"
+    }
+    workflowId: {
+      h: "Workflow Id"
+      n: "workflowId"
+      r: true
+      sh: "The unique identifier of the workflow"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "environment_variable_workflow_info_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/environment-variables/{variableKey}/usage"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "BASE_URL"
+                k: "param"
+                n: "variable_key"
+                or: "variable_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/environment-variables/{variableKey}/usage"
+          q: {
+            exist: [
+              "idempotency_key"
+              "variable_key"
+            ]
+          }
+          r: {
+            param: {
+              variableKey: "variable_key"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "environment-variables"
+            }
+            {
+              var: "variable_key"
+            }
+            {
+              lit: "usage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.workflows`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.environment_variable")]
+  ]
+
+}

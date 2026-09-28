@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "topic_subscriptions_response_dto": {
+      "TOPIC_SUBSCRIPTIONS_RESPONSE_DTO00": {
+        "topic_key": "TOPIC_KEY01",
+        "id": "TOPIC_SUBSCRIPTIONS_RESPONSE_DTO00"
+      },
+      "TOPIC_SUBSCRIPTIONS_RESPONSE_DTO01": {
+        "topic_key": "TOPIC_KEY01",
+        "id": "TOPIC_SUBSCRIPTIONS_RESPONSE_DTO01"
+      },
+      "TOPIC_SUBSCRIPTIONS_RESPONSE_DTO02": {
+        "topic_key": "TOPIC_KEY01",
+        "id": "TOPIC_SUBSCRIPTIONS_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "topic_subscriptions_response_dto": {
+      "topic_subscriptions_response_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "DELETE /v2/topics/{topicKey}/subscriptions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

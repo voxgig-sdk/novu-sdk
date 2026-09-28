@@ -1,0 +1,235 @@
+# Entity: agent_integration_response_dto
+
+main: kit: entity: agent_integration_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    agentId: {
+      h: "Agent Id"
+      n: "agentId"
+      r: true
+      t: "`$STRING`"
+    }
+    connectedAt: {
+      h: "Connected At"
+      n: "connectedAt"
+      r: false
+      sh: "Set when the agent–integration link received its first inbound webhook delivery."
+      t: "`$OBJECT`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      t: "`$STRING`"
+    }
+    exceedsPlanLimit: {
+      h: "Exceeds Plan Limit"
+      n: "exceedsPlanLimit"
+      r: false
+      sh: "Cloud only."
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Agent–integration link document id."
+      t: "`$STRING`"
+    }
+    integration: {
+      h: "Integration"
+      n: "integration"
+      r: true
+      t: "`$OBJECT`"
+    }
+    integrationIdentifier: {
+      h: "Integration Identifier"
+      n: "integrationIdentifier"
+      op: {
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The integration identifier (same as in the integration store), not the internal document _id."
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      t: "`$STRING`"
+    }
+    providerId: {
+      h: "Provider Id"
+      n: "providerId"
+      r: false
+      sh: "Provider ID to auto-create a dedicated integration (e.g."
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "agent_integration_response_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/agents/{identifier}/integrations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/agents/{identifier}/integrations"
+          q: {
+            exist: [
+              "idempotency_key"
+              "identifier"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "integrations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v1/agents/{identifier}/integrations/{agentIntegrationId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "agent_id"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "agent_integration_id"
+                or: "agent_integration_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v1/agents/{identifier}/integrations/{agentIntegrationId}"
+          q: {
+            exist: [
+              "agent_id"
+              "agent_integration_id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              agentIntegrationId: "agent_integration_id"
+              identifier: "agent_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "agent_id"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              var: "agent_integration_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.agent")]
+    [path("$.main.kit.entity.agent") path("$.main.kit.entity.integration")]
+  ]
+
+}

@@ -1,0 +1,91 @@
+# Entity: domain_connect_status_response_dto
+
+main: kit: entity: domain_connect_status_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "domain_connect_status_response_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/domains/{domain}/auto-configure"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "domain"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/domains/{domain}/auto-configure"
+          q: {
+            "$action": "auto-configure"
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              domain: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "domains"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "auto-configure"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.manualRecords`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

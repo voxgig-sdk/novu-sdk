@@ -1,0 +1,92 @@
+# Entity: domain_connect_apply_url_response_dto
+
+main: kit: entity: domain_connect_apply_url_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    redirectUri: {
+      h: "Redirect Uri"
+      n: "redirectUri"
+      r: false
+      sh: "Dashboard URL to return to after the DNS provider consent flow completes."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "domain_connect_apply_url_response_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/domains/{domain}/auto-configure/start"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "domain_id"
+                or: "domain"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/domains/{domain}/auto-configure/start"
+          q: {
+            exist: [
+              "domain_id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              domain: "domain_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "domains"
+            }
+            {
+              var: "domain_id"
+            }
+            {
+              lit: "auto-configure"
+            }
+            {
+              lit: "start"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.domain")]
+  ]
+
+}

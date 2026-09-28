@@ -1,0 +1,29 @@
+# BasicAgentResponseDtoFlow
+
+main: kit: flow: BasicAgentResponseDtoFlow:
+{
+  entity: "agent_response_dto",
+  kind: "basic",
+  name: "BasicAgentResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_response_dto_ref01",
+        srcdatavar: "agent_response_dto_ref01_data",
+        suffix: "_up0",
+        textfield: "bridgeUrl"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentResponseDtoFlow"
+}

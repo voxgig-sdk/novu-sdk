@@ -1,0 +1,35 @@
+{
+  "existing": {
+    "unseen": {
+      "UNSEEN00": {
+        "count": 10,
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "UNSEEN00"
+      },
+      "UNSEEN01": {
+        "count": 20,
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "UNSEEN01"
+      },
+      "UNSEEN02": {
+        "count": 30,
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "UNSEEN02"
+      }
+    }
+  },
+  "new": {
+    "unseen": {
+      "unseen_ref01": {
+        "count": 40
+      }
+    }
+  },
+  "requests": {
+    "GET /v1/subscribers/{subscriberId}/notifications/unseen": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

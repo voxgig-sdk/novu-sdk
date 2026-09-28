@@ -1,0 +1,83 @@
+{
+  "existing": {
+    "environment": {
+      "ENVIRONMENT00": {
+        "apiKeys": [],
+        "bridge": {},
+        "color": "s70",
+        "dns": {},
+        "id": "ENVIRONMENT00",
+        "identifier": "s73",
+        "name": "s74",
+        "organizationId": "s75",
+        "parentId": "s76",
+        "slug": "s77",
+        "type": "s78"
+      },
+      "ENVIRONMENT01": {
+        "apiKeys": [],
+        "bridge": {},
+        "color": "sde",
+        "dns": {},
+        "id": "ENVIRONMENT01",
+        "identifier": "se1",
+        "name": "se2",
+        "organizationId": "se3",
+        "parentId": "se4",
+        "slug": "se5",
+        "type": "se6"
+      },
+      "ENVIRONMENT02": {
+        "apiKeys": [],
+        "bridge": {},
+        "color": "s14c",
+        "dns": {},
+        "id": "ENVIRONMENT02",
+        "identifier": "s14f",
+        "name": "s150",
+        "organizationId": "s151",
+        "parentId": "s152",
+        "slug": "s153",
+        "type": "s154"
+      }
+    }
+  },
+  "new": {
+    "environment": {
+      "environment_ref01": {
+        "apiKeys": [],
+        "bridge": {},
+        "color": "s1ba",
+        "dns": {},
+        "identifier": "s1bd",
+        "name": "s1be",
+        "organizationId": "s1bf",
+        "parentId": "s1c0",
+        "slug": "s1c1",
+        "type": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/environments": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/environments": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/environments/{environmentId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /v1/environments/{environmentId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

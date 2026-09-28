@@ -1,0 +1,749 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 67
+  metrics: count: path: 102
+  metrics: count: method: 149
+
+  entity: activity_notification_response_dto: {
+    path: "/v1/notifications": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+    path: "/v1/notifications/{notificationId}": {
+      rename: param: "notificationId": *"notification_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent: {
+    path: "/v1/agents": {
+      op: create: method: *POST
+    }
+    path: "/v1/agents/{agentId}/reply": {
+      action: "reply": {}
+      rename: param: "agentId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v1/agents/{identifier}": {
+      rename: param: "identifier": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+    path: "/v1/agents/{identifier}/integrations/{agentIntegrationId}": {
+      rename: param: "agentIntegrationId": *"agent_integration_id"
+      rename: param: "identifier": *"agent_id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: agent_integration_response_dto: {
+    path: "/v1/agents/{identifier}/integrations": {
+      op: create: method: *POST
+    }
+    path: "/v1/agents/{identifier}/integrations/{agentIntegrationId}": {
+      rename: param: "agentIntegrationId": *"agent_integration_id"
+      rename: param: "identifier": *"agent_id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: agent_response_dto: {
+    path: "/v1/agents/{identifier}/bridge": {
+      op: update: method: *PUT
+    }
+  }
+
+  entity: bulk: {
+    path: "/v1/subscribers/bulk": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: channel_connection: {
+    path: "/v1/channel-connections": {
+      op: create: method: *POST
+    }
+    path: "/v1/channel-connections/{identifier}": {
+      rename: param: "identifier": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: channel_endpoint: {
+    path: "/v1/channel-endpoints": {
+      op: create: method: *POST
+    }
+    path: "/v1/channel-endpoints/{identifier}": {
+      rename: param: "identifier": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: configure: {
+    path: "/v1/integrations/{integrationIdentifier}/webhook/configure": {
+      rename: param: "integrationIdentifier": *"integration_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: context: {
+    path: "/v2/contexts": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.data`")|top
+    }
+    path: "/v2/contexts/{type}/{id}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.data`")|top
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: create_subscriptions_response_dto: {
+    path: "/v2/topics/{topicKey}/subscriptions": {
+      rename: param: "topicKey": *"topic_key"
+      op: create: method: *POST
+    }
+  }
+
+  entity: diff: {
+    path: "/v2/environments/{targetEnvironmentId}/diff": {
+      rename: param: "targetEnvironmentId": *"environment_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: domain: {
+    path: "/v1/domains": {
+      op: create: method: *POST
+    }
+    path: "/v1/domains/{domain}": {
+      rename: param: "domain": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+    path: "/v1/domains/{domain}/diagnose": {
+      action: "diagnose": {}
+      rename: param: "domain": *"id"
+      op: create: method: *POST
+    }
+    path: "/v1/domains/{domain}/routes/{address}": {
+      rename: param: "domain": *"id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: domain_connect_apply_url_response_dto: {
+    path: "/v1/domains/{domain}/auto-configure/start": {
+      rename: param: "domain": *"domain_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: domain_connect_status_response_dto: {
+    path: "/v1/domains/{domain}/auto-configure": {
+      action: "auto-configure": {}
+      rename: param: "domain": *"id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.manualRecords`")|top
+    }
+  }
+
+  entity: domain_response_dto: {
+    path: "/v1/domains/{domain}/verify": {
+      action: "verify": {}
+      rename: param: "domain": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: domain_route_response_dto: {
+    path: "/v1/domains/{domain}/routes": {
+      action: "routes": {}
+      rename: param: "domain": *"id"
+      op: create: method: *POST
+      op: create: transform: res: *("`body.data`")|top
+    }
+    path: "/v1/domains/{domain}/routes/{address}": {
+      rename: param: "domain": *"domain_id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.data`")|top
+    }
+    path: "/v1/domains/{domain}/routes/{address}/test": {
+      action: "test": {}
+      rename: param: "domain": *"domain_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: environment: {
+    path: "/v1/environments": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/v1/environments/{environmentId}": {
+      rename: param: "environmentId": *"id"
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+  entity: environment_tags_dto: {
+    path: "/v2/environments/{environmentId}/tags": {
+      action: "tags": {}
+      rename: param: "environmentId": *"id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: environment_variable: {
+    path: "/v1/environment-variables": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/v1/environment-variables/{variableKey}": {
+      rename: param: "variableKey": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: environment_variable_workflow_info_dto: {
+    path: "/v1/environment-variables/{variableKey}/usage": {
+      rename: param: "variableKey": *"variable_key"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.workflows`")|top
+    }
+  }
+
+  entity: event: {
+    path: "/v1/events/trigger/{transactionId}": {
+      rename: param: "transactionId": *"transaction_id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: generate_chat_o_auth_url_response_dto: {
+    path: "/v1/integrations/channel-connections/oauth": {
+      op: create: method: *POST
+    }
+    path: "/v1/integrations/channel-endpoints/oauth": {
+      op: create: method: *POST
+    }
+    path: "/v1/integrations/chat/oauth": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: generate_preview_response_dto: {
+    path: "/v2/workflows/{workflowId}/step/{stepId}/preview": {
+      rename: param: "stepId": *"step_id"
+      rename: param: "workflowId": *"workflow_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: import_master_json_response_dto: {
+    path: "/v2/translations/master-json": {
+      op: create: method: *POST
+    }
+    path: "/v2/translations/master-json/upload": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: inbox_notification_dto: {
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete": {
+      rename: param: "actionType": *"action_type"
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert": {
+      rename: param: "actionType": *"action_type"
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/archive": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/read": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unread": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: integration: {
+    path: "/v1/integrations": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/v1/integrations/{integrationIdentifier}/mobile-link": {
+      action: "mobile_link": {}
+      rename: param: "integrationIdentifier": *"integration_identifier"
+      op: create: method: *POST
+    }
+    path: "/v1/integrations/{integrationId}": {
+      rename: param: "integrationId": *"id"
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+    path: "/v1/integrations/{integrationId}/auto-configure": {
+      action: "auto_configure": {}
+      rename: param: "integrationId": *"id"
+      op: create: method: *POST
+      op: create: transform: res: *("`body.integration`")|top
+    }
+  }
+
+  entity: integration_response_dto: {
+    path: "/v1/integrations/active": {
+      op: list: method: *GET
+    }
+    path: "/v1/integrations/{integrationId}/set-primary": {
+      action: "set-primary": {}
+      rename: param: "integrationId": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: layout: {
+    path: "/v2/layouts": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.layouts`")|top
+    }
+    path: "/v2/layouts/{layoutId}": {
+      rename: param: "layoutId": *"id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+    path: "/v2/layouts/{layoutId}/preview": {
+      action: "preview": {}
+      rename: param: "layoutId": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: layout_response_dto: {
+    path: "/v2/layouts/{layoutId}/duplicate": {
+      action: "duplicate": {}
+      rename: param: "layoutId": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: link: {
+    path: "/v1/integrations/channel-endpoints/link": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.providerMetadata`")|top
+    }
+  }
+
+  entity: list_agent_integrations_response_dto: {
+    path: "/v1/agents/{identifier}/integrations": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: list_agents_response_dto: {
+    path: "/v1/agents": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: list_channel_connections_response_dto: {
+    path: "/v1/channel-connections": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_channel_endpoints_response_dto: {
+    path: "/v1/channel-endpoints": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_contexts_response_dto: {
+    path: "/v2/contexts": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_domain_routes_response_dto: {
+    path: "/v1/domains/{domain}/routes": {
+      rename: param: "domain": *"domain_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_domains_response_dto: {
+    path: "/v1/domains": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_subscribers_response_dto: {
+    path: "/v2/subscribers": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_topic_subscriptions_response_dto: {
+    path: "/v2/subscribers/{subscriberId}/subscriptions": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+    path: "/v2/topics/{topicKey}/subscriptions": {
+      rename: param: "topicKey": *"topic_key"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: list_topics_response_dto: {
+    path: "/v2/topics": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: master_json: {
+    path: "/v2/translations/master-json": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: message: {
+    path: "/v1/messages": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+    path: "/v1/messages/transaction/{transactionId}": {
+      rename: param: "transactionId": *"transaction_id"
+      op: remove: method: *DELETE
+    }
+    path: "/v1/messages/{messageId}": {
+      rename: param: "messageId": *"id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: message_response_dto: {
+    path: "/v1/subscribers/{subscriberId}/messages/mark-as": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: create: method: *POST
+    }
+    path: "/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}": {
+      rename: param: "messageId": *"message_id"
+      rename: param: "subscriberId": *"subscriber_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: notification_feed_item_dto: {
+    path: "/v1/subscribers/{subscriberId}/notifications/feed": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: preferences_response_dto: {
+    path: "/v2/subscribers/{subscriberId}/preferences/bulk": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: publish: {
+    path: "/v2/environments/{targetEnvironmentId}/publish": {
+      rename: param: "targetEnvironmentId": *"environment_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: remove_subscriber_response_dto: {
+    path: "/v2/subscribers/{subscriberId}": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: step: {
+    path: "/v2/workflows/{workflowId}/steps/{stepId}": {
+      rename: param: "stepId": *"id"
+      rename: param: "workflowId": *"workflow_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: subscriber: {
+    path: "/v1/subscribers/{subscriberId}/credentials/{providerId}": {
+      rename: param: "providerId": *"provider_id"
+      rename: param: "subscriberId": *"id"
+      op: remove: method: *DELETE
+    }
+    path: "/v1/subscribers/{subscriberId}/messages/mark-all": {
+      action: "message_mark_all": {}
+      rename: param: "subscriberId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers": {
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers/{subscriberId}": {
+      rename: param: "subscriberId": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/archive": {
+      action: "notification_archive": {}
+      rename: param: "subscriberId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/delete": {
+      action: "notification_delete": {}
+      rename: param: "subscriberId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/read": {
+      action: "notification_read": {}
+      rename: param: "subscriberId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/read-archive": {
+      action: "notification_read_archive": {}
+      rename: param: "subscriberId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/seen": {
+      action: "notification_seen": {}
+      rename: param: "subscriberId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v2/subscribers/{subscriberId}/notifications/{notificationId}": {
+      rename: param: "notificationId": *"notification_id"
+      rename: param: "subscriberId": *"id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: subscriber_notifications_count_response_dto: {
+    path: "/v2/subscribers/{subscriberId}/notifications/count": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: subscriber_notifications_response_dto: {
+    path: "/v2/subscribers/{subscriberId}/notifications": {
+      action: "notifications": {}
+      rename: param: "subscriberId": *"id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: subscriber_preferences_dto: {
+    path: "/v2/subscribers/{subscriberId}/preferences": {
+      action: "preferences": {}
+      rename: param: "subscriberId": *"id"
+      op: list: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: subscriber_response_dto: {
+    path: "/v1/subscribers/{subscriberId}/credentials": {
+      action: "credentials": {}
+      rename: param: "subscriberId": *"id"
+      op: patch: method: *PATCH
+      op: update: method: *PUT
+    }
+    path: "/v1/subscribers/{subscriberId}/online-status": {
+      action: "online-status": {}
+      rename: param: "subscriberId": *"id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: subscription: {
+    path: "/v2/topics/{topicKey}/subscriptions/{identifier}": {
+      rename: param: "identifier": *"id"
+      rename: param: "topicKey": *"topic_id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: topic: {
+    path: "/v2/topics": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.data`")|top
+    }
+    path: "/v2/topics/{topicKey}": {
+      rename: param: "topicKey": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.data`")|top
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: topic_subscriber_dto: {
+    path: "/v1/topics/{topicKey}/subscribers/{externalSubscriberId}": {
+      rename: param: "externalSubscriberId": *"external_subscriber_id"
+      rename: param: "topicKey": *"topic_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: topic_subscriptions_response_dto: {
+    path: "/v2/topics/{topicKey}/subscriptions": {
+      rename: param: "topicKey": *"topic_key"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: translation: {
+    path: "/v2/translations": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.content`")|top
+    }
+    path: "/v2/translations/{resourceType}/{resourceId}": {
+      rename: param: "resourceId": *"resource_id"
+      rename: param: "resourceType": *"resource_type"
+      op: remove: method: *DELETE
+    }
+    path: "/v2/translations/{resourceType}/{resourceId}/{locale}": {
+      rename: param: "resourceId": *"resource_id"
+      rename: param: "resourceType": *"resource_type"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.content`")|top
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: translation_group_dto: {
+    path: "/v2/translations/group/{resourceType}/{resourceId}": {
+      rename: param: "resourceId": *"resource_id"
+      rename: param: "resourceType": *"resource_type"
+      op: load: method: *GET
+    }
+  }
+
+  entity: trigger: {
+    path: "/v1/events/trigger": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: trigger_event_response_dto: {
+    path: "/v1/events/trigger/broadcast": {
+      op: create: method: *POST
+    }
+    path: "/v1/events/trigger/bulk": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: unseen: {
+    path: "/v1/subscribers/{subscriberId}/notifications/unseen": {
+      rename: param: "subscriberId": *"subscriber_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: upload: {
+    path: "/v2/translations/upload": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: webhook_result_dto: {
+    path: "/v2/inbound-webhooks/delivery-providers/{environmentId}/{integrationId}": {
+      rename: param: "environmentId": *"environment_id"
+      rename: param: "integrationId": *"integration_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: workflow: {
+    path: "/v2/workflows": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.workflows`")|top
+    }
+    path: "/v2/workflows/{workflowId}": {
+      rename: param: "workflowId": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+  entity: workflow_info_dto: {
+    path: "/v2/layouts/{layoutId}/usage": {
+      rename: param: "layoutId": *"layout_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.workflows`")|top
+    }
+  }
+
+  entity: workflow_response_dto: {
+    path: "/v2/workflows/{workflowId}/sync": {
+      action: "sync": {}
+      rename: param: "workflowId": *"id"
+      op: update: method: *PUT
+    }
+  }
+
+}

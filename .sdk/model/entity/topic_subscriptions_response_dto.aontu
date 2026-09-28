@@ -1,0 +1,82 @@
+# Entity: topic_subscriptions_response_dto
+
+main: kit: entity: topic_subscriptions_response_dto: {
+
+  alias: field: {}
+
+  name: "topic_subscriptions_response_dto"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/topics/{topicKey}/subscriptions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "topic_key"
+                or: "topic_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/topics/{topicKey}/subscriptions"
+          q: {
+            exist: [
+              "idempotency_key"
+              "topic_key"
+            ]
+          }
+          r: {
+            param: {
+              topicKey: "topic_key"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "topics"
+            }
+            {
+              var: "topic_key"
+            }
+            {
+              lit: "subscriptions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.topic")]
+  ]
+
+}

@@ -1,0 +1,89 @@
+{
+  "existing": {
+    "trigger_event_response_dto": {
+      "TRIGGER_EVENT_RESPONSE_DTO00": {
+        "acknowledged": true,
+        "activityFeedLink": "s8d",
+        "actor": "s8e",
+        "agentId": "s8f",
+        "context": {},
+        "error": [],
+        "events": [],
+        "jobData": {},
+        "name": "s94",
+        "overrides": "s95",
+        "payload": {},
+        "status": "s97",
+        "tenant": "s98",
+        "transactionId": "s99",
+        "id": "TRIGGER_EVENT_RESPONSE_DTO00"
+      },
+      "TRIGGER_EVENT_RESPONSE_DTO01": {
+        "acknowledged": true,
+        "activityFeedLink": "s119",
+        "actor": "s11a",
+        "agentId": "s11b",
+        "context": {},
+        "error": [],
+        "events": [],
+        "jobData": {},
+        "name": "s120",
+        "overrides": "s121",
+        "payload": {},
+        "status": "s123",
+        "tenant": "s124",
+        "transactionId": "s125",
+        "id": "TRIGGER_EVENT_RESPONSE_DTO01"
+      },
+      "TRIGGER_EVENT_RESPONSE_DTO02": {
+        "acknowledged": true,
+        "activityFeedLink": "s1a5",
+        "actor": "s1a6",
+        "agentId": "s1a7",
+        "context": {},
+        "error": [],
+        "events": [],
+        "jobData": {},
+        "name": "s1ac",
+        "overrides": "s1ad",
+        "payload": {},
+        "status": "s1af",
+        "tenant": "s1b0",
+        "transactionId": "s1b1",
+        "id": "TRIGGER_EVENT_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "trigger_event_response_dto": {
+      "trigger_event_response_dto_ref01": {
+        "acknowledged": true,
+        "activityFeedLink": "s231",
+        "actor": "s232",
+        "agentId": "s233",
+        "context": {},
+        "error": [],
+        "events": [],
+        "jobData": {},
+        "name": "s238",
+        "overrides": "s239",
+        "payload": {},
+        "status": "s23b",
+        "tenant": "s23c",
+        "transactionId": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/events/trigger/broadcast": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/events/trigger/bulk": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

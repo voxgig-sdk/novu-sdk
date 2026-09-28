@@ -1,0 +1,28 @@
+# BasicPreferencesResponseDtoFlow
+
+main: kit: flow: BasicPreferencesResponseDtoFlow:
+{
+  entity: "preferences_response_dto",
+  kind: "basic",
+  name: "BasicPreferencesResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "preferences_response_dto_ref01",
+        srcdatavar: "preferences_response_dto_ref01_data",
+        suffix: "_up0"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-preferences_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPreferencesResponseDtoFlow"
+}

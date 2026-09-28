@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "upload": {
+      "UPLOAD00": {
+        "errors": [],
+        "failedUploads": 41,
+        "successfulUploads": 42,
+        "totalFiles": 43,
+        "id": "UPLOAD00"
+      },
+      "UPLOAD01": {
+        "errors": [],
+        "failedUploads": 81,
+        "successfulUploads": 82,
+        "totalFiles": 83,
+        "id": "UPLOAD01"
+      },
+      "UPLOAD02": {
+        "errors": [],
+        "failedUploads": 121,
+        "successfulUploads": 122,
+        "totalFiles": 123,
+        "id": "UPLOAD02"
+      }
+    }
+  },
+  "new": {
+    "upload": {
+      "upload_ref01": {
+        "errors": [],
+        "failedUploads": 161,
+        "successfulUploads": 162,
+        "totalFiles": 163
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/translations/upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

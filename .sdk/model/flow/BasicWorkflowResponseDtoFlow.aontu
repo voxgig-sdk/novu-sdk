@@ -1,0 +1,29 @@
+# BasicWorkflowResponseDtoFlow
+
+main: kit: flow: BasicWorkflowResponseDtoFlow:
+{
+  entity: "workflow_response_dto",
+  kind: "basic",
+  name: "BasicWorkflowResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "workflow_response_dto_ref01",
+        srcdatavar: "workflow_response_dto_ref01_data",
+        suffix: "_up0",
+        textfield: "createdAt"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-workflow_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWorkflowResponseDtoFlow"
+}

@@ -1,0 +1,68 @@
+{
+  "existing": {
+    "subscription": {
+      "SUBSCRIPTION00": {
+        "contextKeys": [],
+        "createdAt": "s5b",
+        "id": "SUBSCRIPTION00",
+        "identifier": "s5d",
+        "name": "s5e",
+        "preferences": [],
+        "subscriber": "s60",
+        "topic": "s61",
+        "updatedAt": "s62",
+        "topic_id": "TOPIC01"
+      },
+      "SUBSCRIPTION01": {
+        "contextKeys": [],
+        "createdAt": "sb5",
+        "id": "SUBSCRIPTION01",
+        "identifier": "sb7",
+        "name": "sb8",
+        "preferences": [],
+        "subscriber": "sba",
+        "topic": "sbb",
+        "updatedAt": "sbc",
+        "topic_id": "TOPIC01"
+      },
+      "SUBSCRIPTION02": {
+        "contextKeys": [],
+        "createdAt": "s10f",
+        "id": "SUBSCRIPTION02",
+        "identifier": "s111",
+        "name": "s112",
+        "preferences": [],
+        "subscriber": "s114",
+        "topic": "s115",
+        "updatedAt": "s116",
+        "topic_id": "TOPIC01"
+      }
+    }
+  },
+  "new": {
+    "subscription": {
+      "subscription_ref01": {
+        "contextKeys": [],
+        "createdAt": "s169",
+        "identifier": "s16b",
+        "name": "s16c",
+        "preferences": [],
+        "subscriber": "s16e",
+        "topic": "s16f",
+        "updatedAt": "s170"
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/topics/{topicKey}/subscriptions/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/topics/{topicKey}/subscriptions/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

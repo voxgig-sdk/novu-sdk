@@ -1,0 +1,47 @@
+{
+  "existing": {
+    "diff": {
+      "DIFF00": {
+        "resources": [],
+        "sourceEnvironmentId": "s29",
+        "summary": "s2a",
+        "targetEnvironmentId": "s2b",
+        "environment_id": "ENVIRONMENT01",
+        "id": "DIFF00"
+      },
+      "DIFF01": {
+        "resources": [],
+        "sourceEnvironmentId": "s51",
+        "summary": "s52",
+        "targetEnvironmentId": "s53",
+        "environment_id": "ENVIRONMENT01",
+        "id": "DIFF01"
+      },
+      "DIFF02": {
+        "resources": [],
+        "sourceEnvironmentId": "s79",
+        "summary": "s7a",
+        "targetEnvironmentId": "s7b",
+        "environment_id": "ENVIRONMENT01",
+        "id": "DIFF02"
+      }
+    }
+  },
+  "new": {
+    "diff": {
+      "diff_ref01": {
+        "resources": [],
+        "sourceEnvironmentId": "sa1",
+        "summary": "sa2",
+        "targetEnvironmentId": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/environments/{targetEnvironmentId}/diff": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

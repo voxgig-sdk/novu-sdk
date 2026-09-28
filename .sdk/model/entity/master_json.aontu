@@ -1,0 +1,86 @@
+# Entity: master_json
+
+main: kit: entity: master_json: {
+
+  alias: field: {}
+
+  fields: {
+    layouts: {
+      h: "Layouts"
+      n: "layouts"
+      r: true
+      sh: "All translations for given locale organized by layout identifier"
+      t: "`$OBJECT`"
+    }
+    workflows: {
+      h: "Workflows"
+      n: "workflows"
+      r: true
+      sh: "All translations for given locale organized by workflow identifier"
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "master_json"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/translations/master-json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "en_US"
+                k: "query"
+                n: "locale"
+                or: "locale"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/translations/master-json"
+          q: {
+            exist: [
+              "idempotency_key"
+              "locale"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+            {
+              lit: "master-json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

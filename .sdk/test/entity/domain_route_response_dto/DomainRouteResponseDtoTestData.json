@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "domain_route_response_dto": {
+      "DOMAIN_ROUTE_RESPONSE_DTO00": {
+        "agentId": "s28",
+        "data": {},
+        "id": "DOMAIN_ROUTE_RESPONSE_DTO00",
+        "type": "s2b",
+        "address": "ADDRESS01",
+        "domain_id": "DOMAIN01"
+      },
+      "DOMAIN_ROUTE_RESPONSE_DTO01": {
+        "agentId": "s50",
+        "data": {},
+        "id": "DOMAIN_ROUTE_RESPONSE_DTO01",
+        "type": "s53",
+        "address": "ADDRESS01",
+        "domain_id": "DOMAIN01"
+      },
+      "DOMAIN_ROUTE_RESPONSE_DTO02": {
+        "agentId": "s78",
+        "data": {},
+        "id": "DOMAIN_ROUTE_RESPONSE_DTO02",
+        "type": "s7b",
+        "address": "ADDRESS01",
+        "domain_id": "DOMAIN01"
+      }
+    }
+  },
+  "new": {
+    "domain_route_response_dto": {
+      "domain_route_response_dto_ref01": {
+        "agentId": "sa0",
+        "data": {},
+        "type": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/domains/{domain}/routes/{address}/test": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/domains/{domain}/routes": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/domains/{domain}/routes/{address}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v1/domains/{domain}/routes/{address}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

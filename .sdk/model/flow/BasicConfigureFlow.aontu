@@ -1,0 +1,22 @@
+# BasicConfigureFlow
+
+main: kit: flow: BasicConfigureFlow:
+{
+  entity: "configure",
+  kind: "basic",
+  name: "BasicConfigureFlow",
+  step: [
+    {
+      i: {
+        ref: "configure_ref01"
+      }
+
+      m: {
+        integration_id: "integration01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicConfigureFlow"
+}

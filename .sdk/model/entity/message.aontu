@@ -1,0 +1,504 @@
+# Entity: message
+
+main: kit: entity: message: {
+
+  alias: field: {}
+
+  fields: {
+    channel: {
+      h: "Channel"
+      n: "channel"
+      r: true
+      sh: "Channel the message was sent on"
+      t: "`$STRING`"
+    }
+    content: {
+      h: "Content"
+      n: "content"
+      r: false
+      sh: "Content of the message, can be an email block or a string"
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    contextKeys: {
+      h: "Context Keys"
+      n: "contextKeys"
+      r: false
+      sh: "Context (single or multi) in which the message was sent"
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "Creation date of the message"
+      t: "`$STRING`"
+    }
+    cta: {
+      h: "Cta"
+      n: "cta"
+      r: true
+      sh: "Call to action associated with the message"
+      t: "`$ANY`"
+    }
+    deliveredAt: {
+      h: "Delivered At"
+      n: "deliveredAt"
+      r: false
+      sh: "Array of delivery dates for the message, if the message has multiple delivery dates, for example after being snoozed"
+      t: "`$ARRAY`"
+    }
+    deviceTokens: {
+      h: "Device Tokens"
+      n: "deviceTokens"
+      r: false
+      sh: "Device tokens associated with the message, if applicable"
+      t: "`$ARRAY`"
+    }
+    directWebhookUrl: {
+      h: "Direct Webhook Url"
+      n: "directWebhookUrl"
+      r: false
+      sh: "Direct webhook URL for the message, if applicable"
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: false
+      sh: "Email address associated with the message, if applicable"
+      t: "`$STRING`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      sh: "Environment ID where the message is sent"
+      t: "`$STRING`"
+    }
+    errorId: {
+      h: "Error Id"
+      n: "errorId"
+      r: false
+      sh: "Error ID if the message has an error"
+      t: "`$STRING`"
+    }
+    errorText: {
+      h: "Error Text"
+      n: "errorText"
+      r: false
+      sh: "Error text if the message has an error"
+      t: "`$STRING`"
+    }
+    feedId: {
+      h: "Feed Id"
+      n: "feedId"
+      r: false
+      sh: "Feed ID associated with the message, if applicable"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier for the message"
+      t: "`$STRING`"
+    }
+    lastReadDate: {
+      h: "Last Read Date"
+      n: "lastReadDate"
+      r: false
+      sh: "Last read date of the message, if available"
+      t: "`$STRING`"
+    }
+    lastSeenDate: {
+      h: "Last Seen Date"
+      n: "lastSeenDate"
+      r: false
+      sh: "Last seen date of the message, if available"
+      t: "`$STRING`"
+    }
+    messageTemplateId: {
+      h: "Message Template Id"
+      n: "messageTemplateId"
+      r: false
+      sh: "Message template ID"
+      t: "`$STRING`"
+    }
+    notificationId: {
+      h: "Notification Id"
+      n: "notificationId"
+      r: true
+      sh: "Notification ID associated with the message"
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      sh: "Organization ID associated with the message"
+      t: "`$STRING`"
+    }
+    overrides: {
+      h: "Overrides"
+      n: "overrides"
+      r: false
+      sh: "Provider specific overrides used when triggering the notification"
+      t: "`$OBJECT`"
+    }
+    payload: {
+      h: "Payload"
+      n: "payload"
+      r: false
+      sh: "The payload that was used to send the notification trigger"
+      t: "`$OBJECT`"
+    }
+    phone: {
+      h: "Phone"
+      n: "phone"
+      r: false
+      sh: "Phone number associated with the message, if applicable"
+      t: "`$STRING`"
+    }
+    providerId: {
+      h: "Provider Id"
+      n: "providerId"
+      r: false
+      sh: "Provider ID associated with the message, if applicable"
+      t: "`$STRING`"
+    }
+    read: {
+      h: "Read"
+      n: "read"
+      r: true
+      sh: "Indicates if the message has been read"
+      t: "`$BOOLEAN`"
+    }
+    seen: {
+      h: "Seen"
+      n: "seen"
+      r: true
+      sh: "Indicates if the message has been seen"
+      t: "`$BOOLEAN`"
+    }
+    snoozedUntil: {
+      h: "Snoozed Until"
+      n: "snoozedUntil"
+      r: false
+      sh: "Date when the message will be unsnoozed"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Status of the message"
+      t: "`$STRING`"
+    }
+    subject: {
+      h: "Subject"
+      n: "subject"
+      r: false
+      sh: "Subject of the message, if applicable"
+      t: "`$STRING`"
+    }
+    subscriber: {
+      h: "Subscriber"
+      n: "subscriber"
+      r: false
+      sh: "Subscriber details, if available"
+      t: "`$ANY`"
+    }
+    subscriberId: {
+      h: "Subscriber Id"
+      n: "subscriberId"
+      r: true
+      sh: "Subscriber ID associated with the message"
+      t: "`$STRING`"
+    }
+    template: {
+      h: "Template"
+      n: "template"
+      r: false
+      sh: "Workflow template associated with the message"
+      t: "`$ANY`"
+      union: {
+        branches: 4
+        count: 2
+        depth: 10
+      }
+    }
+    templateId: {
+      h: "Template Id"
+      n: "templateId"
+      r: false
+      sh: "Template ID associated with the message"
+      t: "`$STRING`"
+    }
+    templateIdentifier: {
+      h: "Template Identifier"
+      n: "templateIdentifier"
+      r: false
+      sh: "Identifier for the message template"
+      t: "`$STRING`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      sh: "Title of the message, if applicable"
+      t: "`$STRING`"
+    }
+    transactionId: {
+      h: "Transaction Id"
+      n: "transactionId"
+      r: true
+      sh: "Transaction ID associated with the message"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "message"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/messages"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "channel"
+                or: "channel"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: [
+                  "tenant:org-123"
+                  "region:us-east-1"
+                ]
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "transaction_id"
+                or: "transaction_id"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/messages"
+          q: {
+            exist: [
+              "channel"
+              "context_key"
+              "idempotency_key"
+              "limit"
+              "page"
+              "subscriber_id"
+              "transaction_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "messages"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v1/messages/transaction/{transactionId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "507f1f77bcf86cd799439011"
+                k: "param"
+                n: "transaction_id"
+                or: "transaction_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "channel"
+                or: "channel"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/messages/transaction/{transactionId}"
+          q: {
+            exist: [
+              "channel"
+              "idempotency_key"
+              "transaction_id"
+            ]
+          }
+          r: {
+            param: {
+              transactionId: "transaction_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "messages"
+            }
+            {
+              lit: "transaction"
+            }
+            {
+              var: "transaction_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /v1/messages/{messageId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "507f1f77bcf86cd799439011"
+                k: "param"
+                n: "id"
+                or: "message_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/messages/{messageId}"
+          q: {
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              messageId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "messages"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,18 @@
+# BasicImportMasterJsonResponseDtoFlow
+
+main: kit: flow: BasicImportMasterJsonResponseDtoFlow:
+{
+  entity: "import_master_json_response_dto",
+  kind: "basic",
+  name: "BasicImportMasterJsonResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "import_master_json_response_dto_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicImportMasterJsonResponseDtoFlow"
+}

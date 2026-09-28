@@ -1,0 +1,103 @@
+# Entity: preferences_response_dto
+
+main: kit: entity: preferences_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    context: {
+      h: "Context"
+      n: "context"
+      r: false
+      t: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    preferences: {
+      h: "Preferences"
+      n: "preferences"
+      r: true
+      sh: "Array of workflow preferences to update (maximum 100 items)"
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "preferences_response_dto"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/preferences/bulk"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/preferences/bulk"
+          q: {
+            exist: [
+              "idempotency_key"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "preferences"
+            }
+            {
+              lit: "bulk"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+  ]
+
+}

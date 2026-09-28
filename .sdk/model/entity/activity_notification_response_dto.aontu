@@ -1,0 +1,385 @@
+# Entity: activity_notification_response_dto
+
+main: kit: entity: activity_notification_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    channels: {
+      h: "Channels"
+      n: "channels"
+      r: false
+      t: "`$ARRAY`"
+    }
+    contextKeys: {
+      h: "Context Keys"
+      n: "contextKeys"
+      r: false
+      sh: "Context (single or multi) in which the notification was sent"
+      t: "`$ARRAY`"
+    }
+    controls: {
+      h: "Controls"
+      n: "controls"
+      r: false
+      sh: "Controls associated with the notification"
+      t: "`$OBJECT`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "Creation time of the notification"
+      t: "`$STRING`"
+    }
+    critical: {
+      h: "Critical"
+      n: "critical"
+      r: false
+      sh: "Criticality of the notification"
+      t: "`$BOOLEAN`"
+    }
+    digestedNotificationId: {
+      h: "Digested Notification Id"
+      n: "digestedNotificationId"
+      r: false
+      sh: "Digested Notification ID"
+      t: "`$STRING`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      sh: "Environment ID of the notification"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier of the notification"
+      t: "`$STRING`"
+    }
+    jobs: {
+      h: "Jobs"
+      n: "jobs"
+      r: false
+      sh: "Jobs of the notification"
+      t: "`$ARRAY`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      sh: "Organization ID of the notification"
+      t: "`$STRING`"
+    }
+    payload: {
+      h: "Payload"
+      n: "payload"
+      r: false
+      sh: "Payload of the notification"
+      t: "`$OBJECT`"
+    }
+    severity: {
+      h: "Severity"
+      n: "severity"
+      r: false
+      sh: "Workflow severity"
+      t: "`$STRING`"
+    }
+    subscriber: {
+      h: "Subscriber"
+      n: "subscriber"
+      r: false
+      sh: "Subscriber of the notification"
+      t: "`$ANY`"
+    }
+    subscriberId: {
+      h: "Subscriber Id"
+      n: "subscriberId"
+      r: true
+      sh: "Subscriber ID of the notification"
+      t: "`$STRING`"
+    }
+    tags: {
+      h: "Tags"
+      n: "tags"
+      r: false
+      sh: "Tags associated with the notification"
+      t: "`$ARRAY`"
+    }
+    template: {
+      h: "Template"
+      n: "template"
+      r: false
+      sh: "Template of the notification"
+      t: "`$ANY`"
+    }
+    templateId: {
+      h: "Template Id"
+      n: "templateId"
+      r: false
+      sh: "Template ID of the notification"
+      t: "`$STRING`"
+    }
+    to: {
+      h: "To"
+      n: "to"
+      r: false
+      sh: "To field for subscriber definition"
+      t: "`$OBJECT`"
+    }
+    topics: {
+      h: "Topics"
+      n: "topics"
+      r: false
+      sh: "Topics of the notification"
+      t: "`$ARRAY`"
+    }
+    transactionId: {
+      h: "Transaction Id"
+      n: "transactionId"
+      r: true
+      sh: "Transaction ID of the notification"
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "Last updated time of the notification"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "activity_notification_response_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/notifications"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "channel"
+                or: "channel"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "severity"
+                or: "severity"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "subscription_id"
+                or: "subscription_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "template"
+                or: "template"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "topic_key"
+                or: "topic_key"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "transaction_id"
+                or: "transaction_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/notifications"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "channel"
+              "context_key"
+              "email"
+              "idempotency_key"
+              "limit"
+              "page"
+              "search"
+              "severity"
+              "subscriber_id"
+              "subscription_id"
+              "template"
+              "topic_key"
+              "transaction_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "notifications"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/notifications/{notificationId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/notifications/{notificationId}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "notification_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

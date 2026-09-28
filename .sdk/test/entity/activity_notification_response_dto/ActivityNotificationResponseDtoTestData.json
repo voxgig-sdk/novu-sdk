@@ -1,0 +1,116 @@
+{
+  "existing": {
+    "activity_notification_response_dto": {
+      "ACTIVITY_NOTIFICATION_RESPONSE_DTO00": {
+        "channels": [],
+        "contextKeys": [],
+        "controls": {},
+        "createdAt": "sd5",
+        "critical": true,
+        "digestedNotificationId": "sd7",
+        "environmentId": "sd8",
+        "id": "ACTIVITY_NOTIFICATION_RESPONSE_DTO00",
+        "jobs": [],
+        "organizationId": "sdb",
+        "payload": {},
+        "severity": "sdd",
+        "subscriber": "sde",
+        "subscriberId": "sdf",
+        "tags": [],
+        "template": "se1",
+        "templateId": "se2",
+        "to": {},
+        "topics": [],
+        "transactionId": "se5",
+        "updatedAt": "se6",
+        "notification_id": "NOTIFICATION01"
+      },
+      "ACTIVITY_NOTIFICATION_RESPONSE_DTO01": {
+        "channels": [],
+        "contextKeys": [],
+        "controls": {},
+        "createdAt": "s1a7",
+        "critical": true,
+        "digestedNotificationId": "s1a9",
+        "environmentId": "s1aa",
+        "id": "ACTIVITY_NOTIFICATION_RESPONSE_DTO01",
+        "jobs": [],
+        "organizationId": "s1ad",
+        "payload": {},
+        "severity": "s1af",
+        "subscriber": "s1b0",
+        "subscriberId": "s1b1",
+        "tags": [],
+        "template": "s1b3",
+        "templateId": "s1b4",
+        "to": {},
+        "topics": [],
+        "transactionId": "s1b7",
+        "updatedAt": "s1b8",
+        "notification_id": "NOTIFICATION01"
+      },
+      "ACTIVITY_NOTIFICATION_RESPONSE_DTO02": {
+        "channels": [],
+        "contextKeys": [],
+        "controls": {},
+        "createdAt": "s279",
+        "critical": true,
+        "digestedNotificationId": "s27b",
+        "environmentId": "s27c",
+        "id": "ACTIVITY_NOTIFICATION_RESPONSE_DTO02",
+        "jobs": [],
+        "organizationId": "s27f",
+        "payload": {},
+        "severity": "s281",
+        "subscriber": "s282",
+        "subscriberId": "s283",
+        "tags": [],
+        "template": "s285",
+        "templateId": "s286",
+        "to": {},
+        "topics": [],
+        "transactionId": "s289",
+        "updatedAt": "s28a",
+        "notification_id": "NOTIFICATION01"
+      }
+    }
+  },
+  "new": {
+    "activity_notification_response_dto": {
+      "activity_notification_response_dto_ref01": {
+        "channels": [],
+        "contextKeys": [],
+        "controls": {},
+        "createdAt": "s34b",
+        "critical": true,
+        "digestedNotificationId": "s34d",
+        "environmentId": "s34e",
+        "jobs": [],
+        "organizationId": "s351",
+        "payload": {},
+        "severity": "s353",
+        "subscriber": "s354",
+        "subscriberId": "s355",
+        "tags": [],
+        "template": "s357",
+        "templateId": "s358",
+        "to": {},
+        "topics": [],
+        "transactionId": "s35b",
+        "updatedAt": "s35c"
+      }
+    }
+  },
+  "requests": {
+    "GET /v1/notifications": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/notifications/{notificationId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

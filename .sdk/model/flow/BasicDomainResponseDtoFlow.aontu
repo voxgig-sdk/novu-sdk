@@ -1,0 +1,22 @@
+# BasicDomainResponseDtoFlow
+
+main: kit: flow: BasicDomainResponseDtoFlow:
+{
+  entity: "domain_response_dto",
+  kind: "basic",
+  name: "BasicDomainResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "domain_response_dto_ref01"
+      }
+
+      m: {
+        domain: "domain01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicDomainResponseDtoFlow"
+}

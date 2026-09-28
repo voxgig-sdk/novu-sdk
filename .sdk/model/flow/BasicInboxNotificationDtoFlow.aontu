@@ -1,0 +1,33 @@
+# BasicInboxNotificationDtoFlow
+
+main: kit: flow: BasicInboxNotificationDtoFlow:
+{
+  entity: "inbox_notification_dto",
+  kind: "basic",
+  name: "BasicInboxNotificationDtoFlow",
+  step: [
+    {
+      d: {
+        subscriber_id: "subscriber01"
+      }
+
+      i: {
+        ref: "inbox_notification_dto_ref01",
+        srcdatavar: "inbox_notification_dto_ref01_data",
+        suffix: "_up0",
+        textfield: "archivedAt"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-inbox_notification_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicInboxNotificationDtoFlow"
+}

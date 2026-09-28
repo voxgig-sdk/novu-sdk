@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "domain_connect_status_response_dto": {
+      "DOMAIN_CONNECT_STATUS_RESPONSE_DTO00": {
+        "id": "DOMAIN_CONNECT_STATUS_RESPONSE_DTO00"
+      },
+      "DOMAIN_CONNECT_STATUS_RESPONSE_DTO01": {
+        "id": "DOMAIN_CONNECT_STATUS_RESPONSE_DTO01"
+      },
+      "DOMAIN_CONNECT_STATUS_RESPONSE_DTO02": {
+        "id": "DOMAIN_CONNECT_STATUS_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "domain_connect_status_response_dto": {
+      "domain_connect_status_response_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /v1/domains/{domain}/auto-configure": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

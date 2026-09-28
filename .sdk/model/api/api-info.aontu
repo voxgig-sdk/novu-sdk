@@ -1,0 +1,40 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        email: "support@novu.co"
+        name: "Novu Support"
+        url: "https://discord.gg/novu"
+      }
+      description: "Novu REST API. Please see https://docs.novu.co/api-reference for more details."
+      license: {
+        name: "MIT"
+        url: "https://opensource.org/license/mit"
+      }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "ApiKey"
+        scheme: "secretKey"
+        type: "apiKey"
+      }
+      servers: [
+        {
+          url: "https://api.novu.co"
+        }
+        {
+          url: "https://eu.api.novu.co"
+        }
+      ]
+      summary: "Novu REST API."
+      termsOfService: "https://novu.co/terms"
+      title: "Novu API"
+      version: "3.19.2"
+      website: "https://docs.novu.co"
+    }
+  }
+}
+

@@ -1,0 +1,26 @@
+# BasicSubscriberNotificationsCountResponseDtoFlow
+
+main: kit: flow: BasicSubscriberNotificationsCountResponseDtoFlow:
+{
+  entity: "subscriber_notifications_count_response_dto",
+  kind: "basic",
+  name: "BasicSubscriberNotificationsCountResponseDtoFlow",
+  step: [
+    {
+      m: {
+        subscriber_id: "subscriber01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "subscriber_notifications_count_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSubscriberNotificationsCountResponseDtoFlow"
+}

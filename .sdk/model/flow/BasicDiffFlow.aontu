@@ -1,0 +1,22 @@
+# BasicDiffFlow
+
+main: kit: flow: BasicDiffFlow:
+{
+  entity: "diff",
+  kind: "basic",
+  name: "BasicDiffFlow",
+  step: [
+    {
+      i: {
+        ref: "diff_ref01"
+      }
+
+      m: {
+        environment_id: "environment01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicDiffFlow"
+}

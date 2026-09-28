@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "remove_subscriber_response_dto": {
+      "REMOVE_SUBSCRIBER_RESPONSE_DTO00": {
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "REMOVE_SUBSCRIBER_RESPONSE_DTO00"
+      },
+      "REMOVE_SUBSCRIBER_RESPONSE_DTO01": {
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "REMOVE_SUBSCRIBER_RESPONSE_DTO01"
+      },
+      "REMOVE_SUBSCRIBER_RESPONSE_DTO02": {
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "REMOVE_SUBSCRIBER_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "remove_subscriber_response_dto": {
+      "remove_subscriber_response_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "DELETE /v2/subscribers/{subscriberId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

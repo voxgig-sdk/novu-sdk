@@ -1,0 +1,92 @@
+# Entity: environment_tags_dto
+
+main: kit: entity: environment_tags_dto: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "environment_tags_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/environments/{environmentId}/tags"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "6615943e7ace93b0540ae377"
+                k: "param"
+                n: "id"
+                or: "environment_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/environments/{environmentId}/tags"
+          q: {
+            "$action": "tags"
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              environmentId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "environments"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "tags"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

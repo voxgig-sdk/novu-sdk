@@ -1,0 +1,22 @@
+# BasicListContextsResponseDtoFlow
+
+main: kit: flow: BasicListContextsResponseDtoFlow:
+{
+  entity: "list_contexts_response_dto",
+  kind: "basic",
+  name: "BasicListContextsResponseDtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_contexts_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListContextsResponseDtoFlow"
+}

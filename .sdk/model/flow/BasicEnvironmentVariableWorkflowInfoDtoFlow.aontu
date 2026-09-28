@@ -1,0 +1,26 @@
+# BasicEnvironmentVariableWorkflowInfoDtoFlow
+
+main: kit: flow: BasicEnvironmentVariableWorkflowInfoDtoFlow:
+{
+  entity: "environment_variable_workflow_info_dto",
+  kind: "basic",
+  name: "BasicEnvironmentVariableWorkflowInfoDtoFlow",
+  step: [
+    {
+      m: {
+        variable_key: "variable_key01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "environment_variable_workflow_info_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEnvironmentVariableWorkflowInfoDtoFlow"
+}

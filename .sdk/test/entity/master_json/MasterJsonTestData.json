@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "master_json": {
+      "MASTER_JSON00": {
+        "layouts": {},
+        "workflows": {},
+        "id": "MASTER_JSON00"
+      },
+      "MASTER_JSON01": {
+        "layouts": {},
+        "workflows": {},
+        "id": "MASTER_JSON01"
+      },
+      "MASTER_JSON02": {
+        "layouts": {},
+        "workflows": {},
+        "id": "MASTER_JSON02"
+      }
+    }
+  },
+  "new": {
+    "master_json": {
+      "master_json_ref01": {
+        "layouts": {},
+        "workflows": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/translations/master-json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

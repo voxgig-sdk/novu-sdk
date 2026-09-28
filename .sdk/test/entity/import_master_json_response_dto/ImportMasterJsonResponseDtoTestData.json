@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "import_master_json_response_dto": {
+      "IMPORT_MASTER_JSON_RESPONSE_DTO00": {
+        "failed": [],
+        "locale": "s3d",
+        "masterJson": {},
+        "message": "s3f",
+        "success": true,
+        "successful": [],
+        "id": "IMPORT_MASTER_JSON_RESPONSE_DTO00"
+      },
+      "IMPORT_MASTER_JSON_RESPONSE_DTO01": {
+        "failed": [],
+        "locale": "s79",
+        "masterJson": {},
+        "message": "s7b",
+        "success": true,
+        "successful": [],
+        "id": "IMPORT_MASTER_JSON_RESPONSE_DTO01"
+      },
+      "IMPORT_MASTER_JSON_RESPONSE_DTO02": {
+        "failed": [],
+        "locale": "sb5",
+        "masterJson": {},
+        "message": "sb7",
+        "success": true,
+        "successful": [],
+        "id": "IMPORT_MASTER_JSON_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "import_master_json_response_dto": {
+      "import_master_json_response_dto_ref01": {
+        "failed": [],
+        "locale": "sf1",
+        "masterJson": {},
+        "message": "sf3",
+        "success": true,
+        "successful": []
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/translations/master-json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/translations/master-json/upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

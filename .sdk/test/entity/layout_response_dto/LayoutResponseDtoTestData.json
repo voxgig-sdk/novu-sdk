@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "layout_response_dto": {
+      "LAYOUT_RESPONSE_DTO00": {
+        "id": "LAYOUT_RESPONSE_DTO00"
+      },
+      "LAYOUT_RESPONSE_DTO01": {
+        "id": "LAYOUT_RESPONSE_DTO01"
+      },
+      "LAYOUT_RESPONSE_DTO02": {
+        "id": "LAYOUT_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "layout_response_dto": {
+      "layout_response_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /v2/layouts/{layoutId}/duplicate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

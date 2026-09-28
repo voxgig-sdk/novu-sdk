@@ -1,0 +1,204 @@
+# Entity: agent_response_dto
+
+main: kit: entity: agent_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    active: {
+      h: "Active"
+      n: "active"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    behavior: {
+      h: "Behavior"
+      n: "behavior"
+      r: true
+      t: "`$OBJECT`"
+    }
+    bridgeUrl: {
+      h: "Bridge Url"
+      n: "bridgeUrl"
+      r: false
+      sh: "Production bridge URL"
+      t: "`$STRING`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    createdBy: {
+      h: "Created By"
+      n: "createdBy"
+      r: false
+      sh: "Mongo user id of the user who created the agent"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    devBridgeActive: {
+      h: "Dev Bridge Active"
+      n: "devBridgeActive"
+      r: false
+      sh: "Whether the dev bridge override is active"
+      t: "`$BOOLEAN`"
+    }
+    devBridgeUrl: {
+      h: "Dev Bridge Url"
+      n: "devBridgeUrl"
+      r: false
+      sh: "Development bridge URL (set by npx novu dev)"
+      t: "`$STRING`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      t: "`$STRING`"
+    }
+    exceedsPlanLimit: {
+      h: "Exceeds Plan Limit"
+      n: "exceedsPlanLimit"
+      r: false
+      sh: "Cloud only."
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    identifier: {
+      h: "Identifier"
+      n: "identifier"
+      r: true
+      t: "`$STRING`"
+    }
+    integrations: {
+      h: "Integrations"
+      n: "integrations"
+      r: false
+      t: "`$ARRAY`"
+    }
+    managedRuntime: {
+      h: "Managed Runtime"
+      n: "managedRuntime"
+      r: false
+      sh: "Present when runtime is \"managed\"."
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      t: "`$STRING`"
+    }
+    runtime: {
+      h: "Runtime"
+      n: "runtime"
+      r: false
+      sh: "Whether the agent brain is self-hosted (bridge) or managed by a third-party provider"
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    visibility: {
+      h: "Visibility"
+      n: "visibility"
+      r: false
+      sh: "Discovery scope of the agent."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "agent_response_dto"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /v1/agents/{identifier}/bridge"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/v1/agents/{identifier}/bridge"
+          q: {
+            exist: [
+              "idempotency_key"
+              "identifier"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "bridge"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.agent")]
+  ]
+
+}

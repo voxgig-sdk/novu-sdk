@@ -1,0 +1,26 @@
+# BasicListDomainRoutesResponseDtoFlow
+
+main: kit: flow: BasicListDomainRoutesResponseDtoFlow:
+{
+  entity: "list_domain_routes_response_dto",
+  kind: "basic",
+  name: "BasicListDomainRoutesResponseDtoFlow",
+  step: [
+    {
+      m: {
+        domain_id: "domain01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_domain_routes_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListDomainRoutesResponseDtoFlow"
+}

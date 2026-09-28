@@ -1,0 +1,237 @@
+# Entity: subscription
+
+main: kit: entity: subscription: {
+
+  alias: field: {}
+
+  fields: {
+    contextKeys: {
+      h: "Context Keys"
+      n: "contextKeys"
+      r: false
+      sh: "Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)"
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "The creation date of the subscription"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The unique identifier of the subscription"
+      t: "`$STRING`"
+    }
+    identifier: {
+      h: "Identifier"
+      n: "identifier"
+      r: false
+      sh: "The identifier of the subscription"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "The name of the subscription"
+      t: "`$STRING`"
+    }
+    preferences: {
+      h: "Preferences"
+      n: "preferences"
+      r: false
+      sh: "The preferences/rules for the subscription"
+      t: "`$ARRAY`"
+    }
+    subscriber: {
+      h: "Subscriber"
+      n: "subscriber"
+      r: true
+      sh: "The subscriber information"
+      t: "`$ANY`"
+    }
+    topic: {
+      h: "Topic"
+      n: "topic"
+      r: true
+      sh: "The topic information"
+      t: "`$ANY`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      sh: "The last update date of the subscription"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "subscription"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/topics/{topicKey}/subscriptions/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "topic_id"
+                or: "topic_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/topics/{topicKey}/subscriptions/{identifier}"
+          q: {
+            exist: [
+              "id"
+              "idempotency_key"
+              "topic_id"
+            ]
+          }
+          r: {
+            param: {
+              identifier: "id"
+              topicKey: "topic_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "topics"
+            }
+            {
+              var: "topic_id"
+            }
+            {
+              lit: "subscriptions"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/topics/{topicKey}/subscriptions/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "topic_id"
+                or: "topic_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/topics/{topicKey}/subscriptions/{identifier}"
+          q: {
+            exist: [
+              "id"
+              "idempotency_key"
+              "topic_id"
+            ]
+          }
+          r: {
+            param: {
+              identifier: "id"
+              topicKey: "topic_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "topics"
+            }
+            {
+              var: "topic_id"
+            }
+            {
+              lit: "subscriptions"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.topic")]
+  ]
+
+}

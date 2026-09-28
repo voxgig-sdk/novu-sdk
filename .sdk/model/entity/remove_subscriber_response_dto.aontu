@@ -1,0 +1,79 @@
+# Entity: remove_subscriber_response_dto
+
+main: kit: entity: remove_subscriber_response_dto: {
+
+  alias: field: {}
+
+  name: "remove_subscriber_response_dto"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/subscribers/{subscriberId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/subscribers/{subscriberId}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+  ]
+
+}

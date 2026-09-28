@@ -1,0 +1,87 @@
+{
+  "existing": {
+    "channel_endpoint": {
+      "CHANNEL_ENDPOINT00": {
+        "channel": "s78",
+        "connectionIdentifier": "s79",
+        "contextKeys": [],
+        "createdAt": "s7b",
+        "endpoint": "s7c",
+        "id": "CHANNEL_ENDPOINT00",
+        "identifier": "s7e",
+        "integrationIdentifier": "s7f",
+        "providerId": "s80",
+        "subscriberId": "s81",
+        "type": "s82",
+        "updatedAt": "s83"
+      },
+      "CHANNEL_ENDPOINT01": {
+        "channel": "sf0",
+        "connectionIdentifier": "sf1",
+        "contextKeys": [],
+        "createdAt": "sf3",
+        "endpoint": "sf4",
+        "id": "CHANNEL_ENDPOINT01",
+        "identifier": "sf6",
+        "integrationIdentifier": "sf7",
+        "providerId": "sf8",
+        "subscriberId": "sf9",
+        "type": "sfa",
+        "updatedAt": "sfb"
+      },
+      "CHANNEL_ENDPOINT02": {
+        "channel": "s168",
+        "connectionIdentifier": "s169",
+        "contextKeys": [],
+        "createdAt": "s16b",
+        "endpoint": "s16c",
+        "id": "CHANNEL_ENDPOINT02",
+        "identifier": "s16e",
+        "integrationIdentifier": "s16f",
+        "providerId": "s170",
+        "subscriberId": "s171",
+        "type": "s172",
+        "updatedAt": "s173"
+      }
+    }
+  },
+  "new": {
+    "channel_endpoint": {
+      "channel_endpoint_ref01": {
+        "channel": "s1e0",
+        "connectionIdentifier": "s1e1",
+        "contextKeys": [],
+        "createdAt": "s1e3",
+        "endpoint": "s1e4",
+        "identifier": "s1e6",
+        "integrationIdentifier": "s1e7",
+        "providerId": "s1e8",
+        "subscriberId": "s1e9",
+        "type": "s1ea",
+        "updatedAt": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/channel-endpoints": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/channel-endpoints/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/channel-endpoints/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v1/channel-endpoints/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

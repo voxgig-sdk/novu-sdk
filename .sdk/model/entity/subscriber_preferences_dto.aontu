@@ -1,0 +1,177 @@
+# Entity: subscriber_preferences_dto
+
+main: kit: entity: subscriber_preferences_dto: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "subscriber_preferences_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/subscribers/{subscriberId}/preferences"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: [
+                  "tenant:acme"
+                ]
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: "nonCritical"
+                k: "query"
+                n: "criticality"
+                or: "criticality"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/subscribers/{subscriberId}/preferences"
+          q: {
+            "$action": "preferences"
+            exist: [
+              "context_key"
+              "criticality"
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "preferences"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/preferences"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/preferences"
+          q: {
+            "$action": "preferences"
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "preferences"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

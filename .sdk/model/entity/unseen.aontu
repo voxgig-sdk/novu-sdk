@@ -1,0 +1,111 @@
+# Entity: unseen
+
+main: kit: entity: unseen: {
+
+  alias: field: {}
+
+  fields: {
+    count: {
+      h: "Count"
+      n: "count"
+      r: true
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "unseen"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/subscribers/{subscriberId}/notifications/unseen"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 100
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "seen"
+                or: "seen"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/subscribers/{subscriberId}/notifications/unseen"
+          q: {
+            exist: [
+              "idempotency_key"
+              "limit"
+              "seen"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              lit: "unseen"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+  ]
+
+}

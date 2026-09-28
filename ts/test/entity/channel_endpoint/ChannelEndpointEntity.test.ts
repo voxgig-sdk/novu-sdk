@@ -1,0 +1,182 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { NovuSDK, BaseFeature, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('ChannelEndpointEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when NOVU_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NOVU_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = NovuSDK.test()
+    const ent = testsdk.ChannelEndpoint()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.NOVU_TEST_LIVE
+    for (const op of ['create', 'update', 'load', 'remove']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'channel_endpoint.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"channel":{"a":true,"h":"Channel","n":"channel","r":true,"sh":"The channel type (email, sms, push, chat, etc.).","t":"`$STRING`","key$":"channel","index$":0},"connectionIdentifier":{"a":true,"h":"Connection Identifier","n":"connectionIdentifier","r":true,"sh":"The identifier of the channel connection used for this endpoint.","t":"`$STRING`","key$":"connectionIdentifier","index$":1},"contextKeys":{"a":true,"h":"Context Keys","n":"contextKeys","r":true,"sh":"The context of the channel connection","t":"`$ARRAY`","key$":"contextKeys","index$":2},"createdAt":{"a":true,"h":"Created At","n":"createdAt","r":true,"sh":"The timestamp indicating when the channel endpoint was created, in ISO 8601 format.","t":"`$STRING`","key$":"createdAt","index$":3},"endpoint":{"a":true,"h":"Endpoint","n":"endpoint","r":true,"sh":"Endpoint data specific to the channel type","t":"`$ANY`","union":{"branches":14,"count":1,"depth":0},"key$":"endpoint","index$":4},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":5},"identifier":{"a":true,"h":"Identifier","n":"identifier","r":true,"sh":"The unique identifier of the channel endpoint.","t":"`$STRING`","key$":"identifier","index$":6},"integrationIdentifier":{"a":true,"h":"Integration Identifier","n":"integrationIdentifier","r":true,"sh":"The identifier of the integration to use for this channel endpoint.","t":"`$STRING`","key$":"integrationIdentifier","index$":7},"providerId":{"a":true,"h":"Provider Id","n":"providerId","r":true,"sh":"The provider identifier (e.g., sendgrid, twilio, slack, etc.).","t":"`$STRING`","key$":"providerId","index$":8},"subscriberId":{"a":true,"h":"Subscriber Id","n":"subscriberId","r":true,"sh":"The subscriber ID to which the channel endpoint is linked","t":"`$STRING`","key$":"subscriberId","index$":9},"type":{"a":true,"h":"Type","n":"type","r":true,"sh":"Type of channel endpoint","t":"`$STRING`","key$":"type","index$":10},"updatedAt":{"a":true,"h":"Updated At","n":"updatedAt","r":true,"sh":"The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format.","t":"`$STRING`","key$":"updatedAt","index$":11}},"id":{"field":"id","name":"id"},"name":"channel_endpoint","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /v1/channel-endpoints","source":"openapi3","version":2},"g":{"header":[{"a":true,"k":"header","n":"idempotency_key","or":"idempotency_key","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/v1/channel-endpoints","q":{"exist":["idempotency_key"]},"r":{},"s":[{"lit":"v1"},{"lit":"channel-endpoints"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v1/channel-endpoints/{identifier}","source":"openapi3","version":2},"g":{"header":[{"a":true,"k":"header","n":"idempotency_key","or":"idempotency_key","r":false,"t":"`$STRING`","index$":0}],"params":[{"a":true,"k":"param","n":"id","or":"identifier","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/v1/channel-endpoints/{identifier}","q":{"exist":["id","idempotency_key"]},"r":{"param":{"identifier":"id"}},"s":[{"lit":"v1"},{"lit":"channel-endpoints"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"},"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /v1/channel-endpoints/{identifier}","source":"openapi3","version":2},"g":{"header":[{"a":true,"k":"header","n":"idempotency_key","or":"idempotency_key","r":false,"t":"`$STRING`","index$":0}],"params":[{"a":true,"k":"param","n":"id","or":"identifier","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"DELETE","o":"/v1/channel-endpoints/{identifier}","q":{"exist":["id","idempotency_key"]},"r":{"param":{"identifier":"id"}},"s":[{"lit":"v1"},{"lit":"channel-endpoints"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"remove"},"update":{"input":"data","name":"update","points":[{"a":true,"co":{"id":"PATCH /v1/channel-endpoints/{identifier}","source":"openapi3","version":2},"g":{"header":[{"a":true,"k":"header","n":"idempotency_key","or":"idempotency_key","r":false,"t":"`$STRING`","index$":0}],"params":[{"a":true,"k":"param","n":"id","or":"identifier","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"PATCH","o":"/v1/channel-endpoints/{identifier}","q":{"exist":["id","idempotency_key"]},"r":{"param":{"identifier":"id"}},"s":[{"lit":"v1"},{"lit":"channel-endpoints"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"update"}},"relations":{"ancestors":[]},"key$":"channel_endpoint","name__orig":"channel_endpoint","Name":"ChannelEndpoint","name_":"channel_endpoint","name-":"channel-endpoint","NAME":"CHANNEL_ENDPOINT","index$":6}, {"active":true,"entity":"channel_endpoint","key$":"BasicChannelEndpointFlow","kind":"basic","name":"BasicChannelEndpointFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"channel_endpoint_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"channel_endpoint_ref01","srcdatavar":"channel_endpoint_ref01_data","suffix":"_up0","textfield":"channel"},"m":{},"o":"update","s":[{"apply":"TextFieldMark","def":{"mark":"Mark01-channel_endpoint_ref01"}}],"v":[],"index$":1},{"a":true,"d":{},"i":{"ref":"channel_endpoint_ref01","srcdatavar":"channel_endpoint_ref01_data","suffix":"_dt0"},"m":{"id":"channel_endpoint01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-channel_endpoint_ref01"}}],"index$":2},{"a":true,"d":{},"i":{"ref":"channel_endpoint_ref01","suffix":"_rm0"},"m":{"id":"channel_endpoint01"},"o":"remove","s":[],"v":[],"index$":3}]}, 'ChannelEndpoint', {"POST /v1/channel-endpoints":{"protocol":"http","requestBody":{"required":true,"description":"Channel endpoint creation request. The structure varies based on the type field.","content":{"application/json":{"schema":{"oneOf":[{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["slack_channel"],"example":"slack_channel"},"endpoint":{"description":"Slack channel endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateSlackChannelEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["slack_user"],"example":"slack_user"},"endpoint":{"description":"Slack user endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateSlackUserEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["webhook"],"example":"webhook"},"endpoint":{"description":"Webhook endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateWebhookEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["phone"],"example":"phone"},"endpoint":{"description":"Phone endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreatePhoneEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["ms_teams_channel"],"example":"ms_teams_channel"},"endpoint":{"description":"MS Teams channel endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateMsTeamsChannelEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["ms_teams_user"],"example":"ms_teams_user"},"endpoint":{"description":"MS Teams user endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateMsTeamsUserEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["telegram_chat"],"example":"telegram_chat"},"endpoint":{"description":"Telegram chat endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateTelegramChatEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this Webex endpoint.","example":"webex-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["webex_room"],"example":"webex_room"},"endpoint":{"description":"Webex room endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateWebexRoomEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this Webex endpoint.","example":"webex-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["webex_person"],"example":"webex_person"},"endpoint":{"description":"Webex person endpoint data. Provide exactly one of personId or personEmail.","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateWebexPersonEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["line_user"],"example":"line_user"},"endpoint":{"description":"LINE user endpoint data","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateLineUserEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["pagerduty_service"],"example":"pagerduty_service"},"endpoint":{"description":"PagerDuty service endpoint data. `routingKey` is encrypted at rest on the channel endpoint (`endpoint` field); `region` remains plaintext. No linked channel connection.","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreatePagerDutyServiceEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["opsgenie_integration"],"example":"opsgenie_integration"},"endpoint":{"description":"Opsgenie integration endpoint data. `apiKey` is encrypted at rest on the channel endpoint (`endpoint` field); `region` remains plaintext. No linked channel connection.","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateOpsgenieIntegrationEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["grafana_oncall_integration"],"example":"grafana_oncall_integration"},"endpoint":{"description":"Grafana OnCall integration endpoint data. `url` and `authToken` are encrypted at rest on the channel endpoint (`endpoint` field). No linked channel connection.","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateGrafanaOnCallIntegrationEndpointDto"},{"type":"object","properties":{"identifier":{"type":"string","description":"The unique identifier for the channel endpoint. If not provided, one will be generated automatically.","example":"slack-channel-user123-abc4"},"subscriberId":{"type":"string","description":"The subscriber ID to which the channel endpoint is linked","example":"subscriber-123"},"createSubscriberIfMissing":{"type":"boolean","description":"When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.","default":false},"context":{"type":"object","additionalProperties":{"oneOf":[]}},"integrationIdentifier":{"type":"string","description":"The identifier of the integration to use for this channel endpoint.","example":"slack-prod"},"connectionIdentifier":{"type":"string","description":"The identifier of the channel connection to use for this channel endpoint.","example":"slack-connection-abc123"},"type":{"type":"string","description":"Type of channel endpoint","enum":["tool_webhook"],"example":"tool_webhook"},"endpoint":{"description":"Tool webhook endpoint data. `url` and header values are encrypted at rest on the channel endpoint (`endpoint` field); `method` remains plaintext. No linked channel connection.","allOf":[{}]}},"required":["subscriberId","integrationIdentifier","type","endpoint"],"x-ref":"#/components/schemas/CreateToolWebhookEndpointDto"}],"discriminator":{"propertyName":"type","mapping":{"slack_channel":"#/components/schemas/CreateSlackChannelEndpointDto","slack_user":"#/components/schemas/CreateSlackUserEndpointDto","webhook":"#/components/schemas/CreateWebhookEndpointDto","phone":"#/components/schemas/CreatePhoneEndpointDto","ms_teams_channel":"#/components/schemas/CreateMsTeamsChannelEndpointDto","ms_teams_user":"#/components/schemas/CreateMsTeamsUserEndpointDto","telegram_chat":"#/components/schemas/CreateTelegramChatEndpointDto","webex_room":"#/components/schemas/CreateWebexRoomEndpointDto","webex_person":"#/components/schemas/CreateWebexPersonEndpointDto","line_user":"#/components/schemas/CreateLineUserEndpointDto","pagerduty_service":"#/components/schemas/CreatePagerDutyServiceEndpointDto","opsgenie_integration":"#/components/schemas/CreateOpsgenieIntegrationEndpointDto","grafana_oncall_integration":"#/components/schemas/CreateGrafanaOnCallIntegrationEndpointDto","tool_webhook":"#/components/schemas/CreateToolWebhookEndpointDto"}},"index$":1}}}},"parameters":[{"name":"idempotency-key","in":"header","description":"A header for idempotency purposes","required":false,"schema":{"type":"string"},"index$":0}]},"GET /v1/channel-endpoints/{identifier}":{"protocol":"http","parameters":[{"name":"identifier","required":true,"in":"path","description":"The unique identifier of the channel endpoint","schema":{"type":"string"},"index$":0},{"name":"idempotency-key","in":"header","description":"A header for idempotency purposes","required":false,"schema":{"type":"string"},"index$":1}]},"DELETE /v1/channel-endpoints/{identifier}":{"protocol":"http","parameters":[{"name":"identifier","required":true,"in":"path","description":"The unique identifier of the channel endpoint","schema":{"type":"string"},"index$":0},{"name":"idempotency-key","in":"header","description":"A header for idempotency purposes","required":false,"schema":{"type":"string"},"index$":1}]},"PATCH /v1/channel-endpoints/{identifier}":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"endpoint":{"description":"Updated endpoint data. The structure must match the existing channel endpoint type.","oneOf":[{"type":"object","properties":{"channelId":{}},"required":["channelId"],"x-ref":"#/components/schemas/SlackChannelEndpointDto"},{"type":"object","properties":{"userId":{}},"required":["userId"],"x-ref":"#/components/schemas/SlackUserEndpointDto"},{"type":"object","properties":{"url":{},"channel":{}},"required":["url"],"x-ref":"#/components/schemas/WebhookEndpointDto"},{"type":"object","properties":{"phoneNumber":{}},"required":["phoneNumber"],"x-ref":"#/components/schemas/PhoneEndpointDto"},{"type":"object","properties":{"roomId":{},"parentId":{}},"required":["roomId"],"x-ref":"#/components/schemas/WebexRoomEndpointDto"},{"type":"object","properties":{"personId":{},"personEmail":{}},"x-ref":"#/components/schemas/WebexPersonEndpointDto"},{"type":"object","properties":{"url":{},"headers":{},"method":{}},"required":["url"],"x-ref":"#/components/schemas/ToolWebhookEndpointDto"}],"key$":"endpoint"}},"required":["endpoint"],"x-ref":"#/components/schemas/UpdateChannelEndpointRequestDto","index$":1}}}},"parameters":[{"name":"identifier","required":true,"in":"path","description":"The unique identifier of the channel endpoint","schema":{"type":"string"},"index$":0},{"name":"idempotency-key","in":"header","description":"A header for idempotency purposes","required":false,"schema":{"type":"string"},"index$":1}]}})
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const channel_endpoint_ref01_ent = client.ChannelEndpoint()
+    let channel_endpoint_ref01_data = setup.data.new.channel_endpoint['channel_endpoint_ref01']
+
+    channel_endpoint_ref01_data = (await channel_endpoint_ref01_ent.create(channel_endpoint_ref01_data)).data()
+    assert(null != channel_endpoint_ref01_data.id)
+
+
+    // UPDATE
+    const channel_endpoint_ref01_data_up0: any = {}
+    channel_endpoint_ref01_data_up0.id = channel_endpoint_ref01_data.id
+
+    const channel_endpoint_ref01_markdef_up0 = { name: 'channel', value: 'Mark01-channel_endpoint_ref01_' + setup.now }
+    ;(channel_endpoint_ref01_data_up0 as any)[channel_endpoint_ref01_markdef_up0.name] = channel_endpoint_ref01_markdef_up0.value
+
+    const channel_endpoint_ref01_resdata_up0 = (await channel_endpoint_ref01_ent.update(channel_endpoint_ref01_data_up0)).data()
+    assert(channel_endpoint_ref01_resdata_up0.id === channel_endpoint_ref01_data_up0.id)
+
+    assert((channel_endpoint_ref01_resdata_up0 as any)[channel_endpoint_ref01_markdef_up0.name] === channel_endpoint_ref01_markdef_up0.value)
+
+
+    // LOAD
+    const channel_endpoint_ref01_match_dt0: any = {}
+    channel_endpoint_ref01_match_dt0.id = channel_endpoint_ref01_data.id
+    const channel_endpoint_ref01_data_dt0 = (await channel_endpoint_ref01_ent.load(channel_endpoint_ref01_match_dt0)).data()
+    assert(channel_endpoint_ref01_data_dt0.id === channel_endpoint_ref01_data.id)
+
+
+    // REMOVE
+    const channel_endpoint_ref01_match_rm0: any = { id: channel_endpoint_ref01_data.id }
+    await channel_endpoint_ref01_ent.remove(channel_endpoint_ref01_match_rm0)
+  
+
+  })
+})
+
+
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/channel_endpoint/ChannelEndpointTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = NovuSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['channel_endpoint01','channel_endpoint02','channel_endpoint03'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'NOVU_TEST_CHANNEL_ENDPOINT_ENTID': idmap,
+    'NOVU_TEST_LIVE': 'FALSE',
+    'NOVU_TEST_EXPLAIN': 'FALSE',
+    'NOVU_APIKEY': '',
+  })
+
+  idmap = env['NOVU_TEST_CHANNEL_ENDPOINT_ENTID']
+
+  const live = 'TRUE' === env.NOVU_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['NOVU_TEST_CHANNEL_ENDPOINT_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new NovuSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.NOVU_APIKEY,
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.NOVU_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

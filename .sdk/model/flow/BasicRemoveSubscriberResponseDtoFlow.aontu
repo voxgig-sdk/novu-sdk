@@ -1,0 +1,9 @@
+# BasicRemoveSubscriberResponseDtoFlow
+
+main: kit: flow: BasicRemoveSubscriberResponseDtoFlow:
+{
+  entity: "remove_subscriber_response_dto",
+  kind: "basic",
+  name: "BasicRemoveSubscriberResponseDtoFlow",
+  "key$": "BasicRemoveSubscriberResponseDtoFlow"
+}

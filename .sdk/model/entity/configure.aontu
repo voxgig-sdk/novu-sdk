@@ -1,0 +1,106 @@
+# Entity: configure
+
+main: kit: entity: configure: {
+
+  alias: field: {}
+
+  fields: {
+    botUsername: {
+      h: "Bot Username"
+      n: "botUsername"
+      r: true
+      sh: "Resolved bot username from getMe"
+      t: "`$STRING`"
+    }
+    configuredAt: {
+      h: "Configured At"
+      n: "configuredAt"
+      r: true
+      sh: "ISO-8601 timestamp the webhook was configured at"
+      t: "`$STRING`"
+    }
+    webhookUrl: {
+      h: "Webhook Url"
+      n: "webhookUrl"
+      r: true
+      sh: "URL Novu registered with Telegram for incoming updates"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "configure"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/integrations/{integrationIdentifier}/webhook/configure"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "integration_id"
+                or: "integration_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/{integrationIdentifier}/webhook/configure"
+          q: {
+            exist: [
+              "idempotency_key"
+              "integration_id"
+            ]
+          }
+          r: {
+            param: {
+              integrationIdentifier: "integration_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              var: "integration_id"
+            }
+            {
+              lit: "webhook"
+            }
+            {
+              lit: "configure"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.integration")]
+  ]
+
+}

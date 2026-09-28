@@ -1,0 +1,22 @@
+# BasicMessageResponseDtoFlow
+
+main: kit: flow: BasicMessageResponseDtoFlow:
+{
+  entity: "message_response_dto",
+  kind: "basic",
+  name: "BasicMessageResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "message_response_dto_ref01"
+      }
+
+      m: {
+        subscriber_id: "subscriber01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicMessageResponseDtoFlow"
+}

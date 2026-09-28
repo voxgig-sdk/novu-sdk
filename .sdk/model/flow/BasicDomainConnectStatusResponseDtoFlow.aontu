@@ -1,0 +1,26 @@
+# BasicDomainConnectStatusResponseDtoFlow
+
+main: kit: flow: BasicDomainConnectStatusResponseDtoFlow:
+{
+  entity: "domain_connect_status_response_dto",
+  kind: "basic",
+  name: "BasicDomainConnectStatusResponseDtoFlow",
+  step: [
+    {
+      m: {
+        domain: "domain01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "domain_connect_status_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDomainConnectStatusResponseDtoFlow"
+}

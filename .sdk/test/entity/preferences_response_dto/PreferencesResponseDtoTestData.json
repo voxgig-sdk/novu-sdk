@@ -1,0 +1,39 @@
+{
+  "existing": {
+    "preferences_response_dto": {
+      "PREFERENCES_RESPONSE_DTO00": {
+        "context": {},
+        "preferences": [],
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "PREFERENCES_RESPONSE_DTO00"
+      },
+      "PREFERENCES_RESPONSE_DTO01": {
+        "context": {},
+        "preferences": [],
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "PREFERENCES_RESPONSE_DTO01"
+      },
+      "PREFERENCES_RESPONSE_DTO02": {
+        "context": {},
+        "preferences": [],
+        "subscriber_id": "SUBSCRIBER01",
+        "id": "PREFERENCES_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "preferences_response_dto": {
+      "preferences_response_dto_ref01": {
+        "context": {},
+        "preferences": []
+      }
+    }
+  },
+  "requests": {
+    "PATCH /v2/subscribers/{subscriberId}/preferences/bulk": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

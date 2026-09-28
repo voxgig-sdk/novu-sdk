@@ -1,0 +1,26 @@
+# BasicNotificationFeedItemDtoFlow
+
+main: kit: flow: BasicNotificationFeedItemDtoFlow:
+{
+  entity: "notification_feed_item_dto",
+  kind: "basic",
+  name: "BasicNotificationFeedItemDtoFlow",
+  step: [
+    {
+      m: {
+        subscriber_id: "subscriber01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "notification_feed_item_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicNotificationFeedItemDtoFlow"
+}

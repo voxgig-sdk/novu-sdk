@@ -1,0 +1,82 @@
+# BasicContextFlow
+
+main: kit: flow: BasicContextFlow:
+{
+  entity: "context",
+  kind: "basic",
+  name: "BasicContextFlow",
+  step: [
+    {
+      i: {
+        ref: "context_ref01"
+      }
+
+      m: {
+        type: "type01"
+      }
+
+      o: "create"
+    }
+
+    {
+      d: {
+        type: "type01"
+      }
+
+      i: {
+        ref: "context_ref01",
+        srcdatavar: "context_ref01_data",
+        suffix: "_up0",
+        textfield: "bridgeUrl"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-context_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "context_ref01",
+        srcdatavar: "context_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "context01",
+        type: "type01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-context_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "context_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "context01",
+        type: "type01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicContextFlow"
+}

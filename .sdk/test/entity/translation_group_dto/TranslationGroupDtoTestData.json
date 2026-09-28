@@ -1,0 +1,62 @@
+{
+  "existing": {
+    "translation_group_dto": {
+      "TRANSLATION_GROUP_DTO00": {
+        "createdAt": "s50",
+        "id": "TRANSLATION_GROUP_DTO00",
+        "locales": [],
+        "outdatedLocales": [],
+        "resourceId": "s54",
+        "resourceName": "s55",
+        "resourceType": "s56",
+        "updatedAt": "s57",
+        "resource_id": "RESOURCE01",
+        "resource_type": "RESOURCE_TYPE01"
+      },
+      "TRANSLATION_GROUP_DTO01": {
+        "createdAt": "sa0",
+        "id": "TRANSLATION_GROUP_DTO01",
+        "locales": [],
+        "outdatedLocales": [],
+        "resourceId": "sa4",
+        "resourceName": "sa5",
+        "resourceType": "sa6",
+        "updatedAt": "sa7",
+        "resource_id": "RESOURCE01",
+        "resource_type": "RESOURCE_TYPE01"
+      },
+      "TRANSLATION_GROUP_DTO02": {
+        "createdAt": "sf0",
+        "id": "TRANSLATION_GROUP_DTO02",
+        "locales": [],
+        "outdatedLocales": [],
+        "resourceId": "sf4",
+        "resourceName": "sf5",
+        "resourceType": "sf6",
+        "updatedAt": "sf7",
+        "resource_id": "RESOURCE01",
+        "resource_type": "RESOURCE_TYPE01"
+      }
+    }
+  },
+  "new": {
+    "translation_group_dto": {
+      "translation_group_dto_ref01": {
+        "createdAt": "s140",
+        "locales": [],
+        "outdatedLocales": [],
+        "resourceId": "s144",
+        "resourceName": "s145",
+        "resourceType": "s146",
+        "updatedAt": "s147"
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/translations/group/{resourceType}/{resourceId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

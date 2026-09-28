@@ -1,0 +1,58 @@
+{
+  "existing": {
+    "message_response_dto": {
+      "MESSAGE_RESPONSE_DTO00": {
+        "markAs": "s28",
+        "messageId": "s29",
+        "payload": {},
+        "status": "s2b",
+        "message_id": "MESSAGE01",
+        "subscriber_id": "SUBSCRIBER01",
+        "type": "TYPE01",
+        "id": "MESSAGE_RESPONSE_DTO00"
+      },
+      "MESSAGE_RESPONSE_DTO01": {
+        "markAs": "s50",
+        "messageId": "s51",
+        "payload": {},
+        "status": "s53",
+        "message_id": "MESSAGE01",
+        "subscriber_id": "SUBSCRIBER01",
+        "type": "TYPE01",
+        "id": "MESSAGE_RESPONSE_DTO01"
+      },
+      "MESSAGE_RESPONSE_DTO02": {
+        "markAs": "s78",
+        "messageId": "s79",
+        "payload": {},
+        "status": "s7b",
+        "message_id": "MESSAGE01",
+        "subscriber_id": "SUBSCRIBER01",
+        "type": "TYPE01",
+        "id": "MESSAGE_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "message_response_dto": {
+      "message_response_dto_ref01": {
+        "markAs": "sa0",
+        "messageId": "sa1",
+        "payload": {},
+        "status": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/subscribers/{subscriberId}/messages/mark-as": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# BasicUnseenFlow
+
+main: kit: flow: BasicUnseenFlow:
+{
+  entity: "unseen",
+  kind: "basic",
+  name: "BasicUnseenFlow",
+  step: [
+    {
+      i: {
+        ref: "unseen_ref01",
+        srcdatavar: "unseen_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "unseen01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-unseen_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUnseenFlow"
+}

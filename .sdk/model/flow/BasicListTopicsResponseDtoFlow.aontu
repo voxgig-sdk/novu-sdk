@@ -1,0 +1,22 @@
+# BasicListTopicsResponseDtoFlow
+
+main: kit: flow: BasicListTopicsResponseDtoFlow:
+{
+  entity: "list_topics_response_dto",
+  kind: "basic",
+  name: "BasicListTopicsResponseDtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_topics_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListTopicsResponseDtoFlow"
+}

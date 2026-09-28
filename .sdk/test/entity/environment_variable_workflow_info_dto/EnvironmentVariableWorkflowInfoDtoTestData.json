@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "environment_variable_workflow_info_dto": {
+      "ENVIRONMENT_VARIABLE_WORKFLOW_INFO_DTO00": {
+        "name": "s14",
+        "workflowId": "s15",
+        "variable_key": "VARIABLE_KEY01"
+      },
+      "ENVIRONMENT_VARIABLE_WORKFLOW_INFO_DTO01": {
+        "name": "s28",
+        "workflowId": "s29",
+        "variable_key": "VARIABLE_KEY01"
+      },
+      "ENVIRONMENT_VARIABLE_WORKFLOW_INFO_DTO02": {
+        "name": "s3c",
+        "workflowId": "s3d",
+        "variable_key": "VARIABLE_KEY01"
+      }
+    }
+  },
+  "new": {
+    "environment_variable_workflow_info_dto": {
+      "environment_variable_workflow_info_dto_ref01": {
+        "name": "s50",
+        "workflowId": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /v1/environment-variables/{variableKey}/usage": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

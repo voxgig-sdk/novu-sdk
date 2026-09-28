@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "translation": {
+      "TRANSLATION00": {
+        "content": {},
+        "id": "TRANSLATION00",
+        "locale": "s34",
+        "resourceId": "s35",
+        "resourceType": "s36",
+        "resource_id": "RESOURCE01",
+        "resource_type": "RESOURCE_TYPE01"
+      },
+      "TRANSLATION01": {
+        "content": {},
+        "id": "TRANSLATION01",
+        "locale": "s66",
+        "resourceId": "s67",
+        "resourceType": "s68",
+        "resource_id": "RESOURCE01",
+        "resource_type": "RESOURCE_TYPE01"
+      },
+      "TRANSLATION02": {
+        "content": {},
+        "id": "TRANSLATION02",
+        "locale": "s98",
+        "resourceId": "s99",
+        "resourceType": "s9a",
+        "resource_id": "RESOURCE01",
+        "resource_type": "RESOURCE_TYPE01"
+      }
+    }
+  },
+  "new": {
+    "translation": {
+      "translation_ref01": {
+        "content": {},
+        "locale": "sca",
+        "resourceId": "scb",
+        "resourceType": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/translations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/translations/{resourceType}/{resourceId}/{locale}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/translations/{resourceType}/{resourceId}/{locale}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/translations/{resourceType}/{resourceId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+# BasicIntegrationResponseDtoFlow
+
+main: kit: flow: BasicIntegrationResponseDtoFlow:
+{
+  entity: "integration_response_dto",
+  kind: "basic",
+  name: "BasicIntegrationResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "integration_response_dto_ref01"
+      }
+
+      m: {
+        integration_id: "integration01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "integration_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIntegrationResponseDtoFlow"
+}

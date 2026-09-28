@@ -1,0 +1,18 @@
+# BasicTriggerFlow
+
+main: kit: flow: BasicTriggerFlow:
+{
+  entity: "trigger",
+  kind: "basic",
+  name: "BasicTriggerFlow",
+  step: [
+    {
+      i: {
+        ref: "trigger_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicTriggerFlow"
+}

@@ -1,0 +1,258 @@
+# Entity: workflow_response_dto
+
+main: kit: entity: workflow_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    active: {
+      h: "Active"
+      n: "active"
+      r: false
+      sh: "Whether the workflow is active"
+      t: "`$BOOLEAN`"
+    }
+    agent: {
+      h: "Agent"
+      n: "agent"
+      r: false
+      sh: "Optional agent assignment used to route this workflow through an agent's connected channels."
+      t: "`$ANY`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "Creation timestamp"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Description of the workflow"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Database identifier of the workflow"
+      t: "`$STRING`"
+    }
+    isTranslationEnabled: {
+      h: "Is Translation Enabled"
+      n: "isTranslationEnabled"
+      r: false
+      sh: "Enable or disable translations for this workflow"
+      t: "`$BOOLEAN`"
+    }
+    issues: {
+      h: "Issues"
+      n: "issues"
+      r: false
+      sh: "Runtime issues for workflow creation and update"
+      t: "`$OBJECT`"
+    }
+    lastPublishedAt: {
+      h: "Last Published At"
+      n: "lastPublishedAt"
+      r: false
+      sh: "Timestamp of the last workflow publication"
+      t: "`$STRING`"
+    }
+    lastPublishedBy: {
+      h: "Last Published By"
+      n: "lastPublishedBy"
+      r: false
+      sh: "User who last published the workflow"
+      t: "`$ANY`"
+    }
+    lastTriggeredAt: {
+      h: "Last Triggered At"
+      n: "lastTriggeredAt"
+      r: false
+      sh: "Timestamp of the last workflow trigger"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "Name of the workflow"
+      t: "`$STRING`"
+    }
+    origin: {
+      h: "Origin"
+      n: "origin"
+      r: true
+      sh: "Workflow origin"
+      t: "`$STRING`"
+    }
+    payloadExample: {
+      h: "Payload Example"
+      n: "payloadExample"
+      r: false
+      sh: "Generated payload example based on the payload schema"
+      t: "`$OBJECT`"
+    }
+    payloadSchema: {
+      h: "Payload Schema"
+      n: "payloadSchema"
+      r: false
+      sh: "The payload JSON Schema for the workflow"
+      t: "`$OBJECT`"
+    }
+    preferences: {
+      h: "Preferences"
+      n: "preferences"
+      r: true
+      sh: "Preferences for the workflow"
+      t: "`$ANY`"
+    }
+    severity: {
+      h: "Severity"
+      n: "severity"
+      r: true
+      sh: "Workflow severity"
+      t: "`$STRING`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      sh: "Slug of the workflow"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Workflow status"
+      t: "`$STRING`"
+    }
+    steps: {
+      h: "Steps"
+      n: "steps"
+      r: true
+      sh: "Steps of the workflow"
+      t: "`$ARRAY`"
+      union: {
+        branches: 5
+        count: 3
+        depth: 19
+      }
+    }
+    tags: {
+      h: "Tags"
+      n: "tags"
+      r: false
+      sh: "Tags associated with the workflow"
+      t: "`$ARRAY`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      sh: "Last updated timestamp"
+      t: "`$STRING`"
+    }
+    updatedBy: {
+      h: "Updated By"
+      n: "updatedBy"
+      r: false
+      sh: "User who last updated the workflow"
+      t: "`$ANY`"
+    }
+    validatePayload: {
+      h: "Validate Payload"
+      n: "validatePayload"
+      r: false
+      sh: "Enable or disable payload schema validation"
+      t: "`$BOOLEAN`"
+    }
+    workflowId: {
+      h: "Workflow Id"
+      n: "workflowId"
+      r: true
+      sh: "Workflow identifier"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "workflow_response_dto"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /v2/workflows/{workflowId}/sync"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "workflow_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/v2/workflows/{workflowId}/sync"
+          q: {
+            "$action": "sync"
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              workflowId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "workflows"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "sync"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

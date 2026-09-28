@@ -1,0 +1,43 @@
+{
+  "existing": {
+    "configure": {
+      "CONFIGURE00": {
+        "botUsername": "s1e",
+        "configuredAt": "s1f",
+        "webhookUrl": "s20",
+        "integration_id": "INTEGRATION01",
+        "id": "CONFIGURE00"
+      },
+      "CONFIGURE01": {
+        "botUsername": "s3c",
+        "configuredAt": "s3d",
+        "webhookUrl": "s3e",
+        "integration_id": "INTEGRATION01",
+        "id": "CONFIGURE01"
+      },
+      "CONFIGURE02": {
+        "botUsername": "s5a",
+        "configuredAt": "s5b",
+        "webhookUrl": "s5c",
+        "integration_id": "INTEGRATION01",
+        "id": "CONFIGURE02"
+      }
+    }
+  },
+  "new": {
+    "configure": {
+      "configure_ref01": {
+        "botUsername": "s78",
+        "configuredAt": "s79",
+        "webhookUrl": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/integrations/{integrationIdentifier}/webhook/configure": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

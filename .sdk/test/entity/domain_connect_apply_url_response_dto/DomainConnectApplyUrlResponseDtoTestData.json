@@ -1,0 +1,35 @@
+{
+  "existing": {
+    "domain_connect_apply_url_response_dto": {
+      "DOMAIN_CONNECT_APPLY_URL_RESPONSE_DTO00": {
+        "redirectUri": "sa",
+        "domain_id": "DOMAIN01",
+        "id": "DOMAIN_CONNECT_APPLY_URL_RESPONSE_DTO00"
+      },
+      "DOMAIN_CONNECT_APPLY_URL_RESPONSE_DTO01": {
+        "redirectUri": "s14",
+        "domain_id": "DOMAIN01",
+        "id": "DOMAIN_CONNECT_APPLY_URL_RESPONSE_DTO01"
+      },
+      "DOMAIN_CONNECT_APPLY_URL_RESPONSE_DTO02": {
+        "redirectUri": "s1e",
+        "domain_id": "DOMAIN01",
+        "id": "DOMAIN_CONNECT_APPLY_URL_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "domain_connect_apply_url_response_dto": {
+      "domain_connect_apply_url_response_dto_ref01": {
+        "redirectUri": "s28"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/domains/{domain}/auto-configure/start": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

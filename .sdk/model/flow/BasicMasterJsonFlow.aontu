@@ -1,0 +1,28 @@
+# BasicMasterJsonFlow
+
+main: kit: flow: BasicMasterJsonFlow:
+{
+  entity: "master_json",
+  kind: "basic",
+  name: "BasicMasterJsonFlow",
+  step: [
+    {
+      i: {
+        ref: "master_json_ref01",
+        srcdatavar: "master_json_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-master_json_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMasterJsonFlow"
+}

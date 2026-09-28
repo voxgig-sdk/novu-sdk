@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "subscriber_notifications_count_response_dto": {
+      "SUBSCRIBER_NOTIFICATIONS_COUNT_RESPONSE_DTO00": {
+        "count": 20,
+        "filter": {},
+        "subscriber_id": "SUBSCRIBER01"
+      },
+      "SUBSCRIBER_NOTIFICATIONS_COUNT_RESPONSE_DTO01": {
+        "count": 40,
+        "filter": {},
+        "subscriber_id": "SUBSCRIBER01"
+      },
+      "SUBSCRIBER_NOTIFICATIONS_COUNT_RESPONSE_DTO02": {
+        "count": 60,
+        "filter": {},
+        "subscriber_id": "SUBSCRIBER01"
+      }
+    }
+  },
+  "new": {
+    "subscriber_notifications_count_response_dto": {
+      "subscriber_notifications_count_response_dto_ref01": {
+        "count": 80,
+        "filter": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/subscribers/{subscriberId}/notifications/count": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

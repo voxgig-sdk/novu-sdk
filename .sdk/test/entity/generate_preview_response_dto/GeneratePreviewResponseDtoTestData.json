@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "generate_preview_response_dto": {
+      "GENERATE_PREVIEW_RESPONSE_DTO00": {
+        "controlValues": {},
+        "previewPayload": "s15",
+        "step_id": "STEP01",
+        "workflow_id": "WORKFLOW01",
+        "id": "GENERATE_PREVIEW_RESPONSE_DTO00"
+      },
+      "GENERATE_PREVIEW_RESPONSE_DTO01": {
+        "controlValues": {},
+        "previewPayload": "s29",
+        "step_id": "STEP01",
+        "workflow_id": "WORKFLOW01",
+        "id": "GENERATE_PREVIEW_RESPONSE_DTO01"
+      },
+      "GENERATE_PREVIEW_RESPONSE_DTO02": {
+        "controlValues": {},
+        "previewPayload": "s3d",
+        "step_id": "STEP01",
+        "workflow_id": "WORKFLOW01",
+        "id": "GENERATE_PREVIEW_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "generate_preview_response_dto": {
+      "generate_preview_response_dto_ref01": {
+        "controlValues": {},
+        "previewPayload": "s51"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/workflows/{workflowId}/step/{stepId}/preview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

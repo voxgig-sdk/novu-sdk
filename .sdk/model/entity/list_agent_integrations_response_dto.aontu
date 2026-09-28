@@ -1,0 +1,198 @@
+# Entity: list_agent_integrations_response_dto
+
+main: kit: entity: list_agent_integrations_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    agentId: {
+      h: "Agent Id"
+      n: "agentId"
+      r: true
+      t: "`$STRING`"
+    }
+    connectedAt: {
+      h: "Connected At"
+      n: "connectedAt"
+      r: false
+      sh: "Set when the agent–integration link received its first inbound webhook delivery."
+      t: "`$OBJECT`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      t: "`$STRING`"
+    }
+    exceedsPlanLimit: {
+      h: "Exceeds Plan Limit"
+      n: "exceedsPlanLimit"
+      r: false
+      sh: "Cloud only."
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Agent–integration link document id."
+      t: "`$STRING`"
+    }
+    integration: {
+      h: "Integration"
+      n: "integration"
+      r: true
+      t: "`$OBJECT`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "list_agent_integrations_response_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/agents/{identifier}/integrations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "include_cursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "integration_identifier"
+                or: "integration_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "order_by"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "order_direction"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/agents/{identifier}/integrations"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "idempotency_key"
+              "identifier"
+              "include_cursor"
+              "integration_identifier"
+              "limit"
+              "order_by"
+              "order_direction"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "integrations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.agent")]
+  ]
+
+}

@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "link": {
+      "LINK00": {
+        "context": {},
+        "contextHash": "s29",
+        "integrationIdentifier": "s2a",
+        "subscriberId": "s2b",
+        "id": "LINK00"
+      },
+      "LINK01": {
+        "context": {},
+        "contextHash": "s51",
+        "integrationIdentifier": "s52",
+        "subscriberId": "s53",
+        "id": "LINK01"
+      },
+      "LINK02": {
+        "context": {},
+        "contextHash": "s79",
+        "integrationIdentifier": "s7a",
+        "subscriberId": "s7b",
+        "id": "LINK02"
+      }
+    }
+  },
+  "new": {
+    "link": {
+      "link_ref01": {
+        "context": {},
+        "contextHash": "sa1",
+        "integrationIdentifier": "sa2",
+        "subscriberId": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/integrations/channel-endpoints/link": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

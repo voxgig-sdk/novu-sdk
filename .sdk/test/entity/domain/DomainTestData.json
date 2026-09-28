@@ -1,0 +1,96 @@
+{
+  "existing": {
+    "domain": {
+      "DOMAIN00": {
+        "createdAt": "s6e",
+        "data": {},
+        "dnsProvider": "s70",
+        "environmentId": "s71",
+        "expectedDnsRecords": [],
+        "id": "DOMAIN00",
+        "mxRecordConfigured": true,
+        "name": "s75",
+        "organizationId": "s76",
+        "status": "s77",
+        "updatedAt": "s78",
+        "address": "ADDRESS01"
+      },
+      "DOMAIN01": {
+        "createdAt": "sdc",
+        "data": {},
+        "dnsProvider": "sde",
+        "environmentId": "sdf",
+        "expectedDnsRecords": [],
+        "id": "DOMAIN01",
+        "mxRecordConfigured": true,
+        "name": "se3",
+        "organizationId": "se4",
+        "status": "se5",
+        "updatedAt": "se6",
+        "address": "ADDRESS01"
+      },
+      "DOMAIN02": {
+        "createdAt": "s14a",
+        "data": {},
+        "dnsProvider": "s14c",
+        "environmentId": "s14d",
+        "expectedDnsRecords": [],
+        "id": "DOMAIN02",
+        "mxRecordConfigured": true,
+        "name": "s151",
+        "organizationId": "s152",
+        "status": "s153",
+        "updatedAt": "s154",
+        "address": "ADDRESS01"
+      }
+    }
+  },
+  "new": {
+    "domain": {
+      "domain_ref01": {
+        "createdAt": "s1b8",
+        "data": {},
+        "dnsProvider": "s1ba",
+        "environmentId": "s1bb",
+        "expectedDnsRecords": [],
+        "mxRecordConfigured": true,
+        "name": "s1bf",
+        "organizationId": "s1c0",
+        "status": "s1c1",
+        "updatedAt": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/domains/{domain}/diagnose": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/domains": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/domains/{domain}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/domains/{domain}/routes/{address}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/domains/{domain}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v1/domains/{domain}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

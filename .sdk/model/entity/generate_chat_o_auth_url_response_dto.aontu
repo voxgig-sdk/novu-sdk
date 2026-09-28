@@ -1,0 +1,230 @@
+# Entity: generate_chat_o_auth_url_response_dto
+
+main: kit: entity: generate_chat_o_auth_url_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    autoLinkUser: {
+      h: "Auto Link User"
+      n: "autoLinkUser"
+      r: false
+      sh: "When true (default when connectionMode is \"subscriber\"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint."
+      t: "`$BOOLEAN`"
+    }
+    connectionIdentifier: {
+      h: "Connection Identifier"
+      n: "connectionIdentifier"
+      r: false
+      sh: "Identifier of the channel connection that will be created."
+      t: "`$STRING`"
+    }
+    connectionMode: {
+      h: "Connection Mode"
+      n: "connectionMode"
+      r: false
+      sh: "Connection mode that determines how the channel connection is scoped."
+      t: "`$STRING`"
+    }
+    context: {
+      h: "Context"
+      n: "context"
+      r: false
+      t: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    contextHash: {
+      h: "Context Hash"
+      n: "contextHash"
+      r: false
+      sh: "HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same \"Inbox with context\" signing scheme)."
+      t: "`$STRING`"
+    }
+    integrationIdentifier: {
+      h: "Integration Identifier"
+      n: "integrationIdentifier"
+      r: true
+      sh: "Integration identifier"
+      t: "`$STRING`"
+    }
+    mode: {
+      h: "Mode"
+      n: "mode"
+      r: false
+      sh: "OAuth flow mode."
+      t: "`$STRING`"
+    }
+    scope: {
+      h: "Scope"
+      n: "scope"
+      r: false
+      sh: "**Slack only**: OAuth scopes to request during authorization."
+      t: "`$ARRAY`"
+    }
+    subscriberId: {
+      h: "Subscriber Id"
+      n: "subscriberId"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The subscriber ID to associate with the channel connection."
+      t: "`$STRING`"
+    }
+    userScope: {
+      h: "User Scope"
+      n: "userScope"
+      r: false
+      sh: "**Slack only**: User-level OAuth scopes for \"Sign in with Slack\"."
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "generate_chat_o_auth_url_response_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/integrations/channel-connections/oauth"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/channel-connections/oauth"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              lit: "channel-connections"
+            }
+            {
+              lit: "oauth"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/integrations/channel-endpoints/oauth"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/channel-endpoints/oauth"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              lit: "channel-endpoints"
+            }
+            {
+              lit: "oauth"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/integrations/chat/oauth"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/chat/oauth"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              lit: "chat"
+            }
+            {
+              lit: "oauth"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,78 @@
+{
+  "existing": {
+    "generate_chat_o_auth_url_response_dto": {
+      "GENERATE_CHAT_O_AUTH_URL_RESPONSE_DTO00": {
+        "autoLinkUser": true,
+        "connectionIdentifier": "s65",
+        "connectionMode": "s66",
+        "context": {},
+        "contextHash": "s68",
+        "integrationIdentifier": "s69",
+        "mode": "s6a",
+        "scope": [],
+        "subscriberId": "s6c",
+        "userScope": [],
+        "id": "GENERATE_CHAT_O_AUTH_URL_RESPONSE_DTO00"
+      },
+      "GENERATE_CHAT_O_AUTH_URL_RESPONSE_DTO01": {
+        "autoLinkUser": true,
+        "connectionIdentifier": "sc9",
+        "connectionMode": "sca",
+        "context": {},
+        "contextHash": "scc",
+        "integrationIdentifier": "scd",
+        "mode": "sce",
+        "scope": [],
+        "subscriberId": "sd0",
+        "userScope": [],
+        "id": "GENERATE_CHAT_O_AUTH_URL_RESPONSE_DTO01"
+      },
+      "GENERATE_CHAT_O_AUTH_URL_RESPONSE_DTO02": {
+        "autoLinkUser": true,
+        "connectionIdentifier": "s12d",
+        "connectionMode": "s12e",
+        "context": {},
+        "contextHash": "s130",
+        "integrationIdentifier": "s131",
+        "mode": "s132",
+        "scope": [],
+        "subscriberId": "s134",
+        "userScope": [],
+        "id": "GENERATE_CHAT_O_AUTH_URL_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "generate_chat_o_auth_url_response_dto": {
+      "generate_chat_o_auth_url_response_dto_ref01": {
+        "autoLinkUser": true,
+        "connectionIdentifier": "s191",
+        "connectionMode": "s192",
+        "context": {},
+        "contextHash": "s194",
+        "integrationIdentifier": "s195",
+        "mode": "s196",
+        "scope": [],
+        "subscriberId": "s198",
+        "userScope": []
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/integrations/channel-connections/oauth": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/integrations/channel-endpoints/oauth": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/integrations/chat/oauth": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

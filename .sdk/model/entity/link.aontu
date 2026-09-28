@@ -1,0 +1,96 @@
+# Entity: link
+
+main: kit: entity: link: {
+
+  alias: field: {}
+
+  fields: {
+    context: {
+      h: "Context"
+      n: "context"
+      r: false
+      t: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    contextHash: {
+      h: "Context Hash"
+      n: "contextHash"
+      r: false
+      sh: "HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same \"Inbox with context\" signing scheme)."
+      t: "`$STRING`"
+    }
+    integrationIdentifier: {
+      h: "Integration Identifier"
+      n: "integrationIdentifier"
+      r: true
+      sh: "Integration identifier for the chat provider integration"
+      t: "`$STRING`"
+    }
+    subscriberId: {
+      h: "Subscriber Id"
+      n: "subscriberId"
+      r: true
+      sh: "External subscriber identifier to link to their chat identity"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "link"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/integrations/channel-endpoints/link"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/channel-endpoints/link"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              lit: "channel-endpoints"
+            }
+            {
+              lit: "link"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.providerMetadata`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

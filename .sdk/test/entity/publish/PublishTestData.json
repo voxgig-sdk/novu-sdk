@@ -1,0 +1,51 @@
+{
+  "existing": {
+    "publish": {
+      "PUBLISH00": {
+        "dryRun": true,
+        "resources": [],
+        "results": [],
+        "sourceEnvironmentId": "s35",
+        "summary": "s36",
+        "environment_id": "ENVIRONMENT01",
+        "id": "PUBLISH00"
+      },
+      "PUBLISH01": {
+        "dryRun": true,
+        "resources": [],
+        "results": [],
+        "sourceEnvironmentId": "s67",
+        "summary": "s68",
+        "environment_id": "ENVIRONMENT01",
+        "id": "PUBLISH01"
+      },
+      "PUBLISH02": {
+        "dryRun": true,
+        "resources": [],
+        "results": [],
+        "sourceEnvironmentId": "s99",
+        "summary": "s9a",
+        "environment_id": "ENVIRONMENT01",
+        "id": "PUBLISH02"
+      }
+    }
+  },
+  "new": {
+    "publish": {
+      "publish_ref01": {
+        "dryRun": true,
+        "resources": [],
+        "results": [],
+        "sourceEnvironmentId": "scb",
+        "summary": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/environments/{targetEnvironmentId}/publish": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+# Entity: publish
+
+main: kit: entity: publish: {
+
+  alias: field: {}
+
+  fields: {
+    dryRun: {
+      h: "Dry Run"
+      n: "dryRun"
+      r: false
+      sh: "Perform a dry run without making actual changes"
+      t: "`$BOOLEAN`"
+    }
+    resources: {
+      h: "Resources"
+      n: "resources"
+      r: false
+      sh: "Array of specific resources to publish."
+      t: "`$ARRAY`"
+    }
+    results: {
+      h: "Results"
+      n: "results"
+      r: true
+      sh: "Sync results by resource type"
+      t: "`$ARRAY`"
+    }
+    sourceEnvironmentId: {
+      h: "Source Environment Id"
+      n: "sourceEnvironmentId"
+      r: false
+      sh: "Source environment ID to sync from."
+      t: "`$STRING`"
+    }
+    summary: {
+      h: "Summary"
+      n: "summary"
+      r: true
+      sh: "Summary of the sync operation"
+      t: "`$ANY`"
+    }
+  }
+
+  name: "publish"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/environments/{targetEnvironmentId}/publish"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "6615943e7ace93b0540ae377"
+                k: "param"
+                n: "environment_id"
+                or: "target_environment_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/environments/{targetEnvironmentId}/publish"
+          q: {
+            exist: [
+              "environment_id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              targetEnvironmentId: "environment_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "environments"
+            }
+            {
+              var: "environment_id"
+            }
+            {
+              lit: "publish"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.environment")]
+  ]
+
+}

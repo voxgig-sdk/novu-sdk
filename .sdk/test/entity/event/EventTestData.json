@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "event": {
+      "EVENT00": {
+        "transaction_id": "TRANSACTION01",
+        "id": "EVENT00"
+      },
+      "EVENT01": {
+        "transaction_id": "TRANSACTION01",
+        "id": "EVENT01"
+      },
+      "EVENT02": {
+        "transaction_id": "TRANSACTION01",
+        "id": "EVENT02"
+      }
+    }
+  },
+  "new": {
+    "event": {
+      "event_ref01": {}
+    }
+  },
+  "requests": {
+    "DELETE /v1/events/trigger/{transactionId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

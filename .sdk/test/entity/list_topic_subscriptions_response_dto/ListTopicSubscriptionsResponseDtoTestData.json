@@ -1,0 +1,63 @@
+{
+  "existing": {
+    "list_topic_subscriptions_response_dto": {
+      "LIST_TOPIC_SUBSCRIPTIONS_RESPONSE_DTO00": {
+        "contextKeys": [],
+        "createdAt": "s47",
+        "id": "LIST_TOPIC_SUBSCRIPTIONS_RESPONSE_DTO00",
+        "identifier": "s49",
+        "preferences": [],
+        "subscriber": "s4b",
+        "topic": "s4c",
+        "subscriber_id": "SUBSCRIBER01",
+        "topic_key": "TOPIC_KEY01"
+      },
+      "LIST_TOPIC_SUBSCRIPTIONS_RESPONSE_DTO01": {
+        "contextKeys": [],
+        "createdAt": "s8d",
+        "id": "LIST_TOPIC_SUBSCRIPTIONS_RESPONSE_DTO01",
+        "identifier": "s8f",
+        "preferences": [],
+        "subscriber": "s91",
+        "topic": "s92",
+        "subscriber_id": "SUBSCRIBER01",
+        "topic_key": "TOPIC_KEY01"
+      },
+      "LIST_TOPIC_SUBSCRIPTIONS_RESPONSE_DTO02": {
+        "contextKeys": [],
+        "createdAt": "sd3",
+        "id": "LIST_TOPIC_SUBSCRIPTIONS_RESPONSE_DTO02",
+        "identifier": "sd5",
+        "preferences": [],
+        "subscriber": "sd7",
+        "topic": "sd8",
+        "subscriber_id": "SUBSCRIBER01",
+        "topic_key": "TOPIC_KEY01"
+      }
+    }
+  },
+  "new": {
+    "list_topic_subscriptions_response_dto": {
+      "list_topic_subscriptions_response_dto_ref01": {
+        "contextKeys": [],
+        "createdAt": "s119",
+        "identifier": "s11b",
+        "preferences": [],
+        "subscriber": "s11d",
+        "topic": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/subscribers/{subscriberId}/subscriptions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/topics/{topicKey}/subscriptions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# BasicEnvironmentTagsDtoFlow
+
+main: kit: flow: BasicEnvironmentTagsDtoFlow:
+{
+  entity: "environment_tags_dto",
+  kind: "basic",
+  name: "BasicEnvironmentTagsDtoFlow",
+  step: [
+    {
+      m: {
+        environment_id: "environment01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "environment_tags_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEnvironmentTagsDtoFlow"
+}

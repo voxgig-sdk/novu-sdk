@@ -1,0 +1,33 @@
+# BasicTranslationGroupDtoFlow
+
+main: kit: flow: BasicTranslationGroupDtoFlow:
+{
+  entity: "translation_group_dto",
+  kind: "basic",
+  name: "BasicTranslationGroupDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "translation_group_dto_ref01",
+        srcdatavar: "translation_group_dto_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "translation_group_dto01",
+        resource_type: "resource_type01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-translation_group_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTranslationGroupDtoFlow"
+}

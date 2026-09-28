@@ -1,0 +1,193 @@
+# Entity: subscriber_notifications_response_dto
+
+main: kit: entity: subscriber_notifications_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "subscriber_notifications_response_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/subscribers/{subscriberId}/notifications"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "archived"
+                or: "archived"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 1704067200000
+                k: "query"
+                n: "created_gte"
+                or: "created_gte"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 1735689599999
+                k: "query"
+                n: "created_lte"
+                or: "created_lte"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "data"
+                or: "data"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "read"
+                or: "read"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "seen"
+                or: "seen"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "severity"
+                or: "severity"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "snoozed"
+                or: "snoozed"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/subscribers/{subscriberId}/notifications"
+          q: {
+            "$action": "notifications"
+            exist: [
+              "after"
+              "archived"
+              "context_key"
+              "created_gte"
+              "created_lte"
+              "data"
+              "id"
+              "idempotency_key"
+              "limit"
+              "offset"
+              "read"
+              "seen"
+              "severity"
+              "snoozed"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "notifications"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

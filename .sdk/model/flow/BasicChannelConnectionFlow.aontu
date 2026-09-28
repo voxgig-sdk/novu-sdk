@@ -1,0 +1,72 @@
+# BasicChannelConnectionFlow
+
+main: kit: flow: BasicChannelConnectionFlow:
+{
+  entity: "channel_connection",
+  kind: "basic",
+  name: "BasicChannelConnectionFlow",
+  step: [
+    {
+      i: {
+        ref: "channel_connection_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "channel_connection_ref01",
+        srcdatavar: "channel_connection_ref01_data",
+        suffix: "_up0",
+        textfield: "channel"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-channel_connection_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "channel_connection_ref01",
+        srcdatavar: "channel_connection_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "channel_connection01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-channel_connection_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "channel_connection_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "channel_connection01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicChannelConnectionFlow"
+}

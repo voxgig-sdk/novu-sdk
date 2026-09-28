@@ -1,0 +1,117 @@
+# Entity: diff
+
+main: kit: entity: diff: {
+
+  alias: field: {}
+
+  fields: {
+    resources: {
+      h: "Resources"
+      n: "resources"
+      r: true
+      sh: "Diff resources by resource type"
+      t: "`$ARRAY`"
+    }
+    sourceEnvironmentId: {
+      h: "Source Environment Id"
+      n: "sourceEnvironmentId"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Source environment ID"
+      t: "`$STRING`"
+    }
+    summary: {
+      h: "Summary"
+      n: "summary"
+      r: true
+      sh: "Overall summary"
+      t: "`$ANY`"
+    }
+    targetEnvironmentId: {
+      h: "Target Environment Id"
+      n: "targetEnvironmentId"
+      r: true
+      sh: "Target environment ID"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "diff"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/environments/{targetEnvironmentId}/diff"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "6615943e7ace93b0540ae377"
+                k: "param"
+                n: "environment_id"
+                or: "target_environment_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/environments/{targetEnvironmentId}/diff"
+          q: {
+            exist: [
+              "environment_id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              targetEnvironmentId: "environment_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "environments"
+            }
+            {
+              var: "environment_id"
+            }
+            {
+              lit: "diff"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.environment")]
+  ]
+
+}

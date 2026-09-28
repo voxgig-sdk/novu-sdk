@@ -1,0 +1,900 @@
+# Entity: inbox_notification_dto
+
+main: kit: entity: inbox_notification_dto: {
+
+  alias: field: {}
+
+  fields: {
+    archivedAt: {
+      h: "Archived At"
+      n: "archivedAt"
+      r: false
+      sh: "ISO timestamp when the notification was archived"
+      t: "`$STRING`"
+    }
+    avatar: {
+      h: "Avatar"
+      n: "avatar"
+      r: false
+      sh: "Avatar URL for the notification"
+      t: "`$STRING`"
+    }
+    body: {
+      h: "Body"
+      n: "body"
+      r: true
+      sh: "Body content of the notification"
+      t: "`$STRING`"
+    }
+    channelType: {
+      h: "Channel Type"
+      n: "channelType"
+      r: true
+      sh: "Channel the message was sent on"
+      t: "`$STRING`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "ISO timestamp when the notification was created"
+      t: "`$STRING`"
+    }
+    data: {
+      h: "Data"
+      n: "data"
+      r: false
+      sh: "Custom data payload of the notification"
+      t: "`$OBJECT`"
+    }
+    deliveredAt: {
+      h: "Delivered At"
+      n: "deliveredAt"
+      r: false
+      sh: "Timestamps when the notification was delivered"
+      t: "`$ARRAY`"
+    }
+    firstSeenAt: {
+      h: "First Seen At"
+      n: "firstSeenAt"
+      r: false
+      sh: "ISO timestamp when the notification was first seen"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Unique identifier of the notification"
+      t: "`$STRING`"
+    }
+    isArchived: {
+      h: "Is Archived"
+      n: "isArchived"
+      r: true
+      sh: "Whether the notification has been archived"
+      t: "`$BOOLEAN`"
+    }
+    isRead: {
+      h: "Is Read"
+      n: "isRead"
+      r: true
+      sh: "Whether the notification has been read"
+      t: "`$BOOLEAN`"
+    }
+    isSeen: {
+      h: "Is Seen"
+      n: "isSeen"
+      r: true
+      sh: "Whether the notification has been seen"
+      t: "`$BOOLEAN`"
+    }
+    isSnoozed: {
+      h: "Is Snoozed"
+      n: "isSnoozed"
+      r: true
+      sh: "Whether the notification is snoozed"
+      t: "`$BOOLEAN`"
+    }
+    primaryAction: {
+      h: "Primary Action"
+      n: "primaryAction"
+      r: false
+      sh: "Primary action button for the notification"
+      t: "`$ANY`"
+    }
+    readAt: {
+      h: "Read At"
+      n: "readAt"
+      r: false
+      sh: "ISO timestamp when the notification was read"
+      t: "`$STRING`"
+    }
+    redirect: {
+      h: "Redirect"
+      n: "redirect"
+      r: false
+      sh: "Redirect configuration for the notification"
+      t: "`$ANY`"
+    }
+    secondaryAction: {
+      h: "Secondary Action"
+      n: "secondaryAction"
+      r: false
+      sh: "Secondary action button for the notification"
+      t: "`$ANY`"
+    }
+    severity: {
+      h: "Severity"
+      n: "severity"
+      r: true
+      sh: "Workflow severity"
+      t: "`$STRING`"
+    }
+    snoozeUntil: {
+      fo: "date-time"
+      h: "Snooze Until"
+      n: "snoozeUntil"
+      r: true
+      sh: "The date and time until which the notification should be snoozed"
+      t: "`$STRING`"
+    }
+    snoozedUntil: {
+      h: "Snoozed Until"
+      n: "snoozedUntil"
+      r: false
+      sh: "ISO timestamp when the notification will be unsnoozed"
+      t: "`$STRING`"
+    }
+    subject: {
+      h: "Subject"
+      n: "subject"
+      r: false
+      sh: "Subject of the notification"
+      t: "`$STRING`"
+    }
+    tags: {
+      h: "Tags"
+      n: "tags"
+      r: false
+      sh: "Tags associated with the notification"
+      t: "`$ARRAY`"
+    }
+    to: {
+      h: "To"
+      n: "to"
+      r: true
+      sh: "Subscriber this notification was sent to"
+      t: "`$ANY`"
+    }
+    transactionId: {
+      h: "Transaction Id"
+      n: "transactionId"
+      r: true
+      sh: "Transaction identifier of the notification"
+      t: "`$STRING`"
+    }
+    workflow: {
+      h: "Workflow"
+      n: "workflow"
+      r: false
+      sh: "Workflow associated with the notification"
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "inbox_notification_dto"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "action_type"
+                or: "action_type"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete"
+          q: {
+            exist: [
+              "action_type"
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              actionType: "action_type"
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "actions"
+            }
+            {
+              var: "action_type"
+            }
+            {
+              lit: "complete"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "action_type"
+                or: "action_type"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert"
+          q: {
+            exist: [
+              "action_type"
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              actionType: "action_type"
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "actions"
+            }
+            {
+              var: "action_type"
+            }
+            {
+              lit: "revert"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/archive"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/archive"
+          q: {
+            exist: [
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "archive"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/read"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/read"
+          q: {
+            exist: [
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "read"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze"
+          q: {
+            exist: [
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "snooze"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive"
+          q: {
+            exist: [
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "unarchive"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/unread"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unread"
+          q: {
+            exist: [
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "unread"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "notification_id"
+                or: "notification_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "context_key"
+                or: "context_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze"
+          q: {
+            exist: [
+              "context_key"
+              "idempotency_key"
+              "notification_id"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              notificationId: "notification_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              var: "notification_id"
+            }
+            {
+              lit: "unsnooze"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+    [path("$.main.kit.entity.subscriber")]
+  ]
+
+}

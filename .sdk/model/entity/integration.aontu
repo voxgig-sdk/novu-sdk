@@ -1,0 +1,521 @@
+# Entity: integration
+
+main: kit: entity: integration: {
+
+  alias: field: {}
+
+  fields: {
+    active: {
+      h: "Active"
+      n: "active"
+      op: {
+        list: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: false
+      sh: "If the integration is active, the validation on the credentials field will run"
+      t: "`$BOOLEAN`"
+    }
+    channel: {
+      h: "Channel"
+      n: "channel"
+      r: false
+      sh: "The channel type for the integration."
+      t: "`$STRING`"
+    }
+    check: {
+      h: "Check"
+      n: "check"
+      r: false
+      sh: "Flag to check the integration status"
+      t: "`$BOOLEAN`"
+    }
+    conditions: {
+      de: true
+      h: "Conditions"
+      n: "conditions"
+      r: false
+      sh: "Legacy StepFilter conditions."
+      t: "`$ARRAY`"
+    }
+    configurations: {
+      h: "Configurations"
+      n: "configurations"
+      r: false
+      sh: "Configurations for the integration"
+      t: "`$OBJECT`"
+    }
+    credentials: {
+      h: "Credentials"
+      n: "credentials"
+      r: false
+      sh: "The credentials for the integration"
+      t: "`$ANY`"
+    }
+    deleted: {
+      h: "Deleted"
+      n: "deleted"
+      r: true
+      sh: "Indicates whether the integration has been marked as deleted (soft delete)."
+      t: "`$BOOLEAN`"
+    }
+    deletedAt: {
+      h: "Deleted At"
+      n: "deletedAt"
+      r: false
+      sh: "The timestamp indicating when the integration was deleted."
+      t: "`$STRING`"
+    }
+    deletedBy: {
+      h: "Deleted By"
+      n: "deletedBy"
+      r: false
+      sh: "The identifier of the user who performed the deletion of this integration."
+      t: "`$STRING`"
+    }
+    environmentId: {
+      fo: "uuid"
+      h: "Environment Id"
+      n: "environmentId"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The ID of the associated environment"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "The unique identifier of the integration record in the database."
+      t: "`$STRING`"
+    }
+    identifier: {
+      h: "Identifier"
+      n: "identifier"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The unique identifier for the integration"
+      t: "`$STRING`"
+    }
+    kind: {
+      h: "Kind"
+      n: "kind"
+      r: false
+      sh: "Distinguishes delivery integrations from agent-runtime integrations."
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The name of the integration"
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      sh: "The unique identifier for the organization that owns this integration."
+      t: "`$STRING`"
+    }
+    primary: {
+      h: "Primary"
+      n: "primary"
+      r: true
+      sh: "Indicates whether this integration is marked as primary."
+      t: "`$BOOLEAN`"
+    }
+    providerId: {
+      h: "Provider Id"
+      n: "providerId"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The provider ID for the integration"
+      t: "`$STRING`"
+    }
+    rules: {
+      h: "Rules"
+      n: "rules"
+      r: false
+      sh: "JSONLogic used at send time to select this integration."
+      t: "`$OBJECT`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "integration"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/integrations/{integrationId}/auto-configure"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "integration_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/{integrationId}/auto-configure"
+          q: {
+            "$action": "auto_configure"
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              integrationId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "auto-configure"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.integration`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/integrations/{integrationIdentifier}/mobile-link"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "integration_identifier"
+                or: "integration_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations/{integrationIdentifier}/mobile-link"
+          q: {
+            "$action": "mobile_link"
+            exist: [
+              "idempotency_key"
+              "integration_identifier"
+            ]
+          }
+          r: {
+            param: {
+              integrationIdentifier: "integration_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              var: "integration_identifier"
+            }
+            {
+              lit: "mobile-link"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/integrations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/integrations"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/integrations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/integrations"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v1/integrations/{integrationId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "integration_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/integrations/{integrationId}"
+          q: {
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              integrationId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /v1/integrations/{integrationId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "integration_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/v1/integrations/{integrationId}"
+          q: {
+            exist: [
+              "id"
+              "idempotency_key"
+            ]
+          }
+          r: {
+            param: {
+              integrationId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "integrations"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

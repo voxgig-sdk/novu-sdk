@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "environment_variable": {
+      "ENVIRONMENT_VARIABLE00": {
+        "createdAt": "s50",
+        "id": "ENVIRONMENT_VARIABLE00",
+        "isSecret": true,
+        "key": "s53",
+        "organizationId": "s54",
+        "type": "s55",
+        "updatedAt": "s56",
+        "values": []
+      },
+      "ENVIRONMENT_VARIABLE01": {
+        "createdAt": "sa0",
+        "id": "ENVIRONMENT_VARIABLE01",
+        "isSecret": true,
+        "key": "sa3",
+        "organizationId": "sa4",
+        "type": "sa5",
+        "updatedAt": "sa6",
+        "values": []
+      },
+      "ENVIRONMENT_VARIABLE02": {
+        "createdAt": "sf0",
+        "id": "ENVIRONMENT_VARIABLE02",
+        "isSecret": true,
+        "key": "sf3",
+        "organizationId": "sf4",
+        "type": "sf5",
+        "updatedAt": "sf6",
+        "values": []
+      }
+    }
+  },
+  "new": {
+    "environment_variable": {
+      "environment_variable_ref01": {
+        "createdAt": "s140",
+        "isSecret": true,
+        "key": "s143",
+        "organizationId": "s144",
+        "type": "s145",
+        "updatedAt": "s146",
+        "values": []
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/environment-variables": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/environment-variables": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/environment-variables/{variableKey}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/environment-variables/{variableKey}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v1/environment-variables/{variableKey}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

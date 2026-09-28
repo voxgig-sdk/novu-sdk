@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "subscriber_preferences_dto": {
+      "SUBSCRIBER_PREFERENCES_DTO00": {
+        "id": "SUBSCRIBER_PREFERENCES_DTO00"
+      },
+      "SUBSCRIBER_PREFERENCES_DTO01": {
+        "id": "SUBSCRIBER_PREFERENCES_DTO01"
+      },
+      "SUBSCRIBER_PREFERENCES_DTO02": {
+        "id": "SUBSCRIBER_PREFERENCES_DTO02"
+      }
+    }
+  },
+  "new": {
+    "subscriber_preferences_dto": {
+      "subscriber_preferences_dto_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /v2/subscribers/{subscriberId}/preferences": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/subscribers/{subscriberId}/preferences": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

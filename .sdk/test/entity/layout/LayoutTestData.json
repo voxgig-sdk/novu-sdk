@@ -1,0 +1,109 @@
+{
+  "existing": {
+    "layout": {
+      "LAYOUT00": {
+        "controlValues": "s96",
+        "controls": "s97",
+        "createdAt": "s98",
+        "id": "LAYOUT00",
+        "isDefault": true,
+        "isTranslationEnabled": false,
+        "layoutId": "s9c",
+        "name": "s9d",
+        "origin": "s9e",
+        "slug": "s9f",
+        "source": "sa0",
+        "type": "sa1",
+        "updatedAt": "sa2",
+        "updatedBy": "sa3",
+        "variables": {}
+      },
+      "LAYOUT01": {
+        "controlValues": "s12c",
+        "controls": "s12d",
+        "createdAt": "s12e",
+        "id": "LAYOUT01",
+        "isDefault": true,
+        "isTranslationEnabled": false,
+        "layoutId": "s132",
+        "name": "s133",
+        "origin": "s134",
+        "slug": "s135",
+        "source": "s136",
+        "type": "s137",
+        "updatedAt": "s138",
+        "updatedBy": "s139",
+        "variables": {}
+      },
+      "LAYOUT02": {
+        "controlValues": "s1c2",
+        "controls": "s1c3",
+        "createdAt": "s1c4",
+        "id": "LAYOUT02",
+        "isDefault": true,
+        "isTranslationEnabled": false,
+        "layoutId": "s1c8",
+        "name": "s1c9",
+        "origin": "s1ca",
+        "slug": "s1cb",
+        "source": "s1cc",
+        "type": "s1cd",
+        "updatedAt": "s1ce",
+        "updatedBy": "s1cf",
+        "variables": {}
+      }
+    }
+  },
+  "new": {
+    "layout": {
+      "layout_ref01": {
+        "controlValues": "s258",
+        "controls": "s259",
+        "createdAt": "s25a",
+        "isDefault": true,
+        "isTranslationEnabled": false,
+        "layoutId": "s25e",
+        "name": "s25f",
+        "origin": "s260",
+        "slug": "s261",
+        "source": "s262",
+        "type": "s263",
+        "updatedAt": "s264",
+        "updatedBy": "s265",
+        "variables": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/layouts/{layoutId}/preview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/layouts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/layouts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/layouts/{layoutId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/layouts/{layoutId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /v2/layouts/{layoutId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

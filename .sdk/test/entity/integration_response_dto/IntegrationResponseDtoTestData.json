@@ -1,0 +1,97 @@
+{
+  "existing": {
+    "integration_response_dto": {
+      "INTEGRATION_RESPONSE_DTO00": {
+        "active": true,
+        "channel": "sab",
+        "conditions": [],
+        "configurations": "sad",
+        "credentials": "sae",
+        "deleted": false,
+        "deletedAt": "sb0",
+        "deletedBy": "sb1",
+        "environmentId": "sb2",
+        "id": "INTEGRATION_RESPONSE_DTO00",
+        "identifier": "sb4",
+        "kind": "sb5",
+        "name": "sb6",
+        "organizationId": "sb7",
+        "primary": true,
+        "providerId": "sb9",
+        "rules": {}
+      },
+      "INTEGRATION_RESPONSE_DTO01": {
+        "active": true,
+        "channel": "s155",
+        "conditions": [],
+        "configurations": "s157",
+        "credentials": "s158",
+        "deleted": false,
+        "deletedAt": "s15a",
+        "deletedBy": "s15b",
+        "environmentId": "s15c",
+        "id": "INTEGRATION_RESPONSE_DTO01",
+        "identifier": "s15e",
+        "kind": "s15f",
+        "name": "s160",
+        "organizationId": "s161",
+        "primary": true,
+        "providerId": "s163",
+        "rules": {}
+      },
+      "INTEGRATION_RESPONSE_DTO02": {
+        "active": true,
+        "channel": "s1ff",
+        "conditions": [],
+        "configurations": "s201",
+        "credentials": "s202",
+        "deleted": false,
+        "deletedAt": "s204",
+        "deletedBy": "s205",
+        "environmentId": "s206",
+        "id": "INTEGRATION_RESPONSE_DTO02",
+        "identifier": "s208",
+        "kind": "s209",
+        "name": "s20a",
+        "organizationId": "s20b",
+        "primary": true,
+        "providerId": "s20d",
+        "rules": {}
+      }
+    }
+  },
+  "new": {
+    "integration_response_dto": {
+      "integration_response_dto_ref01": {
+        "active": true,
+        "channel": "s2a9",
+        "conditions": [],
+        "configurations": "s2ab",
+        "credentials": "s2ac",
+        "deleted": false,
+        "deletedAt": "s2ae",
+        "deletedBy": "s2af",
+        "environmentId": "s2b0",
+        "identifier": "s2b2",
+        "kind": "s2b3",
+        "name": "s2b4",
+        "organizationId": "s2b5",
+        "primary": true,
+        "providerId": "s2b7",
+        "rules": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/integrations/{integrationId}/set-primary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/integrations/active": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

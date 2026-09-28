@@ -1,0 +1,120 @@
+{
+  "existing": {
+    "workflow_response_dto": {
+      "WORKFLOW_RESPONSE_DTO00": {
+        "active": true,
+        "agent": "sf1",
+        "createdAt": "sf2",
+        "description": "sf3",
+        "id": "WORKFLOW_RESPONSE_DTO00",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "sf7",
+        "lastPublishedBy": "sf8",
+        "lastTriggeredAt": "sf9",
+        "name": "sfa",
+        "origin": "sfb",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "sfe",
+        "severity": "sff",
+        "slug": "s100",
+        "status": "s101",
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s104",
+        "updatedBy": "s105",
+        "validatePayload": true,
+        "workflowId": "s107"
+      },
+      "WORKFLOW_RESPONSE_DTO01": {
+        "active": true,
+        "agent": "s1e1",
+        "createdAt": "s1e2",
+        "description": "s1e3",
+        "id": "WORKFLOW_RESPONSE_DTO01",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s1e7",
+        "lastPublishedBy": "s1e8",
+        "lastTriggeredAt": "s1e9",
+        "name": "s1ea",
+        "origin": "s1eb",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s1ee",
+        "severity": "s1ef",
+        "slug": "s1f0",
+        "status": "s1f1",
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s1f4",
+        "updatedBy": "s1f5",
+        "validatePayload": true,
+        "workflowId": "s1f7"
+      },
+      "WORKFLOW_RESPONSE_DTO02": {
+        "active": true,
+        "agent": "s2d1",
+        "createdAt": "s2d2",
+        "description": "s2d3",
+        "id": "WORKFLOW_RESPONSE_DTO02",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s2d7",
+        "lastPublishedBy": "s2d8",
+        "lastTriggeredAt": "s2d9",
+        "name": "s2da",
+        "origin": "s2db",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s2de",
+        "severity": "s2df",
+        "slug": "s2e0",
+        "status": "s2e1",
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s2e4",
+        "updatedBy": "s2e5",
+        "validatePayload": true,
+        "workflowId": "s2e7"
+      }
+    }
+  },
+  "new": {
+    "workflow_response_dto": {
+      "workflow_response_dto_ref01": {
+        "active": true,
+        "agent": "s3c1",
+        "createdAt": "s3c2",
+        "description": "s3c3",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s3c7",
+        "lastPublishedBy": "s3c8",
+        "lastTriggeredAt": "s3c9",
+        "name": "s3ca",
+        "origin": "s3cb",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s3ce",
+        "severity": "s3cf",
+        "slug": "s3d0",
+        "status": "s3d1",
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s3d4",
+        "updatedBy": "s3d5",
+        "validatePayload": true,
+        "workflowId": "s3d7"
+      }
+    }
+  },
+  "requests": {
+    "PUT /v2/workflows/{workflowId}/sync": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

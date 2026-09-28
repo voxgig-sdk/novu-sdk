@@ -1,0 +1,153 @@
+{
+  "existing": {
+    "workflow": {
+      "WORKFLOW00": {
+        "active": true,
+        "agent": "s105",
+        "createdAt": "s106",
+        "description": "s107",
+        "id": "WORKFLOW00",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s10b",
+        "lastPublishedBy": "s10c",
+        "lastTriggeredAt": "s10d",
+        "name": "s10e",
+        "origin": "s10f",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s112",
+        "severity": "s113",
+        "slug": "s114",
+        "source": "s115",
+        "status": "s116",
+        "stepTypeOverviews": [],
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s11a",
+        "updatedBy": "s11b",
+        "validatePayload": true,
+        "workflowId": "s11d"
+      },
+      "WORKFLOW01": {
+        "active": true,
+        "agent": "s209",
+        "createdAt": "s20a",
+        "description": "s20b",
+        "id": "WORKFLOW01",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s20f",
+        "lastPublishedBy": "s210",
+        "lastTriggeredAt": "s211",
+        "name": "s212",
+        "origin": "s213",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s216",
+        "severity": "s217",
+        "slug": "s218",
+        "source": "s219",
+        "status": "s21a",
+        "stepTypeOverviews": [],
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s21e",
+        "updatedBy": "s21f",
+        "validatePayload": true,
+        "workflowId": "s221"
+      },
+      "WORKFLOW02": {
+        "active": true,
+        "agent": "s30d",
+        "createdAt": "s30e",
+        "description": "s30f",
+        "id": "WORKFLOW02",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s313",
+        "lastPublishedBy": "s314",
+        "lastTriggeredAt": "s315",
+        "name": "s316",
+        "origin": "s317",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s31a",
+        "severity": "s31b",
+        "slug": "s31c",
+        "source": "s31d",
+        "status": "s31e",
+        "stepTypeOverviews": [],
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s322",
+        "updatedBy": "s323",
+        "validatePayload": true,
+        "workflowId": "s325"
+      }
+    }
+  },
+  "new": {
+    "workflow": {
+      "workflow_ref01": {
+        "active": true,
+        "agent": "s411",
+        "createdAt": "s412",
+        "description": "s413",
+        "isTranslationEnabled": false,
+        "issues": {},
+        "lastPublishedAt": "s417",
+        "lastPublishedBy": "s418",
+        "lastTriggeredAt": "s419",
+        "name": "s41a",
+        "origin": "s41b",
+        "payloadExample": {},
+        "payloadSchema": {},
+        "preferences": "s41e",
+        "severity": "s41f",
+        "slug": "s420",
+        "source": "s421",
+        "status": "s422",
+        "stepTypeOverviews": [],
+        "steps": [],
+        "tags": [],
+        "updatedAt": "s426",
+        "updatedBy": "s427",
+        "validatePayload": true,
+        "workflowId": "s429"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/workflows": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/workflows": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/workflows/{workflowId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/workflows/{workflowId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/workflows/{workflowId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /v2/workflows/{workflowId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

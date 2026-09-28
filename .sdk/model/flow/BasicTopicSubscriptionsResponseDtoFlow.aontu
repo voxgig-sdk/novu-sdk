@@ -1,0 +1,9 @@
+# BasicTopicSubscriptionsResponseDtoFlow
+
+main: kit: flow: BasicTopicSubscriptionsResponseDtoFlow:
+{
+  entity: "topic_subscriptions_response_dto",
+  kind: "basic",
+  name: "BasicTopicSubscriptionsResponseDtoFlow",
+  "key$": "BasicTopicSubscriptionsResponseDtoFlow"
+}

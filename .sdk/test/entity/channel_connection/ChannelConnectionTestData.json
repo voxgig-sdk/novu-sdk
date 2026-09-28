@@ -1,0 +1,91 @@
+{
+  "existing": {
+    "channel_connection": {
+      "CHANNEL_CONNECTION00": {
+        "auth": {},
+        "channel": "s83",
+        "connectionMode": "s84",
+        "context": {},
+        "contextKeys": [],
+        "createdAt": "s87",
+        "id": "CHANNEL_CONNECTION00",
+        "identifier": "s89",
+        "integrationIdentifier": "s8a",
+        "providerId": "s8b",
+        "subscriberId": "s8c",
+        "updatedAt": "s8d",
+        "workspace": {}
+      },
+      "CHANNEL_CONNECTION01": {
+        "auth": {},
+        "channel": "s105",
+        "connectionMode": "s106",
+        "context": {},
+        "contextKeys": [],
+        "createdAt": "s109",
+        "id": "CHANNEL_CONNECTION01",
+        "identifier": "s10b",
+        "integrationIdentifier": "s10c",
+        "providerId": "s10d",
+        "subscriberId": "s10e",
+        "updatedAt": "s10f",
+        "workspace": {}
+      },
+      "CHANNEL_CONNECTION02": {
+        "auth": {},
+        "channel": "s187",
+        "connectionMode": "s188",
+        "context": {},
+        "contextKeys": [],
+        "createdAt": "s18b",
+        "id": "CHANNEL_CONNECTION02",
+        "identifier": "s18d",
+        "integrationIdentifier": "s18e",
+        "providerId": "s18f",
+        "subscriberId": "s190",
+        "updatedAt": "s191",
+        "workspace": {}
+      }
+    }
+  },
+  "new": {
+    "channel_connection": {
+      "channel_connection_ref01": {
+        "auth": {},
+        "channel": "s209",
+        "connectionMode": "s20a",
+        "context": {},
+        "contextKeys": [],
+        "createdAt": "s20d",
+        "identifier": "s20f",
+        "integrationIdentifier": "s210",
+        "providerId": "s211",
+        "subscriberId": "s212",
+        "updatedAt": "s213",
+        "workspace": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/channel-connections": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/channel-connections/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/channel-connections/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v1/channel-connections/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

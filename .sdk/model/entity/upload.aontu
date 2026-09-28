@@ -1,0 +1,89 @@
+# Entity: upload
+
+main: kit: entity: upload: {
+
+  alias: field: {}
+
+  fields: {
+    errors: {
+      h: "Errors"
+      n: "errors"
+      r: true
+      sh: "List of error messages for failed uploads"
+      t: "`$ARRAY`"
+    }
+    failedUploads: {
+      h: "Failed Uploads"
+      n: "failedUploads"
+      r: true
+      sh: "Number of files that failed to upload"
+      t: "`$NUMBER`"
+    }
+    successfulUploads: {
+      h: "Successful Uploads"
+      n: "successfulUploads"
+      r: true
+      sh: "Number of files successfully uploaded"
+      t: "`$NUMBER`"
+    }
+    totalFiles: {
+      h: "Total Files"
+      n: "totalFiles"
+      r: true
+      sh: "Total number of files processed"
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "upload"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/translations/upload"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/translations/upload"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+            {
+              lit: "upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

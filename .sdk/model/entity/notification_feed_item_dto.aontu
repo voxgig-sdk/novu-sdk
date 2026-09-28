@@ -1,0 +1,340 @@
+# Entity: notification_feed_item_dto
+
+main: kit: entity: notification_feed_item_dto: {
+
+  alias: field: {}
+
+  fields: {
+    actor: {
+      h: "Actor"
+      n: "actor"
+      r: false
+      sh: "Actor details related to the notification, if applicable."
+      t: "`$ANY`"
+    }
+    archived: {
+      h: "Archived"
+      n: "archived"
+      r: true
+      sh: "Indicates whether the notification has been archived by the subscriber."
+      t: "`$BOOLEAN`"
+    }
+    channel: {
+      h: "Channel"
+      n: "channel"
+      r: true
+      sh: "Channel the message was sent on"
+      t: "`$STRING`"
+    }
+    content: {
+      h: "Content"
+      n: "content"
+      r: true
+      sh: "The main content of the notification."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "Timestamp indicating when the notification was created."
+      t: "`$STRING`"
+    }
+    cta: {
+      h: "Cta"
+      n: "cta"
+      r: true
+      sh: "Call-to-action information associated with the notification."
+      t: "`$ANY`"
+    }
+    data: {
+      h: "Data"
+      n: "data"
+      r: false
+      sh: "The data sent with the notification."
+      t: "`$OBJECT`"
+    }
+    deviceTokens: {
+      h: "Device Tokens"
+      n: "deviceTokens"
+      r: false
+      sh: "Device tokens for push notifications, if applicable."
+      t: "`$ARRAY`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      sh: "Identifier for the environment where the notification is sent."
+      t: "`$STRING`"
+    }
+    feedId: {
+      h: "Feed Id"
+      n: "feedId"
+      r: false
+      sh: "Identifier for the feed associated with the notification."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Unique identifier for the notification."
+      t: "`$STRING`"
+    }
+    jobId: {
+      h: "Job Id"
+      n: "jobId"
+      r: true
+      sh: "Identifier for the job that triggered the notification."
+      t: "`$STRING`"
+    }
+    messageTemplateId: {
+      h: "Message Template Id"
+      n: "messageTemplateId"
+      r: false
+      sh: "Identifier for the message template used."
+      t: "`$STRING`"
+    }
+    notificationId: {
+      h: "Notification Id"
+      n: "notificationId"
+      r: true
+      sh: "Unique identifier for the notification instance."
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      sh: "Identifier for the organization sending the notification."
+      t: "`$STRING`"
+    }
+    overrides: {
+      h: "Overrides"
+      n: "overrides"
+      r: false
+      sh: "Provider-specific overrides used when triggering the notification."
+      t: "`$OBJECT`"
+    }
+    payload: {
+      h: "Payload"
+      n: "payload"
+      r: false
+      sh: "The payload that was used to send the notification trigger."
+      t: "`$OBJECT`"
+    }
+    providerId: {
+      h: "Provider Id"
+      n: "providerId"
+      r: false
+      sh: "Identifier for the provider that sends the notification."
+      t: "`$STRING`"
+    }
+    read: {
+      h: "Read"
+      n: "read"
+      r: true
+      sh: "Indicates whether the notification has been read by the subscriber."
+      t: "`$BOOLEAN`"
+    }
+    seen: {
+      h: "Seen"
+      n: "seen"
+      r: true
+      sh: "Indicates whether the notification has been seen by the subscriber."
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Current status of the notification."
+      t: "`$STRING`"
+    }
+    subject: {
+      h: "Subject"
+      n: "subject"
+      r: false
+      sh: "The subject line for email notifications, if applicable."
+      t: "`$STRING`"
+    }
+    subscriber: {
+      h: "Subscriber"
+      n: "subscriber"
+      r: false
+      sh: "Subscriber details associated with this notification."
+      t: "`$ANY`"
+    }
+    subscriberId: {
+      h: "Subscriber Id"
+      n: "subscriberId"
+      r: true
+      sh: "Unique identifier for the subscriber receiving the notification."
+      t: "`$STRING`"
+    }
+    tags: {
+      h: "Tags"
+      n: "tags"
+      r: false
+      sh: "Tags associated with the workflow that triggered the notification."
+      t: "`$ARRAY`"
+    }
+    templateId: {
+      h: "Template Id"
+      n: "templateId"
+      r: true
+      sh: "Identifier for the template used to generate the notification."
+      t: "`$STRING`"
+    }
+    templateIdentifier: {
+      h: "Template Identifier"
+      n: "templateIdentifier"
+      r: false
+      sh: "Identifier for the template used, if applicable."
+      t: "`$STRING`"
+    }
+    transactionId: {
+      h: "Transaction Id"
+      n: "transactionId"
+      r: true
+      sh: "Unique identifier for the transaction associated with the notification."
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "Timestamp indicating when the notification was last updated."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "notification_feed_item_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/subscribers/{subscriberId}/notifications/feed"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="
+                k: "query"
+                n: "payload"
+                or: "payload"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "read"
+                or: "read"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "seen"
+                or: "seen"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/subscribers/{subscriberId}/notifications/feed"
+          q: {
+            exist: [
+              "idempotency_key"
+              "limit"
+              "page"
+              "payload"
+              "read"
+              "seen"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "notifications"
+            }
+            {
+              lit: "feed"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+  ]
+
+}

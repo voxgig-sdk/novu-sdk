@@ -1,0 +1,22 @@
+# BasicListAgentsResponseDtoFlow
+
+main: kit: flow: BasicListAgentsResponseDtoFlow:
+{
+  entity: "list_agents_response_dto",
+  kind: "basic",
+  name: "BasicListAgentsResponseDtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_agents_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListAgentsResponseDtoFlow"
+}

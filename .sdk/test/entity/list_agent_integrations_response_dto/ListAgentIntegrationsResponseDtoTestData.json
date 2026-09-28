@@ -1,0 +1,63 @@
+{
+  "existing": {
+    "list_agent_integrations_response_dto": {
+      "LIST_AGENT_INTEGRATIONS_RESPONSE_DTO00": {
+        "agentId": "s5a",
+        "connectedAt": {},
+        "createdAt": "s5c",
+        "environmentId": "s5d",
+        "exceedsPlanLimit": true,
+        "id": "LIST_AGENT_INTEGRATIONS_RESPONSE_DTO00",
+        "integration": {},
+        "organizationId": "s61",
+        "updatedAt": "s62",
+        "identifier": "IDENTIFIER01"
+      },
+      "LIST_AGENT_INTEGRATIONS_RESPONSE_DTO01": {
+        "agentId": "sb4",
+        "connectedAt": {},
+        "createdAt": "sb6",
+        "environmentId": "sb7",
+        "exceedsPlanLimit": true,
+        "id": "LIST_AGENT_INTEGRATIONS_RESPONSE_DTO01",
+        "integration": {},
+        "organizationId": "sbb",
+        "updatedAt": "sbc",
+        "identifier": "IDENTIFIER01"
+      },
+      "LIST_AGENT_INTEGRATIONS_RESPONSE_DTO02": {
+        "agentId": "s10e",
+        "connectedAt": {},
+        "createdAt": "s110",
+        "environmentId": "s111",
+        "exceedsPlanLimit": true,
+        "id": "LIST_AGENT_INTEGRATIONS_RESPONSE_DTO02",
+        "integration": {},
+        "organizationId": "s115",
+        "updatedAt": "s116",
+        "identifier": "IDENTIFIER01"
+      }
+    }
+  },
+  "new": {
+    "list_agent_integrations_response_dto": {
+      "list_agent_integrations_response_dto_ref01": {
+        "agentId": "s168",
+        "connectedAt": {},
+        "createdAt": "s16a",
+        "environmentId": "s16b",
+        "exceedsPlanLimit": true,
+        "integration": {},
+        "organizationId": "s16f",
+        "updatedAt": "s170"
+      }
+    }
+  },
+  "requests": {
+    "GET /v1/agents/{identifier}/integrations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

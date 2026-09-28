@@ -1,0 +1,345 @@
+# Entity: translation
+
+main: kit: entity: translation: {
+
+  alias: field: {}
+
+  fields: {
+    content: {
+      h: "Content"
+      n: "content"
+      r: true
+      sh: "Translation content as JSON object"
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    locale: {
+      h: "Locale"
+      n: "locale"
+      r: true
+      sh: "Locale code (e.g., en_US, es_ES)"
+      t: "`$STRING`"
+    }
+    resourceId: {
+      h: "Resource Id"
+      n: "resourceId"
+      r: true
+      sh: "The resource ID to associate translation with."
+      t: "`$STRING`"
+    }
+    resourceType: {
+      h: "Resource Type"
+      n: "resourceType"
+      r: true
+      sh: "The resource type to associate translation with"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      locale: "locale"
+      resource_id: "resourceId"
+      resource_type: "resourceType"
+    }
+    name: "id"
+    parts: [
+      "resource_type"
+      "resource_id"
+      "locale"
+    ]
+    sep: "/"
+  }
+
+  name: "translation"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/translations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/translations"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.content`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/translations/{resourceType}/{resourceId}/{locale}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "en_US"
+                k: "param"
+                n: "locale"
+                or: "locale"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "welcome-email"
+                k: "param"
+                n: "resource_id"
+                or: "resource_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "resource_type"
+                or: "resource_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/translations/{resourceType}/{resourceId}/{locale}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "locale"
+              "resource_id"
+              "resource_type"
+            ]
+          }
+          r: {
+            param: {
+              resourceId: "resource_id"
+              resourceType: "resource_type"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+            {
+              var: "resource_type"
+            }
+            {
+              var: "resource_id"
+            }
+            {
+              var: "locale"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.content`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/translations/{resourceType}/{resourceId}/{locale}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "locale"
+                or: "locale"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "resource_id"
+                or: "resource_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "resource_type"
+                or: "resource_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/translations/{resourceType}/{resourceId}/{locale}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "locale"
+              "resource_id"
+              "resource_type"
+            ]
+          }
+          r: {
+            param: {
+              resourceId: "resource_id"
+              resourceType: "resource_type"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+            {
+              var: "resource_type"
+            }
+            {
+              var: "resource_id"
+            }
+            {
+              var: "locale"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /v2/translations/{resourceType}/{resourceId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "welcome-email"
+                k: "param"
+                n: "resource_id"
+                or: "resource_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "workflow"
+                k: "param"
+                n: "resource_type"
+                or: "resource_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/translations/{resourceType}/{resourceId}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "resource_id"
+              "resource_type"
+            ]
+          }
+          r: {
+            param: {
+              resourceId: "resource_id"
+              resourceType: "resource_type"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "translations"
+            }
+            {
+              var: "resource_type"
+            }
+            {
+              var: "resource_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

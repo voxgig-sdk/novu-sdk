@@ -1,0 +1,23 @@
+# BasicWebhookResultDtoFlow
+
+main: kit: flow: BasicWebhookResultDtoFlow:
+{
+  entity: "webhook_result_dto",
+  kind: "basic",
+  name: "BasicWebhookResultDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "webhook_result_dto_ref01"
+      }
+
+      m: {
+        environment_id: "environment01",
+        integration_id: "integration01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicWebhookResultDtoFlow"
+}

@@ -1,0 +1,222 @@
+# Entity: trigger_event_response_dto
+
+main: kit: entity: trigger_event_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    acknowledged: {
+      h: "Acknowledged"
+      n: "acknowledged"
+      r: true
+      sh: "Indicates whether the trigger was acknowledged or not"
+      t: "`$BOOLEAN`"
+    }
+    activityFeedLink: {
+      h: "Activity Feed Link"
+      n: "activityFeedLink"
+      r: false
+      sh: "Link to the activity feed for this trigger event"
+      t: "`$STRING`"
+    }
+    actor: {
+      h: "Actor"
+      n: "actor"
+      r: false
+      sh: "It is used to display the Avatar of the provided actor's subscriber id or actor object."
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    agentId: {
+      h: "Agent Id"
+      n: "agentId"
+      r: false
+      sh: "Override the workflow-assigned agent for this trigger using the public agent identifier."
+      t: "`$STRING`"
+    }
+    context: {
+      h: "Context"
+      n: "context"
+      r: false
+      t: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    error: {
+      h: "Error"
+      n: "error"
+      r: false
+      sh: "In case of an error, this field will contain the error message(s)"
+      t: "`$ARRAY`"
+    }
+    events: {
+      h: "Events"
+      n: "events"
+      r: true
+      t: "`$ARRAY`"
+      union: {
+        branches: 4
+        count: 5
+        depth: 6
+      }
+    }
+    jobData: {
+      h: "Job Data"
+      n: "jobData"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The trigger identifier associated for the template you wish to send."
+      t: "`$STRING`"
+    }
+    overrides: {
+      h: "Overrides"
+      n: "overrides"
+      r: false
+      sh: "This could be used to override provider specific configurations"
+      t: "`$ANY`"
+    }
+    payload: {
+      h: "Payload"
+      n: "payload"
+      r: true
+      sh: "The payload object is used to pass additional information that could be used to render the template, or perform routing rules based on it."
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Status of the trigger"
+      t: "`$STRING`"
+    }
+    tenant: {
+      h: "Tenant"
+      n: "tenant"
+      r: false
+      sh: "It is used to specify a tenant context during trigger event."
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    transactionId: {
+      h: "Transaction Id"
+      n: "transactionId"
+      r: false
+      sh: "The returned transaction ID of the trigger"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "trigger_event_response_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/events/trigger/broadcast"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/events/trigger/broadcast"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "events"
+            }
+            {
+              lit: "trigger"
+            }
+            {
+              lit: "broadcast"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/events/trigger/bulk"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/events/trigger/bulk"
+          q: {
+            exist: [
+              "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "events"
+            }
+            {
+              lit: "trigger"
+            }
+            {
+              lit: "bulk"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,83 @@
+{
+  "existing": {
+    "step": {
+      "STEP00": {
+        "controlValues": {},
+        "controls": "s8d",
+        "id": "STEP00",
+        "issues": "s8f",
+        "name": "s90",
+        "origin": "s91",
+        "providerOverrides": {},
+        "slug": "s93",
+        "stepId": "s94",
+        "stepResolverHash": "s95",
+        "type": "s96",
+        "variables": {},
+        "workflowDatabaseId": "s98",
+        "workflowId": "s99",
+        "workflow_id": "WORKFLOW01"
+      },
+      "STEP01": {
+        "controlValues": {},
+        "controls": "s119",
+        "id": "STEP01",
+        "issues": "s11b",
+        "name": "s11c",
+        "origin": "s11d",
+        "providerOverrides": {},
+        "slug": "s11f",
+        "stepId": "s120",
+        "stepResolverHash": "s121",
+        "type": "s122",
+        "variables": {},
+        "workflowDatabaseId": "s124",
+        "workflowId": "s125",
+        "workflow_id": "WORKFLOW01"
+      },
+      "STEP02": {
+        "controlValues": {},
+        "controls": "s1a5",
+        "id": "STEP02",
+        "issues": "s1a7",
+        "name": "s1a8",
+        "origin": "s1a9",
+        "providerOverrides": {},
+        "slug": "s1ab",
+        "stepId": "s1ac",
+        "stepResolverHash": "s1ad",
+        "type": "s1ae",
+        "variables": {},
+        "workflowDatabaseId": "s1b0",
+        "workflowId": "s1b1",
+        "workflow_id": "WORKFLOW01"
+      }
+    }
+  },
+  "new": {
+    "step": {
+      "step_ref01": {
+        "controlValues": {},
+        "controls": "s231",
+        "issues": "s233",
+        "name": "s234",
+        "origin": "s235",
+        "providerOverrides": {},
+        "slug": "s237",
+        "stepId": "s238",
+        "stepResolverHash": "s239",
+        "type": "s23a",
+        "variables": {},
+        "workflowDatabaseId": "s23c",
+        "workflowId": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/workflows/{workflowId}/steps/{stepId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

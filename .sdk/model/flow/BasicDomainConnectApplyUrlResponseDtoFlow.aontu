@@ -1,0 +1,22 @@
+# BasicDomainConnectApplyUrlResponseDtoFlow
+
+main: kit: flow: BasicDomainConnectApplyUrlResponseDtoFlow:
+{
+  entity: "domain_connect_apply_url_response_dto",
+  kind: "basic",
+  name: "BasicDomainConnectApplyUrlResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "domain_connect_apply_url_response_dto_ref01"
+      }
+
+      m: {
+        domain_id: "domain01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicDomainConnectApplyUrlResponseDtoFlow"
+}

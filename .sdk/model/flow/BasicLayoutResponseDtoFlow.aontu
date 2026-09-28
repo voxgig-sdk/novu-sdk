@@ -1,0 +1,22 @@
+# BasicLayoutResponseDtoFlow
+
+main: kit: flow: BasicLayoutResponseDtoFlow:
+{
+  entity: "layout_response_dto",
+  kind: "basic",
+  name: "BasicLayoutResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "layout_response_dto_ref01"
+      }
+
+      m: {
+        layout_id: "layout01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicLayoutResponseDtoFlow"
+}

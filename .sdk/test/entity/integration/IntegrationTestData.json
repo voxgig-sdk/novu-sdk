@@ -1,0 +1,124 @@
+{
+  "existing": {
+    "integration": {
+      "INTEGRATION00": {
+        "active": true,
+        "channel": "sb5",
+        "check": true,
+        "conditions": [],
+        "configurations": {},
+        "credentials": "sb9",
+        "deleted": true,
+        "deletedAt": "sbb",
+        "deletedBy": "sbc",
+        "environmentId": "sbd",
+        "id": "INTEGRATION00",
+        "identifier": "sbf",
+        "kind": "sc0",
+        "name": "sc1",
+        "organizationId": "sc2",
+        "primary": false,
+        "providerId": "sc4",
+        "rules": {},
+        "integration_identifier": "INTEGRATION_IDENTIFIER01"
+      },
+      "INTEGRATION01": {
+        "active": true,
+        "channel": "s169",
+        "check": true,
+        "conditions": [],
+        "configurations": {},
+        "credentials": "s16d",
+        "deleted": true,
+        "deletedAt": "s16f",
+        "deletedBy": "s170",
+        "environmentId": "s171",
+        "id": "INTEGRATION01",
+        "identifier": "s173",
+        "kind": "s174",
+        "name": "s175",
+        "organizationId": "s176",
+        "primary": false,
+        "providerId": "s178",
+        "rules": {},
+        "integration_identifier": "INTEGRATION_IDENTIFIER01"
+      },
+      "INTEGRATION02": {
+        "active": true,
+        "channel": "s21d",
+        "check": true,
+        "conditions": [],
+        "configurations": {},
+        "credentials": "s221",
+        "deleted": true,
+        "deletedAt": "s223",
+        "deletedBy": "s224",
+        "environmentId": "s225",
+        "id": "INTEGRATION02",
+        "identifier": "s227",
+        "kind": "s228",
+        "name": "s229",
+        "organizationId": "s22a",
+        "primary": false,
+        "providerId": "s22c",
+        "rules": {},
+        "integration_identifier": "INTEGRATION_IDENTIFIER01"
+      }
+    }
+  },
+  "new": {
+    "integration": {
+      "integration_ref01": {
+        "active": true,
+        "channel": "s2d1",
+        "check": true,
+        "conditions": [],
+        "configurations": {},
+        "credentials": "s2d5",
+        "deleted": true,
+        "deletedAt": "s2d7",
+        "deletedBy": "s2d8",
+        "environmentId": "s2d9",
+        "identifier": "s2db",
+        "kind": "s2dc",
+        "name": "s2dd",
+        "organizationId": "s2de",
+        "primary": false,
+        "providerId": "s2e0",
+        "rules": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/integrations/{integrationId}/auto-configure": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/integrations/{integrationIdentifier}/mobile-link": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v1/integrations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v1/integrations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v1/integrations/{integrationId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /v1/integrations/{integrationId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

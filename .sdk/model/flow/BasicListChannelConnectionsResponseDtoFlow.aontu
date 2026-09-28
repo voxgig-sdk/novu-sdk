@@ -1,0 +1,22 @@
+# BasicListChannelConnectionsResponseDtoFlow
+
+main: kit: flow: BasicListChannelConnectionsResponseDtoFlow:
+{
+  entity: "list_channel_connections_response_dto",
+  kind: "basic",
+  name: "BasicListChannelConnectionsResponseDtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_channel_connections_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListChannelConnectionsResponseDtoFlow"
+}

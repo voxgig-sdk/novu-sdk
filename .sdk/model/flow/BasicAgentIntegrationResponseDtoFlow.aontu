@@ -1,0 +1,46 @@
+# BasicAgentIntegrationResponseDtoFlow
+
+main: kit: flow: BasicAgentIntegrationResponseDtoFlow:
+{
+  entity: "agent_integration_response_dto",
+  kind: "basic",
+  name: "BasicAgentIntegrationResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_integration_response_dto_ref01"
+      }
+
+      m: {
+        agent_id: "agent01",
+        identifier: "identifier01"
+      }
+
+      o: "create"
+    }
+
+    {
+      d: {
+        agent_id: "agent01"
+      }
+
+      i: {
+        ref: "agent_integration_response_dto_ref01",
+        srcdatavar: "agent_integration_response_dto_ref01_data",
+        suffix: "_up0",
+        textfield: "agentId"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_integration_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentIntegrationResponseDtoFlow"
+}

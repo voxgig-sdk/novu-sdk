@@ -1,0 +1,22 @@
+# BasicPublishFlow
+
+main: kit: flow: BasicPublishFlow:
+{
+  entity: "publish",
+  kind: "basic",
+  name: "BasicPublishFlow",
+  step: [
+    {
+      i: {
+        ref: "publish_ref01"
+      }
+
+      m: {
+        environment_id: "environment01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicPublishFlow"
+}

@@ -1,0 +1,68 @@
+{
+  "existing": {
+    "trigger": {
+      "TRIGGER00": {
+        "actor": "s64",
+        "agentId": "s65",
+        "bridgeUrl": "s66",
+        "context": {},
+        "name": "s68",
+        "overrides": "s69",
+        "payload": {},
+        "tenant": "s6b",
+        "to": "s6c",
+        "transactionId": "s6d",
+        "id": "TRIGGER00"
+      },
+      "TRIGGER01": {
+        "actor": "sc8",
+        "agentId": "sc9",
+        "bridgeUrl": "sca",
+        "context": {},
+        "name": "scc",
+        "overrides": "scd",
+        "payload": {},
+        "tenant": "scf",
+        "to": "sd0",
+        "transactionId": "sd1",
+        "id": "TRIGGER01"
+      },
+      "TRIGGER02": {
+        "actor": "s12c",
+        "agentId": "s12d",
+        "bridgeUrl": "s12e",
+        "context": {},
+        "name": "s130",
+        "overrides": "s131",
+        "payload": {},
+        "tenant": "s133",
+        "to": "s134",
+        "transactionId": "s135",
+        "id": "TRIGGER02"
+      }
+    }
+  },
+  "new": {
+    "trigger": {
+      "trigger_ref01": {
+        "actor": "s190",
+        "agentId": "s191",
+        "bridgeUrl": "s192",
+        "context": {},
+        "name": "s194",
+        "overrides": "s195",
+        "payload": {},
+        "tenant": "s197",
+        "to": "s198",
+        "transactionId": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/events/trigger": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

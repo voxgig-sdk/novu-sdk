@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "bulk": {
+      "BULK00": {
+        "subscribers": [],
+        "id": "BULK00"
+      },
+      "BULK01": {
+        "subscribers": [],
+        "id": "BULK01"
+      },
+      "BULK02": {
+        "subscribers": [],
+        "id": "BULK02"
+      }
+    }
+  },
+  "new": {
+    "bulk": {
+      "bulk_ref01": {
+        "subscribers": []
+      }
+    }
+  },
+  "requests": {
+    "POST /v1/subscribers/bulk": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

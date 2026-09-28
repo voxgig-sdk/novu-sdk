@@ -1,0 +1,104 @@
+{
+  "existing": {
+    "list_subscribers_response_dto": {
+      "LIST_SUBSCRIBERS_RESPONSE_DTO00": {
+        "avatar": "sc8",
+        "channels": [],
+        "createdAt": "sca",
+        "data": {},
+        "deleted": true,
+        "email": "scd",
+        "environmentId": "sce",
+        "firstName": "scf",
+        "id": "LIST_SUBSCRIBERS_RESPONSE_DTO00",
+        "isOnline": false,
+        "lastName": "sd2",
+        "lastOnlineAt": "sd3",
+        "locale": "sd4",
+        "organizationId": "sd5",
+        "phone": "sd6",
+        "subscriberId": "sd7",
+        "timezone": "sd8",
+        "topics": [],
+        "updatedAt": "sda",
+        "v": 219
+      },
+      "LIST_SUBSCRIBERS_RESPONSE_DTO01": {
+        "avatar": "s190",
+        "channels": [],
+        "createdAt": "s192",
+        "data": {},
+        "deleted": true,
+        "email": "s195",
+        "environmentId": "s196",
+        "firstName": "s197",
+        "id": "LIST_SUBSCRIBERS_RESPONSE_DTO01",
+        "isOnline": false,
+        "lastName": "s19a",
+        "lastOnlineAt": "s19b",
+        "locale": "s19c",
+        "organizationId": "s19d",
+        "phone": "s19e",
+        "subscriberId": "s19f",
+        "timezone": "s1a0",
+        "topics": [],
+        "updatedAt": "s1a2",
+        "v": 419
+      },
+      "LIST_SUBSCRIBERS_RESPONSE_DTO02": {
+        "avatar": "s258",
+        "channels": [],
+        "createdAt": "s25a",
+        "data": {},
+        "deleted": true,
+        "email": "s25d",
+        "environmentId": "s25e",
+        "firstName": "s25f",
+        "id": "LIST_SUBSCRIBERS_RESPONSE_DTO02",
+        "isOnline": false,
+        "lastName": "s262",
+        "lastOnlineAt": "s263",
+        "locale": "s264",
+        "organizationId": "s265",
+        "phone": "s266",
+        "subscriberId": "s267",
+        "timezone": "s268",
+        "topics": [],
+        "updatedAt": "s26a",
+        "v": 619
+      }
+    }
+  },
+  "new": {
+    "list_subscribers_response_dto": {
+      "list_subscribers_response_dto_ref01": {
+        "avatar": "s320",
+        "channels": [],
+        "createdAt": "s322",
+        "data": {},
+        "deleted": true,
+        "email": "s325",
+        "environmentId": "s326",
+        "firstName": "s327",
+        "isOnline": false,
+        "lastName": "s32a",
+        "lastOnlineAt": "s32b",
+        "locale": "s32c",
+        "organizationId": "s32d",
+        "phone": "s32e",
+        "subscriberId": "s32f",
+        "timezone": "s330",
+        "topics": [],
+        "updatedAt": "s332",
+        "v": 819
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/subscribers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

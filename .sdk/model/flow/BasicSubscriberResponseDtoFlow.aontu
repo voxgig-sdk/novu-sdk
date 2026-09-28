@@ -1,0 +1,29 @@
+# BasicSubscriberResponseDtoFlow
+
+main: kit: flow: BasicSubscriberResponseDtoFlow:
+{
+  entity: "subscriber_response_dto",
+  kind: "basic",
+  name: "BasicSubscriberResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "subscriber_response_dto_ref01",
+        srcdatavar: "subscriber_response_dto_ref01_data",
+        suffix: "_up0",
+        textfield: "avatar"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-subscriber_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSubscriberResponseDtoFlow"
+}

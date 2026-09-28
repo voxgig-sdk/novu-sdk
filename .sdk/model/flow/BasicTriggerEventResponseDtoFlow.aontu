@@ -1,0 +1,18 @@
+# BasicTriggerEventResponseDtoFlow
+
+main: kit: flow: BasicTriggerEventResponseDtoFlow:
+{
+  entity: "trigger_event_response_dto",
+  kind: "basic",
+  name: "BasicTriggerEventResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "trigger_event_response_dto_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicTriggerEventResponseDtoFlow"
+}

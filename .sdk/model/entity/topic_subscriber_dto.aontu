@@ -1,0 +1,136 @@
+# Entity: topic_subscriber_dto
+
+main: kit: entity: topic_subscriber_dto: {
+
+  alias: field: {}
+
+  fields: {
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      sh: "Unique identifier for the environment"
+      t: "`$STRING`"
+    }
+    externalSubscriberId: {
+      h: "External Subscriber Id"
+      n: "externalSubscriberId"
+      r: true
+      sh: "External identifier for the subscriber"
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      sh: "Unique identifier for the organization"
+      t: "`$STRING`"
+    }
+    subscriberId: {
+      h: "Subscriber Id"
+      n: "subscriberId"
+      r: true
+      sh: "Unique identifier for the subscriber"
+      t: "`$STRING`"
+    }
+    topicId: {
+      h: "Topic Id"
+      n: "topicId"
+      r: true
+      sh: "Unique identifier for the topic"
+      t: "`$STRING`"
+    }
+    topicKey: {
+      h: "Topic Key"
+      n: "topicKey"
+      r: true
+      sh: "Key associated with the topic"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "topic_subscriber_dto"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/topics/{topicKey}/subscribers/{externalSubscriberId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "external_subscriber_id"
+                or: "external_subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "topic_id"
+                or: "topic_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/topics/{topicKey}/subscribers/{externalSubscriberId}"
+          q: {
+            exist: [
+              "external_subscriber_id"
+              "idempotency_key"
+              "topic_id"
+            ]
+          }
+          r: {
+            param: {
+              externalSubscriberId: "external_subscriber_id"
+              topicKey: "topic_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "topics"
+            }
+            {
+              var: "topic_id"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "external_subscriber_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.topic") path("$.main.kit.entity.subscriber")]
+  ]
+
+}

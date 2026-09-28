@@ -1,0 +1,55 @@
+{
+  "existing": {
+    "topic": {
+      "TOPIC00": {
+        "data": {},
+        "id": "TOPIC00",
+        "key": "s2a",
+        "name": "s2b"
+      },
+      "TOPIC01": {
+        "data": {},
+        "id": "TOPIC01",
+        "key": "s52",
+        "name": "s53"
+      },
+      "TOPIC02": {
+        "data": {},
+        "id": "TOPIC02",
+        "key": "s7a",
+        "name": "s7b"
+      }
+    }
+  },
+  "new": {
+    "topic": {
+      "topic_ref01": {
+        "data": {},
+        "key": "sa2",
+        "name": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/topics": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/topics/{topicKey}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/topics/{topicKey}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/topics/{topicKey}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

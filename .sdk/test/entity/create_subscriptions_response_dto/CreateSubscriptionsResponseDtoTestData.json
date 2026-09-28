@@ -1,0 +1,51 @@
+{
+  "existing": {
+    "create_subscriptions_response_dto": {
+      "CREATE_SUBSCRIPTIONS_RESPONSE_DTO00": {
+        "context": {},
+        "name": "s33",
+        "preferences": [],
+        "subscriberIds": [],
+        "subscriptions": [],
+        "topic_key": "TOPIC_KEY01",
+        "id": "CREATE_SUBSCRIPTIONS_RESPONSE_DTO00"
+      },
+      "CREATE_SUBSCRIPTIONS_RESPONSE_DTO01": {
+        "context": {},
+        "name": "s65",
+        "preferences": [],
+        "subscriberIds": [],
+        "subscriptions": [],
+        "topic_key": "TOPIC_KEY01",
+        "id": "CREATE_SUBSCRIPTIONS_RESPONSE_DTO01"
+      },
+      "CREATE_SUBSCRIPTIONS_RESPONSE_DTO02": {
+        "context": {},
+        "name": "s97",
+        "preferences": [],
+        "subscriberIds": [],
+        "subscriptions": [],
+        "topic_key": "TOPIC_KEY01",
+        "id": "CREATE_SUBSCRIPTIONS_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "create_subscriptions_response_dto": {
+      "create_subscriptions_response_dto_ref01": {
+        "context": {},
+        "name": "sc9",
+        "preferences": [],
+        "subscriberIds": [],
+        "subscriptions": []
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/topics/{topicKey}/subscriptions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

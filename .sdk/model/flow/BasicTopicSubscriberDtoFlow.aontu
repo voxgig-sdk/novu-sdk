@@ -1,0 +1,33 @@
+# BasicTopicSubscriberDtoFlow
+
+main: kit: flow: BasicTopicSubscriberDtoFlow:
+{
+  entity: "topic_subscriber_dto",
+  kind: "basic",
+  name: "BasicTopicSubscriberDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "topic_subscriber_dto_ref01",
+        srcdatavar: "topic_subscriber_dto_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "topic_subscriber_dto01",
+        topic_id: "topic01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-topic_subscriber_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTopicSubscriberDtoFlow"
+}

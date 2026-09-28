@@ -1,0 +1,201 @@
+# Entity: message_response_dto
+
+main: kit: entity: message_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    markAs: {
+      h: "Mark As"
+      n: "markAs"
+      r: true
+      t: "`$STRING`"
+    }
+    messageId: {
+      h: "Message Id"
+      n: "messageId"
+      r: true
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    payload: {
+      h: "Payload"
+      n: "payload"
+      r: false
+      sh: "Message action payload"
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Message action status"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "message_response_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "message_id"
+                or: "message_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "type"
+                or: "type"
+                r: true
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "message_id"
+              "subscriber_id"
+              "type"
+            ]
+          }
+          r: {
+            param: {
+              messageId: "message_id"
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "messages"
+            }
+            {
+              var: "message_id"
+            }
+            {
+              lit: "actions"
+            }
+            {
+              var: "type"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/subscribers/{subscriberId}/messages/mark-as"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "subscriber_id"
+                or: "subscriber_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/subscribers/{subscriberId}/messages/mark-as"
+          q: {
+            exist: [
+              "idempotency_key"
+              "subscriber_id"
+            ]
+          }
+          r: {
+            param: {
+              subscriberId: "subscriber_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "subscribers"
+            }
+            {
+              var: "subscriber_id"
+            }
+            {
+              lit: "messages"
+            }
+            {
+              lit: "mark-as"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.subscriber")]
+    [path("$.main.kit.entity.subscriber") path("$.main.kit.entity.message")]
+  ]
+
+}

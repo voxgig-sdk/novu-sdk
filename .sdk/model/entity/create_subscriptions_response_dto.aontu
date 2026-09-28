@@ -1,0 +1,132 @@
+# Entity: create_subscriptions_response_dto
+
+main: kit: entity: create_subscriptions_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    context: {
+      h: "Context"
+      n: "context"
+      r: false
+      t: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "The name of the topic"
+      t: "`$STRING`"
+    }
+    preferences: {
+      h: "Preferences"
+      n: "preferences"
+      r: false
+      sh: "The preferences of the topic."
+      t: "`$ARRAY`"
+      union: {
+        branches: 3
+        count: 1
+        depth: 1
+      }
+    }
+    subscriberIds: {
+      de: true
+      h: "Subscriber Ids"
+      n: "subscriberIds"
+      r: false
+      sh: "List of subscriber IDs to subscribe to the topic (max: 100)."
+      t: "`$ARRAY`"
+    }
+    subscriptions: {
+      h: "Subscriptions"
+      n: "subscriptions"
+      r: false
+      sh: "List of subscriptions to subscribe to the topic (max: 100)."
+      t: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+  }
+
+  name: "create_subscriptions_response_dto"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/topics/{topicKey}/subscriptions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "topic_key"
+                or: "topic_key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/topics/{topicKey}/subscriptions"
+          q: {
+            exist: [
+              "idempotency_key"
+              "topic_key"
+            ]
+          }
+          r: {
+            param: {
+              topicKey: "topic_key"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "topics"
+            }
+            {
+              var: "topic_key"
+            }
+            {
+              lit: "subscriptions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.topic")]
+  ]
+
+}

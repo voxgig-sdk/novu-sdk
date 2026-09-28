@@ -1,0 +1,82 @@
+# Entity: event
+
+main: kit: entity: event: {
+
+  alias: field: {}
+
+  name: "event"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v1/events/trigger/{transactionId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency_key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "transaction_id"
+                or: "transaction_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/events/trigger/{transactionId}"
+          q: {
+            exist: [
+              "idempotency_key"
+              "transaction_id"
+            ]
+          }
+          r: {
+            param: {
+              transactionId: "transaction_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "events"
+            }
+            {
+              lit: "trigger"
+            }
+            {
+              var: "transaction_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.trigger")]
+  ]
+
+}

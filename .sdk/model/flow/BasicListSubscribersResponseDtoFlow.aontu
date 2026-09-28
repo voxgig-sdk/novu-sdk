@@ -1,0 +1,22 @@
+# BasicListSubscribersResponseDtoFlow
+
+main: kit: flow: BasicListSubscribersResponseDtoFlow:
+{
+  entity: "list_subscribers_response_dto",
+  kind: "basic",
+  name: "BasicListSubscribersResponseDtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_subscribers_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListSubscribersResponseDtoFlow"
+}

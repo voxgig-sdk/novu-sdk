@@ -1,0 +1,22 @@
+# BasicCreateSubscriptionsResponseDtoFlow
+
+main: kit: flow: BasicCreateSubscriptionsResponseDtoFlow:
+{
+  entity: "create_subscriptions_response_dto",
+  kind: "basic",
+  name: "BasicCreateSubscriptionsResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "create_subscriptions_response_dto_ref01"
+      }
+
+      m: {
+        topic_key: "topic_key01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateSubscriptionsResponseDtoFlow"
+}
