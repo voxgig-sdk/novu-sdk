@@ -6,7 +6,7 @@ Novu REST API. Please see https://docs.novu.co/api-reference for more details.
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 67 entities and 149 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 59 entities and 149 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -30,7 +30,7 @@ Key fields to recognise:
 
 Results: OK. When a reply or edit is delivered, `data` contains the platform message identifiers. Side-effect-only requests (typing, reactions, deletes, signals without an outbound message) return `data: null`.; Created; OK; The link was removed.; The agent was deleted.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
@@ -82,7 +82,7 @@ Key fields to recognise:
 
 Results: Created; OK.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
@@ -96,7 +96,7 @@ Key fields to recognise:
 
 Results: Created; OK.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
@@ -122,11 +122,12 @@ Key fields to recognise:
 
 Results: Created; OK.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
 - `bridgeUrl`: Bridge URL override for agent connect, if configured on this context
+- `createdAt`: Creation timestamp
 - `data`: Custom data associated with this context
 - `id`: Unique identifier for this context
 - `type`: Context type (for example, tenant, app, workspace)
@@ -161,7 +162,7 @@ Key fields to recognise:
 
 Results: OK; Created.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
@@ -250,7 +251,17 @@ Key fields to recognise:
 
 ### Event
 
-SDK operations: `remove`.
+Results: Created.
+
+SDK operations: `create`, `remove`.
+
+Key fields to recognise:
+
+- `actor`: It is used to display the Avatar of the provided actor&#39;s subscriber id or actor object.
+- `agentId`: Override the workflow-assigned agent for this trigger using the public agent identifier.
+- `bridgeUrl`: Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application.
+- `name`: The trigger identifier of the workflow you wish to send.
+- `overrides`: This could be used to override provider specific configurations
 
 ### GenerateChatOAuthUrlResponseDto
 
@@ -377,62 +388,6 @@ Key fields to recognise:
 - `exceedsPlanLimit`: Cloud only. `true` when this channel type (provider) falls outside the organization plan active-channel limit (by connection order). Active channels are counted per channel type, so multiple integrations of the same provider (for example several Slack workspaces) count as a single active channel. Over-limit channels keep their configuration but the agent will not respond on them until the plan is upgraded or older channel types are disconnected.
 - `id`: Agent–integration link document id.
 
-### ListAgentsResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `bridgeUrl`: Production bridge URL
-- `createdBy`: Mongo user id of the user who created the agent
-- `devBridgeActive`: Whether the dev bridge override is active
-- `devBridgeUrl`: Development bridge URL (set by npx novu dev)
-- `exceedsPlanLimit`: Cloud only. `true` when the agent falls outside the organization plan agent limit (by creation order among active agents, inactive agents do not consume slots). Only plan limits produce this flag, system-capped organizations (enterprise/unlimited tiers) are never over-limit. Over-limit agents are still stored but will not respond to inbound messages until the plan is upgraded or older agents are deactivated.
-
-### ListChannelConnectionsResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `channel`: The channel type (email, sms, push, chat, etc.).
-- `contextKeys`: The context of the channel connection
-- `createdAt`: The timestamp indicating when the channel endpoint was created, in ISO 8601 format.
-- `identifier`: The unique identifier of the channel endpoint.
-- `integrationIdentifier`: The identifier of the integration to use for this channel endpoint.
-
-### ListChannelEndpointsResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `channel`: The channel type (email, sms, push, chat, etc.).
-- `connectionIdentifier`: The identifier of the channel connection used for this endpoint.
-- `contextKeys`: The context of the channel connection
-- `createdAt`: The timestamp indicating when the channel endpoint was created, in ISO 8601 format.
-- `endpoint`: Endpoint data specific to the channel type
-
-### ListContextsResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `bridgeUrl`: Bridge URL override for agent connect, if configured on this context
-- `createdAt`: Creation timestamp
-- `data`: List of returned Contexts
-- `id`: Unique identifier for this context
-- `type`: Context type (for example, tenant, app, workspace)
-
 ### ListDomainRoutesResponseDto
 
 Results: OK.
@@ -443,30 +398,6 @@ Key fields to recognise:
 
 - `agentId`: Internal id of the destination agent. Only present for agent routes.
 - `data`: List of returned domain routes
-
-### ListDomainsResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `data`: List of returned domains
-
-### ListSubscribersResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `avatar`: The URL of the subscriber&#39;s avatar image.
-- `channels`: An array of channel settings associated with the subscriber.
-- `createdAt`: The timestamp indicating when the subscriber was created, in ISO 8601 format.
-- `data`: List of returned Subscribers
-- `deleted`: Indicates whether the subscriber has been deleted.
 
 ### ListTopicSubscriptionsResponseDto
 
@@ -481,20 +412,6 @@ Key fields to recognise:
 - `id`: Unique identifier of the workflow
 - `identifier`: The identifier of the subscription
 - `preferences`: The preferences for workflows in this subscription
-
-### ListTopicsResponseDto
-
-Results: OK.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `createdAt`: The date the topic was created
-- `data`: List of returned Topics
-- `id`: The identifier of the topic
-- `key`: The unique key of the topic
-- `name`: The name of the topic
 
 ### MasterJson
 
@@ -594,7 +511,7 @@ Key fields to recognise:
 
 Results: Created; OK.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
@@ -663,11 +580,13 @@ Key fields to recognise:
 
 Results: OK; Created; Topic deleted successfully.
 
-SDK operations: `create`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`, `update`.
 
 Key fields to recognise:
 
+- `createdAt`: The date the topic was created
 - `data`: Additional custom data associated with the topic
+- `id`: The identifier of the topic
 - `key`: The unique key of the topic
 - `name`: The name of the topic
 
@@ -698,6 +617,7 @@ SDK operations: `create`, `load`, `remove`.
 Key fields to recognise:
 
 - `content`: Translation content as JSON object
+- `createdAt`: Creation timestamp
 - `locale`: Locale code
 - `resourceId`: Resource identifier
 - `resourceType`: Resource type
@@ -715,20 +635,6 @@ Key fields to recognise:
 - `outdatedLocales`: Locales that are outdated compared to the default locale (only present when there are outdated locales)
 - `resourceId`: Resource identifier (slugified ID)
 - `resourceName`: Resource name (for example, workflow name)
-
-### Trigger
-
-Results: Created.
-
-SDK operations: `create`.
-
-Key fields to recognise:
-
-- `actor`: It is used to display the Avatar of the provided actor&#39;s subscriber id or actor object.
-- `agentId`: Override the workflow-assigned agent for this trigger using the public agent identifier.
-- `bridgeUrl`: Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application.
-- `name`: The trigger identifier of the workflow you wish to send.
-- `overrides`: This could be used to override provider specific configurations
 
 ### TriggerEventResponseDto
 
@@ -818,6 +724,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | ActivityNotificationResponseDto | `load` | `GET /v1/notifications/{notificationId}` | Required |
 | Agent | `create` | `POST /v1/agents/{agentId}/reply` | Required |
 | Agent | `create` | `POST /v1/agents` | Required |
+| Agent | `list` | `GET /v1/agents` | Required |
 | Agent | `load` | `GET /v1/agents/{identifier}` | Required |
 | Agent | `remove` | `DELETE /v1/agents/{identifier}/integrations/{agentIntegrationId}` | Required |
 | Agent | `remove` | `DELETE /v1/agents/{identifier}` | Required |
@@ -827,15 +734,18 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | AgentResponseDto | `update` | `PUT /v1/agents/{identifier}/bridge` | Required |
 | Bulk | `create` | `POST /v1/subscribers/bulk` | Required |
 | ChannelConnection | `create` | `POST /v1/channel-connections` | Required |
+| ChannelConnection | `list` | `GET /v1/channel-connections` | Required |
 | ChannelConnection | `load` | `GET /v1/channel-connections/{identifier}` | Required |
 | ChannelConnection | `remove` | `DELETE /v1/channel-connections/{identifier}` | Required |
 | ChannelConnection | `update` | `PATCH /v1/channel-connections/{identifier}` | Required |
 | ChannelEndpoint | `create` | `POST /v1/channel-endpoints` | Required |
+| ChannelEndpoint | `list` | `GET /v1/channel-endpoints` | Required |
 | ChannelEndpoint | `load` | `GET /v1/channel-endpoints/{identifier}` | Required |
 | ChannelEndpoint | `remove` | `DELETE /v1/channel-endpoints/{identifier}` | Required |
 | ChannelEndpoint | `update` | `PATCH /v1/channel-endpoints/{identifier}` | Required |
 | Configure | `create` | `POST /v1/integrations/{integrationIdentifier}/webhook/configure` | Required |
 | Context | `create` | `POST /v2/contexts` | Required |
+| Context | `list` | `GET /v2/contexts` | Required |
 | Context | `load` | `GET /v2/contexts/{type}/{id}` | Required |
 | Context | `remove` | `DELETE /v2/contexts/{type}/{id}` | Required |
 | Context | `update` | `PATCH /v2/contexts/{type}/{id}` | Required |
@@ -843,6 +753,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Diff | `create` | `POST /v2/environments/{targetEnvironmentId}/diff` | Required |
 | Domain | `create` | `POST /v1/domains/{domain}/diagnose` | Required |
 | Domain | `create` | `POST /v1/domains` | Required |
+| Domain | `list` | `GET /v1/domains` | Required |
 | Domain | `load` | `GET /v1/domains/{domain}` | Required |
 | Domain | `remove` | `DELETE /v1/domains/{domain}/routes/{address}` | Required |
 | Domain | `remove` | `DELETE /v1/domains/{domain}` | Required |
@@ -865,6 +776,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | EnvironmentVariable | `remove` | `DELETE /v1/environment-variables/{variableKey}` | Required |
 | EnvironmentVariable | `update` | `PATCH /v1/environment-variables/{variableKey}` | Required |
 | EnvironmentVariableWorkflowInfoDto | `list` | `GET /v1/environment-variables/{variableKey}/usage` | Required |
+| Event | `create` | `POST /v1/events/trigger` | Required |
 | Event | `remove` | `DELETE /v1/events/trigger/{transactionId}` | Required |
 | GenerateChatOAuthUrlResponseDto | `create` | `POST /v1/integrations/channel-connections/oauth` | Required |
 | GenerateChatOAuthUrlResponseDto | `create` | `POST /v1/integrations/channel-endpoints/oauth` | Required |
@@ -897,16 +809,9 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | LayoutResponseDto | `create` | `POST /v2/layouts/{layoutId}/duplicate` | Required |
 | Link | `create` | `POST /v1/integrations/channel-endpoints/link` | Required |
 | ListAgentIntegrationsResponseDto | `list` | `GET /v1/agents/{identifier}/integrations` | Required |
-| ListAgentsResponseDto | `list` | `GET /v1/agents` | Required |
-| ListChannelConnectionsResponseDto | `list` | `GET /v1/channel-connections` | Required |
-| ListChannelEndpointsResponseDto | `list` | `GET /v1/channel-endpoints` | Required |
-| ListContextsResponseDto | `list` | `GET /v2/contexts` | Required |
 | ListDomainRoutesResponseDto | `list` | `GET /v1/domains/{domain}/routes` | Required |
-| ListDomainsResponseDto | `list` | `GET /v1/domains` | Required |
-| ListSubscribersResponseDto | `list` | `GET /v2/subscribers` | Required |
 | ListTopicSubscriptionsResponseDto | `list` | `GET /v2/subscribers/{subscriberId}/subscriptions` | Required |
 | ListTopicSubscriptionsResponseDto | `list` | `GET /v2/topics/{topicKey}/subscriptions` | Required |
-| ListTopicsResponseDto | `list` | `GET /v2/topics` | Required |
 | MasterJson | `load` | `GET /v2/translations/master-json` | Required |
 | Message | `list` | `GET /v1/messages` | Required |
 | Message | `remove` | `DELETE /v1/messages/transaction/{transactionId}` | Required |
@@ -925,6 +830,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Subscriber | `create` | `POST /v2/subscribers/{subscriberId}/notifications/read` | Required |
 | Subscriber | `create` | `POST /v2/subscribers/{subscriberId}/notifications/read-archive` | Required |
 | Subscriber | `create` | `POST /v2/subscribers/{subscriberId}/notifications/seen` | Required |
+| Subscriber | `list` | `GET /v2/subscribers` | Required |
 | Subscriber | `load` | `GET /v2/subscribers/{subscriberId}` | Required |
 | Subscriber | `remove` | `DELETE /v2/subscribers/{subscriberId}/notifications/{notificationId}` | Required |
 | Subscriber | `remove` | `DELETE /v1/subscribers/{subscriberId}/credentials/{providerId}` | Required |
@@ -939,6 +845,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Subscription | `load` | `GET /v2/topics/{topicKey}/subscriptions/{identifier}` | Required |
 | Subscription | `update` | `PATCH /v2/topics/{topicKey}/subscriptions/{identifier}` | Required |
 | Topic | `create` | `POST /v2/topics` | Required |
+| Topic | `list` | `GET /v2/topics` | Required |
 | Topic | `load` | `GET /v2/topics/{topicKey}` | Required |
 | Topic | `remove` | `DELETE /v2/topics/{topicKey}` | Required |
 | Topic | `update` | `PATCH /v2/topics/{topicKey}` | Required |
@@ -949,7 +856,6 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Translation | `remove` | `DELETE /v2/translations/{resourceType}/{resourceId}/{locale}` | Required |
 | Translation | `remove` | `DELETE /v2/translations/{resourceType}/{resourceId}` | Required |
 | TranslationGroupDto | `load` | `GET /v2/translations/group/{resourceType}/{resourceId}` | Required |
-| Trigger | `create` | `POST /v1/events/trigger` | Required |
 | TriggerEventResponseDto | `create` | `POST /v1/events/trigger/broadcast` | Required |
 | TriggerEventResponseDto | `create` | `POST /v1/events/trigger/bulk` | Required |
 | Unseen | `load` | `GET /v1/subscribers/{subscriberId}/notifications/unseen` | Required |
@@ -1015,7 +921,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `novu_list`: List records for an entity. Supported entities: `activity_notification_response_dto`, `domain_connect_status_response_dto`, `environment`, `environment_tags_dto`, `environment_variable`, `environment_variable_workflow_info_dto`, `integration`, `integration_response_dto`, `layout`, `list_agent_integrations_response_dto`, `list_agents_response_dto`, `list_channel_connections_response_dto`, `list_channel_endpoints_response_dto`, `list_contexts_response_dto`, `list_domain_routes_response_dto`, `list_domains_response_dto`, `list_subscribers_response_dto`, `list_topic_subscriptions_response_dto`, `list_topics_response_dto`, `message`, `notification_feed_item_dto`, `subscriber_notifications_count_response_dto`, `subscriber_notifications_response_dto`, `subscriber_preferences_dto`, `workflow`, `workflow_info_dto`.
+- `novu_list`: List records for an entity. Supported entities: `activity_notification_response_dto`, `agent`, `channel_connection`, `channel_endpoint`, `context`, `domain`, `domain_connect_status_response_dto`, `environment`, `environment_tags_dto`, `environment_variable`, `environment_variable_workflow_info_dto`, `integration`, `integration_response_dto`, `layout`, `list_agent_integrations_response_dto`, `list_domain_routes_response_dto`, `list_topic_subscriptions_response_dto`, `message`, `notification_feed_item_dto`, `subscriber`, `subscriber_notifications_count_response_dto`, `subscriber_notifications_response_dto`, `subscriber_preferences_dto`, `topic`, `workflow`, `workflow_info_dto`.
 - `novu_load`: Load one record for an entity. Supported entities: `activity_notification_response_dto`, `agent`, `channel_connection`, `channel_endpoint`, `context`, `domain`, `domain_route_response_dto`, `environment_variable`, `layout`, `master_json`, `step`, `subscriber`, `subscription`, `topic`, `topic_subscriber_dto`, `translation`, `translation_group_dto`, `unseen`, `workflow`.
 
 ## Operational features

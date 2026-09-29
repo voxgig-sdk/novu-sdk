@@ -115,7 +115,7 @@ main: kit: entity: environment_variable: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -157,7 +157,7 @@ main: kit: entity: environment_variable: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -209,7 +209,7 @@ main: kit: entity: environment_variable: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -219,7 +219,7 @@ main: kit: entity: environment_variable: {
                 ex: "BASE_URL"
                 k: "param"
                 n: "id"
-                or: "variable_key"
+                or: "variableKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -270,7 +270,7 @@ main: kit: entity: environment_variable: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -280,7 +280,7 @@ main: kit: entity: environment_variable: {
                 ex: "BASE_URL"
                 k: "param"
                 n: "id"
-                or: "variable_key"
+                or: "variableKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -331,7 +331,7 @@ main: kit: entity: environment_variable: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -341,7 +341,7 @@ main: kit: entity: environment_variable: {
                 ex: "BASE_URL"
                 k: "param"
                 n: "id"
-                or: "variable_key"
+                or: "variableKey"
                 r: true
                 t: "`$STRING`"
               }

@@ -20,7 +20,7 @@ main: kit: entity: topic_subscriptions_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -29,7 +29,7 @@ main: kit: entity: topic_subscriptions_response_dto: {
               {
                 k: "param"
                 n: "topic_key"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }

@@ -93,6 +93,18 @@ class AgentLoadMatch
     public string $id;
 }
 
+/** Request payload for Agent#list. */
+class AgentListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?string $identifier = null;
+    public ?bool $include_cursor = null;
+    public ?float $limit = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
+}
+
 /** Request payload for Agent#create. */
 class AgentCreateData
 {
@@ -283,6 +295,23 @@ class ChannelConnectionLoadMatch
     public string $id;
 }
 
+/** Request payload for ChannelConnection#list. */
+class ChannelConnectionListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?string $channel = null;
+    public ?string $connection_mode = null;
+    public ?array $context_key = null;
+    public ?bool $include_cursor = null;
+    public ?string $integration_identifier = null;
+    public ?float $limit = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
+    public ?string $provider_id = null;
+    public ?string $subscriber_id = null;
+}
+
 /** Request payload for ChannelConnection#create. */
 class ChannelConnectionCreateData
 {
@@ -348,6 +377,23 @@ class ChannelEndpointLoadMatch
     public string $id;
 }
 
+/** Request payload for ChannelEndpoint#list. */
+class ChannelEndpointListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?string $channel = null;
+    public ?string $connection_identifier = null;
+    public ?array $context_key = null;
+    public ?bool $include_cursor = null;
+    public ?string $integration_identifier = null;
+    public ?float $limit = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
+    public ?string $provider_id = null;
+    public ?string $subscriber_id = null;
+}
+
 /** Request payload for ChannelEndpoint#create. */
 class ChannelEndpointCreateData
 {
@@ -409,9 +455,11 @@ class ConfigureCreateData
 class Context
 {
     public ?string $bridgeUrl = null;
-    public ?array $data = null;
+    public string $createdAt;
+    public array $data;
     public string $id;
     public string $type;
+    public string $updatedAt;
 }
 
 /** Request payload for Context#load. */
@@ -421,13 +469,28 @@ class ContextLoadMatch
     public string $type;
 }
 
+/** Request payload for Context#list. */
+class ContextListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?string $id = null;
+    public ?bool $include_cursor = null;
+    public ?float $limit = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
+    public ?string $search = null;
+}
+
 /** Request payload for Context#create. */
 class ContextCreateData
 {
     public ?string $bridgeUrl = null;
-    public ?array $data = null;
+    public string $createdAt;
+    public array $data;
     public string $id;
     public string $type;
+    public string $updatedAt;
 }
 
 /** Request payload for Context#update. */
@@ -436,7 +499,9 @@ class ContextUpdateData
     public string $id;
     public string $type;
     public ?string $bridgeUrl = null;
+    public ?string $createdAt = null;
     public ?array $data = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Context#remove. */
@@ -506,6 +571,18 @@ class Domain
 class DomainLoadMatch
 {
     public string $id;
+}
+
+/** Request payload for Domain#list. */
+class DomainListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?bool $include_cursor = null;
+    public ?float $limit = null;
+    public ?string $name = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
 }
 
 /** Request payload for Domain#create. */
@@ -607,10 +684,16 @@ class DomainResponseDtoCreateData
 /** DomainRouteResponseDto entity data model. */
 class DomainRouteResponseDto
 {
+    public string $address;
     public ?string $agentId = null;
+    public string $createdAt;
     public ?array $data = null;
-    public ?string $id = null;
-    public ?string $type = null;
+    public string $domainId;
+    public string $environmentId;
+    public string $id;
+    public string $organizationId;
+    public string $type;
+    public string $updatedAt;
 }
 
 /** Request payload for DomainRouteResponseDto#load. */
@@ -624,9 +707,15 @@ class DomainRouteResponseDtoLoadMatch
 class DomainRouteResponseDtoCreateData
 {
     public string $id;
+    public string $address;
     public ?string $agentId = null;
+    public string $createdAt;
     public ?array $data = null;
-    public ?string $type = null;
+    public string $domainId;
+    public string $environmentId;
+    public string $organizationId;
+    public string $type;
+    public string $updatedAt;
 }
 
 /** Request payload for DomainRouteResponseDto#update. */
@@ -635,9 +724,14 @@ class DomainRouteResponseDtoUpdateData
     public string $address;
     public string $domain_id;
     public ?string $agentId = null;
+    public ?string $createdAt = null;
     public ?array $data = null;
+    public ?string $domainId = null;
+    public ?string $environmentId = null;
     public ?string $id = null;
+    public ?string $organizationId = null;
     public ?string $type = null;
+    public ?string $updatedAt = null;
 }
 
 /** Environment entity data model. */
@@ -795,6 +889,31 @@ class EnvironmentVariableWorkflowInfoDtoListMatch
 /** Event entity data model. */
 class Event
 {
+    public mixed $actor = null;
+    public ?string $agentId = null;
+    public ?string $bridgeUrl = null;
+    public ?array $context = null;
+    public string $name;
+    public mixed $overrides = null;
+    public ?array $payload = null;
+    public mixed $tenant = null;
+    public mixed $to;
+    public ?string $transactionId = null;
+}
+
+/** Request payload for Event#create. */
+class EventCreateData
+{
+    public mixed $actor = null;
+    public ?string $agentId = null;
+    public ?string $bridgeUrl = null;
+    public ?array $context = null;
+    public string $name;
+    public mixed $overrides = null;
+    public ?array $payload = null;
+    public mixed $tenant = null;
+    public mixed $to;
+    public ?string $transactionId = null;
 }
 
 /** Request payload for Event#remove. */
@@ -1238,131 +1357,6 @@ class ListAgentIntegrationsResponseDtoListMatch
     public ?string $order_direction = null;
 }
 
-/** ListAgentsResponseDto entity data model. */
-class ListAgentsResponseDto
-{
-    public bool $active;
-    public array $behavior;
-    public ?string $bridgeUrl = null;
-    public string $createdAt;
-    public ?string $createdBy = null;
-    public ?string $description = null;
-    public ?bool $devBridgeActive = null;
-    public ?string $devBridgeUrl = null;
-    public string $environmentId;
-    public ?bool $exceedsPlanLimit = null;
-    public string $id;
-    public string $identifier;
-    public ?array $integrations = null;
-    public mixed $managedRuntime = null;
-    public string $name;
-    public string $organizationId;
-    public ?string $runtime = null;
-    public string $updatedAt;
-    public ?string $visibility = null;
-}
-
-/** Request payload for ListAgentsResponseDto#list. */
-class ListAgentsResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?string $identifier = null;
-    public ?bool $include_cursor = null;
-    public ?float $limit = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-}
-
-/** ListChannelConnectionsResponseDto entity data model. */
-class ListChannelConnectionsResponseDto
-{
-    public array $auth;
-    public string $channel;
-    public array $contextKeys;
-    public string $createdAt;
-    public string $identifier;
-    public string $integrationIdentifier;
-    public string $providerId;
-    public string $subscriberId;
-    public string $updatedAt;
-    public array $workspace;
-}
-
-/** Request payload for ListChannelConnectionsResponseDto#list. */
-class ListChannelConnectionsResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?string $channel = null;
-    public ?string $connection_mode = null;
-    public ?array $context_key = null;
-    public ?bool $include_cursor = null;
-    public ?string $integration_identifier = null;
-    public ?float $limit = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-    public ?string $provider_id = null;
-    public ?string $subscriber_id = null;
-}
-
-/** ListChannelEndpointsResponseDto entity data model. */
-class ListChannelEndpointsResponseDto
-{
-    public string $channel;
-    public string $connectionIdentifier;
-    public array $contextKeys;
-    public string $createdAt;
-    public mixed $endpoint;
-    public string $identifier;
-    public string $integrationIdentifier;
-    public string $providerId;
-    public string $subscriberId;
-    public string $type;
-    public string $updatedAt;
-}
-
-/** Request payload for ListChannelEndpointsResponseDto#list. */
-class ListChannelEndpointsResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?string $channel = null;
-    public ?string $connection_identifier = null;
-    public ?array $context_key = null;
-    public ?bool $include_cursor = null;
-    public ?string $integration_identifier = null;
-    public ?float $limit = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-    public ?string $provider_id = null;
-    public ?string $subscriber_id = null;
-}
-
-/** ListContextsResponseDto entity data model. */
-class ListContextsResponseDto
-{
-    public ?string $bridgeUrl = null;
-    public string $createdAt;
-    public array $data;
-    public string $id;
-    public string $type;
-    public string $updatedAt;
-}
-
-/** Request payload for ListContextsResponseDto#list. */
-class ListContextsResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?string $id = null;
-    public ?bool $include_cursor = null;
-    public ?float $limit = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-    public ?string $search = null;
-}
-
 /** ListDomainRoutesResponseDto entity data model. */
 class ListDomainRoutesResponseDto
 {
@@ -1391,74 +1385,6 @@ class ListDomainRoutesResponseDtoListMatch
     public ?string $order_direction = null;
 }
 
-/** ListDomainsResponseDto entity data model. */
-class ListDomainsResponseDto
-{
-    public string $createdAt;
-    public ?array $data = null;
-    public ?string $dnsProvider = null;
-    public string $environmentId;
-    public ?array $expectedDnsRecords = null;
-    public string $id;
-    public bool $mxRecordConfigured;
-    public string $name;
-    public string $organizationId;
-    public string $status;
-    public string $updatedAt;
-}
-
-/** Request payload for ListDomainsResponseDto#list. */
-class ListDomainsResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?bool $include_cursor = null;
-    public ?float $limit = null;
-    public ?string $name = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-}
-
-/** ListSubscribersResponseDto entity data model. */
-class ListSubscribersResponseDto
-{
-    public ?string $avatar = null;
-    public ?array $channels = null;
-    public string $createdAt;
-    public ?array $data = null;
-    public bool $deleted;
-    public ?string $email = null;
-    public string $environmentId;
-    public ?string $firstName = null;
-    public ?string $id = null;
-    public ?bool $isOnline = null;
-    public ?string $lastName = null;
-    public ?string $lastOnlineAt = null;
-    public ?string $locale = null;
-    public string $organizationId;
-    public ?string $phone = null;
-    public string $subscriberId;
-    public ?string $timezone = null;
-    public ?array $topics = null;
-    public string $updatedAt;
-    public ?float $v = null;
-}
-
-/** Request payload for ListSubscribersResponseDto#list. */
-class ListSubscribersResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?string $email = null;
-    public ?bool $include_cursor = null;
-    public ?float $limit = null;
-    public ?string $name = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-    public ?string $phone = null;
-    public ?string $subscriber_id = null;
-}
-
 /** ListTopicSubscriptionsResponseDto entity data model. */
 class ListTopicSubscriptionsResponseDto
 {
@@ -1481,30 +1407,6 @@ class ListTopicSubscriptionsResponseDtoListMatch
     public ?bool $include_cursor = null;
     public ?string $key = null;
     public ?float $limit = null;
-    public ?string $order_by = null;
-    public ?string $order_direction = null;
-}
-
-/** ListTopicsResponseDto entity data model. */
-class ListTopicsResponseDto
-{
-    public ?string $createdAt = null;
-    public ?array $data = null;
-    public string $id;
-    public string $key;
-    public ?string $name = null;
-    public ?string $updatedAt = null;
-}
-
-/** Request payload for ListTopicsResponseDto#list. */
-class ListTopicsResponseDtoListMatch
-{
-    public ?string $after = null;
-    public ?string $before = null;
-    public ?bool $include_cursor = null;
-    public ?string $key = null;
-    public ?float $limit = null;
-    public ?string $name = null;
     public ?string $order_by = null;
     public ?string $order_direction = null;
 }
@@ -1749,6 +1651,21 @@ class SubscriberLoadMatch
     public string $id;
 }
 
+/** Request payload for Subscriber#list. */
+class SubscriberListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?string $email = null;
+    public ?bool $include_cursor = null;
+    public ?float $limit = null;
+    public ?string $name = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
+    public ?string $phone = null;
+    public ?string $subscriber_id = null;
+}
+
 /** Request payload for Subscriber#create. */
 class SubscriberCreateData
 {
@@ -1956,10 +1873,12 @@ class SubscriptionUpdateData
 /** Topic entity data model. */
 class Topic
 {
+    public ?string $createdAt = null;
     public ?array $data = null;
-    public ?string $id = null;
+    public string $id;
     public string $key;
     public ?string $name = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Topic#load. */
@@ -1968,23 +1887,40 @@ class TopicLoadMatch
     public string $id;
 }
 
+/** Request payload for Topic#list. */
+class TopicListMatch
+{
+    public ?string $after = null;
+    public ?string $before = null;
+    public ?bool $include_cursor = null;
+    public ?string $key = null;
+    public ?float $limit = null;
+    public ?string $name = null;
+    public ?string $order_by = null;
+    public ?string $order_direction = null;
+}
+
 /** Request payload for Topic#create. */
 class TopicCreateData
 {
     public ?bool $fail_if_exist = null;
+    public ?string $createdAt = null;
     public ?array $data = null;
-    public ?string $id = null;
+    public string $id;
     public string $key;
     public ?string $name = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Topic#update. */
 class TopicUpdateData
 {
     public string $id;
+    public ?string $createdAt = null;
     public ?array $data = null;
     public ?string $key = null;
     public ?string $name = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Topic#remove. */
@@ -2026,10 +1962,12 @@ class TopicSubscriptionsResponseDtoRemoveMatch
 class Translation
 {
     public array $content;
+    public string $createdAt;
     public ?string $id = null;
     public string $locale;
     public string $resourceId;
     public string $resourceType;
+    public string $updatedAt;
 }
 
 /** Request payload for Translation#load. */
@@ -2044,10 +1982,12 @@ class TranslationLoadMatch
 class TranslationCreateData
 {
     public array $content;
+    public string $createdAt;
     public ?string $id = null;
     public string $locale;
     public string $resourceId;
     public string $resourceType;
+    public string $updatedAt;
 }
 
 /** Request payload for Translation#remove. */
@@ -2076,36 +2016,6 @@ class TranslationGroupDtoLoadMatch
 {
     public string $resource_id;
     public string $resource_type;
-}
-
-/** Trigger entity data model. */
-class Trigger
-{
-    public mixed $actor = null;
-    public ?string $agentId = null;
-    public ?string $bridgeUrl = null;
-    public ?array $context = null;
-    public string $name;
-    public mixed $overrides = null;
-    public ?array $payload = null;
-    public mixed $tenant = null;
-    public mixed $to;
-    public ?string $transactionId = null;
-}
-
-/** Request payload for Trigger#create. */
-class TriggerCreateData
-{
-    public mixed $actor = null;
-    public ?string $agentId = null;
-    public ?string $bridgeUrl = null;
-    public ?array $context = null;
-    public string $name;
-    public mixed $overrides = null;
-    public ?array $payload = null;
-    public mixed $tenant = null;
-    public mixed $to;
-    public ?string $transactionId = null;
 }
 
 /** TriggerEventResponseDto entity data model. */

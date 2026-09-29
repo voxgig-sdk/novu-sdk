@@ -91,7 +91,7 @@ main: kit: entity: subscription: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -107,7 +107,7 @@ main: kit: entity: subscription: {
               {
                 k: "param"
                 n: "topic_id"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -166,7 +166,7 @@ main: kit: entity: subscription: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -182,7 +182,7 @@ main: kit: entity: subscription: {
               {
                 k: "param"
                 n: "topic_id"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }

@@ -76,6 +76,16 @@ export interface AgentLoadMatch {
   id: string
 }
 
+export interface AgentListMatch {
+  after?: string
+  before?: string
+  identifier?: string
+  include_cursor?: boolean
+  limit?: number
+  order_by?: string
+  order_direction?: string
+}
+
 export interface AgentCreateData {
   active: boolean
   behavior: Record<string, any>
@@ -248,6 +258,21 @@ export interface ChannelConnectionLoadMatch {
   id: string
 }
 
+export interface ChannelConnectionListMatch {
+  after?: string
+  before?: string
+  channel?: string
+  connection_mode?: string
+  context_key?: any[]
+  include_cursor?: boolean
+  integration_identifier?: string
+  limit?: number
+  order_by?: string
+  order_direction?: string
+  provider_id?: string
+  subscriber_id?: string
+}
+
 export interface ChannelConnectionCreateData {
   auth: Record<string, any>
   channel: string
@@ -303,6 +328,21 @@ export interface ChannelEndpointLoadMatch {
   id: string
 }
 
+export interface ChannelEndpointListMatch {
+  after?: string
+  before?: string
+  channel?: string
+  connection_identifier?: string
+  context_key?: any[]
+  include_cursor?: boolean
+  integration_identifier?: string
+  limit?: number
+  order_by?: string
+  order_direction?: string
+  provider_id?: string
+  subscriber_id?: string
+}
+
 export interface ChannelEndpointCreateData {
   channel: string
   connectionIdentifier: string
@@ -352,9 +392,11 @@ export interface ConfigureCreateData {
 
 export interface ContextType {
   bridgeUrl?: string
-  data?: Record<string, any>
+  createdAt: string
+  data: Record<string, any>
   id: string
   type: string
+  updatedAt: string
 }
 
 export interface ContextLoadMatch {
@@ -362,18 +404,33 @@ export interface ContextLoadMatch {
   type: string
 }
 
+export interface ContextListMatch {
+  after?: string
+  before?: string
+  id?: string
+  include_cursor?: boolean
+  limit?: number
+  order_by?: string
+  order_direction?: string
+  search?: string
+}
+
 export interface ContextCreateData {
   bridgeUrl?: string
-  data?: Record<string, any>
+  createdAt: string
+  data: Record<string, any>
   id: string
   type: string
+  updatedAt: string
 }
 
 export interface ContextUpdateData {
   id: string
   type: string
   bridgeUrl?: string
+  createdAt?: string
   data?: Record<string, any>
+  updatedAt?: string
 }
 
 export interface ContextRemoveMatch {
@@ -429,6 +486,16 @@ export interface Domain {
 
 export interface DomainLoadMatch {
   id: string
+}
+
+export interface DomainListMatch {
+  after?: string
+  before?: string
+  include_cursor?: boolean
+  limit?: number
+  name?: string
+  order_by?: string
+  order_direction?: string
 }
 
 export interface DomainCreateData {
@@ -528,10 +595,16 @@ export interface DomainResponseDtoCreateData {
 }
 
 export interface DomainRouteResponseDto {
+  address: string
   agentId?: string
+  createdAt: string
   data?: Record<string, any>
-  id?: string
-  type?: string
+  domainId: string
+  environmentId: string
+  id: string
+  organizationId: string
+  type: string
+  updatedAt: string
 }
 
 export interface DomainRouteResponseDtoLoadMatch {
@@ -541,9 +614,15 @@ export interface DomainRouteResponseDtoLoadMatch {
 
 export interface DomainRouteResponseDtoCreateData {
   id: string
+  address: string
   agentId?: string
+  createdAt: string
   data?: Record<string, any>
-  type?: string
+  domainId: string
+  environmentId: string
+  organizationId: string
+  type: string
+  updatedAt: string
 
   // Selects a custom action instead of the plain create:
   //   'routes' | 'test'
@@ -556,9 +635,14 @@ export interface DomainRouteResponseDtoUpdateData {
   address: string
   domain_id: string
   agentId?: string
+  createdAt?: string
   data?: Record<string, any>
+  domainId?: string
+  environmentId?: string
   id?: string
+  organizationId?: string
   type?: string
+  updatedAt?: string
 }
 
 export interface Environment {
@@ -690,6 +774,29 @@ export interface EnvironmentVariableWorkflowInfoDtoListMatch {
 }
 
 export interface Event {
+  actor?: any
+  agentId?: string
+  bridgeUrl?: string
+  context?: Record<string, any>
+  name: string
+  overrides?: any
+  payload?: Record<string, any>
+  tenant?: any
+  to: any
+  transactionId?: string
+}
+
+export interface EventCreateData {
+  actor?: any
+  agentId?: string
+  bridgeUrl?: string
+  context?: Record<string, any>
+  name: string
+  overrides?: any
+  payload?: Record<string, any>
+  tenant?: any
+  to: any
+  transactionId?: string
 }
 
 export interface EventRemoveMatch {
@@ -1099,115 +1206,6 @@ export interface ListAgentIntegrationsResponseDtoListMatch {
   order_direction?: string
 }
 
-export interface ListAgentsResponseDto {
-  active: boolean
-  behavior: Record<string, any>
-  bridgeUrl?: string
-  createdAt: string
-  createdBy?: string
-  description?: string
-  devBridgeActive?: boolean
-  devBridgeUrl?: string
-  environmentId: string
-  exceedsPlanLimit?: boolean
-  id: string
-  identifier: string
-  integrations?: any[]
-  managedRuntime?: any
-  name: string
-  organizationId: string
-  runtime?: string
-  updatedAt: string
-  visibility?: string
-}
-
-export interface ListAgentsResponseDtoListMatch {
-  after?: string
-  before?: string
-  identifier?: string
-  include_cursor?: boolean
-  limit?: number
-  order_by?: string
-  order_direction?: string
-}
-
-export interface ListChannelConnectionsResponseDto {
-  auth: Record<string, any>
-  channel: string
-  contextKeys: any[]
-  createdAt: string
-  identifier: string
-  integrationIdentifier: string
-  providerId: string
-  subscriberId: string
-  updatedAt: string
-  workspace: Record<string, any>
-}
-
-export interface ListChannelConnectionsResponseDtoListMatch {
-  after?: string
-  before?: string
-  channel?: string
-  connection_mode?: string
-  context_key?: any[]
-  include_cursor?: boolean
-  integration_identifier?: string
-  limit?: number
-  order_by?: string
-  order_direction?: string
-  provider_id?: string
-  subscriber_id?: string
-}
-
-export interface ListChannelEndpointsResponseDto {
-  channel: string
-  connectionIdentifier: string
-  contextKeys: any[]
-  createdAt: string
-  endpoint: any
-  identifier: string
-  integrationIdentifier: string
-  providerId: string
-  subscriberId: string
-  type: string
-  updatedAt: string
-}
-
-export interface ListChannelEndpointsResponseDtoListMatch {
-  after?: string
-  before?: string
-  channel?: string
-  connection_identifier?: string
-  context_key?: any[]
-  include_cursor?: boolean
-  integration_identifier?: string
-  limit?: number
-  order_by?: string
-  order_direction?: string
-  provider_id?: string
-  subscriber_id?: string
-}
-
-export interface ListContextsResponseDto {
-  bridgeUrl?: string
-  createdAt: string
-  data: Record<string, any>
-  id: string
-  type: string
-  updatedAt: string
-}
-
-export interface ListContextsResponseDtoListMatch {
-  after?: string
-  before?: string
-  id?: string
-  include_cursor?: boolean
-  limit?: number
-  order_by?: string
-  order_direction?: string
-  search?: string
-}
-
 export interface ListDomainRoutesResponseDto {
   address: string
   agentId?: string
@@ -1232,66 +1230,6 @@ export interface ListDomainRoutesResponseDtoListMatch {
   order_direction?: string
 }
 
-export interface ListDomainsResponseDto {
-  createdAt: string
-  data?: Record<string, any>
-  dnsProvider?: string
-  environmentId: string
-  expectedDnsRecords?: any[]
-  id: string
-  mxRecordConfigured: boolean
-  name: string
-  organizationId: string
-  status: string
-  updatedAt: string
-}
-
-export interface ListDomainsResponseDtoListMatch {
-  after?: string
-  before?: string
-  include_cursor?: boolean
-  limit?: number
-  name?: string
-  order_by?: string
-  order_direction?: string
-}
-
-export interface ListSubscribersResponseDto {
-  avatar?: string
-  channels?: any[]
-  createdAt: string
-  data?: Record<string, any>
-  deleted: boolean
-  email?: string
-  environmentId: string
-  firstName?: string
-  id?: string
-  isOnline?: boolean
-  lastName?: string
-  lastOnlineAt?: string
-  locale?: string
-  organizationId: string
-  phone?: string
-  subscriberId: string
-  timezone?: string
-  topics?: any[]
-  updatedAt: string
-  v?: number
-}
-
-export interface ListSubscribersResponseDtoListMatch {
-  after?: string
-  before?: string
-  email?: string
-  include_cursor?: boolean
-  limit?: number
-  name?: string
-  order_by?: string
-  order_direction?: string
-  phone?: string
-  subscriber_id?: string
-}
-
 export interface ListTopicSubscriptionsResponseDto {
   contextKeys?: any[]
   createdAt: string
@@ -1310,26 +1248,6 @@ export interface ListTopicSubscriptionsResponseDtoListMatch {
   include_cursor?: boolean
   key?: string
   limit?: number
-  order_by?: string
-  order_direction?: string
-}
-
-export interface ListTopicsResponseDto {
-  createdAt?: string
-  data?: Record<string, any>
-  id: string
-  key: string
-  name?: string
-  updatedAt?: string
-}
-
-export interface ListTopicsResponseDtoListMatch {
-  after?: string
-  before?: string
-  include_cursor?: boolean
-  key?: string
-  limit?: number
-  name?: string
   order_by?: string
   order_direction?: string
 }
@@ -1534,6 +1452,19 @@ export interface Subscriber {
 
 export interface SubscriberLoadMatch {
   id: string
+}
+
+export interface SubscriberListMatch {
+  after?: string
+  before?: string
+  email?: string
+  include_cursor?: boolean
+  limit?: number
+  name?: string
+  order_by?: string
+  order_direction?: string
+  phone?: string
+  subscriber_id?: string
 }
 
 export interface SubscriberCreateData {
@@ -1741,29 +1672,46 @@ export interface SubscriptionUpdateData {
 }
 
 export interface Topic {
+  createdAt?: string
   data?: Record<string, any>
-  id?: string
+  id: string
   key: string
   name?: string
+  updatedAt?: string
 }
 
 export interface TopicLoadMatch {
   id: string
 }
 
+export interface TopicListMatch {
+  after?: string
+  before?: string
+  include_cursor?: boolean
+  key?: string
+  limit?: number
+  name?: string
+  order_by?: string
+  order_direction?: string
+}
+
 export interface TopicCreateData {
   fail_if_exist?: boolean
+  createdAt?: string
   data?: Record<string, any>
-  id?: string
+  id: string
   key: string
   name?: string
+  updatedAt?: string
 }
 
 export interface TopicUpdateData {
   id: string
+  createdAt?: string
   data?: Record<string, any>
   key?: string
   name?: string
+  updatedAt?: string
 }
 
 export interface TopicRemoveMatch {
@@ -1793,10 +1741,12 @@ export interface TopicSubscriptionsResponseDtoRemoveMatch {
 
 export interface Translation {
   content: Record<string, any>
+  createdAt: string
   id?: string
   locale: string
   resourceId: string
   resourceType: string
+  updatedAt: string
 }
 
 export interface TranslationLoadMatch {
@@ -1807,10 +1757,12 @@ export interface TranslationLoadMatch {
 
 export interface TranslationCreateData {
   content: Record<string, any>
+  createdAt: string
   id?: string
   locale: string
   resourceId: string
   resourceType: string
+  updatedAt: string
 }
 
 export interface TranslationRemoveMatch {
@@ -1833,32 +1785,6 @@ export interface TranslationGroupDto {
 export interface TranslationGroupDtoLoadMatch {
   resource_id: string
   resource_type: string
-}
-
-export interface Trigger {
-  actor?: any
-  agentId?: string
-  bridgeUrl?: string
-  context?: Record<string, any>
-  name: string
-  overrides?: any
-  payload?: Record<string, any>
-  tenant?: any
-  to: any
-  transactionId?: string
-}
-
-export interface TriggerCreateData {
-  actor?: any
-  agentId?: string
-  bridgeUrl?: string
-  context?: Record<string, any>
-  name: string
-  overrides?: any
-  payload?: Record<string, any>
-  tenant?: any
-  to: any
-  transactionId?: string
 }
 
 export interface TriggerEventResponseDto {

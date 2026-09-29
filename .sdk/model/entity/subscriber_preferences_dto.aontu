@@ -34,7 +34,7 @@ main: kit: entity: subscriber_preferences_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -43,7 +43,7 @@ main: kit: entity: subscriber_preferences_dto: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -55,7 +55,7 @@ main: kit: entity: subscriber_preferences_dto: {
                 ]
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -101,7 +101,7 @@ main: kit: entity: subscriber_preferences_dto: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.workflows`"
           }
         }
       ]
@@ -120,7 +120,7 @@ main: kit: entity: subscriber_preferences_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -129,7 +129,7 @@ main: kit: entity: subscriber_preferences_dto: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }

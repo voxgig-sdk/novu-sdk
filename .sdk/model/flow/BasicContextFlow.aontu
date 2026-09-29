@@ -19,6 +19,18 @@ main: kit: flow: BasicContextFlow:
     }
 
     {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "context_ref01"
+          }
+        }
+      ]
+    }
+
+    {
       d: {
         type: "type01"
       }
@@ -76,6 +88,22 @@ main: kit: flow: BasicContextFlow:
       }
 
       o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "context_ref01"
+          }
+        }
+      ]
     }
   ],
   "key$": "BasicContextFlow"

@@ -44,7 +44,7 @@ main: kit: entity: configure: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -53,7 +53,7 @@ main: kit: entity: configure: {
               {
                 k: "param"
                 n: "integration_id"
-                or: "integration_identifier"
+                or: "integrationIdentifier"
                 r: true
                 t: "`$STRING`"
               }

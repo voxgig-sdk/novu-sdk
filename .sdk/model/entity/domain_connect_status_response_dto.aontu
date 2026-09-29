@@ -34,7 +34,7 @@ main: kit: entity: domain_connect_status_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }

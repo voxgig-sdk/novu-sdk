@@ -72,6 +72,11 @@
       "version": 2,
       "source": "openapi3"
     },
+    "GET /v1/domains": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /v1/domains/{domain}": {
       "provenance": "operation-contract",
       "version": 2,

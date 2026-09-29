@@ -165,41 +165,13 @@ Create a new `Link` entity instance. Pass `nil` for no initial data.
 
 Create a new `ListAgentIntegrationsResponseDto` entity instance. Pass `nil` for no initial data.
 
-#### `ListAgentsResponseDto(data)`
-
-Create a new `ListAgentsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListChannelConnectionsResponseDto(data)`
-
-Create a new `ListChannelConnectionsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListChannelEndpointsResponseDto(data)`
-
-Create a new `ListChannelEndpointsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListContextsResponseDto(data)`
-
-Create a new `ListContextsResponseDto` entity instance. Pass `nil` for no initial data.
-
 #### `ListDomainRoutesResponseDto(data)`
 
 Create a new `ListDomainRoutesResponseDto` entity instance. Pass `nil` for no initial data.
 
-#### `ListDomainsResponseDto(data)`
-
-Create a new `ListDomainsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListSubscribersResponseDto(data)`
-
-Create a new `ListSubscribersResponseDto` entity instance. Pass `nil` for no initial data.
-
 #### `ListTopicSubscriptionsResponseDto(data)`
 
 Create a new `ListTopicSubscriptionsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListTopicsResponseDto(data)`
-
-Create a new `ListTopicsResponseDto` entity instance. Pass `nil` for no initial data.
 
 #### `MasterJson(data)`
 
@@ -276,10 +248,6 @@ Create a new `Translation` entity instance. Pass `nil` for no initial data.
 #### `TranslationGroupDto(data)`
 
 Create a new `TranslationGroupDto` entity instance. Pass `nil` for no initial data.
-
-#### `Trigger(data)`
-
-Create a new `Trigger` entity instance. Pass `nil` for no initial data.
 
 #### `TriggerEventResponseDto(data)`
 
@@ -457,27 +425,27 @@ local agent = client:Agent(nil)
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `active` | - | Yes | Yes | - |
-| `behavior` | - | - | Yes | - |
-| `bridgeUrl` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `createdBy` | - | - | - | - |
-| `description` | - | - | - | - |
-| `devBridgeActive` | - | - | - | - |
-| `devBridgeUrl` | - | - | - | - |
-| `environmentId` | - | - | - | - |
-| `exceedsPlanLimit` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | - | - | - |
-| `integrations` | - | - | - | - |
-| `managedRuntime` | - | Yes | - | - |
-| `name` | - | - | Yes | - |
-| `organizationId` | - | - | - | - |
-| `runtime` | - | - | - | - |
-| `updatedAt` | - | - | - | - |
-| `visibility` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `active` | - | - | Yes | Yes | - |
+| `behavior` | - | - | - | Yes | - |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `createdBy` | - | - | - | - | - |
+| `description` | - | - | - | - | - |
+| `devBridgeActive` | - | - | - | - | - |
+| `devBridgeUrl` | - | - | - | - | - |
+| `environmentId` | - | - | - | - | - |
+| `exceedsPlanLimit` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | - | - | - |
+| `integrations` | - | - | - | - | - |
+| `managedRuntime` | - | - | Yes | - | - |
+| `name` | - | - | - | Yes | - |
+| `organizationId` | - | - | - | - | - |
+| `runtime` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `visibility` | - | - | - | - | - |
 
 ### Operations
 
@@ -497,6 +465,14 @@ local result, err = client:Agent():create({
   organizationId = --[[ string ]],
   updatedAt = --[[ string ]],
 })
+```
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:Agent():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -808,21 +784,21 @@ local channel_connection = client:ChannelConnection(nil)
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `auth` | - | - | - | - |
-| `channel` | - | - | - | - |
-| `connectionMode` | - | - | - | - |
-| `context` | - | - | - | - |
-| `contextKeys` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | Yes | - | - |
-| `integrationIdentifier` | - | - | - | - |
-| `providerId` | - | - | - | - |
-| `subscriberId` | - | Yes | - | - |
-| `updatedAt` | - | - | - | - |
-| `workspace` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `auth` | - | - | - | - | - |
+| `channel` | - | - | - | - | - |
+| `connectionMode` | - | - | - | - | - |
+| `context` | - | - | - | - | - |
+| `contextKeys` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | Yes | - | - |
+| `integrationIdentifier` | - | - | - | - | - |
+| `providerId` | - | - | - | - | - |
+| `subscriberId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
@@ -843,6 +819,14 @@ local result, err = client:ChannelConnection():create({
   updatedAt = --[[ string ]],
   workspace = --[[ table ]],
 })
+```
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:ChannelConnection():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -945,6 +929,14 @@ local result, err = client:ChannelEndpoint():create({
   type = --[[ string ]],
   updatedAt = --[[ string ]],
 })
+```
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:ChannelEndpoint():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -1073,19 +1065,23 @@ local context = client:Context(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Optional bridge URL override for agent connect. |
-| `data` | `table` | No | Optional custom data to associate with this context. |
-| `id` | `string` | Yes | Unique identifier for this context. |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `string` | Yes | Creation timestamp |
+| `data` | `table` | Yes | Custom data associated with this context |
+| `id` | `string` | Yes | Unique identifier for this context |
+| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `bridgeUrl` | - | - | - | - |
-| `data` | - | - | Yes | - |
-| `id` | - | - | - | - |
-| `type` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `data` | - | - | Yes | - | - |
+| `id` | - | - | - | - | - |
+| `type` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -1095,9 +1091,20 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Context():create({
+  createdAt = --[[ string ]],
+  data = --[[ table ]],
   id = --[[ string ]],
   type = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
+```
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:Context():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -1325,6 +1332,14 @@ local result, err = client:Domain():create({
   status = --[[ string ]],
   updatedAt = --[[ string ]],
 })
+```
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:Domain():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -1571,10 +1586,31 @@ local domain_route_response_dto = client:DomainRouteResponseDto(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentId` | `string` | No | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `table` | No | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
-| `id` | `string` | No |  |
-| `type` | `string` | No |  |
+| `address` | `string` | Yes |  |
+| `agentId` | `string` | No | Internal id of the destination agent. |
+| `createdAt` | `string` | Yes |  |
+| `data` | `table` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `string` | Yes |  |
+| `environmentId` | `string` | Yes |  |
+| `id` | `string` | Yes |  |
+| `organizationId` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | load | create | update |
+| --- | --- | --- | --- |
+| `address` | - | - | - |
+| `agentId` | - | - | - |
+| `createdAt` | - | - | - |
+| `data` | - | - | - |
+| `domainId` | - | - | - |
+| `environmentId` | - | - | - |
+| `id` | - | - | - |
+| `organizationId` | - | - | - |
+| `type` | - | - | Yes |
+| `updatedAt` | - | - | - |
 
 ### Operations
 
@@ -1585,6 +1621,13 @@ Create a new entity with the given data.
 ```lua
 local result, err = client:DomainRouteResponseDto():create({
   id = --[[ string ]],
+  address = --[[ string ]],
+  createdAt = --[[ string ]],
+  domainId = --[[ string ]],
+  environmentId = --[[ string ]],
+  organizationId = --[[ string ]],
+  type = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
 ```
 
@@ -1976,7 +2019,33 @@ Return the entity name.
 local event = client:Event(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actor` | `any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `table` | No |  |
+| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `any` | No | This could be used to override provider specific configurations |
+| `payload` | `table` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `any` | No | It is used to specify a tenant context during trigger event. |
+| `to` | `any` | Yes | The recipients list of people who will receive the notification. |
+| `transactionId` | `string` | No | A unique identifier for deduplication. |
+
 ### Operations
+
+#### `create(reqdata, ctrl) -> any, err`
+
+Create a new entity with the given data.
+
+```lua
+local result, err = client:Event():create({
+  name = --[[ string ]],
+  to = --[[ any ]],
+})
+```
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
@@ -2806,256 +2875,6 @@ Return the entity name.
 
 ---
 
-## ListAgentsResponseDtoEntity
-
-```lua
-local list_agents_response_dto = client:ListAgentsResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `boolean` | Yes |  |
-| `behavior` | `table` | Yes |  |
-| `bridgeUrl` | `string` | No | Production bridge URL |
-| `createdAt` | `string` | Yes |  |
-| `createdBy` | `string` | No | Mongo user id of the user who created the agent |
-| `description` | `string` | No |  |
-| `devBridgeActive` | `boolean` | No | Whether the dev bridge override is active |
-| `devBridgeUrl` | `string` | No | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `string` | Yes |  |
-| `exceedsPlanLimit` | `boolean` | No | Cloud only. |
-| `id` | `string` | Yes |  |
-| `identifier` | `string` | Yes |  |
-| `integrations` | `table` | No |  |
-| `managedRuntime` | `any` | No | Present when runtime is "managed". |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `runtime` | `string` | No | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `string` | Yes |  |
-| `visibility` | `string` | No | Discovery scope of the agent. |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListAgentsResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListAgentsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ListChannelConnectionsResponseDtoEntity
-
-```lua
-local list_channel_connections_response_dto = client:ListChannelConnectionsResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `auth` | `table` | Yes |  |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `table` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `table` | Yes |  |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListChannelConnectionsResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ListChannelEndpointsResponseDtoEntity
-
-```lua
-local list_channel_endpoints_response_dto = client:ListChannelEndpointsResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `string` | Yes | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `table` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `any` | Yes | Endpoint data specific to the channel type |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel endpoint is linked |
-| `type` | `string` | Yes | Type of channel endpoint |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListChannelEndpointsResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ListContextsResponseDtoEntity
-
-```lua
-local list_contexts_response_dto = client:ListContextsResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `string` | Yes | Creation timestamp |
-| `data` | `table` | Yes | Custom data associated with this context |
-| `id` | `string` | Yes | Unique identifier for this context |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `string` | Yes | Last update timestamp |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListContextsResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListContextsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
 ## ListDomainRoutesResponseDtoEntity
 
 ```lua
@@ -3117,139 +2936,6 @@ Return the entity name.
 
 ---
 
-## ListDomainsResponseDtoEntity
-
-```lua
-local list_domains_response_dto = client:ListDomainsResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | Yes |  |
-| `data` | `table` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `string` | No |  |
-| `environmentId` | `string` | Yes |  |
-| `expectedDnsRecords` | `table` | No |  |
-| `id` | `string` | Yes |  |
-| `mxRecordConfigured` | `boolean` | Yes |  |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
-| `updatedAt` | `string` | Yes |  |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListDomainsResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListDomainsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ListSubscribersResponseDtoEntity
-
-```lua
-local list_subscribers_response_dto = client:ListSubscribersResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `avatar` | `string` | No | The URL of the subscriber's avatar image. |
-| `channels` | `table` | No | An array of channel settings associated with the subscriber. |
-| `createdAt` | `string` | Yes | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `table` | No | Additional custom data for the subscriber |
-| `deleted` | `boolean` | Yes | Indicates whether the subscriber has been deleted. |
-| `email` | `string` | No | The email address of the subscriber. |
-| `environmentId` | `string` | Yes | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `string` | No | The first name of the subscriber. |
-| `id` | `string` | No | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `boolean` | No | Indicates whether the subscriber is currently online. |
-| `lastName` | `string` | No | The last name of the subscriber. |
-| `lastOnlineAt` | `string` | No | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `string` | No | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `string` | Yes | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `string` | No | The phone number of the subscriber. |
-| `subscriberId` | `string` | Yes | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `string` | No | Timezone of the subscriber |
-| `topics` | `table` | No | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `number` | No | The version of the subscriber document. |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListSubscribersResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListSubscribersResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
 ## ListTopicSubscriptionsResponseDtoEntity
 
 ```lua
@@ -3299,63 +2985,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ListTopicsResponseDtoEntity
-
-```lua
-local list_topics_response_dto = client:ListTopicsResponseDto(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | No | The date the topic was created |
-| `data` | `table` | No | Additional custom data associated with the topic |
-| `id` | `string` | Yes | The identifier of the topic |
-| `key` | `string` | Yes | The unique key of the topic |
-| `name` | `string` | No | The name of the topic |
-| `updatedAt` | `string` | No | The date the topic was last updated |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:ListTopicsResponseDto():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListTopicsResponseDtoEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -3927,6 +3556,14 @@ local result, err = client:Subscriber():create({
 })
 ```
 
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:Subscriber():list()
+```
+
 #### `load(reqmatch, ctrl) -> any, err`
 
 Load a single entity matching the given criteria.
@@ -4308,10 +3945,12 @@ local topic = client:Topic(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | `table` | No | Additional custom data associated with the topic. |
-| `id` | `string` | No |  |
-| `key` | `string` | Yes | The unique key identifier for the topic. |
-| `name` | `string` | No | The display name for the topic |
+| `createdAt` | `string` | No | The date the topic was created |
+| `data` | `table` | No | Additional custom data associated with the topic |
+| `id` | `string` | Yes | The identifier of the topic |
+| `key` | `string` | Yes | The unique key of the topic |
+| `name` | `string` | No | The name of the topic |
+| `updatedAt` | `string` | No | The date the topic was last updated |
 
 ### Operations
 
@@ -4321,8 +3960,17 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Topic():create({
+  id = --[[ string ]],
   key = --[[ string ]],
 })
+```
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:Topic():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -4496,10 +4144,12 @@ local translation = client:Translation(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `content` | `table` | Yes | Translation content as JSON object |
+| `createdAt` | `string` | Yes | Creation timestamp |
 | `id` | `string` | No |  |
-| `locale` | `string` | Yes | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `string` | Yes | The resource ID to associate translation with. |
-| `resourceType` | `string` | Yes | The resource type to associate translation with |
+| `locale` | `string` | Yes | Locale code |
+| `resourceId` | `string` | Yes | Resource identifier |
+| `resourceType` | `string` | Yes | Resource type |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Operations
 
@@ -4510,9 +4160,11 @@ Create a new entity with the given data.
 ```lua
 local result, err = client:Translation():create({
   content = --[[ table ]],
+  createdAt = --[[ string ]],
   locale = --[[ string ]],
   resourceId = --[[ string ]],
   resourceType = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
 ```
 
@@ -4612,70 +4264,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `TranslationGroupDtoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## TriggerEntity
-
-```lua
-local trigger = client:Trigger(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `actor` | `any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `table` | No |  |
-| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `any` | No | This could be used to override provider specific configurations |
-| `payload` | `table` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `any` | No | It is used to specify a tenant context during trigger event. |
-| `to` | `any` | Yes | The recipients list of people who will receive the notification. |
-| `transactionId` | `string` | No | A unique identifier for deduplication. |
-
-### Operations
-
-#### `create(reqdata, ctrl) -> any, err`
-
-Create a new entity with the given data.
-
-```lua
-local result, err = client:Trigger():create({
-  name = --[[ string ]],
-  to = --[[ any ]],
-})
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `TriggerEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

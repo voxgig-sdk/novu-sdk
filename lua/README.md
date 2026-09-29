@@ -236,15 +236,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `LayoutResponseDto` | `(data) -> LayoutResponseDtoEntity` | Create a LayoutResponseDto entity instance. |
 | `Link` | `(data) -> LinkEntity` | Create a Link entity instance. |
 | `ListAgentIntegrationsResponseDto` | `(data) -> ListAgentIntegrationsResponseDtoEntity` | Create a ListAgentIntegrationsResponseDto entity instance. |
-| `ListAgentsResponseDto` | `(data) -> ListAgentsResponseDtoEntity` | Create a ListAgentsResponseDto entity instance. |
-| `ListChannelConnectionsResponseDto` | `(data) -> ListChannelConnectionsResponseDtoEntity` | Create a ListChannelConnectionsResponseDto entity instance. |
-| `ListChannelEndpointsResponseDto` | `(data) -> ListChannelEndpointsResponseDtoEntity` | Create a ListChannelEndpointsResponseDto entity instance. |
-| `ListContextsResponseDto` | `(data) -> ListContextsResponseDtoEntity` | Create a ListContextsResponseDto entity instance. |
 | `ListDomainRoutesResponseDto` | `(data) -> ListDomainRoutesResponseDtoEntity` | Create a ListDomainRoutesResponseDto entity instance. |
-| `ListDomainsResponseDto` | `(data) -> ListDomainsResponseDtoEntity` | Create a ListDomainsResponseDto entity instance. |
-| `ListSubscribersResponseDto` | `(data) -> ListSubscribersResponseDtoEntity` | Create a ListSubscribersResponseDto entity instance. |
 | `ListTopicSubscriptionsResponseDto` | `(data) -> ListTopicSubscriptionsResponseDtoEntity` | Create a ListTopicSubscriptionsResponseDto entity instance. |
-| `ListTopicsResponseDto` | `(data) -> ListTopicsResponseDtoEntity` | Create a ListTopicsResponseDto entity instance. |
 | `MasterJson` | `(data) -> MasterJsonEntity` | Create a MasterJson entity instance. |
 | `Message` | `(data) -> MessageEntity` | Create a Message entity instance. |
 | `MessageResponseDto` | `(data) -> MessageResponseDtoEntity` | Create a MessageResponseDto entity instance. |
@@ -264,7 +257,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `TopicSubscriptionsResponseDto` | `(data) -> TopicSubscriptionsResponseDtoEntity` | Create a TopicSubscriptionsResponseDto entity instance. |
 | `Translation` | `(data) -> TranslationEntity` | Create a Translation entity instance. |
 | `TranslationGroupDto` | `(data) -> TranslationGroupDtoEntity` | Create a TranslationGroupDto entity instance. |
-| `Trigger` | `(data) -> TriggerEntity` | Create a Trigger entity instance. |
 | `TriggerEventResponseDto` | `(data) -> TriggerEventResponseDtoEntity` | Create a TriggerEventResponseDto entity instance. |
 | `Unseen` | `(data) -> UnseenEntity` | Create an Unseen entity instance. |
 | `Upload` | `(data) -> UploadEntity` | Create an Upload entity instance. |
@@ -366,7 +358,7 @@ API path: `/v1/notifications`
 | `updatedAt` |  |
 | `visibility` | Discovery scope of the agent. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/agents/{agentId}/reply`
 
@@ -446,7 +438,7 @@ API path: `/v1/subscribers/bulk`
 | `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 | `workspace` |  |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/channel-connections`
 
@@ -467,7 +459,7 @@ API path: `/v1/channel-connections`
 | `type` | Type of channel endpoint |
 | `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/channel-endpoints`
 
@@ -487,12 +479,14 @@ API path: `/v1/integrations/{integrationIdentifier}/webhook/configure`
 
 | Field | Description |
 | --- | --- |
-| `bridgeUrl` | Optional bridge URL override for agent connect. |
-| `data` | Optional custom data to associate with this context. |
-| `id` | Unique identifier for this context. |
-| `type` | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | Creation timestamp |
+| `data` | Custom data associated with this context |
+| `id` | Unique identifier for this context |
+| `type` | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | Last update timestamp |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/contexts`
 
@@ -539,7 +533,7 @@ API path: `/v2/environments/{targetEnvironmentId}/diff`
 | `status` |  |
 | `updatedAt` |  |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/domains/{domain}/diagnose`
 
@@ -587,10 +581,16 @@ API path: `/v1/domains/{domain}/verify`
 
 | Field | Description |
 | --- | --- |
-| `agentId` | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
+| `address` |  |
+| `agentId` | Internal id of the destination agent. |
+| `createdAt` |  |
+| `data` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` |  |
+| `environmentId` |  |
 | `id` |  |
+| `organizationId` |  |
 | `type` |  |
+| `updatedAt` |  |
 
 Operations: Create, Load, Update.
 
@@ -658,10 +658,20 @@ API path: `/v1/environment-variables/{variableKey}/usage`
 
 | Field | Description |
 | --- | --- |
+| `actor` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` |  |
+| `name` | The trigger identifier of the workflow you wish to send. |
+| `overrides` | This could be used to override provider specific configurations |
+| `payload` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | It is used to specify a tenant context during trigger event. |
+| `to` | The recipients list of people who will receive the notification. |
+| `transactionId` | A unique identifier for deduplication. |
 
-Operations: Remove.
+Operations: Create, Remove.
 
-API path: `/v1/events/trigger/{transactionId}`
+API path: `/v1/events/trigger`
 
 #### GenerateChatOAuthUrlResponseDto
 
@@ -860,88 +870,6 @@ Operations: List.
 
 API path: `/v1/agents/{identifier}/integrations`
 
-#### ListAgentsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `active` |  |
-| `behavior` |  |
-| `bridgeUrl` | Production bridge URL |
-| `createdAt` |  |
-| `createdBy` | Mongo user id of the user who created the agent |
-| `description` |  |
-| `devBridgeActive` | Whether the dev bridge override is active |
-| `devBridgeUrl` | Development bridge URL (set by npx novu dev) |
-| `environmentId` |  |
-| `exceedsPlanLimit` | Cloud only. |
-| `id` |  |
-| `identifier` |  |
-| `integrations` |  |
-| `managedRuntime` | Present when runtime is "managed". |
-| `name` |  |
-| `organizationId` |  |
-| `runtime` | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` |  |
-| `visibility` | Discovery scope of the agent. |
-
-Operations: List.
-
-API path: `/v1/agents`
-
-#### ListChannelConnectionsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `auth` |  |
-| `channel` | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | The context of the channel connection |
-| `createdAt` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` |  |
-
-Operations: List.
-
-API path: `/v1/channel-connections`
-
-#### ListChannelEndpointsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `channel` | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | The context of the channel connection |
-| `createdAt` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | Endpoint data specific to the channel type |
-| `identifier` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | The subscriber ID to which the channel endpoint is linked |
-| `type` | Type of channel endpoint |
-| `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-Operations: List.
-
-API path: `/v1/channel-endpoints`
-
-#### ListContextsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `bridgeUrl` | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | Creation timestamp |
-| `data` | Custom data associated with this context |
-| `id` | Unique identifier for this context |
-| `type` | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | Last update timestamp |
-
-Operations: List.
-
-API path: `/v2/contexts`
-
 #### ListDomainRoutesResponseDto
 
 | Field | Description |
@@ -961,55 +889,6 @@ Operations: List.
 
 API path: `/v1/domains/{domain}/routes`
 
-#### ListDomainsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `createdAt` |  |
-| `data` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` |  |
-| `environmentId` |  |
-| `expectedDnsRecords` |  |
-| `id` |  |
-| `mxRecordConfigured` |  |
-| `name` |  |
-| `organizationId` |  |
-| `status` |  |
-| `updatedAt` |  |
-
-Operations: List.
-
-API path: `/v1/domains`
-
-#### ListSubscribersResponseDto
-
-| Field | Description |
-| --- | --- |
-| `avatar` | The URL of the subscriber's avatar image. |
-| `channels` | An array of channel settings associated with the subscriber. |
-| `createdAt` | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | Additional custom data for the subscriber |
-| `deleted` | Indicates whether the subscriber has been deleted. |
-| `email` | The email address of the subscriber. |
-| `environmentId` | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | The first name of the subscriber. |
-| `id` | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | Indicates whether the subscriber is currently online. |
-| `lastName` | The last name of the subscriber. |
-| `lastOnlineAt` | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | The phone number of the subscriber. |
-| `subscriberId` | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | Timezone of the subscriber |
-| `topics` | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | The version of the subscriber document. |
-
-Operations: List.
-
-API path: `/v2/subscribers`
-
 #### ListTopicSubscriptionsResponseDto
 
 | Field | Description |
@@ -1025,21 +904,6 @@ API path: `/v2/subscribers`
 Operations: List.
 
 API path: `/v2/subscribers/{subscriberId}/subscriptions`
-
-#### ListTopicsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `createdAt` | The date the topic was created |
-| `data` | Additional custom data associated with the topic |
-| `id` | The identifier of the topic |
-| `key` | The unique key of the topic |
-| `name` | The name of the topic |
-| `updatedAt` | The date the topic was last updated |
-
-Operations: List.
-
-API path: `/v2/topics`
 
 #### MasterJson
 
@@ -1229,7 +1093,7 @@ API path: `/v2/workflows/{workflowId}/steps/{stepId}`
 | `updatedAt` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
 | `v` | The version of the subscriber document. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/subscribers`
 
@@ -1315,12 +1179,14 @@ API path: `/v2/topics/{topicKey}/subscriptions/{identifier}`
 
 | Field | Description |
 | --- | --- |
-| `data` | Additional custom data associated with the topic. |
-| `id` |  |
-| `key` | The unique key identifier for the topic. |
-| `name` | The display name for the topic |
+| `createdAt` | The date the topic was created |
+| `data` | Additional custom data associated with the topic |
+| `id` | The identifier of the topic |
+| `key` | The unique key of the topic |
+| `name` | The name of the topic |
+| `updatedAt` | The date the topic was last updated |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/topics`
 
@@ -1353,10 +1219,12 @@ API path: `/v2/topics/{topicKey}/subscriptions`
 | Field | Description |
 | --- | --- |
 | `content` | Translation content as JSON object |
+| `createdAt` | Creation timestamp |
 | `id` |  |
-| `locale` | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | The resource ID to associate translation with. |
-| `resourceType` | The resource type to associate translation with |
+| `locale` | Locale code |
+| `resourceId` | Resource identifier |
+| `resourceType` | Resource type |
+| `updatedAt` | Last update timestamp |
 
 Operations: Create, Load, Remove.
 
@@ -1378,25 +1246,6 @@ API path: `/v2/translations`
 Operations: Load.
 
 API path: `/v2/translations/group/{resourceType}/{resourceId}`
-
-#### Trigger
-
-| Field | Description |
-| --- | --- |
-| `actor` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` |  |
-| `name` | The trigger identifier of the workflow you wish to send. |
-| `overrides` | This could be used to override provider specific configurations |
-| `payload` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | It is used to specify a tenant context during trigger event. |
-| `to` | The recipients list of people who will receive the notification. |
-| `transactionId` | A unique identifier for deduplication. |
-
-Operations: Create.
-
-API path: `/v1/events/trigger`
 
 #### TriggerEventResponseDto
 
@@ -1596,6 +1445,7 @@ Create an instance: `local agent = client:Agent(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1628,6 +1478,12 @@ Create an instance: `local agent = client:Agent(nil)`
 
 ```lua
 local agent, err = client:Agent():load({ id = "agent_id" })
+```
+
+#### Example: List
+
+```lua
+local agents, err = client:Agent():list()
 ```
 
 #### Example: Create
@@ -1759,6 +1615,7 @@ Create an instance: `local channel_connection = client:ChannelConnection(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1785,6 +1642,12 @@ Create an instance: `local channel_connection = client:ChannelConnection(nil)`
 
 ```lua
 local channel_connection, err = client:ChannelConnection():load({ id = "channel_connection_id" })
+```
+
+#### Example: List
+
+```lua
+local channel_connections, err = client:ChannelConnection():list()
 ```
 
 #### Example: Create
@@ -1814,6 +1677,7 @@ Create an instance: `local channel_endpoint = client:ChannelEndpoint(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1839,6 +1703,12 @@ Create an instance: `local channel_endpoint = client:ChannelEndpoint(nil)`
 
 ```lua
 local channel_endpoint, err = client:ChannelEndpoint():load({ id = "channel_endpoint_id" })
+```
+
+#### Example: List
+
+```lua
+local channel_endpoints, err = client:ChannelEndpoint():list()
 ```
 
 #### Example: Create
@@ -1899,6 +1769,7 @@ Create an instance: `local context = client:Context(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1907,10 +1778,12 @@ Create an instance: `local context = client:Context(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bridgeUrl` | `string` | Optional bridge URL override for agent connect. |
-| `data` | `table` | Optional custom data to associate with this context. |
-| `id` | `string` | Unique identifier for this context. |
-| `type` | `string` | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `string` | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `string` | Creation timestamp |
+| `data` | `table` | Custom data associated with this context |
+| `id` | `string` | Unique identifier for this context |
+| `type` | `string` | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `string` | Last update timestamp |
 
 #### Example: Load
 
@@ -1918,12 +1791,21 @@ Create an instance: `local context = client:Context(nil)`
 local context, err = client:Context():load({ id = "context_id", type = "type" })
 ```
 
+#### Example: List
+
+```lua
+local contexts, err = client:Context():list()
+```
+
 #### Example: Create
 
 ```lua
 local context, err = client:Context():create({
+  createdAt = "example_createdAt", -- string
+  data = {}, -- table
   id = "example_id", -- string
   type = "example_type", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -1998,6 +1880,7 @@ Create an instance: `local domain = client:Domain(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -2022,6 +1905,12 @@ Create an instance: `local domain = client:Domain(nil)`
 
 ```lua
 local domain, err = client:Domain():load({ id = "domain_id" })
+```
+
+#### Example: List
+
+```lua
+local domains, err = client:Domain():list()
 ```
 
 #### Example: Create
@@ -2146,10 +2035,16 @@ Create an instance: `local domain_route_response_dto = client:DomainRouteRespons
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentId` | `string` | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `table` | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
+| `address` | `string` |  |
+| `agentId` | `string` | Internal id of the destination agent. |
+| `createdAt` | `string` |  |
+| `data` | `table` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `string` |  |
+| `environmentId` | `string` |  |
 | `id` | `string` |  |
+| `organizationId` | `string` |  |
 | `type` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -2162,6 +2057,13 @@ local domain_route_response_dto, err = client:DomainRouteResponseDto():load({ ad
 ```lua
 local domain_route_response_dto, err = client:DomainRouteResponseDto():create({
   id = "example_id", -- string
+  address = "example_address", -- string
+  createdAt = "example_createdAt", -- string
+  domainId = "example_domainId", -- string
+  environmentId = "example_environmentId", -- string
+  organizationId = "example_organizationId", -- string
+  type = "example_type", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -2324,7 +2226,32 @@ Create an instance: `local event = client:Event(nil)`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `actor` | `any` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `string` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `string` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `table` |  |
+| `name` | `string` | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `any` | This could be used to override provider specific configurations |
+| `payload` | `table` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `any` | It is used to specify a tenant context during trigger event. |
+| `to` | `any` | The recipients list of people who will receive the notification. |
+| `transactionId` | `string` | A unique identifier for deduplication. |
+
+#### Example: Create
+
+```lua
+local event, err = client:Event():create({
+  name = "example_name", -- string
+  to = "example_to", -- any
+})
+```
 
 
 ### GenerateChatOAuthUrlResponseDto
@@ -2721,140 +2648,6 @@ local list_agent_integrations_response_dtos, err = client:ListAgentIntegrationsR
 ```
 
 
-### ListAgentsResponseDto
-
-Create an instance: `local list_agents_response_dto = client:ListAgentsResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `active` | `boolean` |  |
-| `behavior` | `table` |  |
-| `bridgeUrl` | `string` | Production bridge URL |
-| `createdAt` | `string` |  |
-| `createdBy` | `string` | Mongo user id of the user who created the agent |
-| `description` | `string` |  |
-| `devBridgeActive` | `boolean` | Whether the dev bridge override is active |
-| `devBridgeUrl` | `string` | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `string` |  |
-| `exceedsPlanLimit` | `boolean` | Cloud only. |
-| `id` | `string` |  |
-| `identifier` | `string` |  |
-| `integrations` | `table` |  |
-| `managedRuntime` | `any` | Present when runtime is "managed". |
-| `name` | `string` |  |
-| `organizationId` | `string` |  |
-| `runtime` | `string` | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `string` |  |
-| `visibility` | `string` | Discovery scope of the agent. |
-
-#### Example: List
-
-```lua
-local list_agents_response_dtos, err = client:ListAgentsResponseDto():list()
-```
-
-
-### ListChannelConnectionsResponseDto
-
-Create an instance: `local list_channel_connections_response_dto = client:ListChannelConnectionsResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `auth` | `table` |  |
-| `channel` | `string` | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `table` | The context of the channel connection |
-| `createdAt` | `string` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `string` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `string` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `table` |  |
-
-#### Example: List
-
-```lua
-local list_channel_connections_response_dtos, err = client:ListChannelConnectionsResponseDto():list()
-```
-
-
-### ListChannelEndpointsResponseDto
-
-Create an instance: `local list_channel_endpoints_response_dto = client:ListChannelEndpointsResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `channel` | `string` | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `string` | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `table` | The context of the channel connection |
-| `createdAt` | `string` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `any` | Endpoint data specific to the channel type |
-| `identifier` | `string` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | The subscriber ID to which the channel endpoint is linked |
-| `type` | `string` | Type of channel endpoint |
-| `updatedAt` | `string` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-#### Example: List
-
-```lua
-local list_channel_endpoints_response_dtos, err = client:ListChannelEndpointsResponseDto():list()
-```
-
-
-### ListContextsResponseDto
-
-Create an instance: `local list_contexts_response_dto = client:ListContextsResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `bridgeUrl` | `string` | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `string` | Creation timestamp |
-| `data` | `table` | Custom data associated with this context |
-| `id` | `string` | Unique identifier for this context |
-| `type` | `string` | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `string` | Last update timestamp |
-
-#### Example: List
-
-```lua
-local list_contexts_response_dtos, err = client:ListContextsResponseDto():list()
-```
-
-
 ### ListDomainRoutesResponseDto
 
 Create an instance: `local list_domain_routes_response_dto = client:ListDomainRoutesResponseDto(nil)`
@@ -2887,81 +2680,6 @@ local list_domain_routes_response_dtos, err = client:ListDomainRoutesResponseDto
 ```
 
 
-### ListDomainsResponseDto
-
-Create an instance: `local list_domains_response_dto = client:ListDomainsResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `createdAt` | `string` |  |
-| `data` | `table` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `string` |  |
-| `environmentId` | `string` |  |
-| `expectedDnsRecords` | `table` |  |
-| `id` | `string` |  |
-| `mxRecordConfigured` | `boolean` |  |
-| `name` | `string` |  |
-| `organizationId` | `string` |  |
-| `status` | `string` |  |
-| `updatedAt` | `string` |  |
-
-#### Example: List
-
-```lua
-local list_domains_response_dtos, err = client:ListDomainsResponseDto():list()
-```
-
-
-### ListSubscribersResponseDto
-
-Create an instance: `local list_subscribers_response_dto = client:ListSubscribersResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` | The URL of the subscriber's avatar image. |
-| `channels` | `table` | An array of channel settings associated with the subscriber. |
-| `createdAt` | `string` | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `table` | Additional custom data for the subscriber |
-| `deleted` | `boolean` | Indicates whether the subscriber has been deleted. |
-| `email` | `string` | The email address of the subscriber. |
-| `environmentId` | `string` | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `string` | The first name of the subscriber. |
-| `id` | `string` | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `boolean` | Indicates whether the subscriber is currently online. |
-| `lastName` | `string` | The last name of the subscriber. |
-| `lastOnlineAt` | `string` | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `string` | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `string` | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `string` | The phone number of the subscriber. |
-| `subscriberId` | `string` | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `string` | Timezone of the subscriber |
-| `topics` | `table` | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `string` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `number` | The version of the subscriber document. |
-
-#### Example: List
-
-```lua
-local list_subscribers_response_dtos, err = client:ListSubscribersResponseDto():list()
-```
-
-
 ### ListTopicSubscriptionsResponseDto
 
 Create an instance: `local list_topic_subscriptions_response_dto = client:ListTopicSubscriptionsResponseDto(nil)`
@@ -2988,34 +2706,6 @@ Create an instance: `local list_topic_subscriptions_response_dto = client:ListTo
 
 ```lua
 local list_topic_subscriptions_response_dtos, err = client:ListTopicSubscriptionsResponseDto():list()
-```
-
-
-### ListTopicsResponseDto
-
-Create an instance: `local list_topics_response_dto = client:ListTopicsResponseDto(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `createdAt` | `string` | The date the topic was created |
-| `data` | `table` | Additional custom data associated with the topic |
-| `id` | `string` | The identifier of the topic |
-| `key` | `string` | The unique key of the topic |
-| `name` | `string` | The name of the topic |
-| `updatedAt` | `string` | The date the topic was last updated |
-
-#### Example: List
-
-```lua
-local list_topics_response_dtos, err = client:ListTopicsResponseDto():list()
 ```
 
 
@@ -3288,6 +2978,7 @@ Create an instance: `local subscriber = client:Subscriber(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -3321,6 +3012,12 @@ Create an instance: `local subscriber = client:Subscriber(nil)`
 
 ```lua
 local subscriber, err = client:Subscriber():load({ id = "subscriber_id" })
+```
+
+#### Example: List
+
+```lua
+local subscribers, err = client:Subscriber():list()
 ```
 
 #### Example: Create
@@ -3485,6 +3182,7 @@ Create an instance: `local topic = client:Topic(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -3493,10 +3191,12 @@ Create an instance: `local topic = client:Topic(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `table` | Additional custom data associated with the topic. |
-| `id` | `string` |  |
-| `key` | `string` | The unique key identifier for the topic. |
-| `name` | `string` | The display name for the topic |
+| `createdAt` | `string` | The date the topic was created |
+| `data` | `table` | Additional custom data associated with the topic |
+| `id` | `string` | The identifier of the topic |
+| `key` | `string` | The unique key of the topic |
+| `name` | `string` | The name of the topic |
+| `updatedAt` | `string` | The date the topic was last updated |
 
 #### Example: Load
 
@@ -3504,10 +3204,17 @@ Create an instance: `local topic = client:Topic(nil)`
 local topic, err = client:Topic():load({ id = "topic_id" })
 ```
 
+#### Example: List
+
+```lua
+local topics, err = client:Topic():list()
+```
+
 #### Example: Create
 
 ```lua
 local topic, err = client:Topic():create({
+  id = "example_id", -- string
   key = "example_key", -- string
 })
 ```
@@ -3569,10 +3276,12 @@ Create an instance: `local translation = client:Translation(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `content` | `table` | Translation content as JSON object |
+| `createdAt` | `string` | Creation timestamp |
 | `id` | `string` |  |
-| `locale` | `string` | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `string` | The resource ID to associate translation with. |
-| `resourceType` | `string` | The resource type to associate translation with |
+| `locale` | `string` | Locale code |
+| `resourceId` | `string` | Resource identifier |
+| `resourceType` | `string` | Resource type |
+| `updatedAt` | `string` | Last update timestamp |
 
 #### Example: Load
 
@@ -3585,9 +3294,11 @@ local translation, err = client:Translation():load({ locale = "locale", resource
 ```lua
 local translation, err = client:Translation():create({
   content = {}, -- table
+  createdAt = "example_createdAt", -- string
   locale = "example_locale", -- string
   resourceId = "example_resourceId", -- string
   resourceType = "example_resourceType", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -3619,41 +3330,6 @@ Create an instance: `local translation_group_dto = client:TranslationGroupDto(ni
 
 ```lua
 local translation_group_dto, err = client:TranslationGroupDto():load({ resource_id = "resource_id", resource_type = "resource_type" })
-```
-
-
-### Trigger
-
-Create an instance: `local trigger = client:Trigger(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `actor` | `any` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `string` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `string` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `table` |  |
-| `name` | `string` | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `any` | This could be used to override provider specific configurations |
-| `payload` | `table` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `any` | It is used to specify a tenant context during trigger event. |
-| `to` | `any` | The recipients list of people who will receive the notification. |
-| `transactionId` | `string` | A unique identifier for deduplication. |
-
-#### Example: Create
-
-```lua
-local trigger, err = client:Trigger():create({
-  name = "example_name", -- string
-  to = "example_to", -- any
-})
 ```
 
 
@@ -4052,7 +3728,7 @@ activated earlier.
 
 ## Open types
 
-10 fields are carried as open values rather than typed structures.
+9 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -4063,13 +3739,12 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `channel_endpoint` | `endpoint` | 14 | 0 levels |
-| `list_channel_endpoints_response_dto` | `endpoint` | 14 | 0 levels |
 | `layout` | `controls` | 5 | 14 levels |
 | `step` | `controls` | 5 | 14 levels |
 | `workflow` | `steps` | 5 | 19 levels |
 | `workflow_response_dto` | `steps` | 5 | 19 levels |
+| `event` | `to` | 4 | 3 levels |
 | `message` | `template` | 4 | 10 levels |
-| `trigger` | `to` | 4 | 3 levels |
 | `trigger_event_response_dto` | `events` | 4 | 6 levels |
 | `create_subscriptions_response_dto` | `preferences` | 3 | 1 level |
 

@@ -574,38 +574,6 @@ func (sdk *NovuSDK) ListAgentIntegrationsResponseDto(data map[string]any) NovuEn
 }
 
 
-// ListAgentsResponseDto returns a ListAgentsResponseDto entity bound to this client.
-// Idiomatic usage: client.ListAgentsResponseDto(nil).List(nil, nil) or
-// client.ListAgentsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListAgentsResponseDto(data map[string]any) NovuEntity {
-	return NewListAgentsResponseDtoEntityFunc(sdk, data)
-}
-
-
-// ListChannelConnectionsResponseDto returns a ListChannelConnectionsResponseDto entity bound to this client.
-// Idiomatic usage: client.ListChannelConnectionsResponseDto(nil).List(nil, nil) or
-// client.ListChannelConnectionsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListChannelConnectionsResponseDto(data map[string]any) NovuEntity {
-	return NewListChannelConnectionsResponseDtoEntityFunc(sdk, data)
-}
-
-
-// ListChannelEndpointsResponseDto returns a ListChannelEndpointsResponseDto entity bound to this client.
-// Idiomatic usage: client.ListChannelEndpointsResponseDto(nil).List(nil, nil) or
-// client.ListChannelEndpointsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListChannelEndpointsResponseDto(data map[string]any) NovuEntity {
-	return NewListChannelEndpointsResponseDtoEntityFunc(sdk, data)
-}
-
-
-// ListContextsResponseDto returns a ListContextsResponseDto entity bound to this client.
-// Idiomatic usage: client.ListContextsResponseDto(nil).List(nil, nil) or
-// client.ListContextsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListContextsResponseDto(data map[string]any) NovuEntity {
-	return NewListContextsResponseDtoEntityFunc(sdk, data)
-}
-
-
 // ListDomainRoutesResponseDto returns a ListDomainRoutesResponseDto entity bound to this client.
 // Idiomatic usage: client.ListDomainRoutesResponseDto(nil).List(nil, nil) or
 // client.ListDomainRoutesResponseDto(nil).Load(map[string]any{"id": ...}, nil).
@@ -614,35 +582,11 @@ func (sdk *NovuSDK) ListDomainRoutesResponseDto(data map[string]any) NovuEntity 
 }
 
 
-// ListDomainsResponseDto returns a ListDomainsResponseDto entity bound to this client.
-// Idiomatic usage: client.ListDomainsResponseDto(nil).List(nil, nil) or
-// client.ListDomainsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListDomainsResponseDto(data map[string]any) NovuEntity {
-	return NewListDomainsResponseDtoEntityFunc(sdk, data)
-}
-
-
-// ListSubscribersResponseDto returns a ListSubscribersResponseDto entity bound to this client.
-// Idiomatic usage: client.ListSubscribersResponseDto(nil).List(nil, nil) or
-// client.ListSubscribersResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListSubscribersResponseDto(data map[string]any) NovuEntity {
-	return NewListSubscribersResponseDtoEntityFunc(sdk, data)
-}
-
-
 // ListTopicSubscriptionsResponseDto returns a ListTopicSubscriptionsResponseDto entity bound to this client.
 // Idiomatic usage: client.ListTopicSubscriptionsResponseDto(nil).List(nil, nil) or
 // client.ListTopicSubscriptionsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NovuSDK) ListTopicSubscriptionsResponseDto(data map[string]any) NovuEntity {
 	return NewListTopicSubscriptionsResponseDtoEntityFunc(sdk, data)
-}
-
-
-// ListTopicsResponseDto returns a ListTopicsResponseDto entity bound to this client.
-// Idiomatic usage: client.ListTopicsResponseDto(nil).List(nil, nil) or
-// client.ListTopicsResponseDto(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) ListTopicsResponseDto(data map[string]any) NovuEntity {
-	return NewListTopicsResponseDtoEntityFunc(sdk, data)
 }
 
 
@@ -795,14 +739,6 @@ func (sdk *NovuSDK) Translation(data map[string]any) NovuEntity {
 // client.TranslationGroupDto(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NovuSDK) TranslationGroupDto(data map[string]any) NovuEntity {
 	return NewTranslationGroupDtoEntityFunc(sdk, data)
-}
-
-
-// Trigger returns a Trigger entity bound to this client.
-// Idiomatic usage: client.Trigger(nil).List(nil, nil) or
-// client.Trigger(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *NovuSDK) Trigger(data map[string]any) NovuEntity {
-	return NewTriggerEntityFunc(sdk, data)
 }
 
 

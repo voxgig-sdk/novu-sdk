@@ -37,7 +37,7 @@ main: kit: entity: workflow_info_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -46,7 +46,7 @@ main: kit: entity: workflow_info_dto: {
               {
                 k: "param"
                 n: "layout_id"
-                or: "layout_id"
+                or: "layoutId"
                 r: true
                 t: "`$STRING`"
               }

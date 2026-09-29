@@ -12,13 +12,13 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `debug`, `idempotency`, `metrics`, `paging`, `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as **67 semantic entities** that you
+This SDK exposes the API as **59 semantic entities** that you
 call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`, `create`, `update`, `remove`, `patch`):
@@ -103,12 +103,12 @@ local results, err = client:EnvironmentVariable():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/novu-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/novu-sdk/tags) |
-| Python | `voxgig-sdk-novu-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/novu-sdk/tags) |
-| PHP | `voxgig-sdk/novu-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/novu-sdk/tags) |
+| TypeScript | `@voxgig-sdk/novu-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-novu-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/novu-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/novu-sdk/go` | `go get github.com/voxgig-sdk/novu-sdk/go@latest` |
-| Ruby | `voxgig-sdk-novu-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/novu-sdk/tags) |
-| Lua | `voxgig-sdk-novu-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/novu-sdk/tags) |
+| Ruby | `voxgig-sdk-novu-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-novu-sdk` | publish pending — [install from source](lua/README.md#install) |
 | Go CLI | `github.com/voxgig-sdk/novu-sdk/go-cli` | `go install github.com/voxgig-sdk/novu-sdk/go-cli/cmd/novu@latest` |
 | Go MCP server | `github.com/voxgig-sdk/novu-sdk/go-mcp` | `go get github.com/voxgig-sdk/novu-sdk/go-mcp@latest` |
 
@@ -171,22 +171,22 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 67 entities:
+The API exposes 59 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **ActivityNotificationResponseDto** | The ActivityNotificationResponseDto entity (list, load). | `/v1/notifications` |
-| **Agent** | The Agent entity (create, load, remove, update). | `/v1/agents/{identifier}` |
+| **Agent** | The Agent entity (create, list, load, remove, update). | `/v1/agents` |
 | **AgentIntegrationResponseDto** | The AgentIntegrationResponseDto entity (create, update). | `/v1/agents/{identifier}/integrations` |
 | **AgentResponseDto** | The AgentResponseDto entity (update). | `/v1/agents/{identifier}/bridge` |
 | **Bulk** | The Bulk entity (create). | `/v1/subscribers/bulk` |
-| **ChannelConnection** | The ChannelConnection entity (create, load, remove, update). | `/v1/channel-connections/{identifier}` |
-| **ChannelEndpoint** | The ChannelEndpoint entity (create, load, remove, update). | `/v1/channel-endpoints/{identifier}` |
+| **ChannelConnection** | The ChannelConnection entity (create, list, load, remove, update). | `/v1/channel-connections` |
+| **ChannelEndpoint** | The ChannelEndpoint entity (create, list, load, remove, update). | `/v1/channel-endpoints` |
 | **Configure** | The Configure entity (create). | `/v1/integrations/{integrationIdentifier}/webhook/configure` |
-| **Context** | The Context entity (create, load, remove, update). | `/v2/contexts/{type}/{id}` |
+| **Context** | The Context entity (create, list, load, remove, update). | `/v2/contexts` |
 | **CreateSubscriptionsResponseDto** | The CreateSubscriptionsResponseDto entity (create). | `/v2/topics/{topicKey}/subscriptions` |
 | **Diff** | The Diff entity (create). | `/v2/environments/{targetEnvironmentId}/diff` |
-| **Domain** | The Domain entity (create, load, remove, update). | `/v1/domains/{domain}` |
+| **Domain** | The Domain entity (create, list, load, remove, update). | `/v1/domains` |
 | **DomainConnectApplyUrlResponseDto** | The DomainConnectApplyUrlResponseDto entity (create). | `/v1/domains/{domain}/auto-configure/start` |
 | **DomainConnectStatusResponseDto** | The DomainConnectStatusResponseDto entity (list). | `/v1/domains/{domain}/auto-configure` |
 | **DomainResponseDto** | The DomainResponseDto entity (create). | `/v1/domains/{domain}/verify` |
@@ -195,7 +195,7 @@ The API exposes 67 entities:
 | **EnvironmentTagsDto** | The EnvironmentTagsDto entity (list). | `/v2/environments/{environmentId}/tags` |
 | **EnvironmentVariable** | The EnvironmentVariable entity (create, list, load, remove, update). | `/v1/environment-variables` |
 | **EnvironmentVariableWorkflowInfoDto** | The EnvironmentVariableWorkflowInfoDto entity (list). | `/v1/environment-variables/{variableKey}/usage` |
-| **Event** | The Event entity (remove). | `/v1/events/trigger/{transactionId}` |
+| **Event** | The Event entity (create, remove). | `/v1/events/trigger` |
 | **GenerateChatOAuthUrlResponseDto** | The GenerateChatOAuthUrlResponseDto entity (create). | `/v1/integrations/channel-connections/oauth` |
 | **GeneratePreviewResponseDto** | The GeneratePreviewResponseDto entity (create). | `/v2/workflows/{workflowId}/step/{stepId}/preview` |
 | **ImportMasterJsonResponseDto** | The ImportMasterJsonResponseDto entity (create). | `/v2/translations/master-json` |
@@ -206,15 +206,8 @@ The API exposes 67 entities:
 | **LayoutResponseDto** | The LayoutResponseDto entity (create). | `/v2/layouts/{layoutId}/duplicate` |
 | **Link** | The Link entity (create). | `/v1/integrations/channel-endpoints/link` |
 | **ListAgentIntegrationsResponseDto** | The ListAgentIntegrationsResponseDto entity (list). | `/v1/agents/{identifier}/integrations` |
-| **ListAgentsResponseDto** | The ListAgentsResponseDto entity (list). | `/v1/agents` |
-| **ListChannelConnectionsResponseDto** | The ListChannelConnectionsResponseDto entity (list). | `/v1/channel-connections` |
-| **ListChannelEndpointsResponseDto** | The ListChannelEndpointsResponseDto entity (list). | `/v1/channel-endpoints` |
-| **ListContextsResponseDto** | The ListContextsResponseDto entity (list). | `/v2/contexts` |
 | **ListDomainRoutesResponseDto** | The ListDomainRoutesResponseDto entity (list). | `/v1/domains/{domain}/routes` |
-| **ListDomainsResponseDto** | The ListDomainsResponseDto entity (list). | `/v1/domains` |
-| **ListSubscribersResponseDto** | The ListSubscribersResponseDto entity (list). | `/v2/subscribers` |
 | **ListTopicSubscriptionsResponseDto** | The ListTopicSubscriptionsResponseDto entity (list). | `/v2/subscribers/{subscriberId}/subscriptions` |
-| **ListTopicsResponseDto** | The ListTopicsResponseDto entity (list). | `/v2/topics` |
 | **MasterJson** | The MasterJson entity (load). | `/v2/translations/master-json` |
 | **Message** | The Message entity (list, remove). | `/v1/messages` |
 | **MessageResponseDto** | The MessageResponseDto entity (create). | `/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}` |
@@ -223,18 +216,17 @@ The API exposes 67 entities:
 | **Publish** | The Publish entity (create). | `/v2/environments/{targetEnvironmentId}/publish` |
 | **RemoveSubscriberResponseDto** | The RemoveSubscriberResponseDto entity (remove). | `/v2/subscribers/{subscriberId}` |
 | **Step** | The Step entity (load). | `/v2/workflows/{workflowId}/steps/{stepId}` |
-| **Subscriber** | The Subscriber entity (create, load, remove, update). | `/v2/subscribers/{subscriberId}` |
+| **Subscriber** | The Subscriber entity (create, list, load, remove, update). | `/v2/subscribers` |
 | **SubscriberNotificationsCountResponseDto** | The SubscriberNotificationsCountResponseDto entity (list). | `/v2/subscribers/{subscriberId}/notifications/count` |
 | **SubscriberNotificationsResponseDto** | The SubscriberNotificationsResponseDto entity (list). | `/v2/subscribers/{subscriberId}/notifications` |
 | **SubscriberPreferencesDto** | The SubscriberPreferencesDto entity (list, update). | `/v2/subscribers/{subscriberId}/preferences` |
 | **SubscriberResponseDto** | The SubscriberResponseDto entity (update). | `/v1/subscribers/{subscriberId}/credentials` |
 | **Subscription** | The Subscription entity (load, update). | `/v2/topics/{topicKey}/subscriptions/{identifier}` |
-| **Topic** | The Topic entity (create, load, remove, update). | `/v2/topics/{topicKey}` |
+| **Topic** | The Topic entity (create, list, load, remove, update). | `/v2/topics` |
 | **TopicSubscriberDto** | The TopicSubscriberDto entity (load). | `/v1/topics/{topicKey}/subscribers/{externalSubscriberId}` |
 | **TopicSubscriptionsResponseDto** | The TopicSubscriptionsResponseDto entity (remove). | `/v2/topics/{topicKey}/subscriptions` |
 | **Translation** | The Translation entity (create, load, remove). | `/v2/translations/{resourceType}/{resourceId}/{locale}` |
 | **TranslationGroupDto** | The TranslationGroupDto entity (load). | `/v2/translations/group/{resourceType}/{resourceId}` |
-| **Trigger** | The Trigger entity (create). | `/v1/events/trigger` |
 | **TriggerEventResponseDto** | The TriggerEventResponseDto entity (create). | `/v1/events/trigger/broadcast` |
 | **Unseen** | The Unseen entity (load). | `/v1/subscribers/{subscriberId}/notifications/unseen` |
 | **Upload** | The Upload entity (create). | `/v2/translations/upload` |

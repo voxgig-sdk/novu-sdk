@@ -54,7 +54,7 @@ main: kit: entity: message_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -63,14 +63,14 @@ main: kit: entity: message_response_dto: {
               {
                 k: "param"
                 n: "message_id"
-                or: "message_id"
+                or: "messageId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -138,7 +138,7 @@ main: kit: entity: message_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -147,7 +147,7 @@ main: kit: entity: message_response_dto: {
               {
                 k: "param"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }

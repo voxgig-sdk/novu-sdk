@@ -2,36 +2,49 @@
   "existing": {
     "context": {
       "CONTEXT00": {
-        "bridgeUrl": "s28",
+        "bridgeUrl": "s3c",
+        "createdAt": "s3d",
         "data": {},
         "id": "CONTEXT00",
-        "type": "s2b"
+        "type": "s40",
+        "updatedAt": "s41"
       },
       "CONTEXT01": {
-        "bridgeUrl": "s50",
+        "bridgeUrl": "s78",
+        "createdAt": "s79",
         "data": {},
         "id": "CONTEXT01",
-        "type": "s53"
+        "type": "s7c",
+        "updatedAt": "s7d"
       },
       "CONTEXT02": {
-        "bridgeUrl": "s78",
+        "bridgeUrl": "sb4",
+        "createdAt": "sb5",
         "data": {},
         "id": "CONTEXT02",
-        "type": "s7b"
+        "type": "sb8",
+        "updatedAt": "sb9"
       }
     }
   },
   "new": {
     "context": {
       "context_ref01": {
-        "bridgeUrl": "sa0",
+        "bridgeUrl": "sf0",
+        "createdAt": "sf1",
         "data": {},
-        "type": "sa3"
+        "type": "sf4",
+        "updatedAt": "sf5"
       }
     }
   },
   "requests": {
     "POST /v2/contexts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/contexts": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

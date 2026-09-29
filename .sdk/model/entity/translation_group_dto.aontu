@@ -92,7 +92,7 @@ main: kit: entity: translation_group_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -102,7 +102,7 @@ main: kit: entity: translation_group_dto: {
                 ex: "welcome-email"
                 k: "param"
                 n: "resource_id"
-                or: "resource_id"
+                or: "resourceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -110,7 +110,7 @@ main: kit: entity: translation_group_dto: {
                 ex: "workflow"
                 k: "param"
                 n: "resource_type"
-                or: "resource_type"
+                or: "resourceType"
                 r: true
                 t: "`$STRING`"
               }

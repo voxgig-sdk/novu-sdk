@@ -187,15 +187,8 @@ func MakeConfig() map[string]any {
 				"layout_response_dto": map[string]any{},
 				"link": map[string]any{},
 				"list_agent_integrations_response_dto": map[string]any{},
-				"list_agents_response_dto": map[string]any{},
-				"list_channel_connections_response_dto": map[string]any{},
-				"list_channel_endpoints_response_dto": map[string]any{},
-				"list_contexts_response_dto": map[string]any{},
 				"list_domain_routes_response_dto": map[string]any{},
-				"list_domains_response_dto": map[string]any{},
-				"list_subscribers_response_dto": map[string]any{},
 				"list_topic_subscriptions_response_dto": map[string]any{},
-				"list_topics_response_dto": map[string]any{},
 				"master_json": map[string]any{},
 				"message": map[string]any{},
 				"message_response_dto": map[string]any{},
@@ -215,7 +208,6 @@ func MakeConfig() map[string]any {
 				"topic_subscriptions_response_dto": map[string]any{},
 				"translation": map[string]any{},
 				"translation_group_dto": map[string]any{},
-				"trigger": map[string]any{},
 				"trigger_event_response_dto": map[string]any{},
 				"unseen": map[string]any{},
 				"upload": map[string]any{},
@@ -393,7 +385,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -413,19 +405,19 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "channel",
-											"orig": "channel",
+											"orig": "channels",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "email",
-											"orig": "email",
+											"orig": "emails",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -457,31 +449,31 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberIds",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "subscription_id",
-											"orig": "subscription_id",
+											"orig": "subscriptionId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "template",
-											"orig": "template",
+											"orig": "templates",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "topic_key",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "transaction_id",
-											"orig": "transaction_id",
+											"orig": "transactionId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -546,7 +538,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -554,7 +546,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -763,7 +755,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -771,7 +763,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "agent_id",
+											"orig": "agentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -812,13 +804,13 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
 										map[string]any{
 											"name": "novu_analytics_source",
-											"orig": "novu_analytics_source",
+											"orig": "Novu-Analytics-Source",
 											"type": "`$STRING`",
 											"kind": "header",
 											"reqd": true,
@@ -829,6 +821,101 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"idempotency_key",
 										"novu_analytics_source",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v1/agents",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "agents",
+									},
+								},
+								"parts": []any{
+									"v1",
+									"agents",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "identifier",
+											"orig": "identifier",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"idempotency_key",
+										"identifier",
+										"include_cursor",
+										"limit",
+										"order_by",
+										"order_direction",
 									},
 								},
 							},
@@ -871,7 +958,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -941,7 +1028,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -956,7 +1043,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "agent_integration_id",
-											"orig": "agent_integration_id",
+											"orig": "agentIntegrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1004,7 +1091,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1021,7 +1108,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "delete_from_provider",
-											"orig": "delete_from_provider",
+											"orig": "deleteFromProvider",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -1075,7 +1162,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1227,7 +1314,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1297,7 +1384,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1312,7 +1399,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "agent_integration_id",
-											"orig": "agent_integration_id",
+											"orig": "agentIntegrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1500,7 +1587,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1578,7 +1665,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1729,7 +1816,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1738,6 +1825,145 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v1/channel-connections",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "channel-connections",
+									},
+								},
+								"parts": []any{
+									"v1",
+									"channel-connections",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "channel",
+											"orig": "channel",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "chat",
+										},
+										map[string]any{
+											"name": "connection_mode",
+											"orig": "connectionMode",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "shared",
+										},
+										map[string]any{
+											"name": "context_key",
+											"orig": "contextKeys",
+											"type": "`$ARRAY`",
+											"kind": "query",
+											"example": []any{
+												"tenant:org-123",
+												"region:us-east-1",
+											},
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "integration_identifier",
+											"orig": "integrationIdentifier",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "slack-prod",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "provider_id",
+											"orig": "providerId",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "slack",
+										},
+										map[string]any{
+											"name": "subscriber_id",
+											"orig": "subscriberId",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "subscriber-123",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"channel",
+										"connection_mode",
+										"context_key",
+										"idempotency_key",
+										"include_cursor",
+										"integration_identifier",
+										"limit",
+										"order_by",
+										"order_direction",
+										"provider_id",
+										"subscriber_id",
 									},
 								},
 							},
@@ -1780,7 +2006,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1841,7 +2067,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -1902,7 +2128,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2051,7 +2277,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2060,6 +2286,144 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v1/channel-endpoints",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "channel-endpoints",
+									},
+								},
+								"parts": []any{
+									"v1",
+									"channel-endpoints",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "channel",
+											"orig": "channel",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "connection_identifier",
+											"orig": "connectionIdentifier",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "slack-connection-abc123",
+										},
+										map[string]any{
+											"name": "context_key",
+											"orig": "contextKeys",
+											"type": "`$ARRAY`",
+											"kind": "query",
+											"example": []any{
+												"tenant:org-123",
+												"region:us-east-1",
+											},
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "integration_identifier",
+											"orig": "integrationIdentifier",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "slack-prod",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "provider_id",
+											"orig": "providerId",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "slack",
+										},
+										map[string]any{
+											"name": "subscriber_id",
+											"orig": "subscriberId",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "subscriber-123",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"channel",
+										"connection_identifier",
+										"context_key",
+										"idempotency_key",
+										"include_cursor",
+										"integration_identifier",
+										"limit",
+										"order_by",
+										"order_direction",
+										"provider_id",
+										"subscriber_id",
 									},
 								},
 							},
@@ -2102,7 +2466,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2163,7 +2527,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2224,7 +2588,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2324,7 +2688,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2332,7 +2696,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "integration_id",
-											"orig": "integration_identifier",
+											"orig": "integrationIdentifier",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2363,33 +2727,47 @@ func MakeConfig() map[string]any {
 						"name": "bridgeUrl",
 						"title": "Bridge Url",
 						"type": "`$STRING`",
-						"short": "Optional bridge URL override for agent connect.",
+						"short": "Bridge URL override for agent connect, if configured on this context",
+					},
+					map[string]any{
+						"name": "createdAt",
+						"title": "Created At",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "Creation timestamp",
 					},
 					map[string]any{
 						"name": "data",
 						"title": "Data",
 						"type": "`$OBJECT`",
+						"req": true,
 						"op": map[string]any{
-							"update": map[string]any{
-								"req": true,
+							"create": map[string]any{
 								"type": "`$OBJECT`",
 							},
 						},
-						"short": "Optional custom data to associate with this context.",
+						"short": "Custom data associated with this context",
 					},
 					map[string]any{
 						"name": "id",
 						"title": "Id",
 						"type": "`$STRING`",
 						"req": true,
-						"short": "Unique identifier for this context.",
+						"short": "Unique identifier for this context",
 					},
 					map[string]any{
 						"name": "type",
 						"title": "Type",
 						"type": "`$STRING`",
 						"req": true,
-						"short": "Context type (e.g., tenant, app, workspace).",
+						"short": "Context type (e.g., tenant, app, workspace)",
+					},
+					map[string]any{
+						"name": "updatedAt",
+						"title": "Updated At",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "Last update timestamp",
 					},
 				},
 				"id": map[string]any{
@@ -2430,13 +2808,13 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2445,6 +2823,110 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v2/contexts",
+								"segments": []any{
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "contexts",
+									},
+								},
+								"parts": []any{
+									"v2",
+									"contexts",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "tenant-prod-123",
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "search",
+											"orig": "search",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "tenant",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"id",
+										"idempotency_key",
+										"include_cursor",
+										"limit",
+										"order_by",
+										"order_direction",
+										"search",
 									},
 								},
 							},
@@ -2481,13 +2963,13 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2556,7 +3038,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2619,13 +3101,13 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2738,7 +3220,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2746,7 +3228,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "topic_key",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2850,7 +3332,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -2858,7 +3340,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "environment_id",
-											"orig": "target_environment_id",
+											"orig": "targetEnvironmentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2999,7 +3481,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3047,7 +3529,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3056,6 +3538,101 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v1/domains",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "domains",
+									},
+								},
+								"parts": []any{
+									"v1",
+									"domains",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "name",
+											"orig": "name",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"idempotency_key",
+										"include_cursor",
+										"limit",
+										"name",
+										"order_by",
+										"order_direction",
 									},
 								},
 							},
@@ -3098,7 +3675,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3167,7 +3744,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3230,7 +3807,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3291,7 +3868,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3376,7 +3953,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3464,7 +4041,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3608,7 +4185,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3641,26 +4218,69 @@ func MakeConfig() map[string]any {
 			"domain_route_response_dto": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "address",
+						"title": "Address",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
 						"name": "agentId",
 						"title": "Agent Id",
 						"type": "`$STRING`",
-						"short": "Agent identifier; required when type is agent, ignored when type is webhook.",
+						"short": "Internal id of the destination agent.",
+					},
+					map[string]any{
+						"name": "createdAt",
+						"title": "Created At",
+						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "data",
 						"title": "Data",
 						"type": "`$OBJECT`",
-						"short": "Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values).",
+						"short": "String key-value metadata (max 10 keys, 500 characters total when set via API).",
+					},
+					map[string]any{
+						"name": "domainId",
+						"title": "Domain Id",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "environmentId",
+						"title": "Environment Id",
+						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "id",
 						"title": "Id",
 						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "organizationId",
+						"title": "Organization Id",
+						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "type",
 						"title": "Type",
 						"type": "`$STRING`",
+						"req": true,
+						"op": map[string]any{
+							"update": map[string]any{
+								"type": "`$STRING`",
+							},
+						},
+					},
+					map[string]any{
+						"name": "updatedAt",
+						"title": "Updated At",
+						"type": "`$STRING`",
+						"req": true,
 					},
 				},
 				"id": map[string]any{
@@ -3718,7 +4338,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3780,13 +4400,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3850,13 +4470,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -3927,13 +4547,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4096,7 +4716,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4139,7 +4759,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4190,7 +4810,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4198,7 +4818,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "environment_id",
+											"orig": "environmentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4251,7 +4871,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4259,7 +4879,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "environment_id",
+											"orig": "environmentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4335,7 +4955,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4343,7 +4963,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "environment_id",
+											"orig": "environmentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4484,7 +5104,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4527,7 +5147,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4587,7 +5207,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4595,7 +5215,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "variable_key",
+											"orig": "variableKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4649,7 +5269,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4657,7 +5277,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "variable_key",
+											"orig": "variableKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4711,7 +5331,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4719,7 +5339,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "variable_key",
+											"orig": "variableKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4801,7 +5421,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4809,7 +5429,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "variable_key",
-											"orig": "variable_key",
+											"orig": "variableKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4836,9 +5456,118 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"event": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "actor",
+						"title": "Actor",
+						"type": "`$ANY`",
+						"short": "It is used to display the Avatar of the provided actor's subscriber id or actor object.",
+					},
+					map[string]any{
+						"name": "agentId",
+						"title": "Agent Id",
+						"type": "`$STRING`",
+						"short": "Override the workflow-assigned agent for this trigger using the public agent identifier.",
+					},
+					map[string]any{
+						"name": "bridgeUrl",
+						"title": "Bridge Url",
+						"type": "`$STRING`",
+						"short": "Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application.",
+					},
+					map[string]any{
+						"name": "context",
+						"title": "Context",
+						"type": "`$OBJECT`",
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "The trigger identifier of the workflow you wish to send.",
+					},
+					map[string]any{
+						"name": "overrides",
+						"title": "Overrides",
+						"type": "`$ANY`",
+						"short": "This could be used to override provider specific configurations",
+					},
+					map[string]any{
+						"name": "payload",
+						"title": "Payload",
+						"type": "`$OBJECT`",
+						"short": "The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it.",
+					},
+					map[string]any{
+						"name": "tenant",
+						"title": "Tenant",
+						"type": "`$ANY`",
+						"short": "It is used to specify a tenant context during trigger event.",
+					},
+					map[string]any{
+						"name": "to",
+						"title": "To",
+						"type": "`$ANY`",
+						"req": true,
+						"short": "The recipients list of people who will receive the notification.",
+					},
+					map[string]any{
+						"name": "transactionId",
+						"title": "Transaction Id",
+						"type": "`$STRING`",
+						"short": "A unique identifier for deduplication.",
+					},
+				},
 				"name": "event",
 				"op": map[string]any{
+					"create": map[string]any{
+						"input": "data",
+						"name": "create",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "POST",
+								"orig": "/v1/events/trigger",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "events",
+									},
+									map[string]any{
+										"lit": "trigger",
+									},
+								},
+								"parts": []any{
+									"v1",
+									"events",
+									"trigger",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
 					"remove": map[string]any{
 						"input": "data",
 						"name": "remove",
@@ -4880,7 +5609,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -4888,7 +5617,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "transaction_id",
-											"orig": "transaction_id",
+											"orig": "transactionId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4906,11 +5635,7 @@ func MakeConfig() map[string]any {
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"$.main.kit.entity.trigger",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"generate_chat_o_auth_url_response_dto": map[string]any{
@@ -5021,7 +5746,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5066,7 +5791,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5111,7 +5836,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5197,7 +5922,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5205,14 +5930,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "step_id",
-											"orig": "step_id",
+											"orig": "stepId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "workflow_id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5317,7 +6042,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5362,7 +6087,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5612,7 +6337,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5620,21 +6345,21 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "action_type",
-											"orig": "action_type",
+											"orig": "actionType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5643,7 +6368,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -5714,7 +6439,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5722,21 +6447,21 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "action_type",
-											"orig": "action_type",
+											"orig": "actionType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5745,7 +6470,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -5807,7 +6532,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5815,14 +6540,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5831,7 +6556,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -5892,7 +6617,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5900,14 +6625,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5916,7 +6641,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -5977,7 +6702,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -5985,14 +6710,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6001,7 +6726,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -6062,7 +6787,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6070,14 +6795,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6086,7 +6811,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -6147,7 +6872,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6155,14 +6880,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6171,7 +6896,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -6232,7 +6957,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6240,14 +6965,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6256,7 +6981,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -6498,7 +7223,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6506,7 +7231,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "integration_id",
+											"orig": "integrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6558,7 +7283,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6566,7 +7291,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "integration_identifier",
-											"orig": "integration_identifier",
+											"orig": "integrationIdentifier",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6606,7 +7331,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6649,7 +7374,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6700,7 +7425,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6708,7 +7433,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "integration_id",
+											"orig": "integrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6761,7 +7486,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6769,7 +7494,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "integration_id",
+											"orig": "integrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6951,7 +7676,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -6959,7 +7684,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "integration_id",
+											"orig": "integrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7009,7 +7734,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7187,7 +7912,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7195,7 +7920,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "layout_id",
+											"orig": "layoutId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7235,7 +7960,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7278,7 +8003,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7300,13 +8025,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "order_direction",
-											"orig": "order_direction",
+											"orig": "orderDirection",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -7368,7 +8093,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7376,7 +8101,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "layout_id",
+											"orig": "layoutId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7429,7 +8154,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7437,7 +8162,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "layout_id",
+											"orig": "layoutId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7490,7 +8215,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7498,7 +8223,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "layout_id",
+											"orig": "layoutId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7574,7 +8299,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7582,7 +8307,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "layout_id",
+											"orig": "layoutId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7671,7 +8396,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7791,7 +8516,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -7820,13 +8545,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "include_cursor",
-											"orig": "include_cursor",
+											"orig": "includeCursor",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "integration_identifier",
-											"orig": "integration_identifier",
+											"orig": "integrationIdentifier",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -7839,13 +8564,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "order_direction",
-											"orig": "order_direction",
+											"orig": "orderDirection",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -7874,828 +8599,6 @@ func MakeConfig() map[string]any {
 							"$.main.kit.entity.agent",
 						},
 					},
-				},
-			},
-			"list_agents_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "active",
-						"title": "Active",
-						"type": "`$BOOLEAN`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "behavior",
-						"title": "Behavior",
-						"type": "`$OBJECT`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "bridgeUrl",
-						"title": "Bridge Url",
-						"type": "`$STRING`",
-						"short": "Production bridge URL",
-					},
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "createdBy",
-						"title": "Created By",
-						"type": "`$STRING`",
-						"short": "Mongo user id of the user who created the agent",
-					},
-					map[string]any{
-						"name": "description",
-						"title": "Description",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "devBridgeActive",
-						"title": "Dev Bridge Active",
-						"type": "`$BOOLEAN`",
-						"short": "Whether the dev bridge override is active",
-					},
-					map[string]any{
-						"name": "devBridgeUrl",
-						"title": "Dev Bridge Url",
-						"type": "`$STRING`",
-						"short": "Development bridge URL (set by npx novu dev)",
-					},
-					map[string]any{
-						"name": "environmentId",
-						"title": "Environment Id",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "exceedsPlanLimit",
-						"title": "Exceeds Plan Limit",
-						"type": "`$BOOLEAN`",
-						"short": "Cloud only.",
-					},
-					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "identifier",
-						"title": "Identifier",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "integrations",
-						"title": "Integrations",
-						"type": "`$ARRAY`",
-					},
-					map[string]any{
-						"name": "managedRuntime",
-						"title": "Managed Runtime",
-						"type": "`$ANY`",
-						"short": "Present when runtime is \"managed\".",
-					},
-					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "organizationId",
-						"title": "Organization Id",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "runtime",
-						"title": "Runtime",
-						"type": "`$STRING`",
-						"short": "Whether the agent brain is self-hosted (bridge) or managed by a third-party provider",
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "visibility",
-						"title": "Visibility",
-						"type": "`$STRING`",
-						"short": "Discovery scope of the agent.",
-					},
-				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
-				"name": "list_agents_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v1/agents",
-								"segments": []any{
-									map[string]any{
-										"lit": "v1",
-									},
-									map[string]any{
-										"lit": "agents",
-									},
-								},
-								"parts": []any{
-									"v1",
-									"agents",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "identifier",
-											"orig": "identifier",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"idempotency_key",
-										"identifier",
-										"include_cursor",
-										"limit",
-										"order_by",
-										"order_direction",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"list_channel_connections_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "auth",
-						"title": "Auth",
-						"type": "`$OBJECT`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "channel",
-						"title": "Channel",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The channel type (email, sms, push, chat, etc.).",
-					},
-					map[string]any{
-						"name": "contextKeys",
-						"title": "Context Keys",
-						"type": "`$ARRAY`",
-						"req": true,
-						"short": "The context of the channel connection",
-					},
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The timestamp indicating when the channel endpoint was created, in ISO 8601 format.",
-					},
-					map[string]any{
-						"name": "identifier",
-						"title": "Identifier",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The unique identifier of the channel endpoint.",
-					},
-					map[string]any{
-						"name": "integrationIdentifier",
-						"title": "Integration Identifier",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The identifier of the integration to use for this channel endpoint.",
-					},
-					map[string]any{
-						"name": "providerId",
-						"title": "Provider Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The provider identifier (e.g., sendgrid, twilio, slack, etc.).",
-					},
-					map[string]any{
-						"name": "subscriberId",
-						"title": "Subscriber Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The subscriber ID to which the channel connection is linked",
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format.",
-					},
-					map[string]any{
-						"name": "workspace",
-						"title": "Workspace",
-						"type": "`$OBJECT`",
-						"req": true,
-					},
-				},
-				"name": "list_channel_connections_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v1/channel-connections",
-								"segments": []any{
-									map[string]any{
-										"lit": "v1",
-									},
-									map[string]any{
-										"lit": "channel-connections",
-									},
-								},
-								"parts": []any{
-									"v1",
-									"channel-connections",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "channel",
-											"orig": "channel",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "chat",
-										},
-										map[string]any{
-											"name": "connection_mode",
-											"orig": "connection_mode",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "shared",
-										},
-										map[string]any{
-											"name": "context_key",
-											"orig": "context_key",
-											"type": "`$ARRAY`",
-											"kind": "query",
-											"example": []any{
-												"tenant:org-123",
-												"region:us-east-1",
-											},
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "integration_identifier",
-											"orig": "integration_identifier",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "slack-prod",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "provider_id",
-											"orig": "provider_id",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "slack",
-										},
-										map[string]any{
-											"name": "subscriber_id",
-											"orig": "subscriber_id",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "subscriber-123",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"channel",
-										"connection_mode",
-										"context_key",
-										"idempotency_key",
-										"include_cursor",
-										"integration_identifier",
-										"limit",
-										"order_by",
-										"order_direction",
-										"provider_id",
-										"subscriber_id",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"list_channel_endpoints_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "channel",
-						"title": "Channel",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The channel type (email, sms, push, chat, etc.).",
-					},
-					map[string]any{
-						"name": "connectionIdentifier",
-						"title": "Connection Identifier",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The identifier of the channel connection used for this endpoint.",
-					},
-					map[string]any{
-						"name": "contextKeys",
-						"title": "Context Keys",
-						"type": "`$ARRAY`",
-						"req": true,
-						"short": "The context of the channel connection",
-					},
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The timestamp indicating when the channel endpoint was created, in ISO 8601 format.",
-					},
-					map[string]any{
-						"name": "endpoint",
-						"title": "Endpoint",
-						"type": "`$ANY`",
-						"req": true,
-						"short": "Endpoint data specific to the channel type",
-					},
-					map[string]any{
-						"name": "identifier",
-						"title": "Identifier",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The unique identifier of the channel endpoint.",
-					},
-					map[string]any{
-						"name": "integrationIdentifier",
-						"title": "Integration Identifier",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The identifier of the integration to use for this channel endpoint.",
-					},
-					map[string]any{
-						"name": "providerId",
-						"title": "Provider Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The provider identifier (e.g., sendgrid, twilio, slack, etc.).",
-					},
-					map[string]any{
-						"name": "subscriberId",
-						"title": "Subscriber Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The subscriber ID to which the channel endpoint is linked",
-					},
-					map[string]any{
-						"name": "type",
-						"title": "Type",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Type of channel endpoint",
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format.",
-					},
-				},
-				"name": "list_channel_endpoints_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v1/channel-endpoints",
-								"segments": []any{
-									map[string]any{
-										"lit": "v1",
-									},
-									map[string]any{
-										"lit": "channel-endpoints",
-									},
-								},
-								"parts": []any{
-									"v1",
-									"channel-endpoints",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "channel",
-											"orig": "channel",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "connection_identifier",
-											"orig": "connection_identifier",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "slack-connection-abc123",
-										},
-										map[string]any{
-											"name": "context_key",
-											"orig": "context_key",
-											"type": "`$ARRAY`",
-											"kind": "query",
-											"example": []any{
-												"tenant:org-123",
-												"region:us-east-1",
-											},
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "integration_identifier",
-											"orig": "integration_identifier",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "slack-prod",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "provider_id",
-											"orig": "provider_id",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "slack",
-										},
-										map[string]any{
-											"name": "subscriber_id",
-											"orig": "subscriber_id",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "subscriber-123",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"channel",
-										"connection_identifier",
-										"context_key",
-										"idempotency_key",
-										"include_cursor",
-										"integration_identifier",
-										"limit",
-										"order_by",
-										"order_direction",
-										"provider_id",
-										"subscriber_id",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"list_contexts_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "bridgeUrl",
-						"title": "Bridge Url",
-						"type": "`$STRING`",
-						"short": "Bridge URL override for agent connect, if configured on this context",
-					},
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Creation timestamp",
-					},
-					map[string]any{
-						"name": "data",
-						"title": "Data",
-						"type": "`$OBJECT`",
-						"req": true,
-						"short": "Custom data associated with this context",
-					},
-					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Unique identifier for this context",
-					},
-					map[string]any{
-						"name": "type",
-						"title": "Type",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Context type (e.g., tenant, app, workspace)",
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Last update timestamp",
-					},
-				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
-				"name": "list_contexts_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v2/contexts",
-								"segments": []any{
-									map[string]any{
-										"lit": "v2",
-									},
-									map[string]any{
-										"lit": "contexts",
-									},
-								},
-								"parts": []any{
-									"v2",
-									"contexts",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "id",
-											"orig": "id",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "tenant-prod-123",
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "search",
-											"orig": "search",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "tenant",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"id",
-										"idempotency_key",
-										"include_cursor",
-										"limit",
-										"order_by",
-										"order_direction",
-										"search",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
 				},
 			},
 			"list_domain_routes_response_dto": map[string]any{
@@ -8808,7 +8711,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -8831,7 +8734,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "agent_id",
-											"orig": "agent_id",
+											"orig": "agentId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -8843,7 +8746,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "include_cursor",
-											"orig": "include_cursor",
+											"orig": "includeCursor",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -8856,13 +8759,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "order_direction",
-											"orig": "order_direction",
+											"orig": "orderDirection",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -8891,436 +8794,6 @@ func MakeConfig() map[string]any {
 							"$.main.kit.entity.domain",
 						},
 					},
-				},
-			},
-			"list_domains_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "data",
-						"title": "Data",
-						"type": "`$OBJECT`",
-						"short": "String key-value metadata (max 10 keys, 500 characters total when set via API).",
-					},
-					map[string]any{
-						"name": "dnsProvider",
-						"title": "Dns Provider",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "environmentId",
-						"title": "Environment Id",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "expectedDnsRecords",
-						"title": "Expected Dns Records",
-						"type": "`$ARRAY`",
-					},
-					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "mxRecordConfigured",
-						"title": "Mx Record Configured",
-						"type": "`$BOOLEAN`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "organizationId",
-						"title": "Organization Id",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "status",
-						"title": "Status",
-						"type": "`$STRING`",
-						"req": true,
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"req": true,
-					},
-				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
-				"name": "list_domains_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v1/domains",
-								"segments": []any{
-									map[string]any{
-										"lit": "v1",
-									},
-									map[string]any{
-										"lit": "domains",
-									},
-								},
-								"parts": []any{
-									"v1",
-									"domains",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "name",
-											"orig": "name",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"idempotency_key",
-										"include_cursor",
-										"limit",
-										"name",
-										"order_by",
-										"order_direction",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"list_subscribers_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "avatar",
-						"title": "Avatar",
-						"type": "`$STRING`",
-						"short": "The URL of the subscriber's avatar image.",
-					},
-					map[string]any{
-						"name": "channels",
-						"title": "Channels",
-						"type": "`$ARRAY`",
-						"short": "An array of channel settings associated with the subscriber.",
-					},
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The timestamp indicating when the subscriber was created, in ISO 8601 format.",
-					},
-					map[string]any{
-						"name": "data",
-						"title": "Data",
-						"type": "`$OBJECT`",
-						"short": "Additional custom data for the subscriber",
-					},
-					map[string]any{
-						"name": "deleted",
-						"title": "Deleted",
-						"type": "`$BOOLEAN`",
-						"req": true,
-						"short": "Indicates whether the subscriber has been deleted.",
-					},
-					map[string]any{
-						"name": "email",
-						"title": "Email",
-						"type": "`$STRING`",
-						"short": "The email address of the subscriber.",
-					},
-					map[string]any{
-						"name": "environmentId",
-						"title": "Environment Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The unique identifier of the environment associated with this subscriber.",
-					},
-					map[string]any{
-						"name": "firstName",
-						"title": "First Name",
-						"type": "`$STRING`",
-						"short": "The first name of the subscriber.",
-					},
-					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-						"short": "The internal ID generated by Novu for your subscriber.",
-					},
-					map[string]any{
-						"name": "isOnline",
-						"title": "Is Online",
-						"type": "`$BOOLEAN`",
-						"short": "Indicates whether the subscriber is currently online.",
-					},
-					map[string]any{
-						"name": "lastName",
-						"title": "Last Name",
-						"type": "`$STRING`",
-						"short": "The last name of the subscriber.",
-					},
-					map[string]any{
-						"name": "lastOnlineAt",
-						"title": "Last Online At",
-						"type": "`$STRING`",
-						"short": "The timestamp indicating when the subscriber was last online, in ISO 8601 format.",
-					},
-					map[string]any{
-						"name": "locale",
-						"title": "Locale",
-						"type": "`$STRING`",
-						"short": "The locale setting of the subscriber, indicating their preferred language or region.",
-					},
-					map[string]any{
-						"name": "organizationId",
-						"title": "Organization Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The unique identifier of the organization to which the subscriber belongs.",
-					},
-					map[string]any{
-						"name": "phone",
-						"title": "Phone",
-						"type": "`$STRING`",
-						"short": "The phone number of the subscriber.",
-					},
-					map[string]any{
-						"name": "subscriberId",
-						"title": "Subscriber Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The identifier used to create this subscriber, which typically corresponds to the user ID in your system.",
-					},
-					map[string]any{
-						"name": "timezone",
-						"title": "Timezone",
-						"type": "`$STRING`",
-						"short": "Timezone of the subscriber",
-					},
-					map[string]any{
-						"name": "topics",
-						"title": "Topics",
-						"type": "`$ARRAY`",
-						"short": "An array of topics that the subscriber is subscribed to.",
-						"deprecated": true,
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The timestamp indicating when the subscriber was last updated, in ISO 8601 format.",
-					},
-					map[string]any{
-						"name": "v",
-						"title": "V",
-						"type": "`$NUMBER`",
-						"short": "The version of the subscriber document.",
-					},
-				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
-				"name": "list_subscribers_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v2/subscribers",
-								"segments": []any{
-									map[string]any{
-										"lit": "v2",
-									},
-									map[string]any{
-										"lit": "subscribers",
-									},
-								},
-								"parts": []any{
-									"v2",
-									"subscribers",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "email",
-											"orig": "email",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "name",
-											"orig": "name",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "phone",
-											"orig": "phone",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "subscriber_id",
-											"orig": "subscriber_id",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"email",
-										"idempotency_key",
-										"include_cursor",
-										"limit",
-										"name",
-										"order_by",
-										"order_direction",
-										"phone",
-										"subscriber_id",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
 				},
 			},
 			"list_topic_subscriptions_response_dto": map[string]any{
@@ -9420,7 +8893,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -9428,7 +8901,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9449,7 +8922,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 											"example": []any{
@@ -9459,7 +8932,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "include_cursor",
-											"orig": "include_cursor",
+											"orig": "includeCursor",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -9478,13 +8951,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "order_direction",
-											"orig": "order_direction",
+											"orig": "orderDirection",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -9542,7 +9015,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -9550,7 +9023,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "topic_key",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9571,7 +9044,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 											"example": []any{
@@ -9581,7 +9054,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "include_cursor",
-											"orig": "include_cursor",
+											"orig": "includeCursor",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -9594,19 +9067,19 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "order_direction",
-											"orig": "order_direction",
+											"orig": "orderDirection",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -9639,160 +9112,6 @@ func MakeConfig() map[string]any {
 							"$.main.kit.entity.topic",
 						},
 					},
-				},
-			},
-			"list_topics_response_dto": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "createdAt",
-						"title": "Created At",
-						"type": "`$STRING`",
-						"short": "The date the topic was created",
-					},
-					map[string]any{
-						"name": "data",
-						"title": "Data",
-						"type": "`$OBJECT`",
-						"short": "Additional custom data associated with the topic",
-					},
-					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The identifier of the topic",
-					},
-					map[string]any{
-						"name": "key",
-						"title": "Key",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The unique key of the topic",
-					},
-					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-						"short": "The name of the topic",
-					},
-					map[string]any{
-						"name": "updatedAt",
-						"title": "Updated At",
-						"type": "`$STRING`",
-						"short": "The date the topic was last updated",
-					},
-				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
-				"name": "list_topics_response_dto",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/v2/topics",
-								"segments": []any{
-									map[string]any{
-										"lit": "v2",
-									},
-									map[string]any{
-										"lit": "topics",
-									},
-								},
-								"parts": []any{
-									"v2",
-									"topics",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"name": "after",
-											"orig": "after",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "before",
-											"orig": "before",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "include_cursor",
-											"orig": "include_cursor",
-											"type": "`$BOOLEAN`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "key",
-											"orig": "key",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-											"kind": "query",
-											"example": 10,
-										},
-										map[string]any{
-											"name": "name",
-											"orig": "name",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "order_direction",
-											"orig": "order_direction",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"after",
-										"before",
-										"idempotency_key",
-										"include_cursor",
-										"key",
-										"limit",
-										"name",
-										"order_by",
-										"order_direction",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
 				},
 			},
 			"master_json": map[string]any{
@@ -9847,7 +9166,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10135,7 +9454,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10149,7 +9468,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 											"example": []any{
@@ -10173,13 +9492,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "transaction_id",
-											"orig": "transaction_id",
+											"orig": "transactionId",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -10240,7 +9559,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10248,7 +9567,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "transaction_id",
-											"orig": "transaction_id",
+											"orig": "transactionId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10305,7 +9624,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10313,7 +9632,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "message_id",
+											"orig": "messageId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10419,7 +9738,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10427,14 +9746,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "message_id",
-											"orig": "message_id",
+											"orig": "messageId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10498,7 +9817,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10506,7 +9825,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10780,7 +10099,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10788,7 +10107,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10915,7 +10234,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -10923,7 +10242,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11026,7 +10345,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11034,7 +10353,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "environment_id",
-											"orig": "target_environment_id",
+											"orig": "targetEnvironmentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11101,7 +10420,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11109,7 +10428,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11283,7 +10602,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11291,14 +10610,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "step_id",
+											"orig": "stepId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "workflow_id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11489,7 +10808,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11497,7 +10816,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "fail_if_exist",
-											"orig": "fail_if_exist",
+											"orig": "failIfExists",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -11551,7 +10870,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11559,7 +10878,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11615,7 +10934,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11623,7 +10942,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11679,7 +10998,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11687,7 +11006,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11743,7 +11062,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11751,7 +11070,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11807,7 +11126,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11815,7 +11134,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11871,7 +11190,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11879,7 +11198,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -11891,6 +11210,122 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v2/subscribers",
+								"segments": []any{
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "subscribers",
+									},
+								},
+								"parts": []any{
+									"v2",
+									"subscribers",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "email",
+											"orig": "email",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "name",
+											"orig": "name",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "phone",
+											"orig": "phone",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "subscriber_id",
+											"orig": "subscriberId",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"email",
+										"idempotency_key",
+										"include_cursor",
+										"limit",
+										"name",
+										"order_by",
+										"order_direction",
+										"phone",
+										"subscriber_id",
 									},
 								},
 							},
@@ -11933,7 +11368,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -11941,7 +11376,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12003,7 +11438,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12011,14 +11446,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "notification_id",
-											"orig": "notification_id",
+											"orig": "notificationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12027,7 +11462,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -12084,7 +11519,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12092,14 +11527,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "provider_id",
-											"orig": "provider_id",
+											"orig": "providerId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12153,7 +11588,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12161,7 +11596,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12246,7 +11681,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12254,7 +11689,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12263,7 +11698,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "filter",
-											"orig": "filter",
+											"orig": "filters",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -12339,13 +11774,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12353,7 +11788,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12374,20 +11809,20 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "created_gte",
-											"orig": "created_gte",
+											"orig": "createdGte",
 											"type": "`$NUMBER`",
 											"kind": "query",
 											"example": 1704067200000,
 										},
 										map[string]any{
 											"name": "created_lte",
-											"orig": "created_lte",
+											"orig": "createdLte",
 											"type": "`$NUMBER`",
 											"kind": "query",
 											"example": 1735689599999,
@@ -12514,13 +11949,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.workflows`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12528,7 +11963,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12537,7 +11972,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "context_key",
-											"orig": "context_key",
+											"orig": "contextKeys",
 											"type": "`$ARRAY`",
 											"kind": "query",
 											"example": []any{
@@ -12606,7 +12041,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12614,7 +12049,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12813,7 +12248,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12821,7 +12256,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12873,7 +12308,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12881,7 +12316,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -12933,7 +12368,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -12941,7 +12376,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13077,7 +12512,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13092,7 +12527,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "topic_id",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13155,7 +12590,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13170,7 +12605,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "topic_id",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13199,28 +12634,42 @@ func MakeConfig() map[string]any {
 			"topic": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "createdAt",
+						"title": "Created At",
+						"type": "`$STRING`",
+						"short": "The date the topic was created",
+					},
+					map[string]any{
 						"name": "data",
 						"title": "Data",
 						"type": "`$OBJECT`",
-						"short": "Additional custom data associated with the topic.",
+						"short": "Additional custom data associated with the topic",
 					},
 					map[string]any{
 						"name": "id",
 						"title": "Id",
 						"type": "`$STRING`",
+						"req": true,
+						"short": "The identifier of the topic",
 					},
 					map[string]any{
 						"name": "key",
 						"title": "Key",
 						"type": "`$STRING`",
 						"req": true,
-						"short": "The unique key identifier for the topic.",
+						"short": "The unique key of the topic",
 					},
 					map[string]any{
 						"name": "name",
 						"title": "Name",
 						"type": "`$STRING`",
-						"short": "The display name for the topic",
+						"short": "The name of the topic",
+					},
+					map[string]any{
+						"name": "updatedAt",
+						"title": "Updated At",
+						"type": "`$STRING`",
+						"short": "The date the topic was last updated",
 					},
 				},
 				"id": map[string]any{
@@ -13252,13 +12701,13 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13266,7 +12715,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "fail_if_exist",
-											"orig": "fail_if_exist",
+											"orig": "failIfExists",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -13276,6 +12725,108 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"fail_if_exist",
 										"idempotency_key",
+									},
+								},
+							},
+						},
+					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/v2/topics",
+								"segments": []any{
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "topics",
+									},
+								},
+								"parts": []any{
+									"v2",
+									"topics",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "idempotency_key",
+											"orig": "idempotency-key",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "after",
+											"orig": "after",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "before",
+											"orig": "before",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "include_cursor",
+											"orig": "includeCursor",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "key",
+											"orig": "key",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "name",
+											"orig": "name",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "orderBy",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "order_direction",
+											"orig": "orderDirection",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"after",
+										"before",
+										"idempotency_key",
+										"include_cursor",
+										"key",
+										"limit",
+										"name",
+										"order_by",
+										"order_direction",
 									},
 								},
 							},
@@ -13312,13 +12863,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13326,7 +12877,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13379,7 +12930,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13387,7 +12938,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13434,13 +12985,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.data`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13448,7 +12999,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13562,7 +13113,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13570,14 +13121,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "external_subscriber_id",
-											"orig": "external_subscriber_id",
+											"orig": "externalSubscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "topic_id",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13649,7 +13200,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13657,7 +13208,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "topic_key",
-											"orig": "topic_key",
+											"orig": "topicKey",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13692,6 +13243,13 @@ func MakeConfig() map[string]any {
 						"short": "Translation content as JSON object",
 					},
 					map[string]any{
+						"name": "createdAt",
+						"title": "Created At",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "Creation timestamp",
+					},
+					map[string]any{
 						"name": "id",
 						"title": "Id",
 						"type": "`$STRING`",
@@ -13701,21 +13259,28 @@ func MakeConfig() map[string]any {
 						"title": "Locale",
 						"type": "`$STRING`",
 						"req": true,
-						"short": "Locale code (e.g., en_US, es_ES)",
+						"short": "Locale code",
 					},
 					map[string]any{
 						"name": "resourceId",
 						"title": "Resource Id",
 						"type": "`$STRING`",
 						"req": true,
-						"short": "The resource ID to associate translation with.",
+						"short": "Resource identifier",
 					},
 					map[string]any{
 						"name": "resourceType",
 						"title": "Resource Type",
 						"type": "`$STRING`",
 						"req": true,
-						"short": "The resource type to associate translation with",
+						"short": "Resource type",
+					},
+					map[string]any{
+						"name": "updatedAt",
+						"title": "Updated At",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "Last update timestamp",
 					},
 				},
 				"id": map[string]any{
@@ -13758,13 +13323,13 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.content`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13818,13 +13383,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.content`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13840,7 +13405,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "resource_id",
-											"orig": "resource_id",
+											"orig": "resourceId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13848,7 +13413,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "resource_type",
-											"orig": "resource_type",
+											"orig": "resourceType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13912,7 +13477,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13927,14 +13492,14 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "resource_id",
-											"orig": "resource_id",
+											"orig": "resourceId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "resource_type",
-											"orig": "resource_type",
+											"orig": "resourceType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -13988,7 +13553,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -13996,7 +13561,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "resource_id",
-											"orig": "resource_id",
+											"orig": "resourceId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -14004,7 +13569,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "resource_type",
-											"orig": "resource_type",
+											"orig": "resourceType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -14144,7 +13709,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -14152,7 +13717,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "resource_id",
-											"orig": "resource_id",
+											"orig": "resourceId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -14160,7 +13725,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "resource_type",
-											"orig": "resource_type",
+											"orig": "resourceType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -14173,124 +13738,6 @@ func MakeConfig() map[string]any {
 										"idempotency_key",
 										"resource_id",
 										"resource_type",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"trigger": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "actor",
-						"title": "Actor",
-						"type": "`$ANY`",
-						"short": "It is used to display the Avatar of the provided actor's subscriber id or actor object.",
-					},
-					map[string]any{
-						"name": "agentId",
-						"title": "Agent Id",
-						"type": "`$STRING`",
-						"short": "Override the workflow-assigned agent for this trigger using the public agent identifier.",
-					},
-					map[string]any{
-						"name": "bridgeUrl",
-						"title": "Bridge Url",
-						"type": "`$STRING`",
-						"short": "Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application.",
-					},
-					map[string]any{
-						"name": "context",
-						"title": "Context",
-						"type": "`$OBJECT`",
-					},
-					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "The trigger identifier of the workflow you wish to send.",
-					},
-					map[string]any{
-						"name": "overrides",
-						"title": "Overrides",
-						"type": "`$ANY`",
-						"short": "This could be used to override provider specific configurations",
-					},
-					map[string]any{
-						"name": "payload",
-						"title": "Payload",
-						"type": "`$OBJECT`",
-						"short": "The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it.",
-					},
-					map[string]any{
-						"name": "tenant",
-						"title": "Tenant",
-						"type": "`$ANY`",
-						"short": "It is used to specify a tenant context during trigger event.",
-					},
-					map[string]any{
-						"name": "to",
-						"title": "To",
-						"type": "`$ANY`",
-						"req": true,
-						"short": "The recipients list of people who will receive the notification.",
-					},
-					map[string]any{
-						"name": "transactionId",
-						"title": "Transaction Id",
-						"type": "`$STRING`",
-						"short": "A unique identifier for deduplication.",
-					},
-				},
-				"name": "trigger",
-				"op": map[string]any{
-					"create": map[string]any{
-						"input": "data",
-						"name": "create",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "POST",
-								"orig": "/v1/events/trigger",
-								"segments": []any{
-									map[string]any{
-										"lit": "v1",
-									},
-									map[string]any{
-										"lit": "events",
-									},
-									map[string]any{
-										"lit": "trigger",
-									},
-								},
-								"parts": []any{
-									"v1",
-									"events",
-									"trigger",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"name": "idempotency_key",
-											"orig": "idempotency_key",
-											"type": "`$STRING`",
-											"kind": "header",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"idempotency_key",
 									},
 								},
 							},
@@ -14429,7 +13876,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -14474,7 +13921,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -14549,7 +13996,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -14557,7 +14004,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "subscriber_id",
-											"orig": "subscriber_id",
+											"orig": "subscriberId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -14666,7 +14113,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -14735,7 +14182,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -14743,14 +14190,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "environment_id",
-											"orig": "environment_id",
+											"orig": "environmentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "integration_id",
-											"orig": "integration_id",
+											"orig": "integrationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -15006,7 +14453,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15049,7 +14496,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15071,13 +14518,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "order_direction",
-											"orig": "order_direction",
+											"orig": "orderDirection",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -15095,7 +14542,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "tag",
-											"orig": "tag",
+											"orig": "tags",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -15153,7 +14600,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15161,7 +14608,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -15170,7 +14617,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "environment_id",
-											"orig": "environment_id",
+											"orig": "environmentId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -15223,7 +14670,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15231,7 +14678,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -15284,7 +14731,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15292,7 +14739,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -15345,7 +14792,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15353,7 +14800,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -15434,7 +14881,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15442,7 +14889,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "layout_id",
-											"orig": "layout_id",
+											"orig": "layoutId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -15672,7 +15119,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "idempotency_key",
-											"orig": "idempotency_key",
+											"orig": "idempotency-key",
 											"type": "`$STRING`",
 											"kind": "header",
 										},
@@ -15680,7 +15127,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "workflow_id",
+											"orig": "workflowId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,

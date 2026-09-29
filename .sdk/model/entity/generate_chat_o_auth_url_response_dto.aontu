@@ -103,7 +103,7 @@ main: kit: entity: generate_chat_o_auth_url_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -146,7 +146,7 @@ main: kit: entity: generate_chat_o_auth_url_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -189,7 +189,7 @@ main: kit: entity: generate_chat_o_auth_url_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }

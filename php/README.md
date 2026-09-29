@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/novu-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/novu-sdk/releases](https://github.com/voxgig-sdk/novu-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/novu-sdk
+composer config repositories.novu-sdk path ./novu-sdk/php
+composer require voxgig-sdk/novu-sdk:@dev
+```
 
 
 ## Tutorial: your first API call
@@ -145,10 +150,10 @@ $client = NovuSDK::test([
     "entity" => ["domain" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the ENTITY (throws on error);
+// list() returns entity instances (throws on error);
 // call data_get() for the mock record.
-$domain = $client->Domain()->load(["id" => "test01"]);
-print_r($domain->data_get());
+$domain = $client->Domain()->list();
+print_r(array_map(fn($item) => $item->data_get(), $domain));
 ```
 
 ### Use a custom fetch function
@@ -260,15 +265,8 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `LayoutResponseDto` | `($data): LayoutResponseDtoEntity` | Create a LayoutResponseDto entity instance. |
 | `Link` | `($data): LinkEntity` | Create a Link entity instance. |
 | `ListAgentIntegrationsResponseDto` | `($data): ListAgentIntegrationsResponseDtoEntity` | Create a ListAgentIntegrationsResponseDto entity instance. |
-| `ListAgentsResponseDto` | `($data): ListAgentsResponseDtoEntity` | Create a ListAgentsResponseDto entity instance. |
-| `ListChannelConnectionsResponseDto` | `($data): ListChannelConnectionsResponseDtoEntity` | Create a ListChannelConnectionsResponseDto entity instance. |
-| `ListChannelEndpointsResponseDto` | `($data): ListChannelEndpointsResponseDtoEntity` | Create a ListChannelEndpointsResponseDto entity instance. |
-| `ListContextsResponseDto` | `($data): ListContextsResponseDtoEntity` | Create a ListContextsResponseDto entity instance. |
 | `ListDomainRoutesResponseDto` | `($data): ListDomainRoutesResponseDtoEntity` | Create a ListDomainRoutesResponseDto entity instance. |
-| `ListDomainsResponseDto` | `($data): ListDomainsResponseDtoEntity` | Create a ListDomainsResponseDto entity instance. |
-| `ListSubscribersResponseDto` | `($data): ListSubscribersResponseDtoEntity` | Create a ListSubscribersResponseDto entity instance. |
 | `ListTopicSubscriptionsResponseDto` | `($data): ListTopicSubscriptionsResponseDtoEntity` | Create a ListTopicSubscriptionsResponseDto entity instance. |
-| `ListTopicsResponseDto` | `($data): ListTopicsResponseDtoEntity` | Create a ListTopicsResponseDto entity instance. |
 | `MasterJson` | `($data): MasterJsonEntity` | Create a MasterJson entity instance. |
 | `Message` | `($data): MessageEntity` | Create a Message entity instance. |
 | `MessageResponseDto` | `($data): MessageResponseDtoEntity` | Create a MessageResponseDto entity instance. |
@@ -288,7 +286,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `TopicSubscriptionsResponseDto` | `($data): TopicSubscriptionsResponseDtoEntity` | Create a TopicSubscriptionsResponseDto entity instance. |
 | `Translation` | `($data): TranslationEntity` | Create a Translation entity instance. |
 | `TranslationGroupDto` | `($data): TranslationGroupDtoEntity` | Create a TranslationGroupDto entity instance. |
-| `Trigger` | `($data): TriggerEntity` | Create a Trigger entity instance. |
 | `TriggerEventResponseDto` | `($data): TriggerEventResponseDtoEntity` | Create a TriggerEventResponseDto entity instance. |
 | `Unseen` | `($data): UnseenEntity` | Create an Unseen entity instance. |
 | `Upload` | `($data): UploadEntity` | Create an Upload entity instance. |
@@ -389,7 +386,7 @@ API path: `/v1/notifications`
 | `updatedAt` |  |
 | `visibility` | Discovery scope of the agent. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/agents/{agentId}/reply`
 
@@ -469,7 +466,7 @@ API path: `/v1/subscribers/bulk`
 | `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 | `workspace` |  |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/channel-connections`
 
@@ -490,7 +487,7 @@ API path: `/v1/channel-connections`
 | `type` | Type of channel endpoint |
 | `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/channel-endpoints`
 
@@ -510,12 +507,14 @@ API path: `/v1/integrations/{integrationIdentifier}/webhook/configure`
 
 | Field | Description |
 | --- | --- |
-| `bridgeUrl` | Optional bridge URL override for agent connect. |
-| `data` | Optional custom data to associate with this context. |
-| `id` | Unique identifier for this context. |
-| `type` | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | Creation timestamp |
+| `data` | Custom data associated with this context |
+| `id` | Unique identifier for this context |
+| `type` | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | Last update timestamp |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/contexts`
 
@@ -562,7 +561,7 @@ API path: `/v2/environments/{targetEnvironmentId}/diff`
 | `status` |  |
 | `updatedAt` |  |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/domains/{domain}/diagnose`
 
@@ -610,10 +609,16 @@ API path: `/v1/domains/{domain}/verify`
 
 | Field | Description |
 | --- | --- |
-| `agentId` | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
+| `address` |  |
+| `agentId` | Internal id of the destination agent. |
+| `createdAt` |  |
+| `data` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` |  |
+| `environmentId` |  |
 | `id` |  |
+| `organizationId` |  |
 | `type` |  |
+| `updatedAt` |  |
 
 Operations: Create, Load, Update.
 
@@ -681,10 +686,20 @@ API path: `/v1/environment-variables/{variableKey}/usage`
 
 | Field | Description |
 | --- | --- |
+| `actor` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` |  |
+| `name` | The trigger identifier of the workflow you wish to send. |
+| `overrides` | This could be used to override provider specific configurations |
+| `payload` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | It is used to specify a tenant context during trigger event. |
+| `to` | The recipients list of people who will receive the notification. |
+| `transactionId` | A unique identifier for deduplication. |
 
-Operations: Remove.
+Operations: Create, Remove.
 
-API path: `/v1/events/trigger/{transactionId}`
+API path: `/v1/events/trigger`
 
 #### GenerateChatOAuthUrlResponseDto
 
@@ -883,88 +898,6 @@ Operations: List.
 
 API path: `/v1/agents/{identifier}/integrations`
 
-#### ListAgentsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `active` |  |
-| `behavior` |  |
-| `bridgeUrl` | Production bridge URL |
-| `createdAt` |  |
-| `createdBy` | Mongo user id of the user who created the agent |
-| `description` |  |
-| `devBridgeActive` | Whether the dev bridge override is active |
-| `devBridgeUrl` | Development bridge URL (set by npx novu dev) |
-| `environmentId` |  |
-| `exceedsPlanLimit` | Cloud only. |
-| `id` |  |
-| `identifier` |  |
-| `integrations` |  |
-| `managedRuntime` | Present when runtime is "managed". |
-| `name` |  |
-| `organizationId` |  |
-| `runtime` | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` |  |
-| `visibility` | Discovery scope of the agent. |
-
-Operations: List.
-
-API path: `/v1/agents`
-
-#### ListChannelConnectionsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `auth` |  |
-| `channel` | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | The context of the channel connection |
-| `createdAt` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` |  |
-
-Operations: List.
-
-API path: `/v1/channel-connections`
-
-#### ListChannelEndpointsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `channel` | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | The context of the channel connection |
-| `createdAt` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | Endpoint data specific to the channel type |
-| `identifier` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | The subscriber ID to which the channel endpoint is linked |
-| `type` | Type of channel endpoint |
-| `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-Operations: List.
-
-API path: `/v1/channel-endpoints`
-
-#### ListContextsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `bridgeUrl` | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | Creation timestamp |
-| `data` | Custom data associated with this context |
-| `id` | Unique identifier for this context |
-| `type` | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | Last update timestamp |
-
-Operations: List.
-
-API path: `/v2/contexts`
-
 #### ListDomainRoutesResponseDto
 
 | Field | Description |
@@ -984,55 +917,6 @@ Operations: List.
 
 API path: `/v1/domains/{domain}/routes`
 
-#### ListDomainsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `createdAt` |  |
-| `data` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` |  |
-| `environmentId` |  |
-| `expectedDnsRecords` |  |
-| `id` |  |
-| `mxRecordConfigured` |  |
-| `name` |  |
-| `organizationId` |  |
-| `status` |  |
-| `updatedAt` |  |
-
-Operations: List.
-
-API path: `/v1/domains`
-
-#### ListSubscribersResponseDto
-
-| Field | Description |
-| --- | --- |
-| `avatar` | The URL of the subscriber's avatar image. |
-| `channels` | An array of channel settings associated with the subscriber. |
-| `createdAt` | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | Additional custom data for the subscriber |
-| `deleted` | Indicates whether the subscriber has been deleted. |
-| `email` | The email address of the subscriber. |
-| `environmentId` | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | The first name of the subscriber. |
-| `id` | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | Indicates whether the subscriber is currently online. |
-| `lastName` | The last name of the subscriber. |
-| `lastOnlineAt` | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | The phone number of the subscriber. |
-| `subscriberId` | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | Timezone of the subscriber |
-| `topics` | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | The version of the subscriber document. |
-
-Operations: List.
-
-API path: `/v2/subscribers`
-
 #### ListTopicSubscriptionsResponseDto
 
 | Field | Description |
@@ -1048,21 +932,6 @@ API path: `/v2/subscribers`
 Operations: List.
 
 API path: `/v2/subscribers/{subscriberId}/subscriptions`
-
-#### ListTopicsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `createdAt` | The date the topic was created |
-| `data` | Additional custom data associated with the topic |
-| `id` | The identifier of the topic |
-| `key` | The unique key of the topic |
-| `name` | The name of the topic |
-| `updatedAt` | The date the topic was last updated |
-
-Operations: List.
-
-API path: `/v2/topics`
 
 #### MasterJson
 
@@ -1252,7 +1121,7 @@ API path: `/v2/workflows/{workflowId}/steps/{stepId}`
 | `updatedAt` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
 | `v` | The version of the subscriber document. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/subscribers`
 
@@ -1338,12 +1207,14 @@ API path: `/v2/topics/{topicKey}/subscriptions/{identifier}`
 
 | Field | Description |
 | --- | --- |
-| `data` | Additional custom data associated with the topic. |
-| `id` |  |
-| `key` | The unique key identifier for the topic. |
-| `name` | The display name for the topic |
+| `createdAt` | The date the topic was created |
+| `data` | Additional custom data associated with the topic |
+| `id` | The identifier of the topic |
+| `key` | The unique key of the topic |
+| `name` | The name of the topic |
+| `updatedAt` | The date the topic was last updated |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/topics`
 
@@ -1376,10 +1247,12 @@ API path: `/v2/topics/{topicKey}/subscriptions`
 | Field | Description |
 | --- | --- |
 | `content` | Translation content as JSON object |
+| `createdAt` | Creation timestamp |
 | `id` |  |
-| `locale` | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | The resource ID to associate translation with. |
-| `resourceType` | The resource type to associate translation with |
+| `locale` | Locale code |
+| `resourceId` | Resource identifier |
+| `resourceType` | Resource type |
+| `updatedAt` | Last update timestamp |
 
 Operations: Create, Load, Remove.
 
@@ -1401,25 +1274,6 @@ API path: `/v2/translations`
 Operations: Load.
 
 API path: `/v2/translations/group/{resourceType}/{resourceId}`
-
-#### Trigger
-
-| Field | Description |
-| --- | --- |
-| `actor` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` |  |
-| `name` | The trigger identifier of the workflow you wish to send. |
-| `overrides` | This could be used to override provider specific configurations |
-| `payload` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | It is used to specify a tenant context during trigger event. |
-| `to` | The recipients list of people who will receive the notification. |
-| `transactionId` | A unique identifier for deduplication. |
-
-Operations: Create.
-
-API path: `/v1/events/trigger`
 
 #### TriggerEventResponseDto
 
@@ -1621,6 +1475,7 @@ Create an instance: `$agent = $client->Agent();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1654,6 +1509,13 @@ Create an instance: `$agent = $client->Agent();`
 ```php
 // load() returns the ENTITY — call data_get() for the Agent record (throws on error).
 $agent = $client->Agent()->load(["id" => "agent_id"]);
+```
+
+#### Example: List
+
+```php
+// list() returns an array of Agent records (throws on error).
+$agents = $client->Agent()->list();
 ```
 
 #### Example: Create
@@ -1785,6 +1647,7 @@ Create an instance: `$channel_connection = $client->ChannelConnection();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1814,6 +1677,13 @@ Create an instance: `$channel_connection = $client->ChannelConnection();`
 $channel_connection = $client->ChannelConnection()->load(["id" => "channel_connection_id"]);
 ```
 
+#### Example: List
+
+```php
+// list() returns an array of ChannelConnection records (throws on error).
+$channel_connections = $client->ChannelConnection()->list();
+```
+
 #### Example: Create
 
 ```php
@@ -1841,6 +1711,7 @@ Create an instance: `$channel_endpoint = $client->ChannelEndpoint();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1867,6 +1738,13 @@ Create an instance: `$channel_endpoint = $client->ChannelEndpoint();`
 ```php
 // load() returns the ENTITY — call data_get() for the ChannelEndpoint record (throws on error).
 $channel_endpoint = $client->ChannelEndpoint()->load(["id" => "channel_endpoint_id"]);
+```
+
+#### Example: List
+
+```php
+// list() returns an array of ChannelEndpoint records (throws on error).
+$channel_endpoints = $client->ChannelEndpoint()->list();
 ```
 
 #### Example: Create
@@ -1927,6 +1805,7 @@ Create an instance: `$context = $client->Context();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1935,10 +1814,12 @@ Create an instance: `$context = $client->Context();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bridgeUrl` | `string` | Optional bridge URL override for agent connect. |
-| `data` | `array` | Optional custom data to associate with this context. |
-| `id` | `string` | Unique identifier for this context. |
-| `type` | `string` | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `string` | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `string` | Creation timestamp |
+| `data` | `array` | Custom data associated with this context |
+| `id` | `string` | Unique identifier for this context |
+| `type` | `string` | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `string` | Last update timestamp |
 
 #### Example: Load
 
@@ -1947,12 +1828,22 @@ Create an instance: `$context = $client->Context();`
 $context = $client->Context()->load(["id" => "context_id", "type" => "type"]);
 ```
 
+#### Example: List
+
+```php
+// list() returns an array of Context records (throws on error).
+$contexts = $client->Context()->list();
+```
+
 #### Example: Create
 
 ```php
 $context = $client->Context()->create([
+    "createdAt" => null, // string
+    "data" => null, // array
     "id" => null, // string
     "type" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -2027,6 +1918,7 @@ Create an instance: `$domain = $client->Domain();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -2052,6 +1944,13 @@ Create an instance: `$domain = $client->Domain();`
 ```php
 // load() returns the ENTITY — call data_get() for the Domain record (throws on error).
 $domain = $client->Domain()->load(["id" => "domain_id"]);
+```
+
+#### Example: List
+
+```php
+// list() returns an array of Domain records (throws on error).
+$domains = $client->Domain()->list();
 ```
 
 #### Example: Create
@@ -2177,10 +2076,16 @@ Create an instance: `$domain_route_response_dto = $client->DomainRouteResponseDt
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentId` | `string` | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `array` | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
+| `address` | `string` |  |
+| `agentId` | `string` | Internal id of the destination agent. |
+| `createdAt` | `string` |  |
+| `data` | `array` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `string` |  |
+| `environmentId` | `string` |  |
 | `id` | `string` |  |
+| `organizationId` | `string` |  |
 | `type` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -2194,6 +2099,13 @@ $domain_route_response_dto = $client->DomainRouteResponseDto()->load(["address" 
 ```php
 $domain_route_response_dto = $client->DomainRouteResponseDto()->create([
     "id" => null, // string
+    "address" => null, // string
+    "createdAt" => null, // string
+    "domainId" => null, // string
+    "environmentId" => null, // string
+    "organizationId" => null, // string
+    "type" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -2361,7 +2273,32 @@ Create an instance: `$event = $client->Event();`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `actor` | `mixed` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `string` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `string` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `array` |  |
+| `name` | `string` | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `mixed` | This could be used to override provider specific configurations |
+| `payload` | `array` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `mixed` | It is used to specify a tenant context during trigger event. |
+| `to` | `mixed` | The recipients list of people who will receive the notification. |
+| `transactionId` | `string` | A unique identifier for deduplication. |
+
+#### Example: Create
+
+```php
+$event = $client->Event()->create([
+    "name" => null, // string
+    "to" => null, // mixed
+]);
+```
 
 
 ### GenerateChatOAuthUrlResponseDto
@@ -2763,144 +2700,6 @@ $list_agent_integrations_response_dtos = $client->ListAgentIntegrationsResponseD
 ```
 
 
-### ListAgentsResponseDto
-
-Create an instance: `$list_agents_response_dto = $client->ListAgentsResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `active` | `bool` |  |
-| `behavior` | `array` |  |
-| `bridgeUrl` | `string` | Production bridge URL |
-| `createdAt` | `string` |  |
-| `createdBy` | `string` | Mongo user id of the user who created the agent |
-| `description` | `string` |  |
-| `devBridgeActive` | `bool` | Whether the dev bridge override is active |
-| `devBridgeUrl` | `string` | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `string` |  |
-| `exceedsPlanLimit` | `bool` | Cloud only. |
-| `id` | `string` |  |
-| `identifier` | `string` |  |
-| `integrations` | `array` |  |
-| `managedRuntime` | `mixed` | Present when runtime is "managed". |
-| `name` | `string` |  |
-| `organizationId` | `string` |  |
-| `runtime` | `string` | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `string` |  |
-| `visibility` | `string` | Discovery scope of the agent. |
-
-#### Example: List
-
-```php
-// list() returns an array of ListAgentsResponseDto records (throws on error).
-$list_agents_response_dtos = $client->ListAgentsResponseDto()->list();
-```
-
-
-### ListChannelConnectionsResponseDto
-
-Create an instance: `$list_channel_connections_response_dto = $client->ListChannelConnectionsResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `auth` | `array` |  |
-| `channel` | `string` | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `array` | The context of the channel connection |
-| `createdAt` | `string` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `string` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `string` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `array` |  |
-
-#### Example: List
-
-```php
-// list() returns an array of ListChannelConnectionsResponseDto records (throws on error).
-$list_channel_connections_response_dtos = $client->ListChannelConnectionsResponseDto()->list();
-```
-
-
-### ListChannelEndpointsResponseDto
-
-Create an instance: `$list_channel_endpoints_response_dto = $client->ListChannelEndpointsResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `channel` | `string` | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `string` | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `array` | The context of the channel connection |
-| `createdAt` | `string` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `mixed` | Endpoint data specific to the channel type |
-| `identifier` | `string` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | The subscriber ID to which the channel endpoint is linked |
-| `type` | `string` | Type of channel endpoint |
-| `updatedAt` | `string` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-#### Example: List
-
-```php
-// list() returns an array of ListChannelEndpointsResponseDto records (throws on error).
-$list_channel_endpoints_response_dtos = $client->ListChannelEndpointsResponseDto()->list();
-```
-
-
-### ListContextsResponseDto
-
-Create an instance: `$list_contexts_response_dto = $client->ListContextsResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `bridgeUrl` | `string` | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `string` | Creation timestamp |
-| `data` | `array` | Custom data associated with this context |
-| `id` | `string` | Unique identifier for this context |
-| `type` | `string` | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `string` | Last update timestamp |
-
-#### Example: List
-
-```php
-// list() returns an array of ListContextsResponseDto records (throws on error).
-$list_contexts_response_dtos = $client->ListContextsResponseDto()->list();
-```
-
-
 ### ListDomainRoutesResponseDto
 
 Create an instance: `$list_domain_routes_response_dto = $client->ListDomainRoutesResponseDto();`
@@ -2934,83 +2733,6 @@ $list_domain_routes_response_dtos = $client->ListDomainRoutesResponseDto()->list
 ```
 
 
-### ListDomainsResponseDto
-
-Create an instance: `$list_domains_response_dto = $client->ListDomainsResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `createdAt` | `string` |  |
-| `data` | `array` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `string` |  |
-| `environmentId` | `string` |  |
-| `expectedDnsRecords` | `array` |  |
-| `id` | `string` |  |
-| `mxRecordConfigured` | `bool` |  |
-| `name` | `string` |  |
-| `organizationId` | `string` |  |
-| `status` | `string` |  |
-| `updatedAt` | `string` |  |
-
-#### Example: List
-
-```php
-// list() returns an array of ListDomainsResponseDto records (throws on error).
-$list_domains_response_dtos = $client->ListDomainsResponseDto()->list();
-```
-
-
-### ListSubscribersResponseDto
-
-Create an instance: `$list_subscribers_response_dto = $client->ListSubscribersResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` | The URL of the subscriber's avatar image. |
-| `channels` | `array` | An array of channel settings associated with the subscriber. |
-| `createdAt` | `string` | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `array` | Additional custom data for the subscriber |
-| `deleted` | `bool` | Indicates whether the subscriber has been deleted. |
-| `email` | `string` | The email address of the subscriber. |
-| `environmentId` | `string` | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `string` | The first name of the subscriber. |
-| `id` | `string` | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `bool` | Indicates whether the subscriber is currently online. |
-| `lastName` | `string` | The last name of the subscriber. |
-| `lastOnlineAt` | `string` | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `string` | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `string` | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `string` | The phone number of the subscriber. |
-| `subscriberId` | `string` | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `string` | Timezone of the subscriber |
-| `topics` | `array` | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `string` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `float` | The version of the subscriber document. |
-
-#### Example: List
-
-```php
-// list() returns an array of ListSubscribersResponseDto records (throws on error).
-$list_subscribers_response_dtos = $client->ListSubscribersResponseDto()->list();
-```
-
-
 ### ListTopicSubscriptionsResponseDto
 
 Create an instance: `$list_topic_subscriptions_response_dto = $client->ListTopicSubscriptionsResponseDto();`
@@ -3038,35 +2760,6 @@ Create an instance: `$list_topic_subscriptions_response_dto = $client->ListTopic
 ```php
 // list() returns an array of ListTopicSubscriptionsResponseDto records (throws on error).
 $list_topic_subscriptions_response_dtos = $client->ListTopicSubscriptionsResponseDto()->list();
-```
-
-
-### ListTopicsResponseDto
-
-Create an instance: `$list_topics_response_dto = $client->ListTopicsResponseDto();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `createdAt` | `string` | The date the topic was created |
-| `data` | `array` | Additional custom data associated with the topic |
-| `id` | `string` | The identifier of the topic |
-| `key` | `string` | The unique key of the topic |
-| `name` | `string` | The name of the topic |
-| `updatedAt` | `string` | The date the topic was last updated |
-
-#### Example: List
-
-```php
-// list() returns an array of ListTopicsResponseDto records (throws on error).
-$list_topics_response_dtos = $client->ListTopicsResponseDto()->list();
 ```
 
 
@@ -3343,6 +3036,7 @@ Create an instance: `$subscriber = $client->Subscriber();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -3377,6 +3071,13 @@ Create an instance: `$subscriber = $client->Subscriber();`
 ```php
 // load() returns the ENTITY — call data_get() for the Subscriber record (throws on error).
 $subscriber = $client->Subscriber()->load(["id" => "subscriber_id"]);
+```
+
+#### Example: List
+
+```php
+// list() returns an array of Subscriber records (throws on error).
+$subscribers = $client->Subscriber()->list();
 ```
 
 #### Example: Create
@@ -3545,6 +3246,7 @@ Create an instance: `$topic = $client->Topic();`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -3553,10 +3255,12 @@ Create an instance: `$topic = $client->Topic();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `array` | Additional custom data associated with the topic. |
-| `id` | `string` |  |
-| `key` | `string` | The unique key identifier for the topic. |
-| `name` | `string` | The display name for the topic |
+| `createdAt` | `string` | The date the topic was created |
+| `data` | `array` | Additional custom data associated with the topic |
+| `id` | `string` | The identifier of the topic |
+| `key` | `string` | The unique key of the topic |
+| `name` | `string` | The name of the topic |
+| `updatedAt` | `string` | The date the topic was last updated |
 
 #### Example: Load
 
@@ -3565,10 +3269,18 @@ Create an instance: `$topic = $client->Topic();`
 $topic = $client->Topic()->load(["id" => "topic_id"]);
 ```
 
+#### Example: List
+
+```php
+// list() returns an array of Topic records (throws on error).
+$topics = $client->Topic()->list();
+```
+
 #### Example: Create
 
 ```php
 $topic = $client->Topic()->create([
+    "id" => null, // string
     "key" => null, // string
 ]);
 ```
@@ -3631,10 +3343,12 @@ Create an instance: `$translation = $client->Translation();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `content` | `array` | Translation content as JSON object |
+| `createdAt` | `string` | Creation timestamp |
 | `id` | `string` |  |
-| `locale` | `string` | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `string` | The resource ID to associate translation with. |
-| `resourceType` | `string` | The resource type to associate translation with |
+| `locale` | `string` | Locale code |
+| `resourceId` | `string` | Resource identifier |
+| `resourceType` | `string` | Resource type |
+| `updatedAt` | `string` | Last update timestamp |
 
 #### Example: Load
 
@@ -3648,9 +3362,11 @@ $translation = $client->Translation()->load(["locale" => "locale", "resource_id"
 ```php
 $translation = $client->Translation()->create([
     "content" => null, // array
+    "createdAt" => null, // string
     "locale" => null, // string
     "resourceId" => null, // string
     "resourceType" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -3683,41 +3399,6 @@ Create an instance: `$translation_group_dto = $client->TranslationGroupDto();`
 ```php
 // load() returns the ENTITY — call data_get() for the TranslationGroupDto record (throws on error).
 $translation_group_dto = $client->TranslationGroupDto()->load(["resource_id" => "resource_id", "resource_type" => "resource_type"]);
-```
-
-
-### Trigger
-
-Create an instance: `$trigger = $client->Trigger();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `actor` | `mixed` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `string` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `string` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `array` |  |
-| `name` | `string` | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `mixed` | This could be used to override provider specific configurations |
-| `payload` | `array` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `mixed` | It is used to specify a tenant context during trigger event. |
-| `to` | `mixed` | The recipients list of people who will receive the notification. |
-| `transactionId` | `string` | A unique identifier for deduplication. |
-
-#### Example: Create
-
-```php
-$trigger = $client->Trigger()->create([
-    "name" => null, // string
-    "to" => null, // mixed
-]);
 ```
 
 
@@ -4120,7 +3801,7 @@ activated earlier.
 
 ## Open types
 
-10 fields are carried as open values rather than typed structures.
+9 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -4131,13 +3812,12 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `channel_endpoint` | `endpoint` | 14 | 0 levels |
-| `list_channel_endpoints_response_dto` | `endpoint` | 14 | 0 levels |
 | `layout` | `controls` | 5 | 14 levels |
 | `step` | `controls` | 5 | 14 levels |
 | `workflow` | `steps` | 5 | 19 levels |
 | `workflow_response_dto` | `steps` | 5 | 19 levels |
+| `event` | `to` | 4 | 3 levels |
 | `message` | `template` | 4 | 10 levels |
-| `trigger` | `to` | 4 | 3 levels |
 | `trigger_event_response_dto` | `events` | 4 | 6 levels |
 | `create_subscriptions_response_dto` | `preferences` | 3 | 1 level |
 

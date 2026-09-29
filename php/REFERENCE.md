@@ -166,41 +166,13 @@ Create a new `LinkEntity` instance. Pass `null` for no initial data.
 
 Create a new `ListAgentIntegrationsResponseDtoEntity` instance. Pass `null` for no initial data.
 
-#### `ListAgentsResponseDto($data = null)`
-
-Create a new `ListAgentsResponseDtoEntity` instance. Pass `null` for no initial data.
-
-#### `ListChannelConnectionsResponseDto($data = null)`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance. Pass `null` for no initial data.
-
-#### `ListChannelEndpointsResponseDto($data = null)`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance. Pass `null` for no initial data.
-
-#### `ListContextsResponseDto($data = null)`
-
-Create a new `ListContextsResponseDtoEntity` instance. Pass `null` for no initial data.
-
 #### `ListDomainRoutesResponseDto($data = null)`
 
 Create a new `ListDomainRoutesResponseDtoEntity` instance. Pass `null` for no initial data.
 
-#### `ListDomainsResponseDto($data = null)`
-
-Create a new `ListDomainsResponseDtoEntity` instance. Pass `null` for no initial data.
-
-#### `ListSubscribersResponseDto($data = null)`
-
-Create a new `ListSubscribersResponseDtoEntity` instance. Pass `null` for no initial data.
-
 #### `ListTopicSubscriptionsResponseDto($data = null)`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance. Pass `null` for no initial data.
-
-#### `ListTopicsResponseDto($data = null)`
-
-Create a new `ListTopicsResponseDtoEntity` instance. Pass `null` for no initial data.
 
 #### `MasterJson($data = null)`
 
@@ -277,10 +249,6 @@ Create a new `TranslationEntity` instance. Pass `null` for no initial data.
 #### `TranslationGroupDto($data = null)`
 
 Create a new `TranslationGroupDtoEntity` instance. Pass `null` for no initial data.
-
-#### `Trigger($data = null)`
-
-Create a new `TriggerEntity` instance. Pass `null` for no initial data.
 
 #### `TriggerEventResponseDto($data = null)`
 
@@ -459,27 +427,27 @@ $agent = $client->Agent();
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `active` | - | Yes | Yes | - |
-| `behavior` | - | - | Yes | - |
-| `bridgeUrl` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `createdBy` | - | - | - | - |
-| `description` | - | - | - | - |
-| `devBridgeActive` | - | - | - | - |
-| `devBridgeUrl` | - | - | - | - |
-| `environmentId` | - | - | - | - |
-| `exceedsPlanLimit` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | - | - | - |
-| `integrations` | - | - | - | - |
-| `managedRuntime` | - | Yes | - | - |
-| `name` | - | - | Yes | - |
-| `organizationId` | - | - | - | - |
-| `runtime` | - | - | - | - |
-| `updatedAt` | - | - | - | - |
-| `visibility` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `active` | - | - | Yes | Yes | - |
+| `behavior` | - | - | - | Yes | - |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `createdBy` | - | - | - | - | - |
+| `description` | - | - | - | - | - |
+| `devBridgeActive` | - | - | - | - | - |
+| `devBridgeUrl` | - | - | - | - | - |
+| `environmentId` | - | - | - | - | - |
+| `exceedsPlanLimit` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | - | - | - |
+| `integrations` | - | - | - | - | - |
+| `managedRuntime` | - | - | Yes | - | - |
+| `name` | - | - | - | Yes | - |
+| `organizationId` | - | - | - | - | - |
+| `runtime` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `visibility` | - | - | - | - | - |
 
 ### Operations
 
@@ -499,6 +467,14 @@ $result = $client->Agent()->create([
   "organizationId" => null, // string
   "updatedAt" => null, // string
 ]);
+```
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->Agent()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -810,21 +786,21 @@ $channel_connection = $client->ChannelConnection();
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `auth` | - | - | - | - |
-| `channel` | - | - | - | - |
-| `connectionMode` | - | - | - | - |
-| `context` | - | - | - | - |
-| `contextKeys` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | Yes | - | - |
-| `integrationIdentifier` | - | - | - | - |
-| `providerId` | - | - | - | - |
-| `subscriberId` | - | Yes | - | - |
-| `updatedAt` | - | - | - | - |
-| `workspace` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `auth` | - | - | - | - | - |
+| `channel` | - | - | - | - | - |
+| `connectionMode` | - | - | - | - | - |
+| `context` | - | - | - | - | - |
+| `contextKeys` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | Yes | - | - |
+| `integrationIdentifier` | - | - | - | - | - |
+| `providerId` | - | - | - | - | - |
+| `subscriberId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
@@ -845,6 +821,14 @@ $result = $client->ChannelConnection()->create([
   "updatedAt" => null, // string
   "workspace" => null, // array
 ]);
+```
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->ChannelConnection()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -947,6 +931,14 @@ $result = $client->ChannelEndpoint()->create([
   "type" => null, // string
   "updatedAt" => null, // string
 ]);
+```
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->ChannelEndpoint()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1075,19 +1067,23 @@ $context = $client->Context();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Optional bridge URL override for agent connect. |
-| `data` | `array` | No | Optional custom data to associate with this context. |
-| `id` | `string` | Yes | Unique identifier for this context. |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `string` | Yes | Creation timestamp |
+| `data` | `array` | Yes | Custom data associated with this context |
+| `id` | `string` | Yes | Unique identifier for this context |
+| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `bridgeUrl` | - | - | - | - |
-| `data` | - | - | Yes | - |
-| `id` | - | - | - | - |
-| `type` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `data` | - | - | Yes | - | - |
+| `id` | - | - | - | - | - |
+| `type` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -1097,9 +1093,20 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Context()->create([
+  "createdAt" => null, // string
+  "data" => null, // array
   "id" => null, // string
   "type" => null, // string
+  "updatedAt" => null, // string
 ]);
+```
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->Context()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1327,6 +1334,14 @@ $result = $client->Domain()->create([
   "status" => null, // string
   "updatedAt" => null, // string
 ]);
+```
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->Domain()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1573,10 +1588,31 @@ $domain_route_response_dto = $client->DomainRouteResponseDto();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentId` | `string` | No | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `array` | No | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
-| `id` | `string` | No |  |
-| `type` | `string` | No |  |
+| `address` | `string` | Yes |  |
+| `agentId` | `string` | No | Internal id of the destination agent. |
+| `createdAt` | `string` | Yes |  |
+| `data` | `array` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `string` | Yes |  |
+| `environmentId` | `string` | Yes |  |
+| `id` | `string` | Yes |  |
+| `organizationId` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | load | create | update |
+| --- | --- | --- | --- |
+| `address` | - | - | - |
+| `agentId` | - | - | - |
+| `createdAt` | - | - | - |
+| `data` | - | - | - |
+| `domainId` | - | - | - |
+| `environmentId` | - | - | - |
+| `id` | - | - | - |
+| `organizationId` | - | - | - |
+| `type` | - | - | Yes |
+| `updatedAt` | - | - | - |
 
 ### Operations
 
@@ -1587,6 +1623,13 @@ Create a new entity with the given data. Throws on error.
 ```php
 $result = $client->DomainRouteResponseDto()->create([
   "id" => null, // string
+  "address" => null, // string
+  "createdAt" => null, // string
+  "domainId" => null, // string
+  "environmentId" => null, // string
+  "organizationId" => null, // string
+  "type" => null, // string
+  "updatedAt" => null, // string
 ]);
 ```
 
@@ -1978,7 +2021,33 @@ Return the entity name.
 $event = $client->Event();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actor` | `mixed` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `array` | No |  |
+| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `mixed` | No | This could be used to override provider specific configurations |
+| `payload` | `array` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `mixed` | No | It is used to specify a tenant context during trigger event. |
+| `to` | `mixed` | Yes | The recipients list of people who will receive the notification. |
+| `transactionId` | `string` | No | A unique identifier for deduplication. |
+
 ### Operations
+
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
+
+Create a new entity with the given data. Throws on error.
+
+```php
+$result = $client->Event()->create([
+  "name" => null, // string
+  "to" => null, // mixed
+]);
+```
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
@@ -2808,256 +2877,6 @@ Return the entity name.
 
 ---
 
-## ListAgentsResponseDtoEntity
-
-```php
-$list_agents_response_dto = $client->ListAgentsResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `bool` | Yes |  |
-| `behavior` | `array` | Yes |  |
-| `bridgeUrl` | `string` | No | Production bridge URL |
-| `createdAt` | `string` | Yes |  |
-| `createdBy` | `string` | No | Mongo user id of the user who created the agent |
-| `description` | `string` | No |  |
-| `devBridgeActive` | `bool` | No | Whether the dev bridge override is active |
-| `devBridgeUrl` | `string` | No | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `string` | Yes |  |
-| `exceedsPlanLimit` | `bool` | No | Cloud only. |
-| `id` | `string` | Yes |  |
-| `identifier` | `string` | Yes |  |
-| `integrations` | `array` | No |  |
-| `managedRuntime` | `mixed` | No | Present when runtime is "managed". |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `runtime` | `string` | No | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `string` | Yes |  |
-| `visibility` | `string` | No | Discovery scope of the agent. |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListAgentsResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListAgentsResponseDtoEntity`
-
-Create a new `ListAgentsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ListChannelConnectionsResponseDtoEntity
-
-```php
-$list_channel_connections_response_dto = $client->ListChannelConnectionsResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `auth` | `array` | Yes |  |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `array` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `array` | Yes |  |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListChannelConnectionsResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListChannelConnectionsResponseDtoEntity`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ListChannelEndpointsResponseDtoEntity
-
-```php
-$list_channel_endpoints_response_dto = $client->ListChannelEndpointsResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `string` | Yes | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `array` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `mixed` | Yes | Endpoint data specific to the channel type |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel endpoint is linked |
-| `type` | `string` | Yes | Type of channel endpoint |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListChannelEndpointsResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListChannelEndpointsResponseDtoEntity`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ListContextsResponseDtoEntity
-
-```php
-$list_contexts_response_dto = $client->ListContextsResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `string` | Yes | Creation timestamp |
-| `data` | `array` | Yes | Custom data associated with this context |
-| `id` | `string` | Yes | Unique identifier for this context |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `string` | Yes | Last update timestamp |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListContextsResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListContextsResponseDtoEntity`
-
-Create a new `ListContextsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
 ## ListDomainRoutesResponseDtoEntity
 
 ```php
@@ -3119,139 +2938,6 @@ Return the entity name.
 
 ---
 
-## ListDomainsResponseDtoEntity
-
-```php
-$list_domains_response_dto = $client->ListDomainsResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | Yes |  |
-| `data` | `array` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `string` | No |  |
-| `environmentId` | `string` | Yes |  |
-| `expectedDnsRecords` | `array` | No |  |
-| `id` | `string` | Yes |  |
-| `mxRecordConfigured` | `bool` | Yes |  |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
-| `updatedAt` | `string` | Yes |  |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListDomainsResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListDomainsResponseDtoEntity`
-
-Create a new `ListDomainsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ListSubscribersResponseDtoEntity
-
-```php
-$list_subscribers_response_dto = $client->ListSubscribersResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `avatar` | `string` | No | The URL of the subscriber's avatar image. |
-| `channels` | `array` | No | An array of channel settings associated with the subscriber. |
-| `createdAt` | `string` | Yes | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `array` | No | Additional custom data for the subscriber |
-| `deleted` | `bool` | Yes | Indicates whether the subscriber has been deleted. |
-| `email` | `string` | No | The email address of the subscriber. |
-| `environmentId` | `string` | Yes | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `string` | No | The first name of the subscriber. |
-| `id` | `string` | No | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `bool` | No | Indicates whether the subscriber is currently online. |
-| `lastName` | `string` | No | The last name of the subscriber. |
-| `lastOnlineAt` | `string` | No | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `string` | No | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `string` | Yes | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `string` | No | The phone number of the subscriber. |
-| `subscriberId` | `string` | Yes | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `string` | No | Timezone of the subscriber |
-| `topics` | `array` | No | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `float` | No | The version of the subscriber document. |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListSubscribersResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListSubscribersResponseDtoEntity`
-
-Create a new `ListSubscribersResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
 ## ListTopicSubscriptionsResponseDtoEntity
 
 ```php
@@ -3301,63 +2987,6 @@ Set the entity match criteria.
 #### `make(): ListTopicSubscriptionsResponseDtoEntity`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ListTopicsResponseDtoEntity
-
-```php
-$list_topics_response_dto = $client->ListTopicsResponseDto();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | No | The date the topic was created |
-| `data` | `array` | No | Additional custom data associated with the topic |
-| `id` | `string` | Yes | The identifier of the topic |
-| `key` | `string` | Yes | The unique key of the topic |
-| `name` | `string` | No | The name of the topic |
-| `updatedAt` | `string` | No | The date the topic was last updated |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->ListTopicsResponseDto()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ListTopicsResponseDtoEntity`
-
-Create a new `ListTopicsResponseDtoEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -3929,6 +3558,14 @@ $result = $client->Subscriber()->create([
 ]);
 ```
 
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->Subscriber()->list();
+```
+
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
 Load a single entity matching the given criteria. Throws on error.
@@ -4310,10 +3947,12 @@ $topic = $client->Topic();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | `array` | No | Additional custom data associated with the topic. |
-| `id` | `string` | No |  |
-| `key` | `string` | Yes | The unique key identifier for the topic. |
-| `name` | `string` | No | The display name for the topic |
+| `createdAt` | `string` | No | The date the topic was created |
+| `data` | `array` | No | Additional custom data associated with the topic |
+| `id` | `string` | Yes | The identifier of the topic |
+| `key` | `string` | Yes | The unique key of the topic |
+| `name` | `string` | No | The name of the topic |
+| `updatedAt` | `string` | No | The date the topic was last updated |
 
 ### Operations
 
@@ -4323,8 +3962,17 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Topic()->create([
+  "id" => null, // string
   "key" => null, // string
 ]);
+```
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->Topic()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -4498,10 +4146,12 @@ $translation = $client->Translation();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `content` | `array` | Yes | Translation content as JSON object |
+| `createdAt` | `string` | Yes | Creation timestamp |
 | `id` | `string` | No |  |
-| `locale` | `string` | Yes | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `string` | Yes | The resource ID to associate translation with. |
-| `resourceType` | `string` | Yes | The resource type to associate translation with |
+| `locale` | `string` | Yes | Locale code |
+| `resourceId` | `string` | Yes | Resource identifier |
+| `resourceType` | `string` | Yes | Resource type |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Operations
 
@@ -4512,9 +4162,11 @@ Create a new entity with the given data. Throws on error.
 ```php
 $result = $client->Translation()->create([
   "content" => null, // array
+  "createdAt" => null, // string
   "locale" => null, // string
   "resourceId" => null, // string
   "resourceType" => null, // string
+  "updatedAt" => null, // string
 ]);
 ```
 
@@ -4614,70 +4266,6 @@ Set the entity match criteria.
 #### `make(): TranslationGroupDtoEntity`
 
 Create a new `TranslationGroupDtoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## TriggerEntity
-
-```php
-$trigger = $client->Trigger();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `actor` | `mixed` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `array` | No |  |
-| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `mixed` | No | This could be used to override provider specific configurations |
-| `payload` | `array` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `mixed` | No | It is used to specify a tenant context during trigger event. |
-| `to` | `mixed` | Yes | The recipients list of people who will receive the notification. |
-| `transactionId` | `string` | No | A unique identifier for deduplication. |
-
-### Operations
-
-#### `create(array $reqdata, ?array $ctrl = null): mixed`
-
-Create a new entity with the given data. Throws on error.
-
-```php
-$result = $client->Trigger()->create([
-  "name" => null, // string
-  "to" => null, // mixed
-]);
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): TriggerEntity`
-
-Create a new `TriggerEntity` instance with the same client and
 options.
 
 #### `get_name(): string`

@@ -5,31 +5,46 @@ main: kit: entity: topic: {
   alias: field: {}
 
   fields: {
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "The date the topic was created"
+      t: "`$STRING`"
+    }
     data: {
       h: "Data"
       n: "data"
       r: false
-      sh: "Additional custom data associated with the topic."
+      sh: "Additional custom data associated with the topic"
       t: "`$OBJECT`"
     }
     id: {
       h: "Id"
       n: "id"
-      r: false
+      r: true
+      sh: "The identifier of the topic"
       t: "`$STRING`"
     }
     key: {
       h: "Key"
       n: "key"
       r: true
-      sh: "The unique key identifier for the topic."
+      sh: "The unique key of the topic"
       t: "`$STRING`"
     }
     name: {
       h: "Name"
       n: "name"
       r: false
-      sh: "The display name for the topic"
+      sh: "The name of the topic"
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "The date the topic was last updated"
       t: "`$STRING`"
     }
   }
@@ -55,7 +70,7 @@ main: kit: entity: topic: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -64,7 +79,7 @@ main: kit: entity: topic: {
               {
                 k: "query"
                 n: "fail_if_exist"
-                or: "fail_if_exist"
+                or: "failIfExists"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -76,6 +91,115 @@ main: kit: entity: topic: {
             exist: [
               "fail_if_exist"
               "idempotency_key"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "topics"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/topics"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "includeCursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "key"
+                or: "key"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "orderBy"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "orderDirection"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/topics"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "idempotency_key"
+              "include_cursor"
+              "key"
+              "limit"
+              "name"
+              "order_by"
+              "order_direction"
             ]
           }
           s: [
@@ -107,7 +231,7 @@ main: kit: entity: topic: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -116,7 +240,7 @@ main: kit: entity: topic: {
               {
                 k: "param"
                 n: "id"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -148,7 +272,7 @@ main: kit: entity: topic: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.data`"
+            res: "`body`"
           }
         }
       ]
@@ -167,7 +291,7 @@ main: kit: entity: topic: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -176,7 +300,7 @@ main: kit: entity: topic: {
               {
                 k: "param"
                 n: "id"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -227,7 +351,7 @@ main: kit: entity: topic: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -236,7 +360,7 @@ main: kit: entity: topic: {
               {
                 k: "param"
                 n: "id"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -268,7 +392,7 @@ main: kit: entity: topic: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.data`"
+            res: "`body`"
           }
         }
       ]

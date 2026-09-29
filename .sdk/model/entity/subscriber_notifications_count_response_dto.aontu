@@ -37,7 +37,7 @@ main: kit: entity: subscriber_notifications_count_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -46,7 +46,7 @@ main: kit: entity: subscriber_notifications_count_response_dto: {
               {
                 k: "param"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -56,7 +56,7 @@ main: kit: entity: subscriber_notifications_count_response_dto: {
                 ex: "[{\"read\":false,\"archived\":false},{\"tags\":[\"important\"]},{\"tags\":{\"and\":[{\"or\":[\"a\",\"b\"]},{\"or\":[\"c\"]}]}}]"
                 k: "query"
                 n: "filter"
-                or: "filter"
+                or: "filters"
                 r: true
                 t: "`$STRING`"
               }

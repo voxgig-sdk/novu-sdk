@@ -90,7 +90,7 @@ main: kit: entity: list_domain_routes_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -115,7 +115,7 @@ main: kit: entity: list_domain_routes_response_dto: {
               {
                 k: "query"
                 n: "agent_id"
-                or: "agent_id"
+                or: "agentId"
                 r: false
                 t: "`$STRING`"
               }
@@ -129,7 +129,7 @@ main: kit: entity: list_domain_routes_response_dto: {
               {
                 k: "query"
                 n: "include_cursor"
-                or: "include_cursor"
+                or: "includeCursor"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -144,14 +144,14 @@ main: kit: entity: list_domain_routes_response_dto: {
               {
                 k: "query"
                 n: "order_by"
-                or: "order_by"
+                or: "orderBy"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "order_direction"
-                or: "order_direction"
+                or: "orderDirection"
                 r: false
                 t: "`$STRING`"
               }

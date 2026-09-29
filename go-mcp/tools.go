@@ -15,7 +15,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"activity_notification_response_dto | agent | agent_integration_response_dto | agent_response_dto | bulk | channel_connection | channel_endpoint | configure | context | create_subscriptions_response_dto | diff | domain | domain_connect_apply_url_response_dto | domain_connect_status_response_dto | domain_response_dto | domain_route_response_dto | environment | environment_tags_dto | environment_variable | environment_variable_workflow_info_dto | event | generate_chat_o_auth_url_response_dto | generate_preview_response_dto | import_master_json_response_dto | inbox_notification_dto | integration | integration_response_dto | layout | layout_response_dto | link | list_agent_integrations_response_dto | list_agents_response_dto | list_channel_connections_response_dto | list_channel_endpoints_response_dto | list_contexts_response_dto | list_domain_routes_response_dto | list_domains_response_dto | list_subscribers_response_dto | list_topic_subscriptions_response_dto | list_topics_response_dto | master_json | message | message_response_dto | notification_feed_item_dto | preferences_response_dto | publish | remove_subscriber_response_dto | step | subscriber | subscriber_notifications_count_response_dto | subscriber_notifications_response_dto | subscriber_preferences_dto | subscriber_response_dto | subscription | topic | topic_subscriber_dto | topic_subscriptions_response_dto | translation | translation_group_dto | trigger | trigger_event_response_dto | unseen | upload | webhook_result_dto | workflow | workflow_info_dto | workflow_response_dto"`
+	Entity string         `json:"entity" jsonschema:"activity_notification_response_dto | agent | agent_integration_response_dto | agent_response_dto | bulk | channel_connection | channel_endpoint | configure | context | create_subscriptions_response_dto | diff | domain | domain_connect_apply_url_response_dto | domain_connect_status_response_dto | domain_response_dto | domain_route_response_dto | environment | environment_tags_dto | environment_variable | environment_variable_workflow_info_dto | event | generate_chat_o_auth_url_response_dto | generate_preview_response_dto | import_master_json_response_dto | inbox_notification_dto | integration | integration_response_dto | layout | layout_response_dto | link | list_agent_integrations_response_dto | list_domain_routes_response_dto | list_topic_subscriptions_response_dto | master_json | message | message_response_dto | notification_feed_item_dto | preferences_response_dto | publish | remove_subscriber_response_dto | step | subscriber | subscriber_notifications_count_response_dto | subscriber_notifications_response_dto | subscriber_preferences_dto | subscriber_response_dto | subscription | topic | topic_subscriber_dto | topic_subscriptions_response_dto | translation | translation_group_dto | trigger_event_response_dto | unseen | upload | webhook_result_dto | workflow | workflow_info_dto | workflow_response_dto"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -138,24 +138,10 @@ func entityFor(client *sdk.NovuSDK, name string) (sdk.NovuEntity, error) {
 		return client.Link(nil), nil
 	case "list_agent_integrations_response_dto":
 		return client.ListAgentIntegrationsResponseDto(nil), nil
-	case "list_agents_response_dto":
-		return client.ListAgentsResponseDto(nil), nil
-	case "list_channel_connections_response_dto":
-		return client.ListChannelConnectionsResponseDto(nil), nil
-	case "list_channel_endpoints_response_dto":
-		return client.ListChannelEndpointsResponseDto(nil), nil
-	case "list_contexts_response_dto":
-		return client.ListContextsResponseDto(nil), nil
 	case "list_domain_routes_response_dto":
 		return client.ListDomainRoutesResponseDto(nil), nil
-	case "list_domains_response_dto":
-		return client.ListDomainsResponseDto(nil), nil
-	case "list_subscribers_response_dto":
-		return client.ListSubscribersResponseDto(nil), nil
 	case "list_topic_subscriptions_response_dto":
 		return client.ListTopicSubscriptionsResponseDto(nil), nil
-	case "list_topics_response_dto":
-		return client.ListTopicsResponseDto(nil), nil
 	case "master_json":
 		return client.MasterJson(nil), nil
 	case "message":
@@ -194,8 +180,6 @@ func entityFor(client *sdk.NovuSDK, name string) (sdk.NovuEntity, error) {
 		return client.Translation(nil), nil
 	case "translation_group_dto":
 		return client.TranslationGroupDto(nil), nil
-	case "trigger":
-		return client.Trigger(nil), nil
 	case "trigger_event_response_dto":
 		return client.TriggerEventResponseDto(nil), nil
 	case "unseen":

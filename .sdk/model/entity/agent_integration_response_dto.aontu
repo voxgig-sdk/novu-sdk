@@ -105,7 +105,7 @@ main: kit: entity: agent_integration_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -163,7 +163,7 @@ main: kit: entity: agent_integration_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -179,7 +179,7 @@ main: kit: entity: agent_integration_response_dto: {
               {
                 k: "param"
                 n: "agent_integration_id"
-                or: "agent_integration_id"
+                or: "agentIntegrationId"
                 r: true
                 t: "`$STRING`"
               }

@@ -65,7 +65,7 @@ main: kit: entity: topic_subscriber_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -74,14 +74,14 @@ main: kit: entity: topic_subscriber_dto: {
               {
                 k: "param"
                 n: "external_subscriber_id"
-                or: "external_subscriber_id"
+                or: "externalSubscriberId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "topic_id"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }

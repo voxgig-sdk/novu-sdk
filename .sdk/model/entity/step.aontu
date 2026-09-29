@@ -131,7 +131,7 @@ main: kit: entity: step: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -140,14 +140,14 @@ main: kit: entity: step: {
               {
                 k: "param"
                 n: "id"
-                or: "step_id"
+                or: "stepId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "workflow_id"
-                or: "workflow_id"
+                or: "workflowId"
                 r: true
                 t: "`$STRING`"
               }

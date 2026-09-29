@@ -209,15 +209,8 @@ class NovuConfig
                     "layout_response_dto" => [],
                     "link" => [],
                     "list_agent_integrations_response_dto" => [],
-                    "list_agents_response_dto" => [],
-                    "list_channel_connections_response_dto" => [],
-                    "list_channel_endpoints_response_dto" => [],
-                    "list_contexts_response_dto" => [],
                     "list_domain_routes_response_dto" => [],
-                    "list_domains_response_dto" => [],
-                    "list_subscribers_response_dto" => [],
                     "list_topic_subscriptions_response_dto" => [],
-                    "list_topics_response_dto" => [],
                     "master_json" => [],
                     "message" => [],
                     "message_response_dto" => [],
@@ -237,7 +230,6 @@ class NovuConfig
                     "topic_subscriptions_response_dto" => [],
                     "translation" => [],
                     "translation_group_dto" => [],
-                    "trigger" => [],
                     "trigger_event_response_dto" => [],
                     "unseen" => [],
                     "upload" => [],
@@ -415,7 +407,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -435,19 +427,19 @@ class NovuConfig
                       ],
                       [
                         'name' => 'channel',
-                        'orig' => 'channel',
+                        'orig' => 'channels',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'email',
-                        'orig' => 'email',
+                        'orig' => 'emails',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -479,31 +471,31 @@ class NovuConfig
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberIds',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'subscription_id',
-                        'orig' => 'subscription_id',
+                        'orig' => 'subscriptionId',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'template',
-                        'orig' => 'template',
+                        'orig' => 'templates',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'topic_key',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'transaction_id',
-                        'orig' => 'transaction_id',
+                        'orig' => 'transactionId',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -568,7 +560,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -576,7 +568,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -785,7 +777,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -793,7 +785,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'agent_id',
+                        'orig' => 'agentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -834,13 +826,13 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
                       [
                         'name' => 'novu_analytics_source',
-                        'orig' => 'novu_analytics_source',
+                        'orig' => 'Novu-Analytics-Source',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                         'reqd' => true,
@@ -851,6 +843,101 @@ class NovuConfig
                     'exist' => [
                       'idempotency_key',
                       'novu_analytics_source',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v1/agents',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'agents',
+                    ],
+                  ],
+                  'parts' => [
+                    'v1',
+                    'agents',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'identifier',
+                        'orig' => 'identifier',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'idempotency_key',
+                      'identifier',
+                      'include_cursor',
+                      'limit',
+                      'order_by',
+                      'order_direction',
                     ],
                   ],
                 ],
@@ -893,7 +980,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -963,7 +1050,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -978,7 +1065,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'agent_integration_id',
-                        'orig' => 'agent_integration_id',
+                        'orig' => 'agentIntegrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -1026,7 +1113,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1043,7 +1130,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'delete_from_provider',
-                        'orig' => 'delete_from_provider',
+                        'orig' => 'deleteFromProvider',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
@@ -1097,7 +1184,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1249,7 +1336,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1319,7 +1406,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1334,7 +1421,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'agent_integration_id',
-                        'orig' => 'agent_integration_id',
+                        'orig' => 'agentIntegrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -1522,7 +1609,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1600,7 +1687,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1751,7 +1838,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1760,6 +1847,145 @@ class NovuConfig
                   'select' => [
                     'exist' => [
                       'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v1/channel-connections',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'channel-connections',
+                    ],
+                  ],
+                  'parts' => [
+                    'v1',
+                    'channel-connections',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'channel',
+                        'orig' => 'channel',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'chat',
+                      ],
+                      [
+                        'name' => 'connection_mode',
+                        'orig' => 'connectionMode',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'shared',
+                      ],
+                      [
+                        'name' => 'context_key',
+                        'orig' => 'contextKeys',
+                        'type' => '`$ARRAY`',
+                        'kind' => 'query',
+                        'example' => [
+                          'tenant:org-123',
+                          'region:us-east-1',
+                        ],
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'integration_identifier',
+                        'orig' => 'integrationIdentifier',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'slack-prod',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'provider_id',
+                        'orig' => 'providerId',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'slack',
+                      ],
+                      [
+                        'name' => 'subscriber_id',
+                        'orig' => 'subscriberId',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'subscriber-123',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'channel',
+                      'connection_mode',
+                      'context_key',
+                      'idempotency_key',
+                      'include_cursor',
+                      'integration_identifier',
+                      'limit',
+                      'order_by',
+                      'order_direction',
+                      'provider_id',
+                      'subscriber_id',
                     ],
                   ],
                 ],
@@ -1802,7 +2028,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1863,7 +2089,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -1924,7 +2150,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2073,7 +2299,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2082,6 +2308,144 @@ class NovuConfig
                   'select' => [
                     'exist' => [
                       'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v1/channel-endpoints',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'channel-endpoints',
+                    ],
+                  ],
+                  'parts' => [
+                    'v1',
+                    'channel-endpoints',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'channel',
+                        'orig' => 'channel',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'connection_identifier',
+                        'orig' => 'connectionIdentifier',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'slack-connection-abc123',
+                      ],
+                      [
+                        'name' => 'context_key',
+                        'orig' => 'contextKeys',
+                        'type' => '`$ARRAY`',
+                        'kind' => 'query',
+                        'example' => [
+                          'tenant:org-123',
+                          'region:us-east-1',
+                        ],
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'integration_identifier',
+                        'orig' => 'integrationIdentifier',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'slack-prod',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'provider_id',
+                        'orig' => 'providerId',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'slack',
+                      ],
+                      [
+                        'name' => 'subscriber_id',
+                        'orig' => 'subscriberId',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'subscriber-123',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'channel',
+                      'connection_identifier',
+                      'context_key',
+                      'idempotency_key',
+                      'include_cursor',
+                      'integration_identifier',
+                      'limit',
+                      'order_by',
+                      'order_direction',
+                      'provider_id',
+                      'subscriber_id',
                     ],
                   ],
                 ],
@@ -2124,7 +2488,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2185,7 +2549,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2246,7 +2610,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2346,7 +2710,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2354,7 +2718,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'integration_id',
-                        'orig' => 'integration_identifier',
+                        'orig' => 'integrationIdentifier',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -2385,33 +2749,47 @@ class NovuConfig
               'name' => 'bridgeUrl',
               'title' => 'Bridge Url',
               'type' => '`$STRING`',
-              'short' => 'Optional bridge URL override for agent connect.',
+              'short' => 'Bridge URL override for agent connect, if configured on this context',
+            ],
+            [
+              'name' => 'createdAt',
+              'title' => 'Created At',
+              'type' => '`$STRING`',
+              'req' => true,
+              'short' => 'Creation timestamp',
             ],
             [
               'name' => 'data',
               'title' => 'Data',
               'type' => '`$OBJECT`',
+              'req' => true,
               'op' => [
-                'update' => [
-                  'req' => true,
+                'create' => [
                   'type' => '`$OBJECT`',
                 ],
               ],
-              'short' => 'Optional custom data to associate with this context.',
+              'short' => 'Custom data associated with this context',
             ],
             [
               'name' => 'id',
               'title' => 'Id',
               'type' => '`$STRING`',
               'req' => true,
-              'short' => 'Unique identifier for this context.',
+              'short' => 'Unique identifier for this context',
             ],
             [
               'name' => 'type',
               'title' => 'Type',
               'type' => '`$STRING`',
               'req' => true,
-              'short' => 'Context type (e.g., tenant, app, workspace).',
+              'short' => 'Context type (e.g., tenant, app, workspace)',
+            ],
+            [
+              'name' => 'updatedAt',
+              'title' => 'Updated At',
+              'type' => '`$STRING`',
+              'req' => true,
+              'short' => 'Last update timestamp',
             ],
           ],
           'id' => [
@@ -2452,13 +2830,13 @@ class NovuConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2467,6 +2845,110 @@ class NovuConfig
                   'select' => [
                     'exist' => [
                       'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v2/contexts',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'contexts',
+                    ],
+                  ],
+                  'parts' => [
+                    'v2',
+                    'contexts',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'tenant-prod-123',
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'search',
+                        'orig' => 'search',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'tenant',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'id',
+                      'idempotency_key',
+                      'include_cursor',
+                      'limit',
+                      'order_by',
+                      'order_direction',
+                      'search',
                     ],
                   ],
                 ],
@@ -2503,13 +2985,13 @@ class NovuConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2578,7 +3060,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2641,13 +3123,13 @@ class NovuConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2760,7 +3242,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2768,7 +3250,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'topic_key',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -2872,7 +3354,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -2880,7 +3362,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'environment_id',
-                        'orig' => 'target_environment_id',
+                        'orig' => 'targetEnvironmentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -3021,7 +3503,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3069,7 +3551,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3078,6 +3560,101 @@ class NovuConfig
                   'select' => [
                     'exist' => [
                       'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v1/domains',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'domains',
+                    ],
+                  ],
+                  'parts' => [
+                    'v1',
+                    'domains',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'name',
+                        'orig' => 'name',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'idempotency_key',
+                      'include_cursor',
+                      'limit',
+                      'name',
+                      'order_by',
+                      'order_direction',
                     ],
                   ],
                 ],
@@ -3120,7 +3697,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3189,7 +3766,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3252,7 +3829,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3313,7 +3890,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3398,7 +3975,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3486,7 +4063,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3630,7 +4207,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3663,26 +4240,69 @@ class NovuConfig
         'domain_route_response_dto' => [
           'fields' => [
             [
+              'name' => 'address',
+              'title' => 'Address',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
               'name' => 'agentId',
               'title' => 'Agent Id',
               'type' => '`$STRING`',
-              'short' => 'Agent identifier; required when type is agent, ignored when type is webhook.',
+              'short' => 'Internal id of the destination agent.',
+            ],
+            [
+              'name' => 'createdAt',
+              'title' => 'Created At',
+              'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'data',
               'title' => 'Data',
               'type' => '`$OBJECT`',
-              'short' => 'Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values).',
+              'short' => 'String key-value metadata (max 10 keys, 500 characters total when set via API).',
+            ],
+            [
+              'name' => 'domainId',
+              'title' => 'Domain Id',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'environmentId',
+              'title' => 'Environment Id',
+              'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'id',
               'title' => 'Id',
               'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'organizationId',
+              'title' => 'Organization Id',
+              'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'type',
               'title' => 'Type',
               'type' => '`$STRING`',
+              'req' => true,
+              'op' => [
+                'update' => [
+                  'type' => '`$STRING`',
+                ],
+              ],
+            ],
+            [
+              'name' => 'updatedAt',
+              'title' => 'Updated At',
+              'type' => '`$STRING`',
+              'req' => true,
             ],
           ],
           'id' => [
@@ -3740,7 +4360,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3802,13 +4422,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3872,13 +4492,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -3949,13 +4569,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4118,7 +4738,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4161,7 +4781,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4212,7 +4832,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4220,7 +4840,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'environment_id',
+                        'orig' => 'environmentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4273,7 +4893,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4281,7 +4901,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'environment_id',
+                        'orig' => 'environmentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4357,7 +4977,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4365,7 +4985,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'environment_id',
+                        'orig' => 'environmentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4506,7 +5126,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4549,7 +5169,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4609,7 +5229,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4617,7 +5237,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'variable_key',
+                        'orig' => 'variableKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4671,7 +5291,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4679,7 +5299,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'variable_key',
+                        'orig' => 'variableKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4733,7 +5353,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4741,7 +5361,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'variable_key',
+                        'orig' => 'variableKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4823,7 +5443,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4831,7 +5451,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'variable_key',
-                        'orig' => 'variable_key',
+                        'orig' => 'variableKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4858,9 +5478,118 @@ class NovuConfig
           ],
         ],
         'event' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'actor',
+              'title' => 'Actor',
+              'type' => '`$ANY`',
+              'short' => 'It is used to display the Avatar of the provided actor\'s subscriber id or actor object.',
+            ],
+            [
+              'name' => 'agentId',
+              'title' => 'Agent Id',
+              'type' => '`$STRING`',
+              'short' => 'Override the workflow-assigned agent for this trigger using the public agent identifier.',
+            ],
+            [
+              'name' => 'bridgeUrl',
+              'title' => 'Bridge Url',
+              'type' => '`$STRING`',
+              'short' => 'Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application.',
+            ],
+            [
+              'name' => 'context',
+              'title' => 'Context',
+              'type' => '`$OBJECT`',
+            ],
+            [
+              'name' => 'name',
+              'title' => 'Name',
+              'type' => '`$STRING`',
+              'req' => true,
+              'short' => 'The trigger identifier of the workflow you wish to send.',
+            ],
+            [
+              'name' => 'overrides',
+              'title' => 'Overrides',
+              'type' => '`$ANY`',
+              'short' => 'This could be used to override provider specific configurations',
+            ],
+            [
+              'name' => 'payload',
+              'title' => 'Payload',
+              'type' => '`$OBJECT`',
+              'short' => 'The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it.',
+            ],
+            [
+              'name' => 'tenant',
+              'title' => 'Tenant',
+              'type' => '`$ANY`',
+              'short' => 'It is used to specify a tenant context during trigger event.',
+            ],
+            [
+              'name' => 'to',
+              'title' => 'To',
+              'type' => '`$ANY`',
+              'req' => true,
+              'short' => 'The recipients list of people who will receive the notification.',
+            ],
+            [
+              'name' => 'transactionId',
+              'title' => 'Transaction Id',
+              'type' => '`$STRING`',
+              'short' => 'A unique identifier for deduplication.',
+            ],
+          ],
           'name' => 'event',
           'op' => [
+            'create' => [
+              'input' => 'data',
+              'name' => 'create',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'POST',
+                  'orig' => '/v1/events/trigger',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'events',
+                    ],
+                    [
+                      'lit' => 'trigger',
+                    ],
+                  ],
+                  'parts' => [
+                    'v1',
+                    'events',
+                    'trigger',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
             'remove' => [
               'input' => 'data',
               'name' => 'remove',
@@ -4902,7 +5631,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -4910,7 +5639,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'transaction_id',
-                        'orig' => 'transaction_id',
+                        'orig' => 'transactionId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -4928,11 +5657,7 @@ class NovuConfig
             ],
           ],
           'relations' => [
-            'ancestors' => [
-              [
-                '$.main.kit.entity.trigger',
-              ],
-            ],
+            'ancestors' => [],
           ],
         ],
         'generate_chat_o_auth_url_response_dto' => [
@@ -5043,7 +5768,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5088,7 +5813,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5133,7 +5858,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5219,7 +5944,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5227,14 +5952,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'step_id',
-                        'orig' => 'step_id',
+                        'orig' => 'stepId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'workflow_id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -5339,7 +6064,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5384,7 +6109,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5634,7 +6359,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5642,21 +6367,21 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'action_type',
-                        'orig' => 'action_type',
+                        'orig' => 'actionType',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -5665,7 +6390,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -5736,7 +6461,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5744,21 +6469,21 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'action_type',
-                        'orig' => 'action_type',
+                        'orig' => 'actionType',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -5767,7 +6492,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -5829,7 +6554,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5837,14 +6562,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -5853,7 +6578,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -5914,7 +6639,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -5922,14 +6647,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -5938,7 +6663,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -5999,7 +6724,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6007,14 +6732,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6023,7 +6748,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -6084,7 +6809,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6092,14 +6817,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6108,7 +6833,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -6169,7 +6894,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6177,14 +6902,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6193,7 +6918,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -6254,7 +6979,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6262,14 +6987,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6278,7 +7003,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -6520,7 +7245,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6528,7 +7253,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'integration_id',
+                        'orig' => 'integrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6580,7 +7305,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6588,7 +7313,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'integration_identifier',
-                        'orig' => 'integration_identifier',
+                        'orig' => 'integrationIdentifier',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6628,7 +7353,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6671,7 +7396,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6722,7 +7447,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6730,7 +7455,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'integration_id',
+                        'orig' => 'integrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6783,7 +7508,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6791,7 +7516,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'integration_id',
+                        'orig' => 'integrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -6973,7 +7698,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -6981,7 +7706,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'integration_id',
+                        'orig' => 'integrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -7031,7 +7756,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7209,7 +7934,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7217,7 +7942,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'layout_id',
+                        'orig' => 'layoutId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -7257,7 +7982,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7300,7 +8025,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7322,13 +8047,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'order_by',
-                        'orig' => 'order_by',
+                        'orig' => 'orderBy',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'order_direction',
-                        'orig' => 'order_direction',
+                        'orig' => 'orderDirection',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -7390,7 +8115,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7398,7 +8123,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'layout_id',
+                        'orig' => 'layoutId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -7451,7 +8176,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7459,7 +8184,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'layout_id',
+                        'orig' => 'layoutId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -7512,7 +8237,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7520,7 +8245,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'layout_id',
+                        'orig' => 'layoutId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -7596,7 +8321,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7604,7 +8329,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'layout_id',
+                        'orig' => 'layoutId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -7693,7 +8418,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7813,7 +8538,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -7842,13 +8567,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
+                        'orig' => 'includeCursor',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'integration_identifier',
-                        'orig' => 'integration_identifier',
+                        'orig' => 'integrationIdentifier',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -7861,13 +8586,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'order_by',
-                        'orig' => 'order_by',
+                        'orig' => 'orderBy',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'order_direction',
-                        'orig' => 'order_direction',
+                        'orig' => 'orderDirection',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -7896,828 +8621,6 @@ class NovuConfig
                 '$.main.kit.entity.agent',
               ],
             ],
-          ],
-        ],
-        'list_agents_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'active',
-              'title' => 'Active',
-              'type' => '`$BOOLEAN`',
-              'req' => true,
-            ],
-            [
-              'name' => 'behavior',
-              'title' => 'Behavior',
-              'type' => '`$OBJECT`',
-              'req' => true,
-            ],
-            [
-              'name' => 'bridgeUrl',
-              'title' => 'Bridge Url',
-              'type' => '`$STRING`',
-              'short' => 'Production bridge URL',
-            ],
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'createdBy',
-              'title' => 'Created By',
-              'type' => '`$STRING`',
-              'short' => 'Mongo user id of the user who created the agent',
-            ],
-            [
-              'name' => 'description',
-              'title' => 'Description',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'devBridgeActive',
-              'title' => 'Dev Bridge Active',
-              'type' => '`$BOOLEAN`',
-              'short' => 'Whether the dev bridge override is active',
-            ],
-            [
-              'name' => 'devBridgeUrl',
-              'title' => 'Dev Bridge Url',
-              'type' => '`$STRING`',
-              'short' => 'Development bridge URL (set by npx novu dev)',
-            ],
-            [
-              'name' => 'environmentId',
-              'title' => 'Environment Id',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'exceedsPlanLimit',
-              'title' => 'Exceeds Plan Limit',
-              'type' => '`$BOOLEAN`',
-              'short' => 'Cloud only.',
-            ],
-            [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'identifier',
-              'title' => 'Identifier',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'integrations',
-              'title' => 'Integrations',
-              'type' => '`$ARRAY`',
-            ],
-            [
-              'name' => 'managedRuntime',
-              'title' => 'Managed Runtime',
-              'type' => '`$ANY`',
-              'short' => 'Present when runtime is "managed".',
-            ],
-            [
-              'name' => 'name',
-              'title' => 'Name',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'organizationId',
-              'title' => 'Organization Id',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'runtime',
-              'title' => 'Runtime',
-              'type' => '`$STRING`',
-              'short' => 'Whether the agent brain is self-hosted (bridge) or managed by a third-party provider',
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'visibility',
-              'title' => 'Visibility',
-              'type' => '`$STRING`',
-              'short' => 'Discovery scope of the agent.',
-            ],
-          ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
-          'name' => 'list_agents_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v1/agents',
-                  'segments' => [
-                    [
-                      'lit' => 'v1',
-                    ],
-                    [
-                      'lit' => 'agents',
-                    ],
-                  ],
-                  'parts' => [
-                    'v1',
-                    'agents',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'identifier',
-                        'orig' => 'identifier',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'idempotency_key',
-                      'identifier',
-                      'include_cursor',
-                      'limit',
-                      'order_by',
-                      'order_direction',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'list_channel_connections_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'auth',
-              'title' => 'Auth',
-              'type' => '`$OBJECT`',
-              'req' => true,
-            ],
-            [
-              'name' => 'channel',
-              'title' => 'Channel',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The channel type (email, sms, push, chat, etc.).',
-            ],
-            [
-              'name' => 'contextKeys',
-              'title' => 'Context Keys',
-              'type' => '`$ARRAY`',
-              'req' => true,
-              'short' => 'The context of the channel connection',
-            ],
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The timestamp indicating when the channel endpoint was created, in ISO 8601 format.',
-            ],
-            [
-              'name' => 'identifier',
-              'title' => 'Identifier',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The unique identifier of the channel endpoint.',
-            ],
-            [
-              'name' => 'integrationIdentifier',
-              'title' => 'Integration Identifier',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The identifier of the integration to use for this channel endpoint.',
-            ],
-            [
-              'name' => 'providerId',
-              'title' => 'Provider Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The provider identifier (e.g., sendgrid, twilio, slack, etc.).',
-            ],
-            [
-              'name' => 'subscriberId',
-              'title' => 'Subscriber Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The subscriber ID to which the channel connection is linked',
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format.',
-            ],
-            [
-              'name' => 'workspace',
-              'title' => 'Workspace',
-              'type' => '`$OBJECT`',
-              'req' => true,
-            ],
-          ],
-          'name' => 'list_channel_connections_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v1/channel-connections',
-                  'segments' => [
-                    [
-                      'lit' => 'v1',
-                    ],
-                    [
-                      'lit' => 'channel-connections',
-                    ],
-                  ],
-                  'parts' => [
-                    'v1',
-                    'channel-connections',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'channel',
-                        'orig' => 'channel',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'chat',
-                      ],
-                      [
-                        'name' => 'connection_mode',
-                        'orig' => 'connection_mode',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'shared',
-                      ],
-                      [
-                        'name' => 'context_key',
-                        'orig' => 'context_key',
-                        'type' => '`$ARRAY`',
-                        'kind' => 'query',
-                        'example' => [
-                          'tenant:org-123',
-                          'region:us-east-1',
-                        ],
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'integration_identifier',
-                        'orig' => 'integration_identifier',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'slack-prod',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'provider_id',
-                        'orig' => 'provider_id',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'slack',
-                      ],
-                      [
-                        'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'subscriber-123',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'channel',
-                      'connection_mode',
-                      'context_key',
-                      'idempotency_key',
-                      'include_cursor',
-                      'integration_identifier',
-                      'limit',
-                      'order_by',
-                      'order_direction',
-                      'provider_id',
-                      'subscriber_id',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'list_channel_endpoints_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'channel',
-              'title' => 'Channel',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The channel type (email, sms, push, chat, etc.).',
-            ],
-            [
-              'name' => 'connectionIdentifier',
-              'title' => 'Connection Identifier',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The identifier of the channel connection used for this endpoint.',
-            ],
-            [
-              'name' => 'contextKeys',
-              'title' => 'Context Keys',
-              'type' => '`$ARRAY`',
-              'req' => true,
-              'short' => 'The context of the channel connection',
-            ],
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The timestamp indicating when the channel endpoint was created, in ISO 8601 format.',
-            ],
-            [
-              'name' => 'endpoint',
-              'title' => 'Endpoint',
-              'type' => '`$ANY`',
-              'req' => true,
-              'short' => 'Endpoint data specific to the channel type',
-            ],
-            [
-              'name' => 'identifier',
-              'title' => 'Identifier',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The unique identifier of the channel endpoint.',
-            ],
-            [
-              'name' => 'integrationIdentifier',
-              'title' => 'Integration Identifier',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The identifier of the integration to use for this channel endpoint.',
-            ],
-            [
-              'name' => 'providerId',
-              'title' => 'Provider Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The provider identifier (e.g., sendgrid, twilio, slack, etc.).',
-            ],
-            [
-              'name' => 'subscriberId',
-              'title' => 'Subscriber Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The subscriber ID to which the channel endpoint is linked',
-            ],
-            [
-              'name' => 'type',
-              'title' => 'Type',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'Type of channel endpoint',
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format.',
-            ],
-          ],
-          'name' => 'list_channel_endpoints_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v1/channel-endpoints',
-                  'segments' => [
-                    [
-                      'lit' => 'v1',
-                    ],
-                    [
-                      'lit' => 'channel-endpoints',
-                    ],
-                  ],
-                  'parts' => [
-                    'v1',
-                    'channel-endpoints',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'channel',
-                        'orig' => 'channel',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'connection_identifier',
-                        'orig' => 'connection_identifier',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'slack-connection-abc123',
-                      ],
-                      [
-                        'name' => 'context_key',
-                        'orig' => 'context_key',
-                        'type' => '`$ARRAY`',
-                        'kind' => 'query',
-                        'example' => [
-                          'tenant:org-123',
-                          'region:us-east-1',
-                        ],
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'integration_identifier',
-                        'orig' => 'integration_identifier',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'slack-prod',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'provider_id',
-                        'orig' => 'provider_id',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'slack',
-                      ],
-                      [
-                        'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'subscriber-123',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'channel',
-                      'connection_identifier',
-                      'context_key',
-                      'idempotency_key',
-                      'include_cursor',
-                      'integration_identifier',
-                      'limit',
-                      'order_by',
-                      'order_direction',
-                      'provider_id',
-                      'subscriber_id',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'list_contexts_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'bridgeUrl',
-              'title' => 'Bridge Url',
-              'type' => '`$STRING`',
-              'short' => 'Bridge URL override for agent connect, if configured on this context',
-            ],
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'Creation timestamp',
-            ],
-            [
-              'name' => 'data',
-              'title' => 'Data',
-              'type' => '`$OBJECT`',
-              'req' => true,
-              'short' => 'Custom data associated with this context',
-            ],
-            [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'Unique identifier for this context',
-            ],
-            [
-              'name' => 'type',
-              'title' => 'Type',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'Context type (e.g., tenant, app, workspace)',
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'Last update timestamp',
-            ],
-          ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
-          'name' => 'list_contexts_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v2/contexts',
-                  'segments' => [
-                    [
-                      'lit' => 'v2',
-                    ],
-                    [
-                      'lit' => 'contexts',
-                    ],
-                  ],
-                  'parts' => [
-                    'v2',
-                    'contexts',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'tenant-prod-123',
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'search',
-                        'orig' => 'search',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'tenant',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'id',
-                      'idempotency_key',
-                      'include_cursor',
-                      'limit',
-                      'order_by',
-                      'order_direction',
-                      'search',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
           ],
         ],
         'list_domain_routes_response_dto' => [
@@ -8830,7 +8733,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -8853,7 +8756,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'agent_id',
-                        'orig' => 'agent_id',
+                        'orig' => 'agentId',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -8865,7 +8768,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
+                        'orig' => 'includeCursor',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
                       ],
@@ -8878,13 +8781,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'order_by',
-                        'orig' => 'order_by',
+                        'orig' => 'orderBy',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'order_direction',
-                        'orig' => 'order_direction',
+                        'orig' => 'orderDirection',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -8913,436 +8816,6 @@ class NovuConfig
                 '$.main.kit.entity.domain',
               ],
             ],
-          ],
-        ],
-        'list_domains_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'data',
-              'title' => 'Data',
-              'type' => '`$OBJECT`',
-              'short' => 'String key-value metadata (max 10 keys, 500 characters total when set via API).',
-            ],
-            [
-              'name' => 'dnsProvider',
-              'title' => 'Dns Provider',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'environmentId',
-              'title' => 'Environment Id',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'expectedDnsRecords',
-              'title' => 'Expected Dns Records',
-              'type' => '`$ARRAY`',
-            ],
-            [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'mxRecordConfigured',
-              'title' => 'Mx Record Configured',
-              'type' => '`$BOOLEAN`',
-              'req' => true,
-            ],
-            [
-              'name' => 'name',
-              'title' => 'Name',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'organizationId',
-              'title' => 'Organization Id',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'status',
-              'title' => 'Status',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'req' => true,
-            ],
-          ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
-          'name' => 'list_domains_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v1/domains',
-                  'segments' => [
-                    [
-                      'lit' => 'v1',
-                    ],
-                    [
-                      'lit' => 'domains',
-                    ],
-                  ],
-                  'parts' => [
-                    'v1',
-                    'domains',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'name',
-                        'orig' => 'name',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'idempotency_key',
-                      'include_cursor',
-                      'limit',
-                      'name',
-                      'order_by',
-                      'order_direction',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'list_subscribers_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'avatar',
-              'title' => 'Avatar',
-              'type' => '`$STRING`',
-              'short' => 'The URL of the subscriber\'s avatar image.',
-            ],
-            [
-              'name' => 'channels',
-              'title' => 'Channels',
-              'type' => '`$ARRAY`',
-              'short' => 'An array of channel settings associated with the subscriber.',
-            ],
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The timestamp indicating when the subscriber was created, in ISO 8601 format.',
-            ],
-            [
-              'name' => 'data',
-              'title' => 'Data',
-              'type' => '`$OBJECT`',
-              'short' => 'Additional custom data for the subscriber',
-            ],
-            [
-              'name' => 'deleted',
-              'title' => 'Deleted',
-              'type' => '`$BOOLEAN`',
-              'req' => true,
-              'short' => 'Indicates whether the subscriber has been deleted.',
-            ],
-            [
-              'name' => 'email',
-              'title' => 'Email',
-              'type' => '`$STRING`',
-              'short' => 'The email address of the subscriber.',
-            ],
-            [
-              'name' => 'environmentId',
-              'title' => 'Environment Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The unique identifier of the environment associated with this subscriber.',
-            ],
-            [
-              'name' => 'firstName',
-              'title' => 'First Name',
-              'type' => '`$STRING`',
-              'short' => 'The first name of the subscriber.',
-            ],
-            [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-              'short' => 'The internal ID generated by Novu for your subscriber.',
-            ],
-            [
-              'name' => 'isOnline',
-              'title' => 'Is Online',
-              'type' => '`$BOOLEAN`',
-              'short' => 'Indicates whether the subscriber is currently online.',
-            ],
-            [
-              'name' => 'lastName',
-              'title' => 'Last Name',
-              'type' => '`$STRING`',
-              'short' => 'The last name of the subscriber.',
-            ],
-            [
-              'name' => 'lastOnlineAt',
-              'title' => 'Last Online At',
-              'type' => '`$STRING`',
-              'short' => 'The timestamp indicating when the subscriber was last online, in ISO 8601 format.',
-            ],
-            [
-              'name' => 'locale',
-              'title' => 'Locale',
-              'type' => '`$STRING`',
-              'short' => 'The locale setting of the subscriber, indicating their preferred language or region.',
-            ],
-            [
-              'name' => 'organizationId',
-              'title' => 'Organization Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The unique identifier of the organization to which the subscriber belongs.',
-            ],
-            [
-              'name' => 'phone',
-              'title' => 'Phone',
-              'type' => '`$STRING`',
-              'short' => 'The phone number of the subscriber.',
-            ],
-            [
-              'name' => 'subscriberId',
-              'title' => 'Subscriber Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The identifier used to create this subscriber, which typically corresponds to the user ID in your system.',
-            ],
-            [
-              'name' => 'timezone',
-              'title' => 'Timezone',
-              'type' => '`$STRING`',
-              'short' => 'Timezone of the subscriber',
-            ],
-            [
-              'name' => 'topics',
-              'title' => 'Topics',
-              'type' => '`$ARRAY`',
-              'short' => 'An array of topics that the subscriber is subscribed to.',
-              'deprecated' => true,
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The timestamp indicating when the subscriber was last updated, in ISO 8601 format.',
-            ],
-            [
-              'name' => 'v',
-              'title' => 'V',
-              'type' => '`$NUMBER`',
-              'short' => 'The version of the subscriber document.',
-            ],
-          ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
-          'name' => 'list_subscribers_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v2/subscribers',
-                  'segments' => [
-                    [
-                      'lit' => 'v2',
-                    ],
-                    [
-                      'lit' => 'subscribers',
-                    ],
-                  ],
-                  'parts' => [
-                    'v2',
-                    'subscribers',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'email',
-                        'orig' => 'email',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'name',
-                        'orig' => 'name',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'phone',
-                        'orig' => 'phone',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'email',
-                      'idempotency_key',
-                      'include_cursor',
-                      'limit',
-                      'name',
-                      'order_by',
-                      'order_direction',
-                      'phone',
-                      'subscriber_id',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
           ],
         ],
         'list_topic_subscriptions_response_dto' => [
@@ -9442,7 +8915,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -9450,7 +8923,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -9471,7 +8944,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                         'example' => [
@@ -9481,7 +8954,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
+                        'orig' => 'includeCursor',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
                       ],
@@ -9500,13 +8973,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'order_by',
-                        'orig' => 'order_by',
+                        'orig' => 'orderBy',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'order_direction',
-                        'orig' => 'order_direction',
+                        'orig' => 'orderDirection',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -9564,7 +9037,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -9572,7 +9045,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'topic_key',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -9593,7 +9066,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                         'example' => [
@@ -9603,7 +9076,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
+                        'orig' => 'includeCursor',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
                       ],
@@ -9616,19 +9089,19 @@ class NovuConfig
                       ],
                       [
                         'name' => 'order_by',
-                        'orig' => 'order_by',
+                        'orig' => 'orderBy',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'order_direction',
-                        'orig' => 'order_direction',
+                        'orig' => 'orderDirection',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -9661,160 +9134,6 @@ class NovuConfig
                 '$.main.kit.entity.topic',
               ],
             ],
-          ],
-        ],
-        'list_topics_response_dto' => [
-          'fields' => [
-            [
-              'name' => 'createdAt',
-              'title' => 'Created At',
-              'type' => '`$STRING`',
-              'short' => 'The date the topic was created',
-            ],
-            [
-              'name' => 'data',
-              'title' => 'Data',
-              'type' => '`$OBJECT`',
-              'short' => 'Additional custom data associated with the topic',
-            ],
-            [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The identifier of the topic',
-            ],
-            [
-              'name' => 'key',
-              'title' => 'Key',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The unique key of the topic',
-            ],
-            [
-              'name' => 'name',
-              'title' => 'Name',
-              'type' => '`$STRING`',
-              'short' => 'The name of the topic',
-            ],
-            [
-              'name' => 'updatedAt',
-              'title' => 'Updated At',
-              'type' => '`$STRING`',
-              'short' => 'The date the topic was last updated',
-            ],
-          ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
-          'name' => 'list_topics_response_dto',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/v2/topics',
-                  'segments' => [
-                    [
-                      'lit' => 'v2',
-                    ],
-                    [
-                      'lit' => 'topics',
-                    ],
-                  ],
-                  'parts' => [
-                    'v2',
-                    'topics',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                    'query' => [
-                      [
-                        'name' => 'after',
-                        'orig' => 'after',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'before',
-                        'orig' => 'before',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'include_cursor',
-                        'orig' => 'include_cursor',
-                        'type' => '`$BOOLEAN`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'key',
-                        'orig' => 'key',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$NUMBER`',
-                        'kind' => 'query',
-                        'example' => 10,
-                      ],
-                      [
-                        'name' => 'name',
-                        'orig' => 'name',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_by',
-                        'orig' => 'order_by',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                      [
-                        'name' => 'order_direction',
-                        'orig' => 'order_direction',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'after',
-                      'before',
-                      'idempotency_key',
-                      'include_cursor',
-                      'key',
-                      'limit',
-                      'name',
-                      'order_by',
-                      'order_direction',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
           ],
         ],
         'master_json' => [
@@ -9869,7 +9188,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10157,7 +9476,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10171,7 +9490,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                         'example' => [
@@ -10195,13 +9514,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'transaction_id',
-                        'orig' => 'transaction_id',
+                        'orig' => 'transactionId',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -10262,7 +9581,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10270,7 +9589,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'transaction_id',
-                        'orig' => 'transaction_id',
+                        'orig' => 'transactionId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -10327,7 +9646,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10335,7 +9654,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'message_id',
+                        'orig' => 'messageId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -10441,7 +9760,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10449,14 +9768,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'message_id',
-                        'orig' => 'message_id',
+                        'orig' => 'messageId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -10520,7 +9839,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10528,7 +9847,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -10802,7 +10121,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10810,7 +10129,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -10937,7 +10256,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -10945,7 +10264,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11048,7 +10367,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11056,7 +10375,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'environment_id',
-                        'orig' => 'target_environment_id',
+                        'orig' => 'targetEnvironmentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11123,7 +10442,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11131,7 +10450,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11305,7 +10624,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11313,14 +10632,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'step_id',
+                        'orig' => 'stepId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'workflow_id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11511,7 +10830,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11519,7 +10838,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'fail_if_exist',
-                        'orig' => 'fail_if_exist',
+                        'orig' => 'failIfExists',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
                       ],
@@ -11573,7 +10892,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11581,7 +10900,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11637,7 +10956,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11645,7 +10964,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11701,7 +11020,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11709,7 +11028,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11765,7 +11084,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11773,7 +11092,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11829,7 +11148,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11837,7 +11156,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11893,7 +11212,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11901,7 +11220,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -11913,6 +11232,122 @@ class NovuConfig
                     'exist' => [
                       'id',
                       'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v2/subscribers',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'subscribers',
+                    ],
+                  ],
+                  'parts' => [
+                    'v2',
+                    'subscribers',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'email',
+                        'orig' => 'email',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'name',
+                        'orig' => 'name',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'phone',
+                        'orig' => 'phone',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'subscriber_id',
+                        'orig' => 'subscriberId',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'email',
+                      'idempotency_key',
+                      'include_cursor',
+                      'limit',
+                      'name',
+                      'order_by',
+                      'order_direction',
+                      'phone',
+                      'subscriber_id',
                     ],
                   ],
                 ],
@@ -11955,7 +11390,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -11963,7 +11398,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12025,7 +11460,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12033,14 +11468,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'notification_id',
-                        'orig' => 'notification_id',
+                        'orig' => 'notificationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12049,7 +11484,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -12106,7 +11541,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12114,14 +11549,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'provider_id',
-                        'orig' => 'provider_id',
+                        'orig' => 'providerId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12175,7 +11610,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12183,7 +11618,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12268,7 +11703,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12276,7 +11711,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12285,7 +11720,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'filter',
-                        'orig' => 'filter',
+                        'orig' => 'filters',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
@@ -12361,13 +11796,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12375,7 +11810,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12396,20 +11831,20 @@ class NovuConfig
                       ],
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'created_gte',
-                        'orig' => 'created_gte',
+                        'orig' => 'createdGte',
                         'type' => '`$NUMBER`',
                         'kind' => 'query',
                         'example' => 1704067200000,
                       ],
                       [
                         'name' => 'created_lte',
-                        'orig' => 'created_lte',
+                        'orig' => 'createdLte',
                         'type' => '`$NUMBER`',
                         'kind' => 'query',
                         'example' => 1735689599999,
@@ -12536,13 +11971,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.workflows`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12550,7 +11985,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12559,7 +11994,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'context_key',
-                        'orig' => 'context_key',
+                        'orig' => 'contextKeys',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                         'example' => [
@@ -12628,7 +12063,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12636,7 +12071,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12835,7 +12270,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12843,7 +12278,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12895,7 +12330,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12903,7 +12338,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -12955,7 +12390,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -12963,7 +12398,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13099,7 +12534,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13114,7 +12549,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'topic_id',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13177,7 +12612,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13192,7 +12627,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'topic_id',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13221,28 +12656,42 @@ class NovuConfig
         'topic' => [
           'fields' => [
             [
+              'name' => 'createdAt',
+              'title' => 'Created At',
+              'type' => '`$STRING`',
+              'short' => 'The date the topic was created',
+            ],
+            [
               'name' => 'data',
               'title' => 'Data',
               'type' => '`$OBJECT`',
-              'short' => 'Additional custom data associated with the topic.',
+              'short' => 'Additional custom data associated with the topic',
             ],
             [
               'name' => 'id',
               'title' => 'Id',
               'type' => '`$STRING`',
+              'req' => true,
+              'short' => 'The identifier of the topic',
             ],
             [
               'name' => 'key',
               'title' => 'Key',
               'type' => '`$STRING`',
               'req' => true,
-              'short' => 'The unique key identifier for the topic.',
+              'short' => 'The unique key of the topic',
             ],
             [
               'name' => 'name',
               'title' => 'Name',
               'type' => '`$STRING`',
-              'short' => 'The display name for the topic',
+              'short' => 'The name of the topic',
+            ],
+            [
+              'name' => 'updatedAt',
+              'title' => 'Updated At',
+              'type' => '`$STRING`',
+              'short' => 'The date the topic was last updated',
             ],
           ],
           'id' => [
@@ -13274,13 +12723,13 @@ class NovuConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13288,7 +12737,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'fail_if_exist',
-                        'orig' => 'fail_if_exist',
+                        'orig' => 'failIfExists',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
                       ],
@@ -13298,6 +12747,108 @@ class NovuConfig
                     'exist' => [
                       'fail_if_exist',
                       'idempotency_key',
+                    ],
+                  ],
+                ],
+              ],
+            ],
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/v2/topics',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'topics',
+                    ],
+                  ],
+                  'parts' => [
+                    'v2',
+                    'topics',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                    'query' => [
+                      [
+                        'name' => 'after',
+                        'orig' => 'after',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'before',
+                        'orig' => 'before',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'include_cursor',
+                        'orig' => 'includeCursor',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'key',
+                        'orig' => 'key',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                        'example' => 10,
+                      ],
+                      [
+                        'name' => 'name',
+                        'orig' => 'name',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_by',
+                        'orig' => 'orderBy',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'order_direction',
+                        'orig' => 'orderDirection',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'after',
+                      'before',
+                      'idempotency_key',
+                      'include_cursor',
+                      'key',
+                      'limit',
+                      'name',
+                      'order_by',
+                      'order_direction',
                     ],
                   ],
                 ],
@@ -13334,13 +12885,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13348,7 +12899,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13401,7 +12952,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13409,7 +12960,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13456,13 +13007,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.data`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13470,7 +13021,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13584,7 +13135,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13592,14 +13143,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'external_subscriber_id',
-                        'orig' => 'external_subscriber_id',
+                        'orig' => 'externalSubscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'topic_id',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13671,7 +13222,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13679,7 +13230,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'topic_key',
-                        'orig' => 'topic_key',
+                        'orig' => 'topicKey',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13714,6 +13265,13 @@ class NovuConfig
               'short' => 'Translation content as JSON object',
             ],
             [
+              'name' => 'createdAt',
+              'title' => 'Created At',
+              'type' => '`$STRING`',
+              'req' => true,
+              'short' => 'Creation timestamp',
+            ],
+            [
               'name' => 'id',
               'title' => 'Id',
               'type' => '`$STRING`',
@@ -13723,21 +13281,28 @@ class NovuConfig
               'title' => 'Locale',
               'type' => '`$STRING`',
               'req' => true,
-              'short' => 'Locale code (e.g., en_US, es_ES)',
+              'short' => 'Locale code',
             ],
             [
               'name' => 'resourceId',
               'title' => 'Resource Id',
               'type' => '`$STRING`',
               'req' => true,
-              'short' => 'The resource ID to associate translation with.',
+              'short' => 'Resource identifier',
             ],
             [
               'name' => 'resourceType',
               'title' => 'Resource Type',
               'type' => '`$STRING`',
               'req' => true,
-              'short' => 'The resource type to associate translation with',
+              'short' => 'Resource type',
+            ],
+            [
+              'name' => 'updatedAt',
+              'title' => 'Updated At',
+              'type' => '`$STRING`',
+              'req' => true,
+              'short' => 'Last update timestamp',
             ],
           ],
           'id' => [
@@ -13780,13 +13345,13 @@ class NovuConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.content`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13840,13 +13405,13 @@ class NovuConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.content`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13862,7 +13427,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'resource_id',
-                        'orig' => 'resource_id',
+                        'orig' => 'resourceId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13870,7 +13435,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'resource_type',
-                        'orig' => 'resource_type',
+                        'orig' => 'resourceType',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -13934,7 +13499,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -13949,14 +13514,14 @@ class NovuConfig
                       ],
                       [
                         'name' => 'resource_id',
-                        'orig' => 'resource_id',
+                        'orig' => 'resourceId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'resource_type',
-                        'orig' => 'resource_type',
+                        'orig' => 'resourceType',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -14010,7 +13575,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14018,7 +13583,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'resource_id',
-                        'orig' => 'resource_id',
+                        'orig' => 'resourceId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -14026,7 +13591,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'resource_type',
-                        'orig' => 'resource_type',
+                        'orig' => 'resourceType',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -14166,7 +13731,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14174,7 +13739,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'resource_id',
-                        'orig' => 'resource_id',
+                        'orig' => 'resourceId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -14182,7 +13747,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'resource_type',
-                        'orig' => 'resource_type',
+                        'orig' => 'resourceType',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -14195,124 +13760,6 @@ class NovuConfig
                       'idempotency_key',
                       'resource_id',
                       'resource_type',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'trigger' => [
-          'fields' => [
-            [
-              'name' => 'actor',
-              'title' => 'Actor',
-              'type' => '`$ANY`',
-              'short' => 'It is used to display the Avatar of the provided actor\'s subscriber id or actor object.',
-            ],
-            [
-              'name' => 'agentId',
-              'title' => 'Agent Id',
-              'type' => '`$STRING`',
-              'short' => 'Override the workflow-assigned agent for this trigger using the public agent identifier.',
-            ],
-            [
-              'name' => 'bridgeUrl',
-              'title' => 'Bridge Url',
-              'type' => '`$STRING`',
-              'short' => 'Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application.',
-            ],
-            [
-              'name' => 'context',
-              'title' => 'Context',
-              'type' => '`$OBJECT`',
-            ],
-            [
-              'name' => 'name',
-              'title' => 'Name',
-              'type' => '`$STRING`',
-              'req' => true,
-              'short' => 'The trigger identifier of the workflow you wish to send.',
-            ],
-            [
-              'name' => 'overrides',
-              'title' => 'Overrides',
-              'type' => '`$ANY`',
-              'short' => 'This could be used to override provider specific configurations',
-            ],
-            [
-              'name' => 'payload',
-              'title' => 'Payload',
-              'type' => '`$OBJECT`',
-              'short' => 'The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it.',
-            ],
-            [
-              'name' => 'tenant',
-              'title' => 'Tenant',
-              'type' => '`$ANY`',
-              'short' => 'It is used to specify a tenant context during trigger event.',
-            ],
-            [
-              'name' => 'to',
-              'title' => 'To',
-              'type' => '`$ANY`',
-              'req' => true,
-              'short' => 'The recipients list of people who will receive the notification.',
-            ],
-            [
-              'name' => 'transactionId',
-              'title' => 'Transaction Id',
-              'type' => '`$STRING`',
-              'short' => 'A unique identifier for deduplication.',
-            ],
-          ],
-          'name' => 'trigger',
-          'op' => [
-            'create' => [
-              'input' => 'data',
-              'name' => 'create',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'POST',
-                  'orig' => '/v1/events/trigger',
-                  'segments' => [
-                    [
-                      'lit' => 'v1',
-                    ],
-                    [
-                      'lit' => 'events',
-                    ],
-                    [
-                      'lit' => 'trigger',
-                    ],
-                  ],
-                  'parts' => [
-                    'v1',
-                    'events',
-                    'trigger',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'args' => [
-                    'header' => [
-                      [
-                        'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
-                        'type' => '`$STRING`',
-                        'kind' => 'header',
-                      ],
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'idempotency_key',
                     ],
                   ],
                 ],
@@ -14451,7 +13898,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14496,7 +13943,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14571,7 +14018,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14579,7 +14026,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'subscriber_id',
-                        'orig' => 'subscriber_id',
+                        'orig' => 'subscriberId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -14688,7 +14135,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14757,7 +14204,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -14765,14 +14212,14 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'environment_id',
-                        'orig' => 'environment_id',
+                        'orig' => 'environmentId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
                       ],
                       [
                         'name' => 'integration_id',
-                        'orig' => 'integration_id',
+                        'orig' => 'integrationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -15028,7 +14475,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15071,7 +14518,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15093,13 +14540,13 @@ class NovuConfig
                       ],
                       [
                         'name' => 'order_by',
-                        'orig' => 'order_by',
+                        'orig' => 'orderBy',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
                       [
                         'name' => 'order_direction',
-                        'orig' => 'order_direction',
+                        'orig' => 'orderDirection',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -15117,7 +14564,7 @@ class NovuConfig
                       ],
                       [
                         'name' => 'tag',
-                        'orig' => 'tag',
+                        'orig' => 'tags',
                         'type' => '`$ARRAY`',
                         'kind' => 'query',
                       ],
@@ -15175,7 +14622,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15183,7 +14630,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -15192,7 +14639,7 @@ class NovuConfig
                     'query' => [
                       [
                         'name' => 'environment_id',
-                        'orig' => 'environment_id',
+                        'orig' => 'environmentId',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                       ],
@@ -15245,7 +14692,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15253,7 +14700,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -15306,7 +14753,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15314,7 +14761,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -15367,7 +14814,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15375,7 +14822,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -15456,7 +14903,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15464,7 +14911,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'layout_id',
-                        'orig' => 'layout_id',
+                        'orig' => 'layoutId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -15694,7 +15141,7 @@ class NovuConfig
                     'header' => [
                       [
                         'name' => 'idempotency_key',
-                        'orig' => 'idempotency_key',
+                        'orig' => 'idempotency-key',
                         'type' => '`$STRING`',
                         'kind' => 'header',
                       ],
@@ -15702,7 +15149,7 @@ class NovuConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'workflow_id',
+                        'orig' => 'workflowId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,

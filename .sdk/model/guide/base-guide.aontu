@@ -4,7 +4,7 @@
 #   guide.aontu
 
 guide: {
-  metrics: count: entity: 67
+  metrics: count: entity: 59
   metrics: count: path: 102
   metrics: count: method: 149
 
@@ -22,6 +22,7 @@ guide: {
   entity: agent: {
     path: "/v1/agents": {
       op: create: method: *POST
+      op: list: method: *GET
     }
     path: "/v1/agents/{agentId}/reply": {
       action: "reply": {}
@@ -67,6 +68,8 @@ guide: {
   entity: channel_connection: {
     path: "/v1/channel-connections": {
       op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/v1/channel-connections/{identifier}": {
       rename: param: "identifier": *"id"
@@ -79,6 +82,8 @@ guide: {
   entity: channel_endpoint: {
     path: "/v1/channel-endpoints": {
       op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/v1/channel-endpoints/{identifier}": {
       rename: param: "identifier": *"id"
@@ -98,13 +103,12 @@ guide: {
   entity: context: {
     path: "/v2/contexts": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.data`")|top
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/v2/contexts/{type}/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.data`")|top
       op: patch: method: *PATCH
-      op: patch: transform: res: *("`body.data`")|top
       op: remove: method: *DELETE
     }
   }
@@ -126,6 +130,8 @@ guide: {
   entity: domain: {
     path: "/v1/domains": {
       op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/v1/domains/{domain}": {
       rename: param: "domain": *"id"
@@ -173,14 +179,11 @@ guide: {
       action: "routes": {}
       rename: param: "domain": *"id"
       op: create: method: *POST
-      op: create: transform: res: *("`body.data`")|top
     }
     path: "/v1/domains/{domain}/routes/{address}": {
       rename: param: "domain": *"domain_id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.data`")|top
       op: patch: method: *PATCH
-      op: patch: transform: res: *("`body.data`")|top
     }
     path: "/v1/domains/{domain}/routes/{address}/test": {
       action: "test": {}
@@ -231,6 +234,9 @@ guide: {
   }
 
   entity: event: {
+    path: "/v1/events/trigger": {
+      op: create: method: *POST
+    }
     path: "/v1/events/trigger/{transactionId}": {
       rename: param: "transactionId": *"transaction_id"
       op: remove: method: *DELETE
@@ -385,50 +391,9 @@ guide: {
     }
   }
 
-  entity: list_agents_response_dto: {
-    path: "/v1/agents": {
-      op: list: method: *GET
-    }
-  }
-
-  entity: list_channel_connections_response_dto: {
-    path: "/v1/channel-connections": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.data`")|top
-    }
-  }
-
-  entity: list_channel_endpoints_response_dto: {
-    path: "/v1/channel-endpoints": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.data`")|top
-    }
-  }
-
-  entity: list_contexts_response_dto: {
-    path: "/v2/contexts": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.data`")|top
-    }
-  }
-
   entity: list_domain_routes_response_dto: {
     path: "/v1/domains/{domain}/routes": {
       rename: param: "domain": *"domain_id"
-      op: list: method: *GET
-      op: list: transform: res: *("`body.data`")|top
-    }
-  }
-
-  entity: list_domains_response_dto: {
-    path: "/v1/domains": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.data`")|top
-    }
-  }
-
-  entity: list_subscribers_response_dto: {
-    path: "/v2/subscribers": {
       op: list: method: *GET
       op: list: transform: res: *("`body.data`")|top
     }
@@ -442,13 +407,6 @@ guide: {
     }
     path: "/v2/topics/{topicKey}/subscriptions": {
       rename: param: "topicKey": *"topic_key"
-      op: list: method: *GET
-      op: list: transform: res: *("`body.data`")|top
-    }
-  }
-
-  entity: list_topics_response_dto: {
-    path: "/v2/topics": {
       op: list: method: *GET
       op: list: transform: res: *("`body.data`")|top
     }
@@ -537,6 +495,8 @@ guide: {
     }
     path: "/v2/subscribers": {
       op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/v2/subscribers/{subscriberId}": {
       rename: param: "subscriberId": *"id"
@@ -587,6 +547,7 @@ guide: {
       action: "notifications": {}
       rename: param: "subscriberId": *"id"
       op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
   }
 
@@ -595,6 +556,7 @@ guide: {
       action: "preferences": {}
       rename: param: "subscriberId": *"id"
       op: list: method: *GET
+      op: list: transform: res: *("`body.workflows`")|top
       op: patch: method: *PATCH
     }
   }
@@ -625,14 +587,13 @@ guide: {
   entity: topic: {
     path: "/v2/topics": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.data`")|top
+      op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/v2/topics/{topicKey}": {
       rename: param: "topicKey": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.data`")|top
       op: patch: method: *PATCH
-      op: patch: transform: res: *("`body.data`")|top
       op: remove: method: *DELETE
     }
   }
@@ -655,7 +616,6 @@ guide: {
   entity: translation: {
     path: "/v2/translations": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.content`")|top
     }
     path: "/v2/translations/{resourceType}/{resourceId}": {
       rename: param: "resourceId": *"resource_id"
@@ -666,7 +626,6 @@ guide: {
       rename: param: "resourceId": *"resource_id"
       rename: param: "resourceType": *"resource_type"
       op: load: method: *GET
-      op: load: transform: res: *("`body.content`")|top
       op: remove: method: *DELETE
     }
   }
@@ -676,12 +635,6 @@ guide: {
       rename: param: "resourceId": *"resource_id"
       rename: param: "resourceType": *"resource_type"
       op: load: method: *GET
-    }
-  }
-
-  entity: trigger: {
-    path: "/v1/events/trigger": {
-      op: create: method: *POST
     }
   }
 

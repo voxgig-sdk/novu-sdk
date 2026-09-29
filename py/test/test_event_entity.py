@@ -27,7 +27,7 @@ class TestEventEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["create", "remove"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "event." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -39,12 +39,14 @@ class TestEventEntity:
                         "set NOVU_TEST_EVENT_ENTID JSON to run live")
         client = setup["client"]
 
-        # Bootstrap entity data from existing test data.
-        event_ref01_data_raw = vs.items(helpers.to_map(
-            vs.getpath(setup["data"], "existing.event")))
-        event_ref01_data = None
-        if len(event_ref01_data_raw) > 0:
-            event_ref01_data = helpers.to_map(event_ref01_data_raw[0][1])
+        # CREATE
+        event_ref01_ent = client.Event(None)
+        event_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.event"), "event_ref01"))
+
+        event_ref01_data = helpers.to_map(runner.entity_data(event_ref01_ent.create(event_ref01_data, None)))
+        assert event_ref01_data is not None
+
 
 
 
@@ -64,7 +66,7 @@ def _event_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["event01", "event02", "event03", "trigger01", "trigger02", "trigger03"],
+        ["event01", "event02", "event03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

@@ -42,7 +42,7 @@ main: kit: entity: generate_preview_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -51,14 +51,14 @@ main: kit: entity: generate_preview_response_dto: {
               {
                 k: "param"
                 n: "step_id"
-                or: "step_id"
+                or: "stepId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "workflow_id"
-                or: "workflow_id"
+                or: "workflowId"
                 r: true
                 t: "`$STRING`"
               }

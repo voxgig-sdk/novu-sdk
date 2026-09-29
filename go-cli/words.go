@@ -139,24 +139,10 @@ func entityFor(client *sdk.NovuSDK, name string) (sdk.NovuEntity, error) {
 		return client.Link(nil), nil
 	case "list_agent_integrations_response_dto":
 		return client.ListAgentIntegrationsResponseDto(nil), nil
-	case "list_agents_response_dto":
-		return client.ListAgentsResponseDto(nil), nil
-	case "list_channel_connections_response_dto":
-		return client.ListChannelConnectionsResponseDto(nil), nil
-	case "list_channel_endpoints_response_dto":
-		return client.ListChannelEndpointsResponseDto(nil), nil
-	case "list_contexts_response_dto":
-		return client.ListContextsResponseDto(nil), nil
 	case "list_domain_routes_response_dto":
 		return client.ListDomainRoutesResponseDto(nil), nil
-	case "list_domains_response_dto":
-		return client.ListDomainsResponseDto(nil), nil
-	case "list_subscribers_response_dto":
-		return client.ListSubscribersResponseDto(nil), nil
 	case "list_topic_subscriptions_response_dto":
 		return client.ListTopicSubscriptionsResponseDto(nil), nil
-	case "list_topics_response_dto":
-		return client.ListTopicsResponseDto(nil), nil
 	case "master_json":
 		return client.MasterJson(nil), nil
 	case "message":
@@ -195,8 +181,6 @@ func entityFor(client *sdk.NovuSDK, name string) (sdk.NovuEntity, error) {
 		return client.Translation(nil), nil
 	case "translation_group_dto":
 		return client.TranslationGroupDto(nil), nil
-	case "trigger":
-		return client.Trigger(nil), nil
 	case "trigger_event_response_dto":
 		return client.TriggerEventResponseDto(nil), nil
 	case "unseen":

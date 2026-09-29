@@ -72,6 +72,15 @@
 ---@class AgentLoadMatch
 ---@field id string
 
+---@class AgentListMatch
+---@field after? string
+---@field before? string
+---@field identifier? string
+---@field include_cursor? boolean
+---@field limit? number
+---@field order_by? string
+---@field order_direction? string
+
 ---@class AgentCreateData
 ---@field active boolean
 ---@field behavior table
@@ -226,6 +235,20 @@
 ---@class ChannelConnectionLoadMatch
 ---@field id string
 
+---@class ChannelConnectionListMatch
+---@field after? string
+---@field before? string
+---@field channel? string
+---@field connection_mode? string
+---@field context_key? table
+---@field include_cursor? boolean
+---@field integration_identifier? string
+---@field limit? number
+---@field order_by? string
+---@field order_direction? string
+---@field provider_id? string
+---@field subscriber_id? string
+
 ---@class ChannelConnectionCreateData
 ---@field auth table
 ---@field channel string
@@ -276,6 +299,20 @@
 ---@class ChannelEndpointLoadMatch
 ---@field id string
 
+---@class ChannelEndpointListMatch
+---@field after? string
+---@field before? string
+---@field channel? string
+---@field connection_identifier? string
+---@field context_key? table
+---@field include_cursor? boolean
+---@field integration_identifier? string
+---@field limit? number
+---@field order_by? string
+---@field order_direction? string
+---@field provider_id? string
+---@field subscriber_id? string
+
 ---@class ChannelEndpointCreateData
 ---@field channel string
 ---@field connectionIdentifier string
@@ -320,25 +357,41 @@
 
 ---@class Context
 ---@field bridgeUrl? string
----@field data? table
+---@field createdAt string
+---@field data table
 ---@field id string
 ---@field type string
+---@field updatedAt string
 
 ---@class ContextLoadMatch
 ---@field id string
 ---@field type string
 
+---@class ContextListMatch
+---@field after? string
+---@field before? string
+---@field id? string
+---@field include_cursor? boolean
+---@field limit? number
+---@field order_by? string
+---@field order_direction? string
+---@field search? string
+
 ---@class ContextCreateData
 ---@field bridgeUrl? string
----@field data? table
+---@field createdAt string
+---@field data table
 ---@field id string
 ---@field type string
+---@field updatedAt string
 
 ---@class ContextUpdateData
 ---@field id string
 ---@field type string
 ---@field bridgeUrl? string
+---@field createdAt? string
 ---@field data? table
+---@field updatedAt? string
 
 ---@class ContextRemoveMatch
 ---@field id string
@@ -387,6 +440,15 @@
 
 ---@class DomainLoadMatch
 ---@field id string
+
+---@class DomainListMatch
+---@field after? string
+---@field before? string
+---@field include_cursor? boolean
+---@field limit? number
+---@field name? string
+---@field order_by? string
+---@field order_direction? string
 
 ---@class DomainCreateData
 ---@field createdAt string
@@ -458,10 +520,16 @@
 ---@field updatedAt string
 
 ---@class DomainRouteResponseDto
+---@field address string
 ---@field agentId? string
+---@field createdAt string
 ---@field data? table
----@field id? string
----@field type? string
+---@field domainId string
+---@field environmentId string
+---@field id string
+---@field organizationId string
+---@field type string
+---@field updatedAt string
 
 ---@class DomainRouteResponseDtoLoadMatch
 ---@field address string
@@ -469,17 +537,28 @@
 
 ---@class DomainRouteResponseDtoCreateData
 ---@field id string
+---@field address string
 ---@field agentId? string
+---@field createdAt string
 ---@field data? table
----@field type? string
+---@field domainId string
+---@field environmentId string
+---@field organizationId string
+---@field type string
+---@field updatedAt string
 
 ---@class DomainRouteResponseDtoUpdateData
 ---@field address string
 ---@field domain_id string
 ---@field agentId? string
+---@field createdAt? string
 ---@field data? table
+---@field domainId? string
+---@field environmentId? string
 ---@field id? string
+---@field organizationId? string
 ---@field type? string
+---@field updatedAt? string
 
 ---@class Environment
 ---@field apiKeys? table
@@ -589,6 +668,28 @@
 ---@field variable_key string
 
 ---@class Event
+---@field actor? any
+---@field agentId? string
+---@field bridgeUrl? string
+---@field context? table
+---@field name string
+---@field overrides? any
+---@field payload? table
+---@field tenant? any
+---@field to any
+---@field transactionId? string
+
+---@class EventCreateData
+---@field actor? any
+---@field agentId? string
+---@field bridgeUrl? string
+---@field context? table
+---@field name string
+---@field overrides? any
+---@field payload? table
+---@field tenant? any
+---@field to any
+---@field transactionId? string
 
 ---@class EventRemoveMatch
 ---@field transaction_id string
@@ -944,107 +1045,6 @@
 ---@field order_by? string
 ---@field order_direction? string
 
----@class ListAgentsResponseDto
----@field active boolean
----@field behavior table
----@field bridgeUrl? string
----@field createdAt string
----@field createdBy? string
----@field description? string
----@field devBridgeActive? boolean
----@field devBridgeUrl? string
----@field environmentId string
----@field exceedsPlanLimit? boolean
----@field id string
----@field identifier string
----@field integrations? table
----@field managedRuntime? any
----@field name string
----@field organizationId string
----@field runtime? string
----@field updatedAt string
----@field visibility? string
-
----@class ListAgentsResponseDtoListMatch
----@field after? string
----@field before? string
----@field identifier? string
----@field include_cursor? boolean
----@field limit? number
----@field order_by? string
----@field order_direction? string
-
----@class ListChannelConnectionsResponseDto
----@field auth table
----@field channel string
----@field contextKeys table
----@field createdAt string
----@field identifier string
----@field integrationIdentifier string
----@field providerId string
----@field subscriberId string
----@field updatedAt string
----@field workspace table
-
----@class ListChannelConnectionsResponseDtoListMatch
----@field after? string
----@field before? string
----@field channel? string
----@field connection_mode? string
----@field context_key? table
----@field include_cursor? boolean
----@field integration_identifier? string
----@field limit? number
----@field order_by? string
----@field order_direction? string
----@field provider_id? string
----@field subscriber_id? string
-
----@class ListChannelEndpointsResponseDto
----@field channel string
----@field connectionIdentifier string
----@field contextKeys table
----@field createdAt string
----@field endpoint any
----@field identifier string
----@field integrationIdentifier string
----@field providerId string
----@field subscriberId string
----@field type string
----@field updatedAt string
-
----@class ListChannelEndpointsResponseDtoListMatch
----@field after? string
----@field before? string
----@field channel? string
----@field connection_identifier? string
----@field context_key? table
----@field include_cursor? boolean
----@field integration_identifier? string
----@field limit? number
----@field order_by? string
----@field order_direction? string
----@field provider_id? string
----@field subscriber_id? string
-
----@class ListContextsResponseDto
----@field bridgeUrl? string
----@field createdAt string
----@field data table
----@field id string
----@field type string
----@field updatedAt string
-
----@class ListContextsResponseDtoListMatch
----@field after? string
----@field before? string
----@field id? string
----@field include_cursor? boolean
----@field limit? number
----@field order_by? string
----@field order_direction? string
----@field search? string
-
 ---@class ListDomainRoutesResponseDto
 ---@field address string
 ---@field agentId? string
@@ -1067,62 +1067,6 @@
 ---@field order_by? string
 ---@field order_direction? string
 
----@class ListDomainsResponseDto
----@field createdAt string
----@field data? table
----@field dnsProvider? string
----@field environmentId string
----@field expectedDnsRecords? table
----@field id string
----@field mxRecordConfigured boolean
----@field name string
----@field organizationId string
----@field status string
----@field updatedAt string
-
----@class ListDomainsResponseDtoListMatch
----@field after? string
----@field before? string
----@field include_cursor? boolean
----@field limit? number
----@field name? string
----@field order_by? string
----@field order_direction? string
-
----@class ListSubscribersResponseDto
----@field avatar? string
----@field channels? table
----@field createdAt string
----@field data? table
----@field deleted boolean
----@field email? string
----@field environmentId string
----@field firstName? string
----@field id? string
----@field isOnline? boolean
----@field lastName? string
----@field lastOnlineAt? string
----@field locale? string
----@field organizationId string
----@field phone? string
----@field subscriberId string
----@field timezone? string
----@field topics? table
----@field updatedAt string
----@field v? number
-
----@class ListSubscribersResponseDtoListMatch
----@field after? string
----@field before? string
----@field email? string
----@field include_cursor? boolean
----@field limit? number
----@field name? string
----@field order_by? string
----@field order_direction? string
----@field phone? string
----@field subscriber_id? string
-
 ---@class ListTopicSubscriptionsResponseDto
 ---@field contextKeys? table
 ---@field createdAt string
@@ -1140,24 +1084,6 @@
 ---@field include_cursor? boolean
 ---@field key? string
 ---@field limit? number
----@field order_by? string
----@field order_direction? string
-
----@class ListTopicsResponseDto
----@field createdAt? string
----@field data? table
----@field id string
----@field key string
----@field name? string
----@field updatedAt? string
-
----@class ListTopicsResponseDtoListMatch
----@field after? string
----@field before? string
----@field include_cursor? boolean
----@field key? string
----@field limit? number
----@field name? string
 ---@field order_by? string
 ---@field order_direction? string
 
@@ -1344,6 +1270,18 @@
 ---@class SubscriberLoadMatch
 ---@field id string
 
+---@class SubscriberListMatch
+---@field after? string
+---@field before? string
+---@field email? string
+---@field include_cursor? boolean
+---@field limit? number
+---@field name? string
+---@field order_by? string
+---@field order_direction? string
+---@field phone? string
+---@field subscriber_id? string
+
 ---@class SubscriberCreateData
 ---@field fail_if_exist? boolean
 ---@field avatar? string
@@ -1504,26 +1442,42 @@
 ---@field updatedAt? string
 
 ---@class Topic
+---@field createdAt? string
 ---@field data? table
----@field id? string
+---@field id string
 ---@field key string
 ---@field name? string
+---@field updatedAt? string
 
 ---@class TopicLoadMatch
 ---@field id string
 
+---@class TopicListMatch
+---@field after? string
+---@field before? string
+---@field include_cursor? boolean
+---@field key? string
+---@field limit? number
+---@field name? string
+---@field order_by? string
+---@field order_direction? string
+
 ---@class TopicCreateData
 ---@field fail_if_exist? boolean
+---@field createdAt? string
 ---@field data? table
----@field id? string
+---@field id string
 ---@field key string
 ---@field name? string
+---@field updatedAt? string
 
 ---@class TopicUpdateData
 ---@field id string
+---@field createdAt? string
 ---@field data? table
 ---@field key? string
 ---@field name? string
+---@field updatedAt? string
 
 ---@class TopicRemoveMatch
 ---@field id string
@@ -1547,10 +1501,12 @@
 
 ---@class Translation
 ---@field content table
+---@field createdAt string
 ---@field id? string
 ---@field locale string
 ---@field resourceId string
 ---@field resourceType string
+---@field updatedAt string
 
 ---@class TranslationLoadMatch
 ---@field locale string
@@ -1559,10 +1515,12 @@
 
 ---@class TranslationCreateData
 ---@field content table
+---@field createdAt string
 ---@field id? string
 ---@field locale string
 ---@field resourceId string
 ---@field resourceType string
+---@field updatedAt string
 
 ---@class TranslationRemoveMatch
 ---@field locale? string
@@ -1582,30 +1540,6 @@
 ---@class TranslationGroupDtoLoadMatch
 ---@field resource_id string
 ---@field resource_type string
-
----@class Trigger
----@field actor? any
----@field agentId? string
----@field bridgeUrl? string
----@field context? table
----@field name string
----@field overrides? any
----@field payload? table
----@field tenant? any
----@field to any
----@field transactionId? string
-
----@class TriggerCreateData
----@field actor? any
----@field agentId? string
----@field bridgeUrl? string
----@field context? table
----@field name string
----@field overrides? any
----@field payload? table
----@field tenant? any
----@field to any
----@field transactionId? string
 
 ---@class TriggerEventResponseDto
 ---@field acknowledged boolean

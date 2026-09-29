@@ -19,6 +19,18 @@ main: kit: flow: BasicAgentFlow:
     }
 
     {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_ref01"
+          }
+        }
+      ]
+    }
+
+    {
       i: {
         ref: "agent_ref01",
         srcdatavar: "agent_ref01_data",
@@ -70,6 +82,22 @@ main: kit: flow: BasicAgentFlow:
       }
 
       o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "agent_ref01"
+          }
+        }
+      ]
     }
   ],
   "key$": "BasicAgentFlow"

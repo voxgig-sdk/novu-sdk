@@ -25,6 +25,54 @@ func TestTopicEntity(t *testing.T) {
 		}
 	})
 
+	// Feature #4: the entity Stream(action, ...) method runs the op pipeline and
+	// returns a channel over result items. With the streaming feature active it
+	// yields the feature's incremental output; otherwise it falls back to the
+	// materialised list so Stream always yields.
+	t.Run("stream", func(t *testing.T) {
+		seed := map[string]any{
+			"entity": map[string]any{
+				"topic": map[string]any{
+					"s1": map[string]any{"id": "s1"},
+					"s2": map[string]any{"id": "s2"},
+					"s3": map[string]any{"id": "s3"},
+				},
+			},
+		}
+
+		// Fallback: streaming inactive -> yields the materialised list items.
+		base := sdk.TestSDK(seed, nil)
+		var seen []any
+		for item := range base.Topic(nil).Stream("list", nil, nil) {
+			seen = append(seen, item)
+		}
+		if len(seen) != 3 {
+			t.Fatalf("expected 3 streamed items, got %d", len(seen))
+		}
+
+		// Inbound: streaming active -> yields each item from the feature iterator.
+		hasStreaming := false
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
+			_, hasStreaming = fm["streaming"]
+		}
+		if hasStreaming {
+			streamSdk := sdk.TestSDK(seed, map[string]any{
+				"feature": map[string]any{"streaming": map[string]any{"active": true}},
+			})
+			var got []any
+			for item := range streamSdk.Topic(nil).Stream("list", nil, nil) {
+				if sub, ok := item.([]any); ok {
+					got = append(got, sub...)
+				} else {
+					got = append(got, item)
+				}
+			}
+			if len(got) != 3 {
+				t.Fatalf("expected 3 items via streaming feature, got %d", len(got))
+			}
+		}
+	})
+
 	t.Run("basic", func(t *testing.T) {
 		setup := topicBasicSetup(nil)
 		// Per-op sdk-test-control.json skip — basic test exercises a flow
@@ -33,7 +81,7 @@ func TestTopicEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"create", "update", "load", "remove"} {
+		for _, _op := range []string{"create", "list", "update", "load", "remove"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "topic." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -67,12 +115,29 @@ func TestTopicEntity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		// LIST
+		topicRef01Match := map[string]any{}
+
+		topicRef01ListResult, err := topicRef01Ent.List(topicRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		topicRef01List, topicRef01ListOk := topicRef01ListResult.([]any)
+		if !topicRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", topicRef01ListResult)
+		}
+
+		foundItem := vs.Select(entityListToData(topicRef01List), map[string]any{"id": topicRef01Data["id"]})
+		if vs.IsEmpty(foundItem) {
+			t.Fatal("expected to find created entity in list")
+		}
+
 		// UPDATE
 		topicRef01DataUp0Up := map[string]any{
 			"id": topicRef01Data["id"],
 		}
 
-		topicRef01MarkdefUp0Name := "key"
+		topicRef01MarkdefUp0Name := "createdAt"
 		topicRef01MarkdefUp0Value := fmt.Sprintf("Mark01-topic_ref01_%d", setup.now)
 		topicRef01DataUp0Up[topicRef01MarkdefUp0Name] = topicRef01MarkdefUp0Value
 
@@ -114,6 +179,23 @@ func TestTopicEntity(t *testing.T) {
 		_, err = topicRef01Ent.Remove(topicRef01MatchRm0, nil)
 		if err != nil {
 			t.Fatalf("remove failed: %v", err)
+		}
+
+		// LIST
+		topicRef01MatchRt0 := map[string]any{}
+
+		topicRef01ListRt0Result, err := topicRef01Ent.List(topicRef01MatchRt0, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		topicRef01ListRt0, topicRef01ListRt0Ok := topicRef01ListRt0Result.([]any)
+		if !topicRef01ListRt0Ok {
+			t.Fatalf("expected list result to be an array, got %T", topicRef01ListRt0Result)
+		}
+
+		notFoundItem := vs.Select(entityListToData(topicRef01ListRt0), map[string]any{"id": topicRef01Data["id"]})
+		if !vs.IsEmpty(notFoundItem) {
+			t.Fatal("expected removed entity to not be in list")
 		}
 
 	})

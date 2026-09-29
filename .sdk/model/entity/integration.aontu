@@ -206,7 +206,7 @@ main: kit: entity: integration: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -215,7 +215,7 @@ main: kit: entity: integration: {
               {
                 k: "param"
                 n: "id"
-                or: "integration_id"
+                or: "integrationId"
                 r: true
                 t: "`$STRING`"
               }
@@ -265,7 +265,7 @@ main: kit: entity: integration: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -274,7 +274,7 @@ main: kit: entity: integration: {
               {
                 k: "param"
                 n: "integration_identifier"
-                or: "integration_identifier"
+                or: "integrationIdentifier"
                 r: true
                 t: "`$STRING`"
               }
@@ -324,7 +324,7 @@ main: kit: entity: integration: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -366,7 +366,7 @@ main: kit: entity: integration: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -408,7 +408,7 @@ main: kit: entity: integration: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -417,7 +417,7 @@ main: kit: entity: integration: {
               {
                 k: "param"
                 n: "id"
-                or: "integration_id"
+                or: "integrationId"
                 r: true
                 t: "`$STRING`"
               }
@@ -468,7 +468,7 @@ main: kit: entity: integration: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -477,7 +477,7 @@ main: kit: entity: integration: {
               {
                 k: "param"
                 n: "id"
-                or: "integration_id"
+                or: "integrationId"
                 r: true
                 t: "`$STRING`"
               }

@@ -93,6 +93,16 @@ class AgentLoadMatch(TypedDict):
     id: str
 
 
+class AgentListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    identifier: str
+    include_cursor: bool
+    limit: float
+    order_by: str
+    order_direction: str
+
+
 class AgentCreateDataRequired(TypedDict):
     active: bool
     behavior: dict
@@ -283,6 +293,21 @@ class ChannelConnectionLoadMatch(TypedDict):
     id: str
 
 
+class ChannelConnectionListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    channel: str
+    connection_mode: str
+    context_key: list
+    include_cursor: bool
+    integration_identifier: str
+    limit: float
+    order_by: str
+    order_direction: str
+    provider_id: str
+    subscriber_id: str
+
+
 class ChannelConnectionCreateDataRequired(TypedDict):
     auth: dict
     channel: str
@@ -347,6 +372,21 @@ class ChannelEndpointLoadMatch(TypedDict):
     id: str
 
 
+class ChannelEndpointListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    channel: str
+    connection_identifier: str
+    context_key: list
+    include_cursor: bool
+    integration_identifier: str
+    limit: float
+    order_by: str
+    order_direction: str
+    provider_id: str
+    subscriber_id: str
+
+
 class ChannelEndpointCreateDataRequired(TypedDict):
     channel: str
     connectionIdentifier: str
@@ -401,13 +441,15 @@ class ConfigureCreateData(TypedDict):
 
 
 class ContextRequired(TypedDict):
+    createdAt: str
+    data: dict
     id: str
     type: str
+    updatedAt: str
 
 
 class Context(ContextRequired, total=False):
     bridgeUrl: str
-    data: dict
 
 
 class ContextLoadMatch(TypedDict):
@@ -415,14 +457,27 @@ class ContextLoadMatch(TypedDict):
     type: str
 
 
+class ContextListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    id: str
+    include_cursor: bool
+    limit: float
+    order_by: str
+    order_direction: str
+    search: str
+
+
 class ContextCreateDataRequired(TypedDict):
+    createdAt: str
+    data: dict
     id: str
     type: str
+    updatedAt: str
 
 
 class ContextCreateData(ContextCreateDataRequired, total=False):
     bridgeUrl: str
-    data: dict
 
 
 class ContextUpdateDataRequired(TypedDict):
@@ -432,7 +487,9 @@ class ContextUpdateDataRequired(TypedDict):
 
 class ContextUpdateData(ContextUpdateDataRequired, total=False):
     bridgeUrl: str
+    createdAt: str
     data: dict
+    updatedAt: str
 
 
 class ContextRemoveMatch(TypedDict):
@@ -494,6 +551,16 @@ class Domain(DomainRequired, total=False):
 
 class DomainLoadMatch(TypedDict):
     id: str
+
+
+class DomainListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    include_cursor: bool
+    limit: float
+    name: str
+    order_by: str
+    order_direction: str
 
 
 class DomainCreateDataRequired(TypedDict):
@@ -592,11 +659,20 @@ class DomainResponseDtoCreateData(DomainResponseDtoCreateDataRequired, total=Fal
     expectedDnsRecords: list
 
 
-class DomainRouteResponseDto(TypedDict, total=False):
+class DomainRouteResponseDtoRequired(TypedDict):
+    address: str
+    createdAt: str
+    domainId: str
+    environmentId: str
+    id: str
+    organizationId: str
+    type: str
+    updatedAt: str
+
+
+class DomainRouteResponseDto(DomainRouteResponseDtoRequired, total=False):
     agentId: str
     data: dict
-    id: str
-    type: str
 
 
 class DomainRouteResponseDtoLoadMatch(TypedDict):
@@ -606,12 +682,18 @@ class DomainRouteResponseDtoLoadMatch(TypedDict):
 
 class DomainRouteResponseDtoCreateDataRequired(TypedDict):
     id: str
+    address: str
+    createdAt: str
+    domainId: str
+    environmentId: str
+    organizationId: str
+    type: str
+    updatedAt: str
 
 
 class DomainRouteResponseDtoCreateData(DomainRouteResponseDtoCreateDataRequired, total=False):
     agentId: str
     data: dict
-    type: str
 
 
 class DomainRouteResponseDtoUpdateDataRequired(TypedDict):
@@ -621,9 +703,14 @@ class DomainRouteResponseDtoUpdateDataRequired(TypedDict):
 
 class DomainRouteResponseDtoUpdateData(DomainRouteResponseDtoUpdateDataRequired, total=False):
     agentId: str
+    createdAt: str
     data: dict
+    domainId: str
+    environmentId: str
     id: str
+    organizationId: str
     type: str
+    updatedAt: str
 
 
 class EnvironmentRequired(TypedDict):
@@ -760,8 +847,36 @@ class EnvironmentVariableWorkflowInfoDtoListMatch(TypedDict):
     variable_key: str
 
 
-class Event(TypedDict):
-    pass
+class EventRequired(TypedDict):
+    name: str
+    to: Any
+
+
+class Event(EventRequired, total=False):
+    actor: Any
+    agentId: str
+    bridgeUrl: str
+    context: dict
+    overrides: Any
+    payload: dict
+    tenant: Any
+    transactionId: str
+
+
+class EventCreateDataRequired(TypedDict):
+    name: str
+    to: Any
+
+
+class EventCreateData(EventCreateDataRequired, total=False):
+    actor: Any
+    agentId: str
+    bridgeUrl: str
+    context: dict
+    overrides: Any
+    payload: dict
+    tenant: Any
+    transactionId: str
 
 
 class EventRemoveMatch(TypedDict):
@@ -1204,121 +1319,6 @@ class ListAgentIntegrationsResponseDtoListMatch(ListAgentIntegrationsResponseDto
     order_direction: str
 
 
-class ListAgentsResponseDtoRequired(TypedDict):
-    active: bool
-    behavior: dict
-    createdAt: str
-    environmentId: str
-    id: str
-    identifier: str
-    name: str
-    organizationId: str
-    updatedAt: str
-
-
-class ListAgentsResponseDto(ListAgentsResponseDtoRequired, total=False):
-    bridgeUrl: str
-    createdBy: str
-    description: str
-    devBridgeActive: bool
-    devBridgeUrl: str
-    exceedsPlanLimit: bool
-    integrations: list
-    managedRuntime: Any
-    runtime: str
-    visibility: str
-
-
-class ListAgentsResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    identifier: str
-    include_cursor: bool
-    limit: float
-    order_by: str
-    order_direction: str
-
-
-class ListChannelConnectionsResponseDto(TypedDict):
-    auth: dict
-    channel: str
-    contextKeys: list
-    createdAt: str
-    identifier: str
-    integrationIdentifier: str
-    providerId: str
-    subscriberId: str
-    updatedAt: str
-    workspace: dict
-
-
-class ListChannelConnectionsResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    channel: str
-    connection_mode: str
-    context_key: list
-    include_cursor: bool
-    integration_identifier: str
-    limit: float
-    order_by: str
-    order_direction: str
-    provider_id: str
-    subscriber_id: str
-
-
-class ListChannelEndpointsResponseDto(TypedDict):
-    channel: str
-    connectionIdentifier: str
-    contextKeys: list
-    createdAt: str
-    endpoint: Any
-    identifier: str
-    integrationIdentifier: str
-    providerId: str
-    subscriberId: str
-    type: str
-    updatedAt: str
-
-
-class ListChannelEndpointsResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    channel: str
-    connection_identifier: str
-    context_key: list
-    include_cursor: bool
-    integration_identifier: str
-    limit: float
-    order_by: str
-    order_direction: str
-    provider_id: str
-    subscriber_id: str
-
-
-class ListContextsResponseDtoRequired(TypedDict):
-    createdAt: str
-    data: dict
-    id: str
-    type: str
-    updatedAt: str
-
-
-class ListContextsResponseDto(ListContextsResponseDtoRequired, total=False):
-    bridgeUrl: str
-
-
-class ListContextsResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    id: str
-    include_cursor: bool
-    limit: float
-    order_by: str
-    order_direction: str
-    search: str
-
-
 class ListDomainRoutesResponseDtoRequired(TypedDict):
     address: str
     createdAt: str
@@ -1349,72 +1349,6 @@ class ListDomainRoutesResponseDtoListMatch(ListDomainRoutesResponseDtoListMatchR
     order_direction: str
 
 
-class ListDomainsResponseDtoRequired(TypedDict):
-    createdAt: str
-    environmentId: str
-    id: str
-    mxRecordConfigured: bool
-    name: str
-    organizationId: str
-    status: str
-    updatedAt: str
-
-
-class ListDomainsResponseDto(ListDomainsResponseDtoRequired, total=False):
-    data: dict
-    dnsProvider: str
-    expectedDnsRecords: list
-
-
-class ListDomainsResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    include_cursor: bool
-    limit: float
-    name: str
-    order_by: str
-    order_direction: str
-
-
-class ListSubscribersResponseDtoRequired(TypedDict):
-    createdAt: str
-    deleted: bool
-    environmentId: str
-    organizationId: str
-    subscriberId: str
-    updatedAt: str
-
-
-class ListSubscribersResponseDto(ListSubscribersResponseDtoRequired, total=False):
-    avatar: str
-    channels: list
-    data: dict
-    email: str
-    firstName: str
-    id: str
-    isOnline: bool
-    lastName: str
-    lastOnlineAt: str
-    locale: str
-    phone: str
-    timezone: str
-    topics: list
-    v: float
-
-
-class ListSubscribersResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    email: str
-    include_cursor: bool
-    limit: float
-    name: str
-    order_by: str
-    order_direction: str
-    phone: str
-    subscriber_id: str
-
-
 class ListTopicSubscriptionsResponseDtoRequired(TypedDict):
     createdAt: str
     id: str
@@ -1439,29 +1373,6 @@ class ListTopicSubscriptionsResponseDtoListMatch(ListTopicSubscriptionsResponseD
     include_cursor: bool
     key: str
     limit: float
-    order_by: str
-    order_direction: str
-
-
-class ListTopicsResponseDtoRequired(TypedDict):
-    id: str
-    key: str
-
-
-class ListTopicsResponseDto(ListTopicsResponseDtoRequired, total=False):
-    createdAt: str
-    data: dict
-    name: str
-    updatedAt: str
-
-
-class ListTopicsResponseDtoListMatch(TypedDict, total=False):
-    after: str
-    before: str
-    include_cursor: bool
-    key: str
-    limit: float
-    name: str
     order_by: str
     order_direction: str
 
@@ -1702,6 +1613,19 @@ class SubscriberLoadMatch(TypedDict):
     id: str
 
 
+class SubscriberListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    email: str
+    include_cursor: bool
+    limit: float
+    name: str
+    order_by: str
+    order_direction: str
+    phone: str
+    subscriber_id: str
+
+
 class SubscriberCreateDataRequired(TypedDict):
     createdAt: str
     deleted: bool
@@ -1904,28 +1828,43 @@ class SubscriptionUpdateData(SubscriptionUpdateDataRequired, total=False):
 
 
 class TopicRequired(TypedDict):
+    id: str
     key: str
 
 
 class Topic(TopicRequired, total=False):
+    createdAt: str
     data: dict
-    id: str
     name: str
+    updatedAt: str
 
 
 class TopicLoadMatch(TypedDict):
     id: str
 
 
+class TopicListMatch(TypedDict, total=False):
+    after: str
+    before: str
+    include_cursor: bool
+    key: str
+    limit: float
+    name: str
+    order_by: str
+    order_direction: str
+
+
 class TopicCreateDataRequired(TypedDict):
+    id: str
     key: str
 
 
 class TopicCreateData(TopicCreateDataRequired, total=False):
     fail_if_exist: bool
+    createdAt: str
     data: dict
-    id: str
     name: str
+    updatedAt: str
 
 
 class TopicUpdateDataRequired(TypedDict):
@@ -1933,9 +1872,11 @@ class TopicUpdateDataRequired(TypedDict):
 
 
 class TopicUpdateData(TopicUpdateDataRequired, total=False):
+    createdAt: str
     data: dict
     key: str
     name: str
+    updatedAt: str
 
 
 class TopicRemoveMatch(TypedDict):
@@ -1966,9 +1907,11 @@ class TopicSubscriptionsResponseDtoRemoveMatch(TypedDict):
 
 class TranslationRequired(TypedDict):
     content: dict
+    createdAt: str
     locale: str
     resourceId: str
     resourceType: str
+    updatedAt: str
 
 
 class Translation(TranslationRequired, total=False):
@@ -1983,9 +1926,11 @@ class TranslationLoadMatch(TypedDict):
 
 class TranslationCreateDataRequired(TypedDict):
     content: dict
+    createdAt: str
     locale: str
     resourceId: str
     resourceType: str
+    updatedAt: str
 
 
 class TranslationCreateData(TranslationCreateDataRequired, total=False):
@@ -2018,38 +1963,6 @@ class TranslationGroupDto(TranslationGroupDtoRequired, total=False):
 class TranslationGroupDtoLoadMatch(TypedDict):
     resource_id: str
     resource_type: str
-
-
-class TriggerRequired(TypedDict):
-    name: str
-    to: Any
-
-
-class Trigger(TriggerRequired, total=False):
-    actor: Any
-    agentId: str
-    bridgeUrl: str
-    context: dict
-    overrides: Any
-    payload: dict
-    tenant: Any
-    transactionId: str
-
-
-class TriggerCreateDataRequired(TypedDict):
-    name: str
-    to: Any
-
-
-class TriggerCreateData(TriggerCreateDataRequired, total=False):
-    actor: Any
-    agentId: str
-    bridgeUrl: str
-    context: dict
-    overrides: Any
-    payload: dict
-    tenant: Any
-    transactionId: str
 
 
 class TriggerEventResponseDtoRequired(TypedDict):

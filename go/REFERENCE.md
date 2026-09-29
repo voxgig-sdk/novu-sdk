@@ -172,41 +172,13 @@ Create a new `Link` entity instance. Pass `nil` for no initial data.
 
 Create a new `ListAgentIntegrationsResponseDto` entity instance. Pass `nil` for no initial data.
 
-#### `ListAgentsResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListAgentsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListChannelConnectionsResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListChannelConnectionsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListChannelEndpointsResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListChannelEndpointsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListContextsResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListContextsResponseDto` entity instance. Pass `nil` for no initial data.
-
 #### `ListDomainRoutesResponseDto(data map[string]any) NovuEntity`
 
 Create a new `ListDomainRoutesResponseDto` entity instance. Pass `nil` for no initial data.
 
-#### `ListDomainsResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListDomainsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListSubscribersResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListSubscribersResponseDto` entity instance. Pass `nil` for no initial data.
-
 #### `ListTopicSubscriptionsResponseDto(data map[string]any) NovuEntity`
 
 Create a new `ListTopicSubscriptionsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListTopicsResponseDto(data map[string]any) NovuEntity`
-
-Create a new `ListTopicsResponseDto` entity instance. Pass `nil` for no initial data.
 
 #### `MasterJson(data map[string]any) NovuEntity`
 
@@ -283,10 +255,6 @@ Create a new `Translation` entity instance. Pass `nil` for no initial data.
 #### `TranslationGroupDto(data map[string]any) NovuEntity`
 
 Create a new `TranslationGroupDto` entity instance. Pass `nil` for no initial data.
-
-#### `Trigger(data map[string]any) NovuEntity`
-
-Create a new `Trigger` entity instance. Pass `nil` for no initial data.
 
 #### `TriggerEventResponseDto(data map[string]any) NovuEntity`
 
@@ -468,29 +436,41 @@ fmt.Println(agent.GetName()) // "agent"
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `active` | - | Yes | Yes | - |
-| `behavior` | - | - | Yes | - |
-| `bridgeUrl` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `createdBy` | - | - | - | - |
-| `description` | - | - | - | - |
-| `devBridgeActive` | - | - | - | - |
-| `devBridgeUrl` | - | - | - | - |
-| `environmentId` | - | - | - | - |
-| `exceedsPlanLimit` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | - | - | - |
-| `integrations` | - | - | - | - |
-| `managedRuntime` | - | Yes | - | - |
-| `name` | - | - | Yes | - |
-| `organizationId` | - | - | - | - |
-| `runtime` | - | - | - | - |
-| `updatedAt` | - | - | - | - |
-| `visibility` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `active` | - | - | Yes | Yes | - |
+| `behavior` | - | - | - | Yes | - |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `createdBy` | - | - | - | - | - |
+| `description` | - | - | - | - | - |
+| `devBridgeActive` | - | - | - | - | - |
+| `devBridgeUrl` | - | - | - | - | - |
+| `environmentId` | - | - | - | - | - |
+| `exceedsPlanLimit` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | - | - | - |
+| `integrations` | - | - | - | - | - |
+| `managedRuntime` | - | - | Yes | - | - |
+| `name` | - | - | - | Yes | - |
+| `organizationId` | - | - | - | - | - |
+| `runtime` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `visibility` | - | - | - | - | - |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.Agent(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -831,23 +811,35 @@ fmt.Println(channelConnection.GetName()) // "channel_connection"
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `auth` | - | - | - | - |
-| `channel` | - | - | - | - |
-| `connectionMode` | - | - | - | - |
-| `context` | - | - | - | - |
-| `contextKeys` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | Yes | - | - |
-| `integrationIdentifier` | - | - | - | - |
-| `providerId` | - | - | - | - |
-| `subscriberId` | - | Yes | - | - |
-| `updatedAt` | - | - | - | - |
-| `workspace` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `auth` | - | - | - | - | - |
+| `channel` | - | - | - | - | - |
+| `connectionMode` | - | - | - | - | - |
+| `context` | - | - | - | - | - |
+| `contextKeys` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | Yes | - | - |
+| `integrationIdentifier` | - | - | - | - | - |
+| `providerId` | - | - | - | - | - |
+| `subscriberId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.ChannelConnection(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -960,6 +952,18 @@ fmt.Println(channelEndpoint.GetName()) // "channel_endpoint"
 | `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.ChannelEndpoint(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -1117,21 +1121,37 @@ fmt.Println(context.GetName()) // "context"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Optional bridge URL override for agent connect. |
-| `data` | `map[string]any` | No | Optional custom data to associate with this context. |
-| `id` | `string` | Yes | Unique identifier for this context. |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `string` | Yes | Creation timestamp |
+| `data` | `map[string]any` | Yes | Custom data associated with this context |
+| `id` | `string` | Yes | Unique identifier for this context |
+| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `bridgeUrl` | - | - | - | - |
-| `data` | - | - | Yes | - |
-| `id` | - | - | - | - |
-| `type` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `data` | - | - | Yes | - | - |
+| `id` | - | - | - | - | - |
+| `type` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.Context(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -1151,8 +1171,11 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Context(nil).Create(map[string]any{
+    "createdAt": "example_createdAt",
+    "data": map[string]any{},
     "id": "example_id",
     "type": "example_type",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -1362,6 +1385,18 @@ fmt.Println(domain.GetName()) // "domain"
 | `updatedAt` | `string` | Yes |  |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.Domain(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -1632,10 +1667,31 @@ fmt.Println(domainRouteResponseDto.GetName()) // "domain_route_response_dto"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentId` | `string` | No | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `map[string]any` | No | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
-| `id` | `string` | No |  |
-| `type` | `string` | No |  |
+| `address` | `string` | Yes |  |
+| `agentId` | `string` | No | Internal id of the destination agent. |
+| `createdAt` | `string` | Yes |  |
+| `data` | `map[string]any` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `string` | Yes |  |
+| `environmentId` | `string` | Yes |  |
+| `id` | `string` | Yes |  |
+| `organizationId` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | load | create | update |
+| --- | --- | --- | --- |
+| `address` | - | - | - |
+| `agentId` | - | - | - |
+| `createdAt` | - | - | - |
+| `data` | - | - | - |
+| `domainId` | - | - | - |
+| `environmentId` | - | - | - |
+| `id` | - | - | - |
+| `organizationId` | - | - | - |
+| `type` | - | - | Yes |
+| `updatedAt` | - | - | - |
 
 ### Operations
 
@@ -1658,6 +1714,13 @@ Create a new entity with the given data.
 ```go
 result, err := client.DomainRouteResponseDto(nil).Create(map[string]any{
     "id": "example_id",
+    "address": "example_address",
+    "createdAt": "example_createdAt",
+    "domainId": "example_domainId",
+    "environmentId": "example_environmentId",
+    "organizationId": "example_organizationId",
+    "type": "example_type",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -2068,7 +2131,37 @@ event := client.Event(nil)
 fmt.Println(event.GetName()) // "event"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actor` | `any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `map[string]any` | No |  |
+| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `any` | No | This could be used to override provider specific configurations |
+| `payload` | `map[string]any` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `any` | No | It is used to specify a tenant context during trigger event. |
+| `to` | `any` | Yes | The recipients list of people who will receive the notification. |
+| `transactionId` | `string` | No | A unique identifier for deduplication. |
+
 ### Operations
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.Event(nil).Create(map[string]any{
+    "name": "example_name",
+    "to": "example_to",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -2918,252 +3011,6 @@ Return the entity name.
 
 ---
 
-## ListAgentsResponseDtoEntity
-
-```go
-listAgentsResponseDto := client.ListAgentsResponseDto(nil)
-fmt.Println(listAgentsResponseDto.GetName()) // "list_agents_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `bool` | Yes |  |
-| `behavior` | `map[string]any` | Yes |  |
-| `bridgeUrl` | `string` | No | Production bridge URL |
-| `createdAt` | `string` | Yes |  |
-| `createdBy` | `string` | No | Mongo user id of the user who created the agent |
-| `description` | `string` | No |  |
-| `devBridgeActive` | `bool` | No | Whether the dev bridge override is active |
-| `devBridgeUrl` | `string` | No | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `string` | Yes |  |
-| `exceedsPlanLimit` | `bool` | No | Cloud only. |
-| `id` | `string` | Yes |  |
-| `identifier` | `string` | Yes |  |
-| `integrations` | `[]any` | No |  |
-| `managedRuntime` | `any` | No | Present when runtime is "managed". |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `runtime` | `string` | No | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `string` | Yes |  |
-| `visibility` | `string` | No | Discovery scope of the agent. |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListAgentsResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListAgentsResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ListChannelConnectionsResponseDtoEntity
-
-```go
-listChannelConnectionsResponseDto := client.ListChannelConnectionsResponseDto(nil)
-fmt.Println(listChannelConnectionsResponseDto.GetName()) // "list_channel_connections_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `auth` | `map[string]any` | Yes |  |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `[]any` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `map[string]any` | Yes |  |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListChannelConnectionsResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ListChannelEndpointsResponseDtoEntity
-
-```go
-listChannelEndpointsResponseDto := client.ListChannelEndpointsResponseDto(nil)
-fmt.Println(listChannelEndpointsResponseDto.GetName()) // "list_channel_endpoints_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `string` | Yes | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `[]any` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `any` | Yes | Endpoint data specific to the channel type |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel endpoint is linked |
-| `type` | `string` | Yes | Type of channel endpoint |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListChannelEndpointsResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ListContextsResponseDtoEntity
-
-```go
-listContextsResponseDto := client.ListContextsResponseDto(nil)
-fmt.Println(listContextsResponseDto.GetName()) // "list_contexts_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `string` | Yes | Creation timestamp |
-| `data` | `map[string]any` | Yes | Custom data associated with this context |
-| `id` | `string` | Yes | Unique identifier for this context |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `string` | Yes | Last update timestamp |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListContextsResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListContextsResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
 ## ListDomainRoutesResponseDtoEntity
 
 ```go
@@ -3224,137 +3071,6 @@ Return the entity name.
 
 ---
 
-## ListDomainsResponseDtoEntity
-
-```go
-listDomainsResponseDto := client.ListDomainsResponseDto(nil)
-fmt.Println(listDomainsResponseDto.GetName()) // "list_domains_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | Yes |  |
-| `data` | `map[string]any` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `string` | No |  |
-| `environmentId` | `string` | Yes |  |
-| `expectedDnsRecords` | `[]any` | No |  |
-| `id` | `string` | Yes |  |
-| `mxRecordConfigured` | `bool` | Yes |  |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
-| `updatedAt` | `string` | Yes |  |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListDomainsResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListDomainsResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ListSubscribersResponseDtoEntity
-
-```go
-listSubscribersResponseDto := client.ListSubscribersResponseDto(nil)
-fmt.Println(listSubscribersResponseDto.GetName()) // "list_subscribers_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `avatar` | `string` | No | The URL of the subscriber's avatar image. |
-| `channels` | `[]any` | No | An array of channel settings associated with the subscriber. |
-| `createdAt` | `string` | Yes | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `map[string]any` | No | Additional custom data for the subscriber |
-| `deleted` | `bool` | Yes | Indicates whether the subscriber has been deleted. |
-| `email` | `string` | No | The email address of the subscriber. |
-| `environmentId` | `string` | Yes | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `string` | No | The first name of the subscriber. |
-| `id` | `string` | No | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `bool` | No | Indicates whether the subscriber is currently online. |
-| `lastName` | `string` | No | The last name of the subscriber. |
-| `lastOnlineAt` | `string` | No | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `string` | No | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `string` | Yes | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `string` | No | The phone number of the subscriber. |
-| `subscriberId` | `string` | Yes | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `string` | No | Timezone of the subscriber |
-| `topics` | `[]any` | No | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `float64` | No | The version of the subscriber document. |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListSubscribersResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListSubscribersResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
 ## ListTopicSubscriptionsResponseDtoEntity
 
 ```go
@@ -3403,62 +3119,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ListTopicsResponseDtoEntity
-
-```go
-listTopicsResponseDto := client.ListTopicsResponseDto(nil)
-fmt.Println(listTopicsResponseDto.GetName()) // "list_topics_response_dto"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | No | The date the topic was created |
-| `data` | `map[string]any` | No | Additional custom data associated with the topic |
-| `id` | `string` | Yes | The identifier of the topic |
-| `key` | `string` | Yes | The unique key of the topic |
-| `name` | `string` | No | The name of the topic |
-| `updatedAt` | `string` | No | The date the topic was last updated |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.ListTopicsResponseDto(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ListTopicsResponseDtoEntity` instance with the same client and
 options.
 
 #### `GetName() string`
@@ -4012,6 +3672,18 @@ fmt.Println(subscriber.GetName()) // "subscriber"
 
 ### Operations
 
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.Subscriber(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
+
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
 Load a single entity matching the given criteria.
@@ -4422,12 +4094,26 @@ fmt.Println(topic.GetName()) // "topic"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | `map[string]any` | No | Additional custom data associated with the topic. |
-| `id` | `string` | No |  |
-| `key` | `string` | Yes | The unique key identifier for the topic. |
-| `name` | `string` | No | The display name for the topic |
+| `createdAt` | `string` | No | The date the topic was created |
+| `data` | `map[string]any` | No | Additional custom data associated with the topic |
+| `id` | `string` | Yes | The identifier of the topic |
+| `key` | `string` | Yes | The unique key of the topic |
+| `name` | `string` | No | The name of the topic |
+| `updatedAt` | `string` | No | The date the topic was last updated |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.Topic(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -4447,6 +4133,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Topic(nil).Create(map[string]any{
+    "id": "example_id",
     "key": "example_key",
 }, nil)
 if err != nil {
@@ -4619,10 +4306,12 @@ fmt.Println(translation.GetName()) // "translation"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `content` | `map[string]any` | Yes | Translation content as JSON object |
+| `createdAt` | `string` | Yes | Creation timestamp |
 | `id` | `string` | No |  |
-| `locale` | `string` | Yes | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `string` | Yes | The resource ID to associate translation with. |
-| `resourceType` | `string` | Yes | The resource type to associate translation with |
+| `locale` | `string` | Yes | Locale code |
+| `resourceId` | `string` | Yes | Resource identifier |
+| `resourceType` | `string` | Yes | Resource type |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Operations
 
@@ -4645,9 +4334,11 @@ Create a new entity with the given data.
 ```go
 result, err := client.Translation(nil).Create(map[string]any{
     "content": map[string]any{},
+    "createdAt": "example_createdAt",
     "locale": "example_locale",
     "resourceId": "example_resourceId",
     "resourceType": "example_resourceType",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -4740,69 +4431,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `TranslationGroupDtoEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## TriggerEntity
-
-```go
-trigger := client.Trigger(nil)
-fmt.Println(trigger.GetName()) // "trigger"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `actor` | `any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `map[string]any` | No |  |
-| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `any` | No | This could be used to override provider specific configurations |
-| `payload` | `map[string]any` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `any` | No | It is used to specify a tenant context during trigger event. |
-| `to` | `any` | Yes | The recipients list of people who will receive the notification. |
-| `transactionId` | `string` | No | A unique identifier for deduplication. |
-
-### Operations
-
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Trigger(nil).Create(map[string]any{
-    "name": "example_name",
-    "to": "example_to",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `TriggerEntity` instance with the same client and
 options.
 
 #### `GetName() string`

@@ -107,6 +107,11 @@
       "version": 2,
       "source": "openapi3"
     },
+    "GET /v1/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /v1/agents/{identifier}": {
       "provenance": "operation-contract",
       "version": 2,

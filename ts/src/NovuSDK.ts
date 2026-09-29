@@ -31,15 +31,8 @@ import { LayoutEntity } from './entity/LayoutEntity'
 import { LayoutResponseDtoEntity } from './entity/LayoutResponseDtoEntity'
 import { LinkEntity } from './entity/LinkEntity'
 import { ListAgentIntegrationsResponseDtoEntity } from './entity/ListAgentIntegrationsResponseDtoEntity'
-import { ListAgentsResponseDtoEntity } from './entity/ListAgentsResponseDtoEntity'
-import { ListChannelConnectionsResponseDtoEntity } from './entity/ListChannelConnectionsResponseDtoEntity'
-import { ListChannelEndpointsResponseDtoEntity } from './entity/ListChannelEndpointsResponseDtoEntity'
-import { ListContextsResponseDtoEntity } from './entity/ListContextsResponseDtoEntity'
 import { ListDomainRoutesResponseDtoEntity } from './entity/ListDomainRoutesResponseDtoEntity'
-import { ListDomainsResponseDtoEntity } from './entity/ListDomainsResponseDtoEntity'
-import { ListSubscribersResponseDtoEntity } from './entity/ListSubscribersResponseDtoEntity'
 import { ListTopicSubscriptionsResponseDtoEntity } from './entity/ListTopicSubscriptionsResponseDtoEntity'
-import { ListTopicsResponseDtoEntity } from './entity/ListTopicsResponseDtoEntity'
 import { MasterJsonEntity } from './entity/MasterJsonEntity'
 import { MessageEntity } from './entity/MessageEntity'
 import { MessageResponseDtoEntity } from './entity/MessageResponseDtoEntity'
@@ -59,7 +52,6 @@ import { TopicSubscriberDtoEntity } from './entity/TopicSubscriberDtoEntity'
 import { TopicSubscriptionsResponseDtoEntity } from './entity/TopicSubscriptionsResponseDtoEntity'
 import { TranslationEntity } from './entity/TranslationEntity'
 import { TranslationGroupDtoEntity } from './entity/TranslationGroupDtoEntity'
-import { TriggerEntity } from './entity/TriggerEntity'
 import { TriggerEventResponseDtoEntity } from './entity/TriggerEventResponseDtoEntity'
 import { UnseenEntity } from './entity/UnseenEntity'
 import { UploadEntity } from './entity/UploadEntity'
@@ -627,42 +619,6 @@ class NovuSDK {
   }
 
 
-  // Entity access: `client.ListAgentsResponseDto().list()` / `client.ListAgentsResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListAgentsResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListAgentsResponseDtoEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.ListChannelConnectionsResponseDto().list()` / `client.ListChannelConnectionsResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListChannelConnectionsResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListChannelConnectionsResponseDtoEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.ListChannelEndpointsResponseDto().list()` / `client.ListChannelEndpointsResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListChannelEndpointsResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListChannelEndpointsResponseDtoEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.ListContextsResponseDto().list()` / `client.ListContextsResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListContextsResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListContextsResponseDtoEntity(self, entopts)
-  }
-
-
   // Entity access: `client.ListDomainRoutesResponseDto().list()` / `client.ListDomainRoutesResponseDto().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
@@ -672,39 +628,12 @@ class NovuSDK {
   }
 
 
-  // Entity access: `client.ListDomainsResponseDto().list()` / `client.ListDomainsResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListDomainsResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListDomainsResponseDtoEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.ListSubscribersResponseDto().list()` / `client.ListSubscribersResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListSubscribersResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListSubscribersResponseDtoEntity(self, entopts)
-  }
-
-
   // Entity access: `client.ListTopicSubscriptionsResponseDto().list()` / `client.ListTopicSubscriptionsResponseDto().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
   ListTopicSubscriptionsResponseDto(entopts?: Record<string, any>) {
     const self = this
     return new ListTopicSubscriptionsResponseDtoEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.ListTopicsResponseDto().list()` / `client.ListTopicsResponseDto().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ListTopicsResponseDto(entopts?: Record<string, any>) {
-    const self = this
-    return new ListTopicsResponseDtoEntity(self, entopts)
   }
 
 
@@ -876,15 +805,6 @@ class NovuSDK {
   TranslationGroupDto(entopts?: Record<string, any>) {
     const self = this
     return new TranslationGroupDtoEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.Trigger().list()` / `client.Trigger().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  Trigger(entopts?: Record<string, any>) {
-    const self = this
-    return new TriggerEntity(self, entopts)
   }
 
 

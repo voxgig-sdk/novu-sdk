@@ -23,7 +23,7 @@ class EventEntityTest extends TestCase
         $setup = event_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["create", "remove"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "event." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -38,13 +38,15 @@ class EventEntityTest extends TestCase
         }
         $client = $setup["client"];
 
-        // Bootstrap entity data from existing test data.
-        $event_ref01_data_raw = Vs::items(Helpers::to_map(
-            Vs::getpath($setup["data"], "existing.event")));
-        $event_ref01_data = null;
-        if (count($event_ref01_data_raw) > 0) {
-            $event_ref01_data = Helpers::to_map($event_ref01_data_raw[0][1]);
-        }
+        // CREATE
+        $event_ref01_ent = $client->Event(null);
+        $event_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.event"), "event_ref01"));
+
+        $event_ref01_data_result = $event_ref01_ent->create($event_ref01_data, null);
+        $event_ref01_data = Helpers::to_map(is_object($event_ref01_data_result) && method_exists($event_ref01_data_result, 'data_get') ? $event_ref01_data_result->data_get() : $event_ref01_data_result);
+        $this->assertNotNull($event_ref01_data);
+
 
     }
 }
@@ -64,7 +66,7 @@ function event_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["event01", "event02", "event03", "trigger01", "trigger02", "trigger03"] as $k) {
+    foreach (["event01", "event02", "event03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

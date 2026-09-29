@@ -283,7 +283,7 @@ main: kit: entity: message: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -303,7 +303,7 @@ main: kit: entity: message: {
                 ]
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -326,14 +326,14 @@ main: kit: entity: message: {
               {
                 k: "query"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "transaction_id"
-                or: "transaction_id"
+                or: "transactionId"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -381,7 +381,7 @@ main: kit: entity: message: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -391,7 +391,7 @@ main: kit: entity: message: {
                 ex: "507f1f77bcf86cd799439011"
                 k: "param"
                 n: "transaction_id"
-                or: "transaction_id"
+                or: "transactionId"
                 r: true
                 t: "`$STRING`"
               }
@@ -450,7 +450,7 @@ main: kit: entity: message: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -460,7 +460,7 @@ main: kit: entity: message: {
                 ex: "507f1f77bcf86cd799439011"
                 k: "param"
                 n: "id"
-                or: "message_id"
+                or: "messageId"
                 r: true
                 t: "`$STRING`"
               }

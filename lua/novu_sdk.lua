@@ -787,62 +787,6 @@ function NovuSDK:ListAgentIntegrationsResponseDto(data)
 end
 
 
--- Idiomatic facade: client:ListAgentsResponseDto():list() / client:ListAgentsResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListAgentsResponseDto(data)
-  local EntityMod = require("entity.list_agents_response_dto_entity")
-  if data == nil then
-    if self._list_agents_response_dto == nil then
-      self._list_agents_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_agents_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:ListChannelConnectionsResponseDto():list() / client:ListChannelConnectionsResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListChannelConnectionsResponseDto(data)
-  local EntityMod = require("entity.list_channel_connections_response_dto_entity")
-  if data == nil then
-    if self._list_channel_connections_response_dto == nil then
-      self._list_channel_connections_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_channel_connections_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:ListChannelEndpointsResponseDto():list() / client:ListChannelEndpointsResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListChannelEndpointsResponseDto(data)
-  local EntityMod = require("entity.list_channel_endpoints_response_dto_entity")
-  if data == nil then
-    if self._list_channel_endpoints_response_dto == nil then
-      self._list_channel_endpoints_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_channel_endpoints_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:ListContextsResponseDto():list() / client:ListContextsResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListContextsResponseDto(data)
-  local EntityMod = require("entity.list_contexts_response_dto_entity")
-  if data == nil then
-    if self._list_contexts_response_dto == nil then
-      self._list_contexts_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_contexts_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:ListDomainRoutesResponseDto():list() / client:ListDomainRoutesResponseDto():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function NovuSDK:ListDomainRoutesResponseDto(data)
@@ -857,34 +801,6 @@ function NovuSDK:ListDomainRoutesResponseDto(data)
 end
 
 
--- Idiomatic facade: client:ListDomainsResponseDto():list() / client:ListDomainsResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListDomainsResponseDto(data)
-  local EntityMod = require("entity.list_domains_response_dto_entity")
-  if data == nil then
-    if self._list_domains_response_dto == nil then
-      self._list_domains_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_domains_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:ListSubscribersResponseDto():list() / client:ListSubscribersResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListSubscribersResponseDto(data)
-  local EntityMod = require("entity.list_subscribers_response_dto_entity")
-  if data == nil then
-    if self._list_subscribers_response_dto == nil then
-      self._list_subscribers_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_subscribers_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:ListTopicSubscriptionsResponseDto():list() / client:ListTopicSubscriptionsResponseDto():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function NovuSDK:ListTopicSubscriptionsResponseDto(data)
@@ -894,20 +810,6 @@ function NovuSDK:ListTopicSubscriptionsResponseDto(data)
       self._list_topic_subscriptions_response_dto = EntityMod.new(self, nil)
     end
     return self._list_topic_subscriptions_response_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:ListTopicsResponseDto():list() / client:ListTopicsResponseDto():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:ListTopicsResponseDto(data)
-  local EntityMod = require("entity.list_topics_response_dto_entity")
-  if data == nil then
-    if self._list_topics_response_dto == nil then
-      self._list_topics_response_dto = EntityMod.new(self, nil)
-    end
-    return self._list_topics_response_dto
   end
   return EntityMod.new(self, data)
 end
@@ -1174,20 +1076,6 @@ function NovuSDK:TranslationGroupDto(data)
       self._translation_group_dto = EntityMod.new(self, nil)
     end
     return self._translation_group_dto
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:Trigger():list() / client:Trigger():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function NovuSDK:Trigger(data)
-  local EntityMod = require("entity.trigger_entity")
-  if data == nil then
-    if self._trigger == nil then
-      self._trigger = EntityMod.new(self, nil)
-    end
-    return self._trigger
   end
   return EntityMod.new(self, data)
 end

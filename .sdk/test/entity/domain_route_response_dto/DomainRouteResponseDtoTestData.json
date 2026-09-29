@@ -2,27 +2,42 @@
   "existing": {
     "domain_route_response_dto": {
       "DOMAIN_ROUTE_RESPONSE_DTO00": {
-        "agentId": "s28",
+        "address": "s64",
+        "agentId": "s65",
+        "createdAt": "s66",
         "data": {},
+        "domainId": "s68",
+        "environmentId": "s69",
         "id": "DOMAIN_ROUTE_RESPONSE_DTO00",
-        "type": "s2b",
-        "address": "ADDRESS01",
+        "organizationId": "s6b",
+        "type": "s6c",
+        "updatedAt": "s6d",
         "domain_id": "DOMAIN01"
       },
       "DOMAIN_ROUTE_RESPONSE_DTO01": {
-        "agentId": "s50",
+        "address": "sc8",
+        "agentId": "sc9",
+        "createdAt": "sca",
         "data": {},
+        "domainId": "scc",
+        "environmentId": "scd",
         "id": "DOMAIN_ROUTE_RESPONSE_DTO01",
-        "type": "s53",
-        "address": "ADDRESS01",
+        "organizationId": "scf",
+        "type": "sd0",
+        "updatedAt": "sd1",
         "domain_id": "DOMAIN01"
       },
       "DOMAIN_ROUTE_RESPONSE_DTO02": {
-        "agentId": "s78",
+        "address": "s12c",
+        "agentId": "s12d",
+        "createdAt": "s12e",
         "data": {},
+        "domainId": "s130",
+        "environmentId": "s131",
         "id": "DOMAIN_ROUTE_RESPONSE_DTO02",
-        "type": "s7b",
-        "address": "ADDRESS01",
+        "organizationId": "s133",
+        "type": "s134",
+        "updatedAt": "s135",
         "domain_id": "DOMAIN01"
       }
     }
@@ -30,9 +45,15 @@
   "new": {
     "domain_route_response_dto": {
       "domain_route_response_dto_ref01": {
-        "agentId": "sa0",
+        "address": "s190",
+        "agentId": "s191",
+        "createdAt": "s192",
         "data": {},
-        "type": "sa3"
+        "domainId": "s194",
+        "environmentId": "s195",
+        "organizationId": "s197",
+        "type": "s198",
+        "updatedAt": "s199"
       }
     }
   },

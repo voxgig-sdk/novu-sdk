@@ -506,34 +506,6 @@ class NovuSDK
   end
 
 
-  # Canonical facade: client.ListAgentsResponseDto.list / client.ListAgentsResponseDto.load({ "id" => ... })
-  def ListAgentsResponseDto(data = nil)
-    require_relative 'entity/list_agents_response_dto_entity'
-    ListAgentsResponseDtoEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.ListChannelConnectionsResponseDto.list / client.ListChannelConnectionsResponseDto.load({ "id" => ... })
-  def ListChannelConnectionsResponseDto(data = nil)
-    require_relative 'entity/list_channel_connections_response_dto_entity'
-    ListChannelConnectionsResponseDtoEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.ListChannelEndpointsResponseDto.list / client.ListChannelEndpointsResponseDto.load({ "id" => ... })
-  def ListChannelEndpointsResponseDto(data = nil)
-    require_relative 'entity/list_channel_endpoints_response_dto_entity'
-    ListChannelEndpointsResponseDtoEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.ListContextsResponseDto.list / client.ListContextsResponseDto.load({ "id" => ... })
-  def ListContextsResponseDto(data = nil)
-    require_relative 'entity/list_contexts_response_dto_entity'
-    ListContextsResponseDtoEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.ListDomainRoutesResponseDto.list / client.ListDomainRoutesResponseDto.load({ "id" => ... })
   def ListDomainRoutesResponseDto(data = nil)
     require_relative 'entity/list_domain_routes_response_dto_entity'
@@ -541,31 +513,10 @@ class NovuSDK
   end
 
 
-  # Canonical facade: client.ListDomainsResponseDto.list / client.ListDomainsResponseDto.load({ "id" => ... })
-  def ListDomainsResponseDto(data = nil)
-    require_relative 'entity/list_domains_response_dto_entity'
-    ListDomainsResponseDtoEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.ListSubscribersResponseDto.list / client.ListSubscribersResponseDto.load({ "id" => ... })
-  def ListSubscribersResponseDto(data = nil)
-    require_relative 'entity/list_subscribers_response_dto_entity'
-    ListSubscribersResponseDtoEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.ListTopicSubscriptionsResponseDto.list / client.ListTopicSubscriptionsResponseDto.load({ "id" => ... })
   def ListTopicSubscriptionsResponseDto(data = nil)
     require_relative 'entity/list_topic_subscriptions_response_dto_entity'
     ListTopicSubscriptionsResponseDtoEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.ListTopicsResponseDto.list / client.ListTopicsResponseDto.load({ "id" => ... })
-  def ListTopicsResponseDto(data = nil)
-    require_relative 'entity/list_topics_response_dto_entity'
-    ListTopicsResponseDtoEntity.new(self, data)
   end
 
 
@@ -699,13 +650,6 @@ class NovuSDK
   def TranslationGroupDto(data = nil)
     require_relative 'entity/translation_group_dto_entity'
     TranslationGroupDtoEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.Trigger.list / client.Trigger.load({ "id" => ... })
-  def Trigger(data = nil)
-    require_relative 'entity/trigger_entity'
-    TriggerEntity.new(self, data)
   end
 
 

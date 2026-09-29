@@ -146,32 +146,11 @@ func init() {
 	core.NewListAgentIntegrationsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
 		return entity.NewListAgentIntegrationsResponseDtoEntity(client, entopts)
 	}
-	core.NewListAgentsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListAgentsResponseDtoEntity(client, entopts)
-	}
-	core.NewListChannelConnectionsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListChannelConnectionsResponseDtoEntity(client, entopts)
-	}
-	core.NewListChannelEndpointsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListChannelEndpointsResponseDtoEntity(client, entopts)
-	}
-	core.NewListContextsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListContextsResponseDtoEntity(client, entopts)
-	}
 	core.NewListDomainRoutesResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
 		return entity.NewListDomainRoutesResponseDtoEntity(client, entopts)
 	}
-	core.NewListDomainsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListDomainsResponseDtoEntity(client, entopts)
-	}
-	core.NewListSubscribersResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListSubscribersResponseDtoEntity(client, entopts)
-	}
 	core.NewListTopicSubscriptionsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
 		return entity.NewListTopicSubscriptionsResponseDtoEntity(client, entopts)
-	}
-	core.NewListTopicsResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewListTopicsResponseDtoEntity(client, entopts)
 	}
 	core.NewMasterJsonEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
 		return entity.NewMasterJsonEntity(client, entopts)
@@ -229,9 +208,6 @@ func init() {
 	}
 	core.NewTranslationGroupDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
 		return entity.NewTranslationGroupDtoEntity(client, entopts)
-	}
-	core.NewTriggerEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
-		return entity.NewTriggerEntity(client, entopts)
 	}
 	core.NewTriggerEventResponseDtoEntityFunc = func(client *core.NovuSDK, entopts map[string]any) core.NovuEntity {
 		return entity.NewTriggerEventResponseDtoEntity(client, entopts)

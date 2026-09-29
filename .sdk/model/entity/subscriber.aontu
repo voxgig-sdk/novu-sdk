@@ -169,7 +169,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -178,7 +178,7 @@ main: kit: entity: subscriber: {
               {
                 k: "query"
                 n: "fail_if_exist"
-                or: "fail_if_exist"
+                or: "failIfExists"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -216,7 +216,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -225,7 +225,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -278,7 +278,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -287,7 +287,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -340,7 +340,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -349,7 +349,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -402,7 +402,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -411,7 +411,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -464,7 +464,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -473,7 +473,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -526,7 +526,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -535,7 +535,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -579,6 +579,131 @@ main: kit: entity: subscriber: {
         }
       ]
     }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/subscribers"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "includeCursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "orderBy"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "orderDirection"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "phone"
+                or: "phone"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "subscriber_id"
+                or: "subscriberId"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/subscribers"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "email"
+              "idempotency_key"
+              "include_cursor"
+              "limit"
+              "name"
+              "order_by"
+              "order_direction"
+              "phone"
+              "subscriber_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "subscribers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
     load: {
       name: "load"
       points: [
@@ -593,7 +718,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -602,7 +727,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -653,7 +778,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -662,14 +787,14 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "notification_id"
-                or: "notification_id"
+                or: "notificationId"
                 r: true
                 t: "`$STRING`"
               }
@@ -678,7 +803,7 @@ main: kit: entity: subscriber: {
               {
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -733,7 +858,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -742,14 +867,14 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "provider_id"
-                or: "provider_id"
+                or: "providerId"
                 r: true
                 t: "`$STRING`"
               }
@@ -808,7 +933,7 @@ main: kit: entity: subscriber: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -817,7 +942,7 @@ main: kit: entity: subscriber: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }

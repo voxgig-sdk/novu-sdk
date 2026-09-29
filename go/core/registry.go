@@ -82,23 +82,9 @@ var NewLinkEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
 var NewListAgentIntegrationsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
-var NewListAgentsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
-var NewListChannelConnectionsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
-var NewListChannelEndpointsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
-var NewListContextsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
 var NewListDomainRoutesResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
-var NewListDomainsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
-var NewListSubscribersResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
 var NewListTopicSubscriptionsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
-var NewListTopicsResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
 var NewMasterJsonEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
@@ -137,8 +123,6 @@ var NewTopicSubscriptionsResponseDtoEntityFunc func(client *NovuSDK, entopts map
 var NewTranslationEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
 var NewTranslationGroupDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
-
-var NewTriggerEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 
 var NewTriggerEventResponseDtoEntityFunc func(client *NovuSDK, entopts map[string]any) NovuEntity
 

@@ -421,54 +421,6 @@ Create a new `ListAgentIntegrationsResponseDto` entity instance.
 
 **Returns:** `ListAgentIntegrationsResponseDtoEntity` instance.
 
-#### `ListAgentsResponseDto(data?: object)`
-
-Create a new `ListAgentsResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListAgentsResponseDtoEntity` instance.
-
-#### `ListChannelConnectionsResponseDto(data?: object)`
-
-Create a new `ListChannelConnectionsResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListChannelConnectionsResponseDtoEntity` instance.
-
-#### `ListChannelEndpointsResponseDto(data?: object)`
-
-Create a new `ListChannelEndpointsResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListChannelEndpointsResponseDtoEntity` instance.
-
-#### `ListContextsResponseDto(data?: object)`
-
-Create a new `ListContextsResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListContextsResponseDtoEntity` instance.
-
 #### `ListDomainRoutesResponseDto(data?: object)`
 
 Create a new `ListDomainRoutesResponseDto` entity instance.
@@ -481,30 +433,6 @@ Create a new `ListDomainRoutesResponseDto` entity instance.
 
 **Returns:** `ListDomainRoutesResponseDtoEntity` instance.
 
-#### `ListDomainsResponseDto(data?: object)`
-
-Create a new `ListDomainsResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListDomainsResponseDtoEntity` instance.
-
-#### `ListSubscribersResponseDto(data?: object)`
-
-Create a new `ListSubscribersResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListSubscribersResponseDtoEntity` instance.
-
 #### `ListTopicSubscriptionsResponseDto(data?: object)`
 
 Create a new `ListTopicSubscriptionsResponseDto` entity instance.
@@ -516,18 +444,6 @@ Create a new `ListTopicSubscriptionsResponseDto` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `ListTopicSubscriptionsResponseDtoEntity` instance.
-
-#### `ListTopicsResponseDto(data?: object)`
-
-Create a new `ListTopicsResponseDto` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ListTopicsResponseDtoEntity` instance.
 
 #### `MasterJson(data?: object)`
 
@@ -756,18 +672,6 @@ Create a new `TranslationGroupDto` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `TranslationGroupDtoEntity` instance.
-
-#### `Trigger(data?: object)`
-
-Create a new `Trigger` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `TriggerEntity` instance.
 
 #### `TriggerEventResponseDto(data?: object)`
 
@@ -1009,27 +913,27 @@ const agent = client.Agent()
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `active` | - | Yes | Yes | - |
-| `behavior` | - | - | Yes | - |
-| `bridgeUrl` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `createdBy` | - | - | - | - |
-| `description` | - | - | - | - |
-| `devBridgeActive` | - | - | - | - |
-| `devBridgeUrl` | - | - | - | - |
-| `environmentId` | - | - | - | - |
-| `exceedsPlanLimit` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | - | - | - |
-| `integrations` | - | - | - | - |
-| `managedRuntime` | - | Yes | - | - |
-| `name` | - | - | Yes | - |
-| `organizationId` | - | - | - | - |
-| `runtime` | - | - | - | - |
-| `updatedAt` | - | - | - | - |
-| `visibility` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `active` | - | - | Yes | Yes | - |
+| `behavior` | - | - | - | Yes | - |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `createdBy` | - | - | - | - | - |
+| `description` | - | - | - | - | - |
+| `devBridgeActive` | - | - | - | - | - |
+| `devBridgeUrl` | - | - | - | - | - |
+| `environmentId` | - | - | - | - | - |
+| `exceedsPlanLimit` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | - | - | - |
+| `integrations` | - | - | - | - | - |
+| `managedRuntime` | - | - | Yes | - | - |
+| `name` | - | - | - | Yes | - |
+| `organizationId` | - | - | - | - | - |
+| `runtime` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `visibility` | - | - | - | - | - |
 
 ### Actions
 
@@ -1069,6 +973,14 @@ const result = await client.Agent().create({
   organizationId: 'example_organizationId',
   updatedAt: 'example_updatedAt',
 })
+```
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.Agent().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -1372,21 +1284,21 @@ const channel_connection = client.ChannelConnection()
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `auth` | - | - | - | - |
-| `channel` | - | - | - | - |
-| `connectionMode` | - | - | - | - |
-| `context` | - | - | - | - |
-| `contextKeys` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | Yes | - | - |
-| `integrationIdentifier` | - | - | - | - |
-| `providerId` | - | - | - | - |
-| `subscriberId` | - | Yes | - | - |
-| `updatedAt` | - | - | - | - |
-| `workspace` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `auth` | - | - | - | - | - |
+| `channel` | - | - | - | - | - |
+| `connectionMode` | - | - | - | - | - |
+| `context` | - | - | - | - | - |
+| `contextKeys` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | Yes | - | - |
+| `integrationIdentifier` | - | - | - | - | - |
+| `providerId` | - | - | - | - | - |
+| `subscriberId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
@@ -1407,6 +1319,14 @@ const result = await client.ChannelConnection().create({
   updatedAt: 'example_updatedAt',
   workspace: {},
 })
+```
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.ChannelConnection().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -1507,6 +1427,14 @@ const result = await client.ChannelEndpoint().create({
   type: 'example_type',
   updatedAt: 'example_updatedAt',
 })
+```
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.ChannelEndpoint().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -1631,19 +1559,23 @@ const context = client.Context()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Optional bridge URL override for agent connect. |
-| `data` | `Record<string, any>` | No | Optional custom data to associate with this context. |
-| `id` | `string` | Yes | Unique identifier for this context. |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `string` | Yes | Creation timestamp |
+| `data` | `Record<string, any>` | Yes | Custom data associated with this context |
+| `id` | `string` | Yes | Unique identifier for this context |
+| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `bridgeUrl` | - | - | - | - |
-| `data` | - | - | Yes | - |
-| `id` | - | - | - | - |
-| `type` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `data` | - | - | Yes | - | - |
+| `id` | - | - | - | - | - |
+| `type` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -1653,9 +1585,20 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Context().create({
+  createdAt: 'example_createdAt',
+  data: {},
   id: 'example_id',
   type: 'example_type',
+  updatedAt: 'example_updatedAt',
 })
+```
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.Context().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -1897,6 +1840,14 @@ const result = await client.Domain().create({
   status: 'example_status',
   updatedAt: 'example_updatedAt',
 })
+```
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.Domain().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -2175,10 +2126,31 @@ const domain_route_response_dto = client.DomainRouteResponseDto()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentId` | `string` | No | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `Record<string, any>` | No | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
-| `id` | `string` | No |  |
-| `type` | `string` | No |  |
+| `address` | `string` | Yes |  |
+| `agentId` | `string` | No | Internal id of the destination agent. |
+| `createdAt` | `string` | Yes |  |
+| `data` | `Record<string, any>` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `string` | Yes |  |
+| `environmentId` | `string` | Yes |  |
+| `id` | `string` | Yes |  |
+| `organizationId` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | load | create | update |
+| --- | --- | --- | --- |
+| `address` | - | - | - |
+| `agentId` | - | - | - |
+| `createdAt` | - | - | - |
+| `data` | - | - | - |
+| `domainId` | - | - | - |
+| `environmentId` | - | - | - |
+| `id` | - | - | - |
+| `organizationId` | - | - | - |
+| `type` | - | - | Yes |
+| `updatedAt` | - | - | - |
 
 ### Actions
 
@@ -2210,6 +2182,13 @@ Create a new entity with the given data.
 ```ts
 const result = await client.DomainRouteResponseDto().create({
   id: 'example_id',
+  address: 'example_address',
+  createdAt: 'example_createdAt',
+  domainId: 'example_domainId',
+  environmentId: 'example_environmentId',
+  organizationId: 'example_organizationId',
+  type: 'example_type',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -2611,7 +2590,33 @@ Return a copy of the entity options.
 const event = client.Event()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actor` | `any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `Record<string, any>` | No |  |
+| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `any` | No | This could be used to override provider specific configurations |
+| `payload` | `Record<string, any>` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `any` | No | It is used to specify a tenant context during trigger event. |
+| `to` | `any` | Yes | The recipients list of people who will receive the notification. |
+| `transactionId` | `string` | No | A unique identifier for deduplication. |
+
 ### Operations
+
+#### `create(data: object, ctrl?: object)`
+
+Create a new entity with the given data.
+
+```ts
+const result = await client.Event().create({
+  name: 'example_name',
+  to: 'example_to',
+})
+```
 
 #### `remove(match: object, ctrl?: object)`
 
@@ -3500,248 +3505,6 @@ Return a copy of the entity options.
 
 ---
 
-## ListAgentsResponseDtoEntity
-
-```ts
-const list_agents_response_dto = client.ListAgentsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `boolean` | Yes |  |
-| `behavior` | `Record<string, any>` | Yes |  |
-| `bridgeUrl` | `string` | No | Production bridge URL |
-| `createdAt` | `string` | Yes |  |
-| `createdBy` | `string` | No | Mongo user id of the user who created the agent |
-| `description` | `string` | No |  |
-| `devBridgeActive` | `boolean` | No | Whether the dev bridge override is active |
-| `devBridgeUrl` | `string` | No | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `string` | Yes |  |
-| `exceedsPlanLimit` | `boolean` | No | Cloud only. |
-| `id` | `string` | Yes |  |
-| `identifier` | `string` | Yes |  |
-| `integrations` | `any[]` | No |  |
-| `managedRuntime` | `any` | No | Present when runtime is "managed". |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `runtime` | `string` | No | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `string` | Yes |  |
-| `visibility` | `string` | No | Discovery scope of the agent. |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListAgentsResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListAgentsResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ListChannelConnectionsResponseDtoEntity
-
-```ts
-const list_channel_connections_response_dto = client.ListChannelConnectionsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `auth` | `Record<string, any>` | Yes |  |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `any[]` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `Record<string, any>` | Yes |  |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListChannelConnectionsResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ListChannelEndpointsResponseDtoEntity
-
-```ts
-const list_channel_endpoints_response_dto = client.ListChannelEndpointsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `channel` | `string` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `string` | Yes | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `any[]` | Yes | The context of the channel connection |
-| `createdAt` | `string` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `any` | Yes | Endpoint data specific to the channel type |
-| `identifier` | `string` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `string` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `string` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `string` | Yes | The subscriber ID to which the channel endpoint is linked |
-| `type` | `string` | Yes | Type of channel endpoint |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListChannelEndpointsResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ListContextsResponseDtoEntity
-
-```ts
-const list_contexts_response_dto = client.ListContextsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bridgeUrl` | `string` | No | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `string` | Yes | Creation timestamp |
-| `data` | `Record<string, any>` | Yes | Custom data associated with this context |
-| `id` | `string` | Yes | Unique identifier for this context |
-| `type` | `string` | Yes | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `string` | Yes | Last update timestamp |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListContextsResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListContextsResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
 ## ListDomainRoutesResponseDtoEntity
 
 ```ts
@@ -3801,135 +3564,6 @@ Return a copy of the entity options.
 
 ---
 
-## ListDomainsResponseDtoEntity
-
-```ts
-const list_domains_response_dto = client.ListDomainsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | Yes |  |
-| `data` | `Record<string, any>` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `string` | No |  |
-| `environmentId` | `string` | Yes |  |
-| `expectedDnsRecords` | `any[]` | No |  |
-| `id` | `string` | Yes |  |
-| `mxRecordConfigured` | `boolean` | Yes |  |
-| `name` | `string` | Yes |  |
-| `organizationId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
-| `updatedAt` | `string` | Yes |  |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListDomainsResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListDomainsResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ListSubscribersResponseDtoEntity
-
-```ts
-const list_subscribers_response_dto = client.ListSubscribersResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `avatar` | `string` | No | The URL of the subscriber's avatar image. |
-| `channels` | `any[]` | No | An array of channel settings associated with the subscriber. |
-| `createdAt` | `string` | Yes | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `Record<string, any>` | No | Additional custom data for the subscriber |
-| `deleted` | `boolean` | Yes | Indicates whether the subscriber has been deleted. |
-| `email` | `string` | No | The email address of the subscriber. |
-| `environmentId` | `string` | Yes | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `string` | No | The first name of the subscriber. |
-| `id` | `string` | No | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `boolean` | No | Indicates whether the subscriber is currently online. |
-| `lastName` | `string` | No | The last name of the subscriber. |
-| `lastOnlineAt` | `string` | No | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `string` | No | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `string` | Yes | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `string` | No | The phone number of the subscriber. |
-| `subscriberId` | `string` | Yes | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `string` | No | Timezone of the subscriber |
-| `topics` | `any[]` | No | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `string` | Yes | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `number` | No | The version of the subscriber document. |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListSubscribersResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListSubscribersResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
 ## ListTopicSubscriptionsResponseDtoEntity
 
 ```ts
@@ -3973,61 +3607,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ListTopicsResponseDtoEntity
-
-```ts
-const list_topics_response_dto = client.ListTopicsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `string` | No | The date the topic was created |
-| `data` | `Record<string, any>` | No | Additional custom data associated with the topic |
-| `id` | `string` | Yes | The identifier of the topic |
-| `key` | `string` | Yes | The unique key of the topic |
-| `name` | `string` | No | The name of the topic |
-| `updatedAt` | `string` | No | The date the topic was last updated |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.ListTopicsResponseDto().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ListTopicsResponseDtoEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -4612,6 +4191,14 @@ const result = await client.Subscriber().create({
 })
 ```
 
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.Subscriber().list()
+```
+
 #### `load(match: object, ctrl?: object)`
 
 Load a single entity matching the given criteria.
@@ -5044,10 +4631,12 @@ const topic = client.Topic()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | `Record<string, any>` | No | Additional custom data associated with the topic. |
-| `id` | `string` | No |  |
-| `key` | `string` | Yes | The unique key identifier for the topic. |
-| `name` | `string` | No | The display name for the topic |
+| `createdAt` | `string` | No | The date the topic was created |
+| `data` | `Record<string, any>` | No | Additional custom data associated with the topic |
+| `id` | `string` | Yes | The identifier of the topic |
+| `key` | `string` | Yes | The unique key of the topic |
+| `name` | `string` | No | The name of the topic |
+| `updatedAt` | `string` | No | The date the topic was last updated |
 
 ### Operations
 
@@ -5057,8 +4646,17 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Topic().create({
+  id: 'example_id',
   key: 'example_key',
 })
+```
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.Topic().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -5226,10 +4824,12 @@ const translation = client.Translation()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `content` | `Record<string, any>` | Yes | Translation content as JSON object |
+| `createdAt` | `string` | Yes | Creation timestamp |
 | `id` | `string` | No |  |
-| `locale` | `string` | Yes | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `string` | Yes | The resource ID to associate translation with. |
-| `resourceType` | `string` | Yes | The resource type to associate translation with |
+| `locale` | `string` | Yes | Locale code |
+| `resourceId` | `string` | Yes | Resource identifier |
+| `resourceType` | `string` | Yes | Resource type |
+| `updatedAt` | `string` | Yes | Last update timestamp |
 
 ### Operations
 
@@ -5240,9 +4840,11 @@ Create a new entity with the given data.
 ```ts
 const result = await client.Translation().create({
   content: {},
+  createdAt: 'example_createdAt',
   locale: 'example_locale',
   resourceId: 'example_resourceId',
   resourceType: 'example_resourceType',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -5334,68 +4936,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `TranslationGroupDtoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `NovuSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## TriggerEntity
-
-```ts
-const trigger = client.Trigger()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `actor` | `any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `string` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `string` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `Record<string, any>` | No |  |
-| `name` | `string` | Yes | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `any` | No | This could be used to override provider specific configurations |
-| `payload` | `Record<string, any>` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `any` | No | It is used to specify a tenant context during trigger event. |
-| `to` | `any` | Yes | The recipients list of people who will receive the notification. |
-| `transactionId` | `string` | No | A unique identifier for deduplication. |
-
-### Operations
-
-#### `create(data: object, ctrl?: object)`
-
-Create a new entity with the given data.
-
-```ts
-const result = await client.Trigger().create({
-  name: 'example_name',
-  to: 'example_to',
-})
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `TriggerEntity` instance with the same client and
 options.
 
 #### `client()`

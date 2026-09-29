@@ -257,6 +257,39 @@ AgentLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for Agent#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] identifier
+#   @return [String, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+AgentListMatch = Struct.new(
+  :after,
+  :before,
+  :identifier,
+  :include_cursor,
+  :limit,
+  :order_by,
+  :order_direction,
+  keyword_init: true
+)
+
 # Request payload for Agent#create.
 #
 # @!attribute [rw] active
@@ -837,6 +870,59 @@ ChannelConnectionLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for ChannelConnection#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] channel
+#   @return [String, nil]
+#
+# @!attribute [rw] connection_mode
+#   @return [String, nil]
+#
+# @!attribute [rw] context_key
+#   @return [Array, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] integration_identifier
+#   @return [String, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+#
+# @!attribute [rw] provider_id
+#   @return [String, nil]
+#
+# @!attribute [rw] subscriber_id
+#   @return [String, nil]
+ChannelConnectionListMatch = Struct.new(
+  :after,
+  :before,
+  :channel,
+  :connection_mode,
+  :context_key,
+  :include_cursor,
+  :integration_identifier,
+  :limit,
+  :order_by,
+  :order_direction,
+  :provider_id,
+  :subscriber_id,
+  keyword_init: true
+)
+
 # Request payload for ChannelConnection#create.
 #
 # @!attribute [rw] auth
@@ -1022,6 +1108,59 @@ ChannelEndpointLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for ChannelEndpoint#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] channel
+#   @return [String, nil]
+#
+# @!attribute [rw] connection_identifier
+#   @return [String, nil]
+#
+# @!attribute [rw] context_key
+#   @return [Array, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] integration_identifier
+#   @return [String, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+#
+# @!attribute [rw] provider_id
+#   @return [String, nil]
+#
+# @!attribute [rw] subscriber_id
+#   @return [String, nil]
+ChannelEndpointListMatch = Struct.new(
+  :after,
+  :before,
+  :channel,
+  :connection_identifier,
+  :context_key,
+  :include_cursor,
+  :integration_identifier,
+  :limit,
+  :order_by,
+  :order_direction,
+  :provider_id,
+  :subscriber_id,
+  keyword_init: true
+)
+
 # Request payload for ChannelEndpoint#create.
 #
 # @!attribute [rw] channel
@@ -1180,19 +1319,27 @@ ConfigureCreateData = Struct.new(
 # @!attribute [rw] bridgeUrl
 #   @return [String, nil]
 #
+# @!attribute [rw] createdAt
+#   @return [String]
+#
 # @!attribute [rw] data
-#   @return [Hash, nil]
+#   @return [Hash]
 #
 # @!attribute [rw] id
 #   @return [String]
 #
 # @!attribute [rw] type
 #   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 Context = Struct.new(
   :bridgeUrl,
+  :createdAt,
   :data,
   :id,
   :type,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -1209,24 +1356,69 @@ ContextLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for Context#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+#
+# @!attribute [rw] search
+#   @return [String, nil]
+ContextListMatch = Struct.new(
+  :after,
+  :before,
+  :id,
+  :include_cursor,
+  :limit,
+  :order_by,
+  :order_direction,
+  :search,
+  keyword_init: true
+)
+
 # Request payload for Context#create.
 #
 # @!attribute [rw] bridgeUrl
 #   @return [String, nil]
 #
+# @!attribute [rw] createdAt
+#   @return [String]
+#
 # @!attribute [rw] data
-#   @return [Hash, nil]
+#   @return [Hash]
 #
 # @!attribute [rw] id
 #   @return [String]
 #
 # @!attribute [rw] type
 #   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 ContextCreateData = Struct.new(
   :bridgeUrl,
+  :createdAt,
   :data,
   :id,
   :type,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -1241,13 +1433,21 @@ ContextCreateData = Struct.new(
 # @!attribute [rw] bridgeUrl
 #   @return [String, nil]
 #
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
 # @!attribute [rw] data
 #   @return [Hash, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 ContextUpdateData = Struct.new(
   :id,
   :type,
   :bridgeUrl,
+  :createdAt,
   :data,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -1419,6 +1619,39 @@ Domain = Struct.new(
 #   @return [String]
 DomainLoadMatch = Struct.new(
   :id,
+  keyword_init: true
+)
+
+# Request payload for Domain#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+DomainListMatch = Struct.new(
+  :after,
+  :before,
+  :include_cursor,
+  :limit,
+  :name,
+  :order_by,
+  :order_direction,
   keyword_init: true
 )
 
@@ -1673,22 +1906,46 @@ DomainResponseDtoCreateData = Struct.new(
 
 # DomainRouteResponseDto entity data model.
 #
+# @!attribute [rw] address
+#   @return [String]
+#
 # @!attribute [rw] agentId
 #   @return [String, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String]
 #
 # @!attribute [rw] data
 #   @return [Hash, nil]
 #
+# @!attribute [rw] domainId
+#   @return [String]
+#
+# @!attribute [rw] environmentId
+#   @return [String]
+#
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
+#
+# @!attribute [rw] organizationId
+#   @return [String]
 #
 # @!attribute [rw] type
-#   @return [String, nil]
+#   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 DomainRouteResponseDto = Struct.new(
+  :address,
   :agentId,
+  :createdAt,
   :data,
+  :domainId,
+  :environmentId,
   :id,
+  :organizationId,
   :type,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -1710,19 +1967,43 @@ DomainRouteResponseDtoLoadMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String]
 #
+# @!attribute [rw] address
+#   @return [String]
+#
 # @!attribute [rw] agentId
 #   @return [String, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String]
 #
 # @!attribute [rw] data
 #   @return [Hash, nil]
 #
+# @!attribute [rw] domainId
+#   @return [String]
+#
+# @!attribute [rw] environmentId
+#   @return [String]
+#
+# @!attribute [rw] organizationId
+#   @return [String]
+#
 # @!attribute [rw] type
-#   @return [String, nil]
+#   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 DomainRouteResponseDtoCreateData = Struct.new(
   :id,
+  :address,
   :agentId,
+  :createdAt,
   :data,
+  :domainId,
+  :environmentId,
+  :organizationId,
   :type,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -1737,21 +2018,41 @@ DomainRouteResponseDtoCreateData = Struct.new(
 # @!attribute [rw] agentId
 #   @return [String, nil]
 #
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
 # @!attribute [rw] data
 #   @return [Hash, nil]
+#
+# @!attribute [rw] domainId
+#   @return [String, nil]
+#
+# @!attribute [rw] environmentId
+#   @return [String, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
+# @!attribute [rw] organizationId
+#   @return [String, nil]
+#
 # @!attribute [rw] type
+#   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 DomainRouteResponseDtoUpdateData = Struct.new(
   :address,
   :domain_id,
   :agentId,
+  :createdAt,
   :data,
+  :domainId,
+  :environmentId,
   :id,
+  :organizationId,
   :type,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -2139,8 +2440,94 @@ EnvironmentVariableWorkflowInfoDtoListMatch = Struct.new(
 )
 
 # Event entity data model.
-class Event
-end
+#
+# @!attribute [rw] actor
+#   @return [Object, nil]
+#
+# @!attribute [rw] agentId
+#   @return [String, nil]
+#
+# @!attribute [rw] bridgeUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] context
+#   @return [Hash, nil]
+#
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] overrides
+#   @return [Object, nil]
+#
+# @!attribute [rw] payload
+#   @return [Hash, nil]
+#
+# @!attribute [rw] tenant
+#   @return [Object, nil]
+#
+# @!attribute [rw] to
+#   @return [Object]
+#
+# @!attribute [rw] transactionId
+#   @return [String, nil]
+Event = Struct.new(
+  :actor,
+  :agentId,
+  :bridgeUrl,
+  :context,
+  :name,
+  :overrides,
+  :payload,
+  :tenant,
+  :to,
+  :transactionId,
+  keyword_init: true
+)
+
+# Request payload for Event#create.
+#
+# @!attribute [rw] actor
+#   @return [Object, nil]
+#
+# @!attribute [rw] agentId
+#   @return [String, nil]
+#
+# @!attribute [rw] bridgeUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] context
+#   @return [Hash, nil]
+#
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] overrides
+#   @return [Object, nil]
+#
+# @!attribute [rw] payload
+#   @return [Hash, nil]
+#
+# @!attribute [rw] tenant
+#   @return [Object, nil]
+#
+# @!attribute [rw] to
+#   @return [Object]
+#
+# @!attribute [rw] transactionId
+#   @return [String, nil]
+EventCreateData = Struct.new(
+  :actor,
+  :agentId,
+  :bridgeUrl,
+  :context,
+  :name,
+  :overrides,
+  :payload,
+  :tenant,
+  :to,
+  :transactionId,
+  keyword_init: true
+)
 
 # Request payload for Event#remove.
 #
@@ -3471,386 +3858,6 @@ ListAgentIntegrationsResponseDtoListMatch = Struct.new(
   keyword_init: true
 )
 
-# ListAgentsResponseDto entity data model.
-#
-# @!attribute [rw] active
-#   @return [Boolean]
-#
-# @!attribute [rw] behavior
-#   @return [Hash]
-#
-# @!attribute [rw] bridgeUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] createdAt
-#   @return [String]
-#
-# @!attribute [rw] createdBy
-#   @return [String, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] devBridgeActive
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] devBridgeUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] environmentId
-#   @return [String]
-#
-# @!attribute [rw] exceedsPlanLimit
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] id
-#   @return [String]
-#
-# @!attribute [rw] identifier
-#   @return [String]
-#
-# @!attribute [rw] integrations
-#   @return [Array, nil]
-#
-# @!attribute [rw] managedRuntime
-#   @return [Object, nil]
-#
-# @!attribute [rw] name
-#   @return [String]
-#
-# @!attribute [rw] organizationId
-#   @return [String]
-#
-# @!attribute [rw] runtime
-#   @return [String, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String]
-#
-# @!attribute [rw] visibility
-#   @return [String, nil]
-ListAgentsResponseDto = Struct.new(
-  :active,
-  :behavior,
-  :bridgeUrl,
-  :createdAt,
-  :createdBy,
-  :description,
-  :devBridgeActive,
-  :devBridgeUrl,
-  :environmentId,
-  :exceedsPlanLimit,
-  :id,
-  :identifier,
-  :integrations,
-  :managedRuntime,
-  :name,
-  :organizationId,
-  :runtime,
-  :updatedAt,
-  :visibility,
-  keyword_init: true
-)
-
-# Request payload for ListAgentsResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] identifier
-#   @return [String, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-ListAgentsResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :identifier,
-  :include_cursor,
-  :limit,
-  :order_by,
-  :order_direction,
-  keyword_init: true
-)
-
-# ListChannelConnectionsResponseDto entity data model.
-#
-# @!attribute [rw] auth
-#   @return [Hash]
-#
-# @!attribute [rw] channel
-#   @return [String]
-#
-# @!attribute [rw] contextKeys
-#   @return [Array]
-#
-# @!attribute [rw] createdAt
-#   @return [String]
-#
-# @!attribute [rw] identifier
-#   @return [String]
-#
-# @!attribute [rw] integrationIdentifier
-#   @return [String]
-#
-# @!attribute [rw] providerId
-#   @return [String]
-#
-# @!attribute [rw] subscriberId
-#   @return [String]
-#
-# @!attribute [rw] updatedAt
-#   @return [String]
-#
-# @!attribute [rw] workspace
-#   @return [Hash]
-ListChannelConnectionsResponseDto = Struct.new(
-  :auth,
-  :channel,
-  :contextKeys,
-  :createdAt,
-  :identifier,
-  :integrationIdentifier,
-  :providerId,
-  :subscriberId,
-  :updatedAt,
-  :workspace,
-  keyword_init: true
-)
-
-# Request payload for ListChannelConnectionsResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] channel
-#   @return [String, nil]
-#
-# @!attribute [rw] connection_mode
-#   @return [String, nil]
-#
-# @!attribute [rw] context_key
-#   @return [Array, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] integration_identifier
-#   @return [String, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-#
-# @!attribute [rw] provider_id
-#   @return [String, nil]
-#
-# @!attribute [rw] subscriber_id
-#   @return [String, nil]
-ListChannelConnectionsResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :channel,
-  :connection_mode,
-  :context_key,
-  :include_cursor,
-  :integration_identifier,
-  :limit,
-  :order_by,
-  :order_direction,
-  :provider_id,
-  :subscriber_id,
-  keyword_init: true
-)
-
-# ListChannelEndpointsResponseDto entity data model.
-#
-# @!attribute [rw] channel
-#   @return [String]
-#
-# @!attribute [rw] connectionIdentifier
-#   @return [String]
-#
-# @!attribute [rw] contextKeys
-#   @return [Array]
-#
-# @!attribute [rw] createdAt
-#   @return [String]
-#
-# @!attribute [rw] endpoint
-#   @return [Object]
-#
-# @!attribute [rw] identifier
-#   @return [String]
-#
-# @!attribute [rw] integrationIdentifier
-#   @return [String]
-#
-# @!attribute [rw] providerId
-#   @return [String]
-#
-# @!attribute [rw] subscriberId
-#   @return [String]
-#
-# @!attribute [rw] type
-#   @return [String]
-#
-# @!attribute [rw] updatedAt
-#   @return [String]
-ListChannelEndpointsResponseDto = Struct.new(
-  :channel,
-  :connectionIdentifier,
-  :contextKeys,
-  :createdAt,
-  :endpoint,
-  :identifier,
-  :integrationIdentifier,
-  :providerId,
-  :subscriberId,
-  :type,
-  :updatedAt,
-  keyword_init: true
-)
-
-# Request payload for ListChannelEndpointsResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] channel
-#   @return [String, nil]
-#
-# @!attribute [rw] connection_identifier
-#   @return [String, nil]
-#
-# @!attribute [rw] context_key
-#   @return [Array, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] integration_identifier
-#   @return [String, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-#
-# @!attribute [rw] provider_id
-#   @return [String, nil]
-#
-# @!attribute [rw] subscriber_id
-#   @return [String, nil]
-ListChannelEndpointsResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :channel,
-  :connection_identifier,
-  :context_key,
-  :include_cursor,
-  :integration_identifier,
-  :limit,
-  :order_by,
-  :order_direction,
-  :provider_id,
-  :subscriber_id,
-  keyword_init: true
-)
-
-# ListContextsResponseDto entity data model.
-#
-# @!attribute [rw] bridgeUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] createdAt
-#   @return [String]
-#
-# @!attribute [rw] data
-#   @return [Hash]
-#
-# @!attribute [rw] id
-#   @return [String]
-#
-# @!attribute [rw] type
-#   @return [String]
-#
-# @!attribute [rw] updatedAt
-#   @return [String]
-ListContextsResponseDto = Struct.new(
-  :bridgeUrl,
-  :createdAt,
-  :data,
-  :id,
-  :type,
-  :updatedAt,
-  keyword_init: true
-)
-
-# Request payload for ListContextsResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-#
-# @!attribute [rw] search
-#   @return [String, nil]
-ListContextsResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :id,
-  :include_cursor,
-  :limit,
-  :order_by,
-  :order_direction,
-  :search,
-  keyword_init: true
-)
-
 # ListDomainRoutesResponseDto entity data model.
 #
 # @!attribute [rw] address
@@ -3933,218 +3940,6 @@ ListDomainRoutesResponseDtoListMatch = Struct.new(
   keyword_init: true
 )
 
-# ListDomainsResponseDto entity data model.
-#
-# @!attribute [rw] createdAt
-#   @return [String]
-#
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
-# @!attribute [rw] dnsProvider
-#   @return [String, nil]
-#
-# @!attribute [rw] environmentId
-#   @return [String]
-#
-# @!attribute [rw] expectedDnsRecords
-#   @return [Array, nil]
-#
-# @!attribute [rw] id
-#   @return [String]
-#
-# @!attribute [rw] mxRecordConfigured
-#   @return [Boolean]
-#
-# @!attribute [rw] name
-#   @return [String]
-#
-# @!attribute [rw] organizationId
-#   @return [String]
-#
-# @!attribute [rw] status
-#   @return [String]
-#
-# @!attribute [rw] updatedAt
-#   @return [String]
-ListDomainsResponseDto = Struct.new(
-  :createdAt,
-  :data,
-  :dnsProvider,
-  :environmentId,
-  :expectedDnsRecords,
-  :id,
-  :mxRecordConfigured,
-  :name,
-  :organizationId,
-  :status,
-  :updatedAt,
-  keyword_init: true
-)
-
-# Request payload for ListDomainsResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-ListDomainsResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :include_cursor,
-  :limit,
-  :name,
-  :order_by,
-  :order_direction,
-  keyword_init: true
-)
-
-# ListSubscribersResponseDto entity data model.
-#
-# @!attribute [rw] avatar
-#   @return [String, nil]
-#
-# @!attribute [rw] channels
-#   @return [Array, nil]
-#
-# @!attribute [rw] createdAt
-#   @return [String]
-#
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
-# @!attribute [rw] deleted
-#   @return [Boolean]
-#
-# @!attribute [rw] email
-#   @return [String, nil]
-#
-# @!attribute [rw] environmentId
-#   @return [String]
-#
-# @!attribute [rw] firstName
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] isOnline
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] lastName
-#   @return [String, nil]
-#
-# @!attribute [rw] lastOnlineAt
-#   @return [String, nil]
-#
-# @!attribute [rw] locale
-#   @return [String, nil]
-#
-# @!attribute [rw] organizationId
-#   @return [String]
-#
-# @!attribute [rw] phone
-#   @return [String, nil]
-#
-# @!attribute [rw] subscriberId
-#   @return [String]
-#
-# @!attribute [rw] timezone
-#   @return [String, nil]
-#
-# @!attribute [rw] topics
-#   @return [Array, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String]
-#
-# @!attribute [rw] v
-#   @return [Float, nil]
-ListSubscribersResponseDto = Struct.new(
-  :avatar,
-  :channels,
-  :createdAt,
-  :data,
-  :deleted,
-  :email,
-  :environmentId,
-  :firstName,
-  :id,
-  :isOnline,
-  :lastName,
-  :lastOnlineAt,
-  :locale,
-  :organizationId,
-  :phone,
-  :subscriberId,
-  :timezone,
-  :topics,
-  :updatedAt,
-  :v,
-  keyword_init: true
-)
-
-# Request payload for ListSubscribersResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] email
-#   @return [String, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-#
-# @!attribute [rw] phone
-#   @return [String, nil]
-#
-# @!attribute [rw] subscriber_id
-#   @return [String, nil]
-ListSubscribersResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :email,
-  :include_cursor,
-  :limit,
-  :name,
-  :order_by,
-  :order_direction,
-  :phone,
-  :subscriber_id,
-  keyword_init: true
-)
-
 # ListTopicSubscriptionsResponseDto entity data model.
 #
 # @!attribute [rw] contextKeys
@@ -4214,72 +4009,6 @@ ListTopicSubscriptionsResponseDtoListMatch = Struct.new(
   :include_cursor,
   :key,
   :limit,
-  :order_by,
-  :order_direction,
-  keyword_init: true
-)
-
-# ListTopicsResponseDto entity data model.
-#
-# @!attribute [rw] createdAt
-#   @return [String, nil]
-#
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
-# @!attribute [rw] id
-#   @return [String]
-#
-# @!attribute [rw] key
-#   @return [String]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String, nil]
-ListTopicsResponseDto = Struct.new(
-  :createdAt,
-  :data,
-  :id,
-  :key,
-  :name,
-  :updatedAt,
-  keyword_init: true
-)
-
-# Request payload for ListTopicsResponseDto#list.
-#
-# @!attribute [rw] after
-#   @return [String, nil]
-#
-# @!attribute [rw] before
-#   @return [String, nil]
-#
-# @!attribute [rw] include_cursor
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] key
-#   @return [String, nil]
-#
-# @!attribute [rw] limit
-#   @return [Float, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] order_by
-#   @return [String, nil]
-#
-# @!attribute [rw] order_direction
-#   @return [String, nil]
-ListTopicsResponseDtoListMatch = Struct.new(
-  :after,
-  :before,
-  :include_cursor,
-  :key,
-  :limit,
-  :name,
   :order_by,
   :order_direction,
   keyword_init: true
@@ -4959,6 +4688,51 @@ SubscriberLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for Subscriber#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] email
+#   @return [String, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+#
+# @!attribute [rw] phone
+#   @return [String, nil]
+#
+# @!attribute [rw] subscriber_id
+#   @return [String, nil]
+SubscriberListMatch = Struct.new(
+  :after,
+  :before,
+  :email,
+  :include_cursor,
+  :limit,
+  :name,
+  :order_by,
+  :order_direction,
+  :phone,
+  :subscriber_id,
+  keyword_init: true
+)
+
 # Request payload for Subscriber#create.
 #
 # @!attribute [rw] fail_if_exist
@@ -5552,22 +5326,30 @@ SubscriptionUpdateData = Struct.new(
 
 # Topic entity data model.
 #
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
 # @!attribute [rw] data
 #   @return [Hash, nil]
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] key
 #   @return [String]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 Topic = Struct.new(
+  :createdAt,
   :data,
   :id,
   :key,
   :name,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -5580,28 +5362,73 @@ TopicLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for Topic#list.
+#
+# @!attribute [rw] after
+#   @return [String, nil]
+#
+# @!attribute [rw] before
+#   @return [String, nil]
+#
+# @!attribute [rw] include_cursor
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] key
+#   @return [String, nil]
+#
+# @!attribute [rw] limit
+#   @return [Float, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] order_by
+#   @return [String, nil]
+#
+# @!attribute [rw] order_direction
+#   @return [String, nil]
+TopicListMatch = Struct.new(
+  :after,
+  :before,
+  :include_cursor,
+  :key,
+  :limit,
+  :name,
+  :order_by,
+  :order_direction,
+  keyword_init: true
+)
+
 # Request payload for Topic#create.
 #
 # @!attribute [rw] fail_if_exist
 #   @return [Boolean, nil]
 #
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
 # @!attribute [rw] data
 #   @return [Hash, nil]
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] key
 #   @return [String]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 TopicCreateData = Struct.new(
   :fail_if_exist,
+  :createdAt,
   :data,
   :id,
   :key,
   :name,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -5610,6 +5437,9 @@ TopicCreateData = Struct.new(
 # @!attribute [rw] id
 #   @return [String]
 #
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
 # @!attribute [rw] data
 #   @return [Hash, nil]
 #
@@ -5618,11 +5448,16 @@ TopicCreateData = Struct.new(
 #
 # @!attribute [rw] name
 #   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 TopicUpdateData = Struct.new(
   :id,
+  :createdAt,
   :data,
   :key,
   :name,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -5695,6 +5530,9 @@ TopicSubscriptionsResponseDtoRemoveMatch = Struct.new(
 # @!attribute [rw] content
 #   @return [Hash]
 #
+# @!attribute [rw] createdAt
+#   @return [String]
+#
 # @!attribute [rw] id
 #   @return [String, nil]
 #
@@ -5706,12 +5544,17 @@ TopicSubscriptionsResponseDtoRemoveMatch = Struct.new(
 #
 # @!attribute [rw] resourceType
 #   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 Translation = Struct.new(
   :content,
+  :createdAt,
   :id,
   :locale,
   :resourceId,
   :resourceType,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -5737,6 +5580,9 @@ TranslationLoadMatch = Struct.new(
 # @!attribute [rw] content
 #   @return [Hash]
 #
+# @!attribute [rw] createdAt
+#   @return [String]
+#
 # @!attribute [rw] id
 #   @return [String, nil]
 #
@@ -5748,12 +5594,17 @@ TranslationLoadMatch = Struct.new(
 #
 # @!attribute [rw] resourceType
 #   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 TranslationCreateData = Struct.new(
   :content,
+  :createdAt,
   :id,
   :locale,
   :resourceId,
   :resourceType,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -5821,96 +5672,6 @@ TranslationGroupDto = Struct.new(
 TranslationGroupDtoLoadMatch = Struct.new(
   :resource_id,
   :resource_type,
-  keyword_init: true
-)
-
-# Trigger entity data model.
-#
-# @!attribute [rw] actor
-#   @return [Object, nil]
-#
-# @!attribute [rw] agentId
-#   @return [String, nil]
-#
-# @!attribute [rw] bridgeUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] context
-#   @return [Hash, nil]
-#
-# @!attribute [rw] name
-#   @return [String]
-#
-# @!attribute [rw] overrides
-#   @return [Object, nil]
-#
-# @!attribute [rw] payload
-#   @return [Hash, nil]
-#
-# @!attribute [rw] tenant
-#   @return [Object, nil]
-#
-# @!attribute [rw] to
-#   @return [Object]
-#
-# @!attribute [rw] transactionId
-#   @return [String, nil]
-Trigger = Struct.new(
-  :actor,
-  :agentId,
-  :bridgeUrl,
-  :context,
-  :name,
-  :overrides,
-  :payload,
-  :tenant,
-  :to,
-  :transactionId,
-  keyword_init: true
-)
-
-# Request payload for Trigger#create.
-#
-# @!attribute [rw] actor
-#   @return [Object, nil]
-#
-# @!attribute [rw] agentId
-#   @return [String, nil]
-#
-# @!attribute [rw] bridgeUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] context
-#   @return [Hash, nil]
-#
-# @!attribute [rw] name
-#   @return [String]
-#
-# @!attribute [rw] overrides
-#   @return [Object, nil]
-#
-# @!attribute [rw] payload
-#   @return [Hash, nil]
-#
-# @!attribute [rw] tenant
-#   @return [Object, nil]
-#
-# @!attribute [rw] to
-#   @return [Object]
-#
-# @!attribute [rw] transactionId
-#   @return [String, nil]
-TriggerCreateData = Struct.new(
-  :actor,
-  :agentId,
-  :bridgeUrl,
-  :context,
-  :name,
-  :overrides,
-  :payload,
-  :tenant,
-  :to,
-  :transactionId,
   keyword_init: true
 )
 

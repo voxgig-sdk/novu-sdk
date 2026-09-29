@@ -16,7 +16,7 @@ class EventEntityTest < Minitest::Test
     setup = event_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["create", "remove"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "event." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -31,13 +31,15 @@ class EventEntityTest < Minitest::Test
     end
     client = setup[:client]
 
-    # Bootstrap entity data from existing test data.
-    event_ref01_data_raw = Vs.items(Helpers.to_map(
-      Vs.getpath(setup[:data], "existing.event")))
-    event_ref01_data = nil
-    if event_ref01_data_raw.length > 0
-      event_ref01_data = Helpers.to_map(event_ref01_data_raw[0][1])
-    end
+    # CREATE
+    event_ref01_ent = client.Event(nil)
+    event_ref01_data = Helpers.to_map(Vs.getprop(
+      Vs.getpath(setup[:data], "new.event"), "event_ref01"))
+
+    event_ref01_data_result = event_ref01_ent.create(event_ref01_data, nil)
+    event_ref01_data = Helpers.to_map(event_ref01_data_result.respond_to?(:data_get) ? event_ref01_data_result.data_get : event_ref01_data_result)
+    assert !event_ref01_data.nil?
+
 
   end
 end
@@ -56,7 +58,7 @@ def event_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["event01", "event02", "event03", "trigger01", "trigger02", "trigger03"],
+    ["event01", "event02", "event03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

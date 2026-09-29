@@ -166,41 +166,13 @@ Create a new `Link` entity instance. Pass `nil` for no initial data.
 
 Create a new `ListAgentIntegrationsResponseDto` entity instance. Pass `nil` for no initial data.
 
-#### `ListAgentsResponseDto(data = nil)`
-
-Create a new `ListAgentsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListChannelConnectionsResponseDto(data = nil)`
-
-Create a new `ListChannelConnectionsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListChannelEndpointsResponseDto(data = nil)`
-
-Create a new `ListChannelEndpointsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListContextsResponseDto(data = nil)`
-
-Create a new `ListContextsResponseDto` entity instance. Pass `nil` for no initial data.
-
 #### `ListDomainRoutesResponseDto(data = nil)`
 
 Create a new `ListDomainRoutesResponseDto` entity instance. Pass `nil` for no initial data.
 
-#### `ListDomainsResponseDto(data = nil)`
-
-Create a new `ListDomainsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListSubscribersResponseDto(data = nil)`
-
-Create a new `ListSubscribersResponseDto` entity instance. Pass `nil` for no initial data.
-
 #### `ListTopicSubscriptionsResponseDto(data = nil)`
 
 Create a new `ListTopicSubscriptionsResponseDto` entity instance. Pass `nil` for no initial data.
-
-#### `ListTopicsResponseDto(data = nil)`
-
-Create a new `ListTopicsResponseDto` entity instance. Pass `nil` for no initial data.
 
 #### `MasterJson(data = nil)`
 
@@ -277,10 +249,6 @@ Create a new `Translation` entity instance. Pass `nil` for no initial data.
 #### `TranslationGroupDto(data = nil)`
 
 Create a new `TranslationGroupDto` entity instance. Pass `nil` for no initial data.
-
-#### `Trigger(data = nil)`
-
-Create a new `Trigger` entity instance. Pass `nil` for no initial data.
 
 #### `TriggerEventResponseDto(data = nil)`
 
@@ -460,27 +428,27 @@ agent = client.Agent
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `active` | - | Yes | Yes | - |
-| `behavior` | - | - | Yes | - |
-| `bridgeUrl` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `createdBy` | - | - | - | - |
-| `description` | - | - | - | - |
-| `devBridgeActive` | - | - | - | - |
-| `devBridgeUrl` | - | - | - | - |
-| `environmentId` | - | - | - | - |
-| `exceedsPlanLimit` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | - | - | - |
-| `integrations` | - | - | - | - |
-| `managedRuntime` | - | Yes | - | - |
-| `name` | - | - | Yes | - |
-| `organizationId` | - | - | - | - |
-| `runtime` | - | - | - | - |
-| `updatedAt` | - | - | - | - |
-| `visibility` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `active` | - | - | Yes | Yes | - |
+| `behavior` | - | - | - | Yes | - |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `createdBy` | - | - | - | - | - |
+| `description` | - | - | - | - | - |
+| `devBridgeActive` | - | - | - | - | - |
+| `devBridgeUrl` | - | - | - | - | - |
+| `environmentId` | - | - | - | - | - |
+| `exceedsPlanLimit` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | - | - | - |
+| `integrations` | - | - | - | - | - |
+| `managedRuntime` | - | - | Yes | - | - |
+| `name` | - | - | - | Yes | - |
+| `organizationId` | - | - | - | - | - |
+| `runtime` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `visibility` | - | - | - | - | - |
 
 ### Operations
 
@@ -500,6 +468,14 @@ result = client.Agent.create({
   "organizationId" => "example_organizationId", # String
   "updatedAt" => "example_updatedAt", # String
 })
+```
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.Agent.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -811,21 +787,21 @@ channel_connection = client.ChannelConnection
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `auth` | - | - | - | - |
-| `channel` | - | - | - | - |
-| `connectionMode` | - | - | - | - |
-| `context` | - | - | - | - |
-| `contextKeys` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | Yes | - | - |
-| `integrationIdentifier` | - | - | - | - |
-| `providerId` | - | - | - | - |
-| `subscriberId` | - | Yes | - | - |
-| `updatedAt` | - | - | - | - |
-| `workspace` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `auth` | - | - | - | - | - |
+| `channel` | - | - | - | - | - |
+| `connectionMode` | - | - | - | - | - |
+| `context` | - | - | - | - | - |
+| `contextKeys` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | Yes | - | - |
+| `integrationIdentifier` | - | - | - | - | - |
+| `providerId` | - | - | - | - | - |
+| `subscriberId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
@@ -846,6 +822,14 @@ result = client.ChannelConnection.create({
   "updatedAt" => "example_updatedAt", # String
   "workspace" => {}, # Hash
 })
+```
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.ChannelConnection.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -948,6 +932,14 @@ result = client.ChannelEndpoint.create({
   "type" => "example_type", # String
   "updatedAt" => "example_updatedAt", # String
 })
+```
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.ChannelEndpoint.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -1076,19 +1068,23 @@ context = client.Context
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bridgeUrl` | `String` | No | Optional bridge URL override for agent connect. |
-| `data` | `Hash` | No | Optional custom data to associate with this context. |
-| `id` | `String` | Yes | Unique identifier for this context. |
-| `type` | `String` | Yes | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `String` | No | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `String` | Yes | Creation timestamp |
+| `data` | `Hash` | Yes | Custom data associated with this context |
+| `id` | `String` | Yes | Unique identifier for this context |
+| `type` | `String` | Yes | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `String` | Yes | Last update timestamp |
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `bridgeUrl` | - | - | - | - |
-| `data` | - | - | Yes | - |
-| `id` | - | - | - | - |
-| `type` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `data` | - | - | Yes | - | - |
+| `id` | - | - | - | - | - |
+| `type` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -1098,9 +1094,20 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Context.create({
+  "createdAt" => "example_createdAt", # String
+  "data" => {}, # Hash
   "id" => "example_id", # String
   "type" => "example_type", # String
+  "updatedAt" => "example_updatedAt", # String
 })
+```
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.Context.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -1328,6 +1335,14 @@ result = client.Domain.create({
   "status" => "example_status", # String
   "updatedAt" => "example_updatedAt", # String
 })
+```
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.Domain.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -1574,10 +1589,31 @@ domain_route_response_dto = client.DomainRouteResponseDto
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentId` | `String` | No | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `Hash` | No | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
-| `id` | `String` | No |  |
-| `type` | `String` | No |  |
+| `address` | `String` | Yes |  |
+| `agentId` | `String` | No | Internal id of the destination agent. |
+| `createdAt` | `String` | Yes |  |
+| `data` | `Hash` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `String` | Yes |  |
+| `environmentId` | `String` | Yes |  |
+| `id` | `String` | Yes |  |
+| `organizationId` | `String` | Yes |  |
+| `type` | `String` | Yes |  |
+| `updatedAt` | `String` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | load | create | update |
+| --- | --- | --- | --- |
+| `address` | - | - | - |
+| `agentId` | - | - | - |
+| `createdAt` | - | - | - |
+| `data` | - | - | - |
+| `domainId` | - | - | - |
+| `environmentId` | - | - | - |
+| `id` | - | - | - |
+| `organizationId` | - | - | - |
+| `type` | - | - | Yes |
+| `updatedAt` | - | - | - |
 
 ### Operations
 
@@ -1588,6 +1624,13 @@ Create a new entity with the given data. Raises on error.
 ```ruby
 result = client.DomainRouteResponseDto.create({
   "id" => "example_id", # String
+  "address" => "example_address", # String
+  "createdAt" => "example_createdAt", # String
+  "domainId" => "example_domainId", # String
+  "environmentId" => "example_environmentId", # String
+  "organizationId" => "example_organizationId", # String
+  "type" => "example_type", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -1979,7 +2022,33 @@ Return the entity name.
 event = client.Event
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actor` | `Object` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `String` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `String` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `Hash` | No |  |
+| `name` | `String` | Yes | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `Object` | No | This could be used to override provider specific configurations |
+| `payload` | `Hash` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `Object` | No | It is used to specify a tenant context during trigger event. |
+| `to` | `Object` | Yes | The recipients list of people who will receive the notification. |
+| `transactionId` | `String` | No | A unique identifier for deduplication. |
+
 ### Operations
+
+#### `create(reqdata, ctrl = nil) -> result`
+
+Create a new entity with the given data. Raises on error.
+
+```ruby
+result = client.Event.create({
+  "name" => "example_name", # String
+  "to" => "example_to", # Object
+})
+```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
 
@@ -2809,256 +2878,6 @@ Return the entity name.
 
 ---
 
-## ListAgentsResponseDtoEntity
-
-```ruby
-list_agents_response_dto = client.ListAgentsResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `Boolean` | Yes |  |
-| `behavior` | `Hash` | Yes |  |
-| `bridgeUrl` | `String` | No | Production bridge URL |
-| `createdAt` | `String` | Yes |  |
-| `createdBy` | `String` | No | Mongo user id of the user who created the agent |
-| `description` | `String` | No |  |
-| `devBridgeActive` | `Boolean` | No | Whether the dev bridge override is active |
-| `devBridgeUrl` | `String` | No | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `String` | Yes |  |
-| `exceedsPlanLimit` | `Boolean` | No | Cloud only. |
-| `id` | `String` | Yes |  |
-| `identifier` | `String` | Yes |  |
-| `integrations` | `Array` | No |  |
-| `managedRuntime` | `Object` | No | Present when runtime is "managed". |
-| `name` | `String` | Yes |  |
-| `organizationId` | `String` | Yes |  |
-| `runtime` | `String` | No | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `String` | Yes |  |
-| `visibility` | `String` | No | Discovery scope of the agent. |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListAgentsResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListAgentsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ListChannelConnectionsResponseDtoEntity
-
-```ruby
-list_channel_connections_response_dto = client.ListChannelConnectionsResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `auth` | `Hash` | Yes |  |
-| `channel` | `String` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `Array` | Yes | The context of the channel connection |
-| `createdAt` | `String` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `String` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `String` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `String` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `String` | Yes | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `String` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `Hash` | Yes |  |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListChannelConnectionsResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ListChannelEndpointsResponseDtoEntity
-
-```ruby
-list_channel_endpoints_response_dto = client.ListChannelEndpointsResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `channel` | `String` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `String` | Yes | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `Array` | Yes | The context of the channel connection |
-| `createdAt` | `String` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `Object` | Yes | Endpoint data specific to the channel type |
-| `identifier` | `String` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `String` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `String` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `String` | Yes | The subscriber ID to which the channel endpoint is linked |
-| `type` | `String` | Yes | Type of channel endpoint |
-| `updatedAt` | `String` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListChannelEndpointsResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ListContextsResponseDtoEntity
-
-```ruby
-list_contexts_response_dto = client.ListContextsResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bridgeUrl` | `String` | No | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `String` | Yes | Creation timestamp |
-| `data` | `Hash` | Yes | Custom data associated with this context |
-| `id` | `String` | Yes | Unique identifier for this context |
-| `type` | `String` | Yes | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `String` | Yes | Last update timestamp |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListContextsResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListContextsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
 ## ListDomainRoutesResponseDtoEntity
 
 ```ruby
@@ -3120,139 +2939,6 @@ Return the entity name.
 
 ---
 
-## ListDomainsResponseDtoEntity
-
-```ruby
-list_domains_response_dto = client.ListDomainsResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `String` | Yes |  |
-| `data` | `Hash` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `String` | No |  |
-| `environmentId` | `String` | Yes |  |
-| `expectedDnsRecords` | `Array` | No |  |
-| `id` | `String` | Yes |  |
-| `mxRecordConfigured` | `Boolean` | Yes |  |
-| `name` | `String` | Yes |  |
-| `organizationId` | `String` | Yes |  |
-| `status` | `String` | Yes |  |
-| `updatedAt` | `String` | Yes |  |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListDomainsResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListDomainsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ListSubscribersResponseDtoEntity
-
-```ruby
-list_subscribers_response_dto = client.ListSubscribersResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `avatar` | `String` | No | The URL of the subscriber's avatar image. |
-| `channels` | `Array` | No | An array of channel settings associated with the subscriber. |
-| `createdAt` | `String` | Yes | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `Hash` | No | Additional custom data for the subscriber |
-| `deleted` | `Boolean` | Yes | Indicates whether the subscriber has been deleted. |
-| `email` | `String` | No | The email address of the subscriber. |
-| `environmentId` | `String` | Yes | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `String` | No | The first name of the subscriber. |
-| `id` | `String` | No | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `Boolean` | No | Indicates whether the subscriber is currently online. |
-| `lastName` | `String` | No | The last name of the subscriber. |
-| `lastOnlineAt` | `String` | No | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `String` | No | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `String` | Yes | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `String` | No | The phone number of the subscriber. |
-| `subscriberId` | `String` | Yes | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `String` | No | Timezone of the subscriber |
-| `topics` | `Array` | No | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `String` | Yes | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `Float` | No | The version of the subscriber document. |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListSubscribersResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListSubscribersResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
 ## ListTopicSubscriptionsResponseDtoEntity
 
 ```ruby
@@ -3302,63 +2988,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ListTopicsResponseDtoEntity
-
-```ruby
-list_topics_response_dto = client.ListTopicsResponseDto
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `String` | No | The date the topic was created |
-| `data` | `Hash` | No | Additional custom data associated with the topic |
-| `id` | `String` | Yes | The identifier of the topic |
-| `key` | `String` | Yes | The unique key of the topic |
-| `name` | `String` | No | The name of the topic |
-| `updatedAt` | `String` | No | The date the topic was last updated |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.ListTopicsResponseDto.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ListTopicsResponseDtoEntity` instance with the same client and
 options.
 
 #### `get_name -> String`
@@ -3930,6 +3559,14 @@ result = client.Subscriber.create({
 })
 ```
 
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.Subscriber.list
+```
+
 #### `load(reqmatch, ctrl = nil) -> result`
 
 Load a single entity matching the given criteria. Raises on error.
@@ -4311,10 +3948,12 @@ topic = client.Topic
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | `Hash` | No | Additional custom data associated with the topic. |
-| `id` | `String` | No |  |
-| `key` | `String` | Yes | The unique key identifier for the topic. |
-| `name` | `String` | No | The display name for the topic |
+| `createdAt` | `String` | No | The date the topic was created |
+| `data` | `Hash` | No | Additional custom data associated with the topic |
+| `id` | `String` | Yes | The identifier of the topic |
+| `key` | `String` | Yes | The unique key of the topic |
+| `name` | `String` | No | The name of the topic |
+| `updatedAt` | `String` | No | The date the topic was last updated |
 
 ### Operations
 
@@ -4324,8 +3963,17 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Topic.create({
+  "id" => "example_id", # String
   "key" => "example_key", # String
 })
+```
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.Topic.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -4499,10 +4147,12 @@ translation = client.Translation
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `content` | `Hash` | Yes | Translation content as JSON object |
+| `createdAt` | `String` | Yes | Creation timestamp |
 | `id` | `String` | No |  |
-| `locale` | `String` | Yes | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `String` | Yes | The resource ID to associate translation with. |
-| `resourceType` | `String` | Yes | The resource type to associate translation with |
+| `locale` | `String` | Yes | Locale code |
+| `resourceId` | `String` | Yes | Resource identifier |
+| `resourceType` | `String` | Yes | Resource type |
+| `updatedAt` | `String` | Yes | Last update timestamp |
 
 ### Operations
 
@@ -4513,9 +4163,11 @@ Create a new entity with the given data. Raises on error.
 ```ruby
 result = client.Translation.create({
   "content" => {}, # Hash
+  "createdAt" => "example_createdAt", # String
   "locale" => "example_locale", # String
   "resourceId" => "example_resourceId", # String
   "resourceType" => "example_resourceType", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -4615,70 +4267,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `TranslationGroupDtoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## TriggerEntity
-
-```ruby
-trigger = client.Trigger
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `actor` | `Object` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `String` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `String` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `Hash` | No |  |
-| `name` | `String` | Yes | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `Object` | No | This could be used to override provider specific configurations |
-| `payload` | `Hash` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `Object` | No | It is used to specify a tenant context during trigger event. |
-| `to` | `Object` | Yes | The recipients list of people who will receive the notification. |
-| `transactionId` | `String` | No | A unique identifier for deduplication. |
-
-### Operations
-
-#### `create(reqdata, ctrl = nil) -> result`
-
-Create a new entity with the given data. Raises on error.
-
-```ruby
-result = client.Trigger.create({
-  "name" => "example_name", # String
-  "to" => "example_to", # Object
-})
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `TriggerEntity` instance with the same client and
 options.
 
 #### `get_name -> String`

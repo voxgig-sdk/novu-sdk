@@ -5,30 +5,72 @@ main: kit: entity: domain_route_response_dto: {
   alias: field: {}
 
   fields: {
+    address: {
+      h: "Address"
+      n: "address"
+      r: true
+      t: "`$STRING`"
+    }
     agentId: {
       h: "Agent Id"
       n: "agentId"
       r: false
-      sh: "Agent identifier; required when type is agent, ignored when type is webhook."
+      sh: "Internal id of the destination agent."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
       t: "`$STRING`"
     }
     data: {
       h: "Data"
       n: "data"
       r: false
-      sh: "Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values)."
+      sh: "String key-value metadata (max 10 keys, 500 characters total when set via API)."
       t: "`$OBJECT`"
+    }
+    domainId: {
+      h: "Domain Id"
+      n: "domainId"
+      r: true
+      t: "`$STRING`"
+    }
+    environmentId: {
+      h: "Environment Id"
+      n: "environmentId"
+      r: true
+      t: "`$STRING`"
     }
     id: {
       h: "Id"
       n: "id"
-      r: false
+      r: true
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
       t: "`$STRING`"
     }
     type: {
       h: "Type"
       n: "type"
-      r: false
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
       t: "`$STRING`"
     }
   }
@@ -54,7 +96,7 @@ main: kit: entity: domain_route_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -127,7 +169,7 @@ main: kit: entity: domain_route_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -172,7 +214,7 @@ main: kit: entity: domain_route_response_dto: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.data`"
+            res: "`body`"
           }
         }
       ]
@@ -191,7 +233,7 @@ main: kit: entity: domain_route_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -246,7 +288,7 @@ main: kit: entity: domain_route_response_dto: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.data`"
+            res: "`body`"
           }
         }
       ]
@@ -265,7 +307,7 @@ main: kit: entity: domain_route_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -320,7 +362,7 @@ main: kit: entity: domain_route_response_dto: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.data`"
+            res: "`body`"
           }
         }
       ]

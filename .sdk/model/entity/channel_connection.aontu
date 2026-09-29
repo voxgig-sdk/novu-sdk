@@ -132,7 +132,7 @@ main: kit: entity: channel_connection: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -160,6 +160,156 @@ main: kit: entity: channel_connection: {
         }
       ]
     }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/channel-connections"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "chat"
+                k: "query"
+                n: "channel"
+                or: "channel"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "shared"
+                k: "query"
+                n: "connection_mode"
+                or: "connectionMode"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: [
+                  "tenant:org-123"
+                  "region:us-east-1"
+                ]
+                k: "query"
+                n: "context_key"
+                or: "contextKeys"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "includeCursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "slack-prod"
+                k: "query"
+                n: "integration_identifier"
+                or: "integrationIdentifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "orderBy"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "orderDirection"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "slack"
+                k: "query"
+                n: "provider_id"
+                or: "providerId"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "subscriber-123"
+                k: "query"
+                n: "subscriber_id"
+                or: "subscriberId"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/channel-connections"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "channel"
+              "connection_mode"
+              "context_key"
+              "idempotency_key"
+              "include_cursor"
+              "integration_identifier"
+              "limit"
+              "order_by"
+              "order_direction"
+              "provider_id"
+              "subscriber_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "channel-connections"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
     load: {
       name: "load"
       points: [
@@ -174,7 +324,7 @@ main: kit: entity: channel_connection: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -234,7 +384,7 @@ main: kit: entity: channel_connection: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -294,7 +444,7 @@ main: kit: entity: channel_connection: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }

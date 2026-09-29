@@ -899,78 +899,6 @@ class NovuSDK
     }
 
 
-    private $_list_agents_response_dto = null;
-
-    // Canonical facade: $client->ListAgentsResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_agents_response_dto()
-    // resolves here too.
-    public function ListAgentsResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_agents_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_agents_response_dto === null) {
-                $this->_list_agents_response_dto = new ListAgentsResponseDtoEntity($this, null);
-            }
-            return $this->_list_agents_response_dto;
-        }
-        return new ListAgentsResponseDtoEntity($this, $data);
-    }
-
-
-    private $_list_channel_connections_response_dto = null;
-
-    // Canonical facade: $client->ListChannelConnectionsResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_channel_connections_response_dto()
-    // resolves here too.
-    public function ListChannelConnectionsResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_channel_connections_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_channel_connections_response_dto === null) {
-                $this->_list_channel_connections_response_dto = new ListChannelConnectionsResponseDtoEntity($this, null);
-            }
-            return $this->_list_channel_connections_response_dto;
-        }
-        return new ListChannelConnectionsResponseDtoEntity($this, $data);
-    }
-
-
-    private $_list_channel_endpoints_response_dto = null;
-
-    // Canonical facade: $client->ListChannelEndpointsResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_channel_endpoints_response_dto()
-    // resolves here too.
-    public function ListChannelEndpointsResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_channel_endpoints_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_channel_endpoints_response_dto === null) {
-                $this->_list_channel_endpoints_response_dto = new ListChannelEndpointsResponseDtoEntity($this, null);
-            }
-            return $this->_list_channel_endpoints_response_dto;
-        }
-        return new ListChannelEndpointsResponseDtoEntity($this, $data);
-    }
-
-
-    private $_list_contexts_response_dto = null;
-
-    // Canonical facade: $client->ListContextsResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_contexts_response_dto()
-    // resolves here too.
-    public function ListContextsResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_contexts_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_contexts_response_dto === null) {
-                $this->_list_contexts_response_dto = new ListContextsResponseDtoEntity($this, null);
-            }
-            return $this->_list_contexts_response_dto;
-        }
-        return new ListContextsResponseDtoEntity($this, $data);
-    }
-
-
     private $_list_domain_routes_response_dto = null;
 
     // Canonical facade: $client->ListDomainRoutesResponseDto()->list() / ->load(["id" => ...]).
@@ -989,42 +917,6 @@ class NovuSDK
     }
 
 
-    private $_list_domains_response_dto = null;
-
-    // Canonical facade: $client->ListDomainsResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_domains_response_dto()
-    // resolves here too.
-    public function ListDomainsResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_domains_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_domains_response_dto === null) {
-                $this->_list_domains_response_dto = new ListDomainsResponseDtoEntity($this, null);
-            }
-            return $this->_list_domains_response_dto;
-        }
-        return new ListDomainsResponseDtoEntity($this, $data);
-    }
-
-
-    private $_list_subscribers_response_dto = null;
-
-    // Canonical facade: $client->ListSubscribersResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_subscribers_response_dto()
-    // resolves here too.
-    public function ListSubscribersResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_subscribers_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_subscribers_response_dto === null) {
-                $this->_list_subscribers_response_dto = new ListSubscribersResponseDtoEntity($this, null);
-            }
-            return $this->_list_subscribers_response_dto;
-        }
-        return new ListSubscribersResponseDtoEntity($this, $data);
-    }
-
-
     private $_list_topic_subscriptions_response_dto = null;
 
     // Canonical facade: $client->ListTopicSubscriptionsResponseDto()->list() / ->load(["id" => ...]).
@@ -1040,24 +932,6 @@ class NovuSDK
             return $this->_list_topic_subscriptions_response_dto;
         }
         return new ListTopicSubscriptionsResponseDtoEntity($this, $data);
-    }
-
-
-    private $_list_topics_response_dto = null;
-
-    // Canonical facade: $client->ListTopicsResponseDto()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->list_topics_response_dto()
-    // resolves here too.
-    public function ListTopicsResponseDto($data = null)
-    {
-        require_once __DIR__ . '/entity/list_topics_response_dto_entity.php';
-        if ($data === null) {
-            if ($this->_list_topics_response_dto === null) {
-                $this->_list_topics_response_dto = new ListTopicsResponseDtoEntity($this, null);
-            }
-            return $this->_list_topics_response_dto;
-        }
-        return new ListTopicsResponseDtoEntity($this, $data);
     }
 
 
@@ -1400,24 +1274,6 @@ class NovuSDK
             return $this->_translation_group_dto;
         }
         return new TranslationGroupDtoEntity($this, $data);
-    }
-
-
-    private $_trigger = null;
-
-    // Canonical facade: $client->Trigger()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->trigger()
-    // resolves here too.
-    public function Trigger($data = null)
-    {
-        require_once __DIR__ . '/entity/trigger_entity.php';
-        if ($data === null) {
-            if ($this->_trigger === null) {
-                $this->_trigger = new TriggerEntity($this, null);
-            }
-            return $this->_trigger;
-        }
-        return new TriggerEntity($this, $data);
     }
 
 

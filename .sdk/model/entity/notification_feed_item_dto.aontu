@@ -233,7 +233,7 @@ main: kit: entity: notification_feed_item_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -242,7 +242,7 @@ main: kit: entity: notification_feed_item_dto: {
               {
                 k: "param"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }

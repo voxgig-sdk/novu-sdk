@@ -77,7 +77,7 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -86,7 +86,7 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
               {
                 k: "param"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -113,14 +113,14 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
                 ]
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
               {
                 k: "query"
                 n: "include_cursor"
-                or: "include_cursor"
+                or: "includeCursor"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -142,14 +142,14 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
               {
                 k: "query"
                 n: "order_by"
-                or: "order_by"
+                or: "orderBy"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "order_direction"
-                or: "order_direction"
+                or: "orderDirection"
                 r: false
                 t: "`$STRING`"
               }
@@ -206,7 +206,7 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -215,7 +215,7 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
               {
                 k: "param"
                 n: "topic_key"
-                or: "topic_key"
+                or: "topicKey"
                 r: true
                 t: "`$STRING`"
               }
@@ -242,14 +242,14 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
                 ]
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
               {
                 k: "query"
                 n: "include_cursor"
-                or: "include_cursor"
+                or: "includeCursor"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -264,21 +264,21 @@ main: kit: entity: list_topic_subscriptions_response_dto: {
               {
                 k: "query"
                 n: "order_by"
-                or: "order_by"
+                or: "orderBy"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "order_direction"
-                or: "order_direction"
+                or: "orderDirection"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: false
                 t: "`$STRING`"
               }

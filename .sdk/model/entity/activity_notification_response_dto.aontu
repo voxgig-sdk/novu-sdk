@@ -174,7 +174,7 @@ main: kit: entity: activity_notification_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -197,21 +197,21 @@ main: kit: entity: activity_notification_response_dto: {
               {
                 k: "query"
                 n: "channel"
-                or: "channel"
+                or: "channels"
                 r: false
                 t: "`$ARRAY`"
               }
               {
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
               {
                 k: "query"
                 n: "email"
-                or: "email"
+                or: "emails"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -248,35 +248,35 @@ main: kit: entity: activity_notification_response_dto: {
               {
                 k: "query"
                 n: "subscriber_id"
-                or: "subscriber_id"
+                or: "subscriberIds"
                 r: false
                 t: "`$ARRAY`"
               }
               {
                 k: "query"
                 n: "subscription_id"
-                or: "subscription_id"
+                or: "subscriptionId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "template"
-                or: "template"
+                or: "templates"
                 r: false
                 t: "`$ARRAY`"
               }
               {
                 k: "query"
                 n: "topic_key"
-                or: "topic_key"
+                or: "topicKey"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "transaction_id"
-                or: "transaction_id"
+                or: "transactionId"
                 r: false
                 t: "`$STRING`"
               }
@@ -332,7 +332,7 @@ main: kit: entity: activity_notification_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -341,7 +341,7 @@ main: kit: entity: activity_notification_response_dto: {
               {
                 k: "param"
                 n: "notification_id"
-                or: "notification_id"
+                or: "notificationId"
                 r: true
                 t: "`$STRING`"
               }

@@ -34,7 +34,7 @@ main: kit: entity: subscriber_notifications_response_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -43,7 +43,7 @@ main: kit: entity: subscriber_notifications_response_dto: {
               {
                 k: "param"
                 n: "id"
-                or: "subscriber_id"
+                or: "subscriberId"
                 r: true
                 t: "`$STRING`"
               }
@@ -66,7 +66,7 @@ main: kit: entity: subscriber_notifications_response_dto: {
               {
                 k: "query"
                 n: "context_key"
-                or: "context_key"
+                or: "contextKeys"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -74,7 +74,7 @@ main: kit: entity: subscriber_notifications_response_dto: {
                 ex: 1704067200000
                 k: "query"
                 n: "created_gte"
-                or: "created_gte"
+                or: "createdGte"
                 r: false
                 t: "`$NUMBER`"
               }
@@ -82,7 +82,7 @@ main: kit: entity: subscriber_notifications_response_dto: {
                 ex: 1735689599999
                 k: "query"
                 n: "created_lte"
-                or: "created_lte"
+                or: "createdLte"
                 r: false
                 t: "`$NUMBER`"
               }
@@ -181,7 +181,7 @@ main: kit: entity: subscriber_notifications_response_dto: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]

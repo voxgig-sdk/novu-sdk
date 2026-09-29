@@ -33,15 +33,8 @@ const LayoutEntity_1 = require("./entity/LayoutEntity");
 const LayoutResponseDtoEntity_1 = require("./entity/LayoutResponseDtoEntity");
 const LinkEntity_1 = require("./entity/LinkEntity");
 const ListAgentIntegrationsResponseDtoEntity_1 = require("./entity/ListAgentIntegrationsResponseDtoEntity");
-const ListAgentsResponseDtoEntity_1 = require("./entity/ListAgentsResponseDtoEntity");
-const ListChannelConnectionsResponseDtoEntity_1 = require("./entity/ListChannelConnectionsResponseDtoEntity");
-const ListChannelEndpointsResponseDtoEntity_1 = require("./entity/ListChannelEndpointsResponseDtoEntity");
-const ListContextsResponseDtoEntity_1 = require("./entity/ListContextsResponseDtoEntity");
 const ListDomainRoutesResponseDtoEntity_1 = require("./entity/ListDomainRoutesResponseDtoEntity");
-const ListDomainsResponseDtoEntity_1 = require("./entity/ListDomainsResponseDtoEntity");
-const ListSubscribersResponseDtoEntity_1 = require("./entity/ListSubscribersResponseDtoEntity");
 const ListTopicSubscriptionsResponseDtoEntity_1 = require("./entity/ListTopicSubscriptionsResponseDtoEntity");
-const ListTopicsResponseDtoEntity_1 = require("./entity/ListTopicsResponseDtoEntity");
 const MasterJsonEntity_1 = require("./entity/MasterJsonEntity");
 const MessageEntity_1 = require("./entity/MessageEntity");
 const MessageResponseDtoEntity_1 = require("./entity/MessageResponseDtoEntity");
@@ -61,7 +54,6 @@ const TopicSubscriberDtoEntity_1 = require("./entity/TopicSubscriberDtoEntity");
 const TopicSubscriptionsResponseDtoEntity_1 = require("./entity/TopicSubscriptionsResponseDtoEntity");
 const TranslationEntity_1 = require("./entity/TranslationEntity");
 const TranslationGroupDtoEntity_1 = require("./entity/TranslationGroupDtoEntity");
-const TriggerEntity_1 = require("./entity/TriggerEntity");
 const TriggerEventResponseDtoEntity_1 = require("./entity/TriggerEventResponseDtoEntity");
 const UnseenEntity_1 = require("./entity/UnseenEntity");
 const UploadEntity_1 = require("./entity/UploadEntity");
@@ -493,34 +485,6 @@ class NovuSDK {
         const self = this;
         return new ListAgentIntegrationsResponseDtoEntity_1.ListAgentIntegrationsResponseDtoEntity(self, entopts);
     }
-    // Entity access: `client.ListAgentsResponseDto().list()` / `client.ListAgentsResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListAgentsResponseDto(entopts) {
-        const self = this;
-        return new ListAgentsResponseDtoEntity_1.ListAgentsResponseDtoEntity(self, entopts);
-    }
-    // Entity access: `client.ListChannelConnectionsResponseDto().list()` / `client.ListChannelConnectionsResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListChannelConnectionsResponseDto(entopts) {
-        const self = this;
-        return new ListChannelConnectionsResponseDtoEntity_1.ListChannelConnectionsResponseDtoEntity(self, entopts);
-    }
-    // Entity access: `client.ListChannelEndpointsResponseDto().list()` / `client.ListChannelEndpointsResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListChannelEndpointsResponseDto(entopts) {
-        const self = this;
-        return new ListChannelEndpointsResponseDtoEntity_1.ListChannelEndpointsResponseDtoEntity(self, entopts);
-    }
-    // Entity access: `client.ListContextsResponseDto().list()` / `client.ListContextsResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListContextsResponseDto(entopts) {
-        const self = this;
-        return new ListContextsResponseDtoEntity_1.ListContextsResponseDtoEntity(self, entopts);
-    }
     // Entity access: `client.ListDomainRoutesResponseDto().list()` / `client.ListDomainRoutesResponseDto().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
@@ -528,33 +492,12 @@ class NovuSDK {
         const self = this;
         return new ListDomainRoutesResponseDtoEntity_1.ListDomainRoutesResponseDtoEntity(self, entopts);
     }
-    // Entity access: `client.ListDomainsResponseDto().list()` / `client.ListDomainsResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListDomainsResponseDto(entopts) {
-        const self = this;
-        return new ListDomainsResponseDtoEntity_1.ListDomainsResponseDtoEntity(self, entopts);
-    }
-    // Entity access: `client.ListSubscribersResponseDto().list()` / `client.ListSubscribersResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListSubscribersResponseDto(entopts) {
-        const self = this;
-        return new ListSubscribersResponseDtoEntity_1.ListSubscribersResponseDtoEntity(self, entopts);
-    }
     // Entity access: `client.ListTopicSubscriptionsResponseDto().list()` / `client.ListTopicSubscriptionsResponseDto().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
     ListTopicSubscriptionsResponseDto(entopts) {
         const self = this;
         return new ListTopicSubscriptionsResponseDtoEntity_1.ListTopicSubscriptionsResponseDtoEntity(self, entopts);
-    }
-    // Entity access: `client.ListTopicsResponseDto().list()` / `client.ListTopicsResponseDto().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ListTopicsResponseDto(entopts) {
-        const self = this;
-        return new ListTopicsResponseDtoEntity_1.ListTopicsResponseDtoEntity(self, entopts);
     }
     // Entity access: `client.MasterJson().list()` / `client.MasterJson().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
@@ -688,13 +631,6 @@ class NovuSDK {
     TranslationGroupDto(entopts) {
         const self = this;
         return new TranslationGroupDtoEntity_1.TranslationGroupDtoEntity(self, entopts);
-    }
-    // Entity access: `client.Trigger().list()` / `client.Trigger().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    Trigger(entopts) {
-        const self = this;
-        return new TriggerEntity_1.TriggerEntity(self, entopts);
     }
     // Entity access: `client.TriggerEventResponseDto().list()` / `client.TriggerEventResponseDto().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity

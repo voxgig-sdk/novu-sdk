@@ -180,7 +180,7 @@ main: kit: entity: agent: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -190,7 +190,7 @@ main: kit: entity: agent: {
                 ex: "support-agent"
                 k: "param"
                 n: "id"
-                or: "agent_id"
+                or: "agentId"
                 r: true
                 t: "`$STRING`"
               }
@@ -240,14 +240,14 @@ main: kit: entity: agent: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "header"
                 n: "novu_analytics_source"
-                or: "novu_analytics_source"
+                or: "Novu-Analytics-Source"
                 r: true
                 t: "`$STRING`"
               }
@@ -259,6 +259,107 @@ main: kit: entity: agent: {
             exist: [
               "idempotency_key"
               "novu_analytics_source"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "agents"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/agents"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "idempotency_key"
+                or: "idempotency-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "after"
+                or: "after"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "before"
+                or: "before"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "identifier"
+                or: "identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "include_cursor"
+                or: "includeCursor"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "orderBy"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_direction"
+                or: "orderDirection"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/agents"
+          q: {
+            exist: [
+              "after"
+              "before"
+              "idempotency_key"
+              "identifier"
+              "include_cursor"
+              "limit"
+              "order_by"
+              "order_direction"
             ]
           }
           s: [
@@ -290,7 +391,7 @@ main: kit: entity: agent: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -350,7 +451,7 @@ main: kit: entity: agent: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -366,7 +467,7 @@ main: kit: entity: agent: {
               {
                 k: "param"
                 n: "agent_integration_id"
-                or: "agent_integration_id"
+                or: "agentIntegrationId"
                 r: true
                 t: "`$STRING`"
               }
@@ -420,7 +521,7 @@ main: kit: entity: agent: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -438,7 +539,7 @@ main: kit: entity: agent: {
               {
                 k: "query"
                 n: "delete_from_provider"
-                or: "delete_from_provider"
+                or: "deleteFromProvider"
                 r: true
                 t: "`$STRING`"
               }
@@ -490,7 +591,7 @@ main: kit: entity: agent: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }

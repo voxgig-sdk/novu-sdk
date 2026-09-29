@@ -12,11 +12,47 @@ class TopicEntityTest < Minitest::Test
     assert !ent.nil?
   end
 
+  # Feature #4: the entity stream(action, ...) method runs the op pipeline and
+  # returns an Enumerator over result items. With the streaming feature active
+  # it yields the feature's incremental output; otherwise it falls back to the
+  # materialised list so stream always yields.
+  def test_stream
+    seed = {
+      "entity" => {
+        "topic" => {
+          "s1" => { "id" => "s1" },
+          "s2" => { "id" => "s2" },
+          "s3" => { "id" => "s3" },
+        },
+      },
+    }
+
+    # Fallback: streaming inactive -> yields the materialised list items.
+    base = NovuSDK.test(seed, nil)
+    seen = base.Topic(nil).stream("list", nil, nil).to_a
+    assert_equal 3, seen.length
+
+    # Inbound: streaming active -> yields each item from the feature.
+    cfg = NovuConfig.shared_config
+    if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
+      sdk = NovuSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
+      got = []
+      sdk.Topic(nil).stream("list", nil, nil).each do |item|
+        if item.is_a?(Array)
+          got.concat(item)
+        else
+          got << item
+        end
+      end
+      assert_equal 3, got.length
+    end
+  end
+
   def test_basic_flow
     setup = topic_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["create", "update", "load", "remove"].each do |_op|
+    ["create", "list", "update", "load", "remove"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "topic." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -41,12 +77,23 @@ class TopicEntityTest < Minitest::Test
     assert !topic_ref01_data.nil?
     assert !topic_ref01_data["id"].nil?
 
+    # LIST
+    topic_ref01_match = {}
+
+    topic_ref01_list_result = topic_ref01_ent.list(topic_ref01_match, nil)
+    assert topic_ref01_list_result.is_a?(Array)
+
+    found_item = Vs.select(
+      Runner.entity_list_to_data(topic_ref01_list_result),
+      { "id" => topic_ref01_data["id"] })
+    assert !Vs.isempty(found_item)
+
     # UPDATE
     topic_ref01_data_up0_up = {
       "id" => topic_ref01_data["id"],
     }
 
-    topic_ref01_markdef_up0_name = "key"
+    topic_ref01_markdef_up0_name = "createdAt"
     topic_ref01_markdef_up0_value = "Mark01-topic_ref01_#{setup[:now]}"
     topic_ref01_data_up0_up[topic_ref01_markdef_up0_name] = topic_ref01_markdef_up0_value
 
@@ -70,6 +117,17 @@ class TopicEntityTest < Minitest::Test
       "id" => topic_ref01_data["id"],
     }
     topic_ref01_ent.remove(topic_ref01_match_rm0, nil)
+
+    # LIST
+    topic_ref01_match_rt0 = {}
+
+    topic_ref01_list_rt0_result = topic_ref01_ent.list(topic_ref01_match_rt0, nil)
+    assert topic_ref01_list_rt0_result.is_a?(Array)
+
+    not_found_item = Vs.select(
+      Runner.entity_list_to_data(topic_ref01_list_rt0_result),
+      { "id" => topic_ref01_data["id"] })
+    assert Vs.isempty(not_found_item)
 
   end
 end

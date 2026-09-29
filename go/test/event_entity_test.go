@@ -32,7 +32,7 @@ func TestEventEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"create", "remove"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "event." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -47,15 +47,22 @@ func TestEventEntity(t *testing.T) {
 			t.Skip("live entity test uses synthetic IDs from fixture — set NOVU_TEST_EVENT_ENTID JSON to run live")
 			return
 		}
-		// Bootstrap entity data from existing test data (no create step in flow).
-		eventRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.event")))
-		var eventRef01Data map[string]any
-		if len(eventRef01DataRaw) > 0 {
-			eventRef01Data = core.ToMapAny(eventRef01DataRaw[0][1])
+		client := setup.client
+
+		// CREATE
+		eventRef01Ent := client.Event(nil)
+		eventRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "event"}), "event_ref01"))
+
+		eventRef01DataResult, err := eventRef01Ent.Create(eventRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
 		}
-		// Discard guards against Go's unused-var check when the flow's steps
-		// happen not to consume the bootstrap data (e.g. list-only flows).
-		_ = eventRef01Data
+		eventRef01Data = core.ToMapAny(entityData(eventRef01DataResult))
+		if eventRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
+
 
 	})
 }
@@ -85,7 +92,7 @@ func eventBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"event01", "event02", "event03", "trigger01", "trigger02", "trigger03"},
+		[]any{"event01", "event02", "event03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

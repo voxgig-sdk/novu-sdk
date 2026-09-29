@@ -136,6 +136,11 @@
       "version": 2,
       "source": "openapi3"
     },
+    "GET /v2/subscribers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /v2/subscribers/{subscriberId}": {
       "provenance": "operation-contract",
       "version": 2,

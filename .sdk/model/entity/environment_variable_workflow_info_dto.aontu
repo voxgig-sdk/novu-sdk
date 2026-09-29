@@ -37,7 +37,7 @@ main: kit: entity: environment_variable_workflow_info_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -47,7 +47,7 @@ main: kit: entity: environment_variable_workflow_info_dto: {
                 ex: "BASE_URL"
                 k: "param"
                 n: "variable_key"
-                or: "variable_key"
+                or: "variableKey"
                 r: true
                 t: "`$STRING`"
               }

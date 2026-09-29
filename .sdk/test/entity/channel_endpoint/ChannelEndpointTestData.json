@@ -68,6 +68,11 @@
       "version": 2,
       "source": "openapi3"
     },
+    "GET /v1/channel-endpoints": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /v1/channel-endpoints/{identifier}": {
       "provenance": "operation-contract",
       "version": 2,

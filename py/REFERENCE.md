@@ -166,41 +166,13 @@ Create a new `LinkEntity` instance. Pass `None` for no initial data.
 
 Create a new `ListAgentIntegrationsResponseDtoEntity` instance. Pass `None` for no initial data.
 
-#### `ListAgentsResponseDto(data=None)`
-
-Create a new `ListAgentsResponseDtoEntity` instance. Pass `None` for no initial data.
-
-#### `ListChannelConnectionsResponseDto(data=None)`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance. Pass `None` for no initial data.
-
-#### `ListChannelEndpointsResponseDto(data=None)`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance. Pass `None` for no initial data.
-
-#### `ListContextsResponseDto(data=None)`
-
-Create a new `ListContextsResponseDtoEntity` instance. Pass `None` for no initial data.
-
 #### `ListDomainRoutesResponseDto(data=None)`
 
 Create a new `ListDomainRoutesResponseDtoEntity` instance. Pass `None` for no initial data.
 
-#### `ListDomainsResponseDto(data=None)`
-
-Create a new `ListDomainsResponseDtoEntity` instance. Pass `None` for no initial data.
-
-#### `ListSubscribersResponseDto(data=None)`
-
-Create a new `ListSubscribersResponseDtoEntity` instance. Pass `None` for no initial data.
-
 #### `ListTopicSubscriptionsResponseDto(data=None)`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance. Pass `None` for no initial data.
-
-#### `ListTopicsResponseDto(data=None)`
-
-Create a new `ListTopicsResponseDtoEntity` instance. Pass `None` for no initial data.
 
 #### `MasterJson(data=None)`
 
@@ -277,10 +249,6 @@ Create a new `TranslationEntity` instance. Pass `None` for no initial data.
 #### `TranslationGroupDto(data=None)`
 
 Create a new `TranslationGroupDtoEntity` instance. Pass `None` for no initial data.
-
-#### `Trigger(data=None)`
-
-Create a new `TriggerEntity` instance. Pass `None` for no initial data.
 
 #### `TriggerEventResponseDto(data=None)`
 
@@ -455,27 +423,27 @@ agent = client.Agent()
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `active` | - | Yes | Yes | - |
-| `behavior` | - | - | Yes | - |
-| `bridgeUrl` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `createdBy` | - | - | - | - |
-| `description` | - | - | - | - |
-| `devBridgeActive` | - | - | - | - |
-| `devBridgeUrl` | - | - | - | - |
-| `environmentId` | - | - | - | - |
-| `exceedsPlanLimit` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | - | - | - |
-| `integrations` | - | - | - | - |
-| `managedRuntime` | - | Yes | - | - |
-| `name` | - | - | Yes | - |
-| `organizationId` | - | - | - | - |
-| `runtime` | - | - | - | - |
-| `updatedAt` | - | - | - | - |
-| `visibility` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `active` | - | - | Yes | Yes | - |
+| `behavior` | - | - | - | Yes | - |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `createdBy` | - | - | - | - | - |
+| `description` | - | - | - | - | - |
+| `devBridgeActive` | - | - | - | - | - |
+| `devBridgeUrl` | - | - | - | - | - |
+| `environmentId` | - | - | - | - | - |
+| `exceedsPlanLimit` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | - | - | - |
+| `integrations` | - | - | - | - | - |
+| `managedRuntime` | - | - | Yes | - | - |
+| `name` | - | - | - | Yes | - |
+| `organizationId` | - | - | - | - | - |
+| `runtime` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `visibility` | - | - | - | - | - |
 
 ### Operations
 
@@ -495,6 +463,16 @@ result = client.Agent().create({
     "organizationId": "example_organizationId",  # str
     "updatedAt": "example_updatedAt",  # str
 })
+```
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.Agent().list()
+for agent in results:
+    print(agent)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -802,21 +780,21 @@ channel_connection = client.ChannelConnection()
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `auth` | - | - | - | - |
-| `channel` | - | - | - | - |
-| `connectionMode` | - | - | - | - |
-| `context` | - | - | - | - |
-| `contextKeys` | - | - | - | - |
-| `createdAt` | - | - | - | - |
-| `id` | - | - | - | - |
-| `identifier` | - | Yes | - | - |
-| `integrationIdentifier` | - | - | - | - |
-| `providerId` | - | - | - | - |
-| `subscriberId` | - | Yes | - | - |
-| `updatedAt` | - | - | - | - |
-| `workspace` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `auth` | - | - | - | - | - |
+| `channel` | - | - | - | - | - |
+| `connectionMode` | - | - | - | - | - |
+| `context` | - | - | - | - | - |
+| `contextKeys` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `id` | - | - | - | - | - |
+| `identifier` | - | - | Yes | - | - |
+| `integrationIdentifier` | - | - | - | - | - |
+| `providerId` | - | - | - | - | - |
+| `subscriberId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
@@ -837,6 +815,16 @@ result = client.ChannelConnection().create({
     "updatedAt": "example_updatedAt",  # str
     "workspace": {},  # dict
 })
+```
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.ChannelConnection().list()
+for channel_connection in results:
+    print(channel_connection)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -938,6 +926,16 @@ result = client.ChannelEndpoint().create({
     "type": "example_type",  # str
     "updatedAt": "example_updatedAt",  # str
 })
+```
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.ChannelEndpoint().list()
+for channel_endpoint in results:
+    print(channel_endpoint)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -1064,19 +1062,23 @@ context = client.Context()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bridgeUrl` | `str` | No | Optional bridge URL override for agent connect. |
-| `data` | `dict` | No | Optional custom data to associate with this context. |
-| `id` | `str` | Yes | Unique identifier for this context. |
-| `type` | `str` | Yes | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `str` | No | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `str` | Yes | Creation timestamp |
+| `data` | `dict` | Yes | Custom data associated with this context |
+| `id` | `str` | Yes | Unique identifier for this context |
+| `type` | `str` | Yes | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `str` | Yes | Last update timestamp |
 
 ### Field Usage by Operation
 
-| Field | load | create | update | remove |
-| --- | --- | --- | --- | --- |
-| `bridgeUrl` | - | - | - | - |
-| `data` | - | - | Yes | - |
-| `id` | - | - | - | - |
-| `type` | - | - | - | - |
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `bridgeUrl` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `data` | - | - | Yes | - | - |
+| `id` | - | - | - | - | - |
+| `type` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -1086,9 +1088,22 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Context().create({
+    "createdAt": "example_createdAt",  # str
+    "data": {},  # dict
     "id": "example_id",  # str
     "type": "example_type",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
+```
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.Context().list()
+for context in results:
+    print(context)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -1313,6 +1328,16 @@ result = client.Domain().create({
     "status": "example_status",  # str
     "updatedAt": "example_updatedAt",  # str
 })
+```
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.Domain().list()
+for domain in results:
+    print(domain)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -1557,10 +1582,31 @@ domain_route_response_dto = client.DomainRouteResponseDto()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentId` | `str` | No | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `dict` | No | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
-| `id` | `str` | No |  |
-| `type` | `str` | No |  |
+| `address` | `str` | Yes |  |
+| `agentId` | `str` | No | Internal id of the destination agent. |
+| `createdAt` | `str` | Yes |  |
+| `data` | `dict` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `str` | Yes |  |
+| `environmentId` | `str` | Yes |  |
+| `id` | `str` | Yes |  |
+| `organizationId` | `str` | Yes |  |
+| `type` | `str` | Yes |  |
+| `updatedAt` | `str` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | load | create | update |
+| --- | --- | --- | --- |
+| `address` | - | - | - |
+| `agentId` | - | - | - |
+| `createdAt` | - | - | - |
+| `data` | - | - | - |
+| `domainId` | - | - | - |
+| `environmentId` | - | - | - |
+| `id` | - | - | - |
+| `organizationId` | - | - | - |
+| `type` | - | - | Yes |
+| `updatedAt` | - | - | - |
 
 ### Operations
 
@@ -1571,6 +1617,13 @@ Create a new entity with the given data. Returns the created entity data and rai
 ```python
 result = client.DomainRouteResponseDto().create({
     "id": "example_id",  # str
+    "address": "example_address",  # str
+    "createdAt": "example_createdAt",  # str
+    "domainId": "example_domainId",  # str
+    "environmentId": "example_environmentId",  # str
+    "organizationId": "example_organizationId",  # str
+    "type": "example_type",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -1965,7 +2018,33 @@ Return the entity name.
 event = client.Event()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actor` | `Any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `str` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `str` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `dict` | No |  |
+| `name` | `str` | Yes | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `Any` | No | This could be used to override provider specific configurations |
+| `payload` | `dict` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `Any` | No | It is used to specify a tenant context during trigger event. |
+| `to` | `Any` | Yes | The recipients list of people who will receive the notification. |
+| `transactionId` | `str` | No | A unique identifier for deduplication. |
+
 ### Operations
+
+#### `create(reqdata, ctrl=None) -> dict`
+
+Create a new entity with the given data. Returns the created entity data and raises on error.
+
+```python
+result = client.Event().create({
+    "name": "example_name",  # str
+    "to": "example_to",  # Any
+})
+```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
 
@@ -2792,260 +2871,6 @@ Return the entity name.
 
 ---
 
-## ListAgentsResponseDtoEntity
-
-```python
-list_agents_response_dto = client.ListAgentsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `bool` | Yes |  |
-| `behavior` | `dict` | Yes |  |
-| `bridgeUrl` | `str` | No | Production bridge URL |
-| `createdAt` | `str` | Yes |  |
-| `createdBy` | `str` | No | Mongo user id of the user who created the agent |
-| `description` | `str` | No |  |
-| `devBridgeActive` | `bool` | No | Whether the dev bridge override is active |
-| `devBridgeUrl` | `str` | No | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `str` | Yes |  |
-| `exceedsPlanLimit` | `bool` | No | Cloud only. |
-| `id` | `str` | Yes |  |
-| `identifier` | `str` | Yes |  |
-| `integrations` | `list` | No |  |
-| `managedRuntime` | `Any` | No | Present when runtime is "managed". |
-| `name` | `str` | Yes |  |
-| `organizationId` | `str` | Yes |  |
-| `runtime` | `str` | No | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `str` | Yes |  |
-| `visibility` | `str` | No | Discovery scope of the agent. |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListAgentsResponseDto().list()
-for list_agents_response_dto in results:
-    print(list_agents_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListAgentsResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ListChannelConnectionsResponseDtoEntity
-
-```python
-list_channel_connections_response_dto = client.ListChannelConnectionsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `auth` | `dict` | Yes |  |
-| `channel` | `str` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `list` | Yes | The context of the channel connection |
-| `createdAt` | `str` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `str` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `str` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `str` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `str` | Yes | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `str` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `dict` | Yes |  |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListChannelConnectionsResponseDto().list()
-for list_channel_connections_response_dto in results:
-    print(list_channel_connections_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListChannelConnectionsResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ListChannelEndpointsResponseDtoEntity
-
-```python
-list_channel_endpoints_response_dto = client.ListChannelEndpointsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `channel` | `str` | Yes | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `str` | Yes | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `list` | Yes | The context of the channel connection |
-| `createdAt` | `str` | Yes | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `Any` | Yes | Endpoint data specific to the channel type |
-| `identifier` | `str` | Yes | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `str` | Yes | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `str` | Yes | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `str` | Yes | The subscriber ID to which the channel endpoint is linked |
-| `type` | `str` | Yes | Type of channel endpoint |
-| `updatedAt` | `str` | Yes | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListChannelEndpointsResponseDto().list()
-for list_channel_endpoints_response_dto in results:
-    print(list_channel_endpoints_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListChannelEndpointsResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ListContextsResponseDtoEntity
-
-```python
-list_contexts_response_dto = client.ListContextsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bridgeUrl` | `str` | No | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `str` | Yes | Creation timestamp |
-| `data` | `dict` | Yes | Custom data associated with this context |
-| `id` | `str` | Yes | Unique identifier for this context |
-| `type` | `str` | Yes | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `str` | Yes | Last update timestamp |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListContextsResponseDto().list()
-for list_contexts_response_dto in results:
-    print(list_contexts_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListContextsResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
 ## ListDomainRoutesResponseDtoEntity
 
 ```python
@@ -3108,141 +2933,6 @@ Return the entity name.
 
 ---
 
-## ListDomainsResponseDtoEntity
-
-```python
-list_domains_response_dto = client.ListDomainsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `str` | Yes |  |
-| `data` | `dict` | No | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `str` | No |  |
-| `environmentId` | `str` | Yes |  |
-| `expectedDnsRecords` | `list` | No |  |
-| `id` | `str` | Yes |  |
-| `mxRecordConfigured` | `bool` | Yes |  |
-| `name` | `str` | Yes |  |
-| `organizationId` | `str` | Yes |  |
-| `status` | `str` | Yes |  |
-| `updatedAt` | `str` | Yes |  |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListDomainsResponseDto().list()
-for list_domains_response_dto in results:
-    print(list_domains_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListDomainsResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ListSubscribersResponseDtoEntity
-
-```python
-list_subscribers_response_dto = client.ListSubscribersResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `avatar` | `str` | No | The URL of the subscriber's avatar image. |
-| `channels` | `list` | No | An array of channel settings associated with the subscriber. |
-| `createdAt` | `str` | Yes | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `dict` | No | Additional custom data for the subscriber |
-| `deleted` | `bool` | Yes | Indicates whether the subscriber has been deleted. |
-| `email` | `str` | No | The email address of the subscriber. |
-| `environmentId` | `str` | Yes | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `str` | No | The first name of the subscriber. |
-| `id` | `str` | No | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `bool` | No | Indicates whether the subscriber is currently online. |
-| `lastName` | `str` | No | The last name of the subscriber. |
-| `lastOnlineAt` | `str` | No | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `str` | No | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `str` | Yes | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `str` | No | The phone number of the subscriber. |
-| `subscriberId` | `str` | Yes | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `str` | No | Timezone of the subscriber |
-| `topics` | `list` | No | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `str` | Yes | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `float` | No | The version of the subscriber document. |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListSubscribersResponseDto().list()
-for list_subscribers_response_dto in results:
-    print(list_subscribers_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListSubscribersResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
 ## ListTopicSubscriptionsResponseDtoEntity
 
 ```python
@@ -3294,64 +2984,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `ListTopicSubscriptionsResponseDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ListTopicsResponseDtoEntity
-
-```python
-list_topics_response_dto = client.ListTopicsResponseDto()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `createdAt` | `str` | No | The date the topic was created |
-| `data` | `dict` | No | Additional custom data associated with the topic |
-| `id` | `str` | Yes | The identifier of the topic |
-| `key` | `str` | Yes | The unique key of the topic |
-| `name` | `str` | No | The name of the topic |
-| `updatedAt` | `str` | No | The date the topic was last updated |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.ListTopicsResponseDto().list()
-for list_topics_response_dto in results:
-    print(list_topics_response_dto)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ListTopicsResponseDtoEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -3918,6 +3550,16 @@ result = client.Subscriber().create({
 })
 ```
 
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.Subscriber().list()
+for subscriber in results:
+    print(subscriber)
+```
+
 #### `load(reqmatch, ctrl=None) -> dict`
 
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
@@ -4299,10 +3941,12 @@ topic = client.Topic()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | `dict` | No | Additional custom data associated with the topic. |
-| `id` | `str` | No |  |
-| `key` | `str` | Yes | The unique key identifier for the topic. |
-| `name` | `str` | No | The display name for the topic |
+| `createdAt` | `str` | No | The date the topic was created |
+| `data` | `dict` | No | Additional custom data associated with the topic |
+| `id` | `str` | Yes | The identifier of the topic |
+| `key` | `str` | Yes | The unique key of the topic |
+| `name` | `str` | No | The name of the topic |
+| `updatedAt` | `str` | No | The date the topic was last updated |
 
 ### Operations
 
@@ -4312,8 +3956,19 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Topic().create({
+    "id": "example_id",  # str
     "key": "example_key",  # str
 })
+```
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.Topic().list()
+for topic in results:
+    print(topic)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -4484,10 +4139,12 @@ translation = client.Translation()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `content` | `dict` | Yes | Translation content as JSON object |
+| `createdAt` | `str` | Yes | Creation timestamp |
 | `id` | `str` | No |  |
-| `locale` | `str` | Yes | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `str` | Yes | The resource ID to associate translation with. |
-| `resourceType` | `str` | Yes | The resource type to associate translation with |
+| `locale` | `str` | Yes | Locale code |
+| `resourceId` | `str` | Yes | Resource identifier |
+| `resourceType` | `str` | Yes | Resource type |
+| `updatedAt` | `str` | Yes | Last update timestamp |
 
 ### Operations
 
@@ -4498,9 +4155,11 @@ Create a new entity with the given data. Returns the created entity data and rai
 ```python
 result = client.Translation().create({
     "content": {},  # dict
+    "createdAt": "example_createdAt",  # str
     "locale": "example_locale",  # str
     "resourceId": "example_resourceId",  # str
     "resourceType": "example_resourceType",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -4599,69 +4258,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `TranslationGroupDtoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## TriggerEntity
-
-```python
-trigger = client.Trigger()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `actor` | `Any` | No | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `str` | No | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `str` | No | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `dict` | No |  |
-| `name` | `str` | Yes | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `Any` | No | This could be used to override provider specific configurations |
-| `payload` | `dict` | No | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `Any` | No | It is used to specify a tenant context during trigger event. |
-| `to` | `Any` | Yes | The recipients list of people who will receive the notification. |
-| `transactionId` | `str` | No | A unique identifier for deduplication. |
-
-### Operations
-
-#### `create(reqdata, ctrl=None) -> dict`
-
-Create a new entity with the given data. Returns the created entity data and raises on error.
-
-```python
-result = client.Trigger().create({
-    "name": "example_name",  # str
-    "to": "example_to",  # Any
-})
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `TriggerEntity` instance with the same options.
 
 #### `get_name() -> str`
 

@@ -18,12 +18,51 @@ class TopicEntityTest extends TestCase
         $this->assertNotNull($ent);
     }
 
+    // Feature #4: the entity stream(action, ...) method runs the op pipeline
+    // and yields result items. With the streaming feature active it yields the
+    // feature's incremental output; otherwise it falls back to the materialised
+    // list so stream always yields.
+    public function test_stream(): void
+    {
+        $seed = [
+            "entity" => [
+                "topic" => [
+                    "s1" => ["id" => "s1"],
+                    "s2" => ["id" => "s2"],
+                    "s3" => ["id" => "s3"],
+                ],
+            ],
+        ];
+
+        // Fallback: streaming inactive -> yields the materialised list items.
+        $base = NovuSDK::test($seed, null);
+        $seen = iterator_to_array($base->Topic(null)->stream("list", null, null), false);
+        $this->assertCount(3, $seen);
+
+        // Inbound: streaming active -> yields each item from the feature.
+        $cfg = NovuConfig::shared_config();
+        if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
+            $sdk = NovuSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
+            $got = [];
+            foreach ($sdk->Topic(null)->stream("list", null, null) as $item) {
+                if (is_array($item) && array_is_list($item)) {
+                    foreach ($item as $sub) {
+                        $got[] = $sub;
+                    }
+                } else {
+                    $got[] = $item;
+                }
+            }
+            $this->assertCount(3, $got);
+        }
+    }
+
     public function test_basic_flow(): void
     {
         $setup = topic_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["create", "update", "load", "remove"] as $_op) {
+        foreach (["create", "list", "update", "load", "remove"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "topic." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -48,12 +87,23 @@ class TopicEntityTest extends TestCase
         $this->assertNotNull($topic_ref01_data);
         $this->assertNotNull($topic_ref01_data["id"]);
 
+        // LIST
+        $topic_ref01_match = [];
+
+        $topic_ref01_list_result = $topic_ref01_ent->list($topic_ref01_match, null);
+        $this->assertIsArray($topic_ref01_list_result);
+
+        $found_item = sdk_select(
+            Runner::entity_list_to_data($topic_ref01_list_result),
+            ["id" => $topic_ref01_data["id"]]);
+        $this->assertNotEmpty($found_item);
+
         // UPDATE
         $topic_ref01_data_up0_up = [
             "id" => $topic_ref01_data["id"],
         ];
 
-        $topic_ref01_markdef_up0_name = "key";
+        $topic_ref01_markdef_up0_name = "createdAt";
         $topic_ref01_markdef_up0_value = "Mark01-topic_ref01_" . $setup["now"];
         $topic_ref01_data_up0_up[$topic_ref01_markdef_up0_name] = $topic_ref01_markdef_up0_value;
 
@@ -77,6 +127,17 @@ class TopicEntityTest extends TestCase
             "id" => $topic_ref01_data["id"],
         ];
         $topic_ref01_ent->remove($topic_ref01_match_rm0, null);
+
+        // LIST
+        $topic_ref01_match_rt0 = [];
+
+        $topic_ref01_list_rt0_result = $topic_ref01_ent->list($topic_ref01_match_rt0, null);
+        $this->assertIsArray($topic_ref01_list_rt0_result);
+
+        $not_found_item = sdk_select(
+            Runner::entity_list_to_data($topic_ref01_list_rt0_result),
+            ["id" => $topic_ref01_data["id"]]);
+        $this->assertEmpty($not_found_item);
 
     }
 }

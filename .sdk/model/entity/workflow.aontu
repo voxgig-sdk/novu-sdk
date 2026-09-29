@@ -249,7 +249,7 @@ main: kit: entity: workflow: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -291,7 +291,7 @@ main: kit: entity: workflow: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -316,14 +316,14 @@ main: kit: entity: workflow: {
               {
                 k: "query"
                 n: "order_by"
-                or: "order_by"
+                or: "orderBy"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "order_direction"
-                or: "order_direction"
+                or: "orderDirection"
                 r: false
                 t: "`$STRING`"
               }
@@ -344,7 +344,7 @@ main: kit: entity: workflow: {
               {
                 k: "query"
                 n: "tag"
-                or: "tag"
+                or: "tags"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -393,7 +393,7 @@ main: kit: entity: workflow: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -402,7 +402,7 @@ main: kit: entity: workflow: {
               {
                 k: "param"
                 n: "id"
-                or: "workflow_id"
+                or: "workflowId"
                 r: true
                 t: "`$STRING`"
               }
@@ -411,7 +411,7 @@ main: kit: entity: workflow: {
               {
                 k: "query"
                 n: "environment_id"
-                or: "environment_id"
+                or: "environmentId"
                 r: false
                 t: "`$STRING`"
               }
@@ -463,7 +463,7 @@ main: kit: entity: workflow: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -472,7 +472,7 @@ main: kit: entity: workflow: {
               {
                 k: "param"
                 n: "id"
-                or: "workflow_id"
+                or: "workflowId"
                 r: true
                 t: "`$STRING`"
               }
@@ -523,7 +523,7 @@ main: kit: entity: workflow: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -532,7 +532,7 @@ main: kit: entity: workflow: {
               {
                 k: "param"
                 n: "id"
-                or: "workflow_id"
+                or: "workflowId"
                 r: true
                 t: "`$STRING`"
               }
@@ -583,7 +583,7 @@ main: kit: entity: workflow: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -592,7 +592,7 @@ main: kit: entity: workflow: {
               {
                 k: "param"
                 n: "id"
-                or: "workflow_id"
+                or: "workflowId"
                 r: true
                 t: "`$STRING`"
               }

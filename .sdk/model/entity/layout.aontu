@@ -148,7 +148,7 @@ main: kit: entity: layout: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -157,7 +157,7 @@ main: kit: entity: layout: {
               {
                 k: "param"
                 n: "id"
-                or: "layout_id"
+                or: "layoutId"
                 r: true
                 t: "`$STRING`"
               }
@@ -207,7 +207,7 @@ main: kit: entity: layout: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -249,7 +249,7 @@ main: kit: entity: layout: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -274,14 +274,14 @@ main: kit: entity: layout: {
               {
                 k: "query"
                 n: "order_by"
-                or: "order_by"
+                or: "orderBy"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "order_direction"
-                or: "order_direction"
+                or: "orderDirection"
                 r: false
                 t: "`$STRING`"
               }
@@ -335,7 +335,7 @@ main: kit: entity: layout: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -344,7 +344,7 @@ main: kit: entity: layout: {
               {
                 k: "param"
                 n: "id"
-                or: "layout_id"
+                or: "layoutId"
                 r: true
                 t: "`$STRING`"
               }
@@ -395,7 +395,7 @@ main: kit: entity: layout: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -404,7 +404,7 @@ main: kit: entity: layout: {
               {
                 k: "param"
                 n: "id"
-                or: "layout_id"
+                or: "layoutId"
                 r: true
                 t: "`$STRING`"
               }
@@ -455,7 +455,7 @@ main: kit: entity: layout: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -464,7 +464,7 @@ main: kit: entity: layout: {
               {
                 k: "param"
                 n: "id"
-                or: "layout_id"
+                or: "layoutId"
                 r: true
                 t: "`$STRING`"
               }

@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/novu-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/novu-sdk/releases](https://github.com/voxgig-sdk/novu-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/novu-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-novu-sdk", path: "./novu-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -250,15 +259,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `LayoutResponseDto` | `(data) -> LayoutResponseDtoEntity` | Create a LayoutResponseDto entity instance. |
 | `Link` | `(data) -> LinkEntity` | Create a Link entity instance. |
 | `ListAgentIntegrationsResponseDto` | `(data) -> ListAgentIntegrationsResponseDtoEntity` | Create a ListAgentIntegrationsResponseDto entity instance. |
-| `ListAgentsResponseDto` | `(data) -> ListAgentsResponseDtoEntity` | Create a ListAgentsResponseDto entity instance. |
-| `ListChannelConnectionsResponseDto` | `(data) -> ListChannelConnectionsResponseDtoEntity` | Create a ListChannelConnectionsResponseDto entity instance. |
-| `ListChannelEndpointsResponseDto` | `(data) -> ListChannelEndpointsResponseDtoEntity` | Create a ListChannelEndpointsResponseDto entity instance. |
-| `ListContextsResponseDto` | `(data) -> ListContextsResponseDtoEntity` | Create a ListContextsResponseDto entity instance. |
 | `ListDomainRoutesResponseDto` | `(data) -> ListDomainRoutesResponseDtoEntity` | Create a ListDomainRoutesResponseDto entity instance. |
-| `ListDomainsResponseDto` | `(data) -> ListDomainsResponseDtoEntity` | Create a ListDomainsResponseDto entity instance. |
-| `ListSubscribersResponseDto` | `(data) -> ListSubscribersResponseDtoEntity` | Create a ListSubscribersResponseDto entity instance. |
 | `ListTopicSubscriptionsResponseDto` | `(data) -> ListTopicSubscriptionsResponseDtoEntity` | Create a ListTopicSubscriptionsResponseDto entity instance. |
-| `ListTopicsResponseDto` | `(data) -> ListTopicsResponseDtoEntity` | Create a ListTopicsResponseDto entity instance. |
 | `MasterJson` | `(data) -> MasterJsonEntity` | Create a MasterJson entity instance. |
 | `Message` | `(data) -> MessageEntity` | Create a Message entity instance. |
 | `MessageResponseDto` | `(data) -> MessageResponseDtoEntity` | Create a MessageResponseDto entity instance. |
@@ -278,7 +280,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `TopicSubscriptionsResponseDto` | `(data) -> TopicSubscriptionsResponseDtoEntity` | Create a TopicSubscriptionsResponseDto entity instance. |
 | `Translation` | `(data) -> TranslationEntity` | Create a Translation entity instance. |
 | `TranslationGroupDto` | `(data) -> TranslationGroupDtoEntity` | Create a TranslationGroupDto entity instance. |
-| `Trigger` | `(data) -> TriggerEntity` | Create a Trigger entity instance. |
 | `TriggerEventResponseDto` | `(data) -> TriggerEventResponseDtoEntity` | Create a TriggerEventResponseDto entity instance. |
 | `Unseen` | `(data) -> UnseenEntity` | Create an Unseen entity instance. |
 | `Upload` | `(data) -> UploadEntity` | Create an Upload entity instance. |
@@ -378,7 +379,7 @@ API path: `/v1/notifications`
 | `updatedAt` |  |
 | `visibility` | Discovery scope of the agent. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/agents/{agentId}/reply`
 
@@ -458,7 +459,7 @@ API path: `/v1/subscribers/bulk`
 | `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 | `workspace` |  |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/channel-connections`
 
@@ -479,7 +480,7 @@ API path: `/v1/channel-connections`
 | `type` | Type of channel endpoint |
 | `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/channel-endpoints`
 
@@ -499,12 +500,14 @@ API path: `/v1/integrations/{integrationIdentifier}/webhook/configure`
 
 | Field | Description |
 | --- | --- |
-| `bridgeUrl` | Optional bridge URL override for agent connect. |
-| `data` | Optional custom data to associate with this context. |
-| `id` | Unique identifier for this context. |
-| `type` | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | Creation timestamp |
+| `data` | Custom data associated with this context |
+| `id` | Unique identifier for this context |
+| `type` | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | Last update timestamp |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/contexts`
 
@@ -551,7 +554,7 @@ API path: `/v2/environments/{targetEnvironmentId}/diff`
 | `status` |  |
 | `updatedAt` |  |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v1/domains/{domain}/diagnose`
 
@@ -599,10 +602,16 @@ API path: `/v1/domains/{domain}/verify`
 
 | Field | Description |
 | --- | --- |
-| `agentId` | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
+| `address` |  |
+| `agentId` | Internal id of the destination agent. |
+| `createdAt` |  |
+| `data` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` |  |
+| `environmentId` |  |
 | `id` |  |
+| `organizationId` |  |
 | `type` |  |
+| `updatedAt` |  |
 
 Operations: Create, Load, Update.
 
@@ -670,10 +679,20 @@ API path: `/v1/environment-variables/{variableKey}/usage`
 
 | Field | Description |
 | --- | --- |
+| `actor` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` |  |
+| `name` | The trigger identifier of the workflow you wish to send. |
+| `overrides` | This could be used to override provider specific configurations |
+| `payload` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | It is used to specify a tenant context during trigger event. |
+| `to` | The recipients list of people who will receive the notification. |
+| `transactionId` | A unique identifier for deduplication. |
 
-Operations: Remove.
+Operations: Create, Remove.
 
-API path: `/v1/events/trigger/{transactionId}`
+API path: `/v1/events/trigger`
 
 #### GenerateChatOAuthUrlResponseDto
 
@@ -872,88 +891,6 @@ Operations: List.
 
 API path: `/v1/agents/{identifier}/integrations`
 
-#### ListAgentsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `active` |  |
-| `behavior` |  |
-| `bridgeUrl` | Production bridge URL |
-| `createdAt` |  |
-| `createdBy` | Mongo user id of the user who created the agent |
-| `description` |  |
-| `devBridgeActive` | Whether the dev bridge override is active |
-| `devBridgeUrl` | Development bridge URL (set by npx novu dev) |
-| `environmentId` |  |
-| `exceedsPlanLimit` | Cloud only. |
-| `id` |  |
-| `identifier` |  |
-| `integrations` |  |
-| `managedRuntime` | Present when runtime is "managed". |
-| `name` |  |
-| `organizationId` |  |
-| `runtime` | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` |  |
-| `visibility` | Discovery scope of the agent. |
-
-Operations: List.
-
-API path: `/v1/agents`
-
-#### ListChannelConnectionsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `auth` |  |
-| `channel` | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | The context of the channel connection |
-| `createdAt` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` |  |
-
-Operations: List.
-
-API path: `/v1/channel-connections`
-
-#### ListChannelEndpointsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `channel` | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | The context of the channel connection |
-| `createdAt` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | Endpoint data specific to the channel type |
-| `identifier` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | The subscriber ID to which the channel endpoint is linked |
-| `type` | Type of channel endpoint |
-| `updatedAt` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-Operations: List.
-
-API path: `/v1/channel-endpoints`
-
-#### ListContextsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `bridgeUrl` | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | Creation timestamp |
-| `data` | Custom data associated with this context |
-| `id` | Unique identifier for this context |
-| `type` | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | Last update timestamp |
-
-Operations: List.
-
-API path: `/v2/contexts`
-
 #### ListDomainRoutesResponseDto
 
 | Field | Description |
@@ -973,55 +910,6 @@ Operations: List.
 
 API path: `/v1/domains/{domain}/routes`
 
-#### ListDomainsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `createdAt` |  |
-| `data` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` |  |
-| `environmentId` |  |
-| `expectedDnsRecords` |  |
-| `id` |  |
-| `mxRecordConfigured` |  |
-| `name` |  |
-| `organizationId` |  |
-| `status` |  |
-| `updatedAt` |  |
-
-Operations: List.
-
-API path: `/v1/domains`
-
-#### ListSubscribersResponseDto
-
-| Field | Description |
-| --- | --- |
-| `avatar` | The URL of the subscriber's avatar image. |
-| `channels` | An array of channel settings associated with the subscriber. |
-| `createdAt` | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | Additional custom data for the subscriber |
-| `deleted` | Indicates whether the subscriber has been deleted. |
-| `email` | The email address of the subscriber. |
-| `environmentId` | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | The first name of the subscriber. |
-| `id` | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | Indicates whether the subscriber is currently online. |
-| `lastName` | The last name of the subscriber. |
-| `lastOnlineAt` | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | The phone number of the subscriber. |
-| `subscriberId` | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | Timezone of the subscriber |
-| `topics` | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | The version of the subscriber document. |
-
-Operations: List.
-
-API path: `/v2/subscribers`
-
 #### ListTopicSubscriptionsResponseDto
 
 | Field | Description |
@@ -1037,21 +925,6 @@ API path: `/v2/subscribers`
 Operations: List.
 
 API path: `/v2/subscribers/{subscriberId}/subscriptions`
-
-#### ListTopicsResponseDto
-
-| Field | Description |
-| --- | --- |
-| `createdAt` | The date the topic was created |
-| `data` | Additional custom data associated with the topic |
-| `id` | The identifier of the topic |
-| `key` | The unique key of the topic |
-| `name` | The name of the topic |
-| `updatedAt` | The date the topic was last updated |
-
-Operations: List.
-
-API path: `/v2/topics`
 
 #### MasterJson
 
@@ -1241,7 +1114,7 @@ API path: `/v2/workflows/{workflowId}/steps/{stepId}`
 | `updatedAt` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
 | `v` | The version of the subscriber document. |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/subscribers`
 
@@ -1327,12 +1200,14 @@ API path: `/v2/topics/{topicKey}/subscriptions/{identifier}`
 
 | Field | Description |
 | --- | --- |
-| `data` | Additional custom data associated with the topic. |
-| `id` |  |
-| `key` | The unique key identifier for the topic. |
-| `name` | The display name for the topic |
+| `createdAt` | The date the topic was created |
+| `data` | Additional custom data associated with the topic |
+| `id` | The identifier of the topic |
+| `key` | The unique key of the topic |
+| `name` | The name of the topic |
+| `updatedAt` | The date the topic was last updated |
 
-Operations: Create, Load, Remove, Update.
+Operations: Create, List, Load, Remove, Update.
 
 API path: `/v2/topics`
 
@@ -1365,10 +1240,12 @@ API path: `/v2/topics/{topicKey}/subscriptions`
 | Field | Description |
 | --- | --- |
 | `content` | Translation content as JSON object |
+| `createdAt` | Creation timestamp |
 | `id` |  |
-| `locale` | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | The resource ID to associate translation with. |
-| `resourceType` | The resource type to associate translation with |
+| `locale` | Locale code |
+| `resourceId` | Resource identifier |
+| `resourceType` | Resource type |
+| `updatedAt` | Last update timestamp |
 
 Operations: Create, Load, Remove.
 
@@ -1390,25 +1267,6 @@ API path: `/v2/translations`
 Operations: Load.
 
 API path: `/v2/translations/group/{resourceType}/{resourceId}`
-
-#### Trigger
-
-| Field | Description |
-| --- | --- |
-| `actor` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` |  |
-| `name` | The trigger identifier of the workflow you wish to send. |
-| `overrides` | This could be used to override provider specific configurations |
-| `payload` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | It is used to specify a tenant context during trigger event. |
-| `to` | The recipients list of people who will receive the notification. |
-| `transactionId` | A unique identifier for deduplication. |
-
-Operations: Create.
-
-API path: `/v1/events/trigger`
 
 #### TriggerEventResponseDto
 
@@ -1610,6 +1468,7 @@ Create an instance: `agent = client.Agent`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1643,6 +1502,13 @@ Create an instance: `agent = client.Agent`
 ```ruby
 # load returns the ENTITY — call data_get for the Agent record (raises on error).
 agent = client.Agent.load({ "id" => "agent_id" })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of Agent records (raises on error).
+agents = client.Agent.list
 ```
 
 #### Example: Create
@@ -1774,6 +1640,7 @@ Create an instance: `channel_connection = client.ChannelConnection`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1803,6 +1670,13 @@ Create an instance: `channel_connection = client.ChannelConnection`
 channel_connection = client.ChannelConnection.load({ "id" => "channel_connection_id" })
 ```
 
+#### Example: List
+
+```ruby
+# list returns an Array of ChannelConnection records (raises on error).
+channel_connections = client.ChannelConnection.list
+```
+
 #### Example: Create
 
 ```ruby
@@ -1830,6 +1704,7 @@ Create an instance: `channel_endpoint = client.ChannelEndpoint`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1856,6 +1731,13 @@ Create an instance: `channel_endpoint = client.ChannelEndpoint`
 ```ruby
 # load returns the ENTITY — call data_get for the ChannelEndpoint record (raises on error).
 channel_endpoint = client.ChannelEndpoint.load({ "id" => "channel_endpoint_id" })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of ChannelEndpoint records (raises on error).
+channel_endpoints = client.ChannelEndpoint.list
 ```
 
 #### Example: Create
@@ -1916,6 +1798,7 @@ Create an instance: `context = client.Context`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -1924,10 +1807,12 @@ Create an instance: `context = client.Context`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bridgeUrl` | `String` | Optional bridge URL override for agent connect. |
-| `data` | `Hash` | Optional custom data to associate with this context. |
-| `id` | `String` | Unique identifier for this context. |
-| `type` | `String` | Context type (e.g., tenant, app, workspace). |
+| `bridgeUrl` | `String` | Bridge URL override for agent connect, if configured on this context |
+| `createdAt` | `String` | Creation timestamp |
+| `data` | `Hash` | Custom data associated with this context |
+| `id` | `String` | Unique identifier for this context |
+| `type` | `String` | Context type (e.g., tenant, app, workspace) |
+| `updatedAt` | `String` | Last update timestamp |
 
 #### Example: Load
 
@@ -1936,12 +1821,22 @@ Create an instance: `context = client.Context`
 context = client.Context.load({ "id" => "context_id", "type" => "type" })
 ```
 
+#### Example: List
+
+```ruby
+# list returns an Array of Context records (raises on error).
+contexts = client.Context.list
+```
+
 #### Example: Create
 
 ```ruby
 context = client.Context.create({
+  "createdAt" => "example_createdAt", # String
+  "data" => {}, # Hash
   "id" => "example_id", # String
   "type" => "example_type", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -2016,6 +1911,7 @@ Create an instance: `domain = client.Domain`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -2041,6 +1937,13 @@ Create an instance: `domain = client.Domain`
 ```ruby
 # load returns the ENTITY — call data_get for the Domain record (raises on error).
 domain = client.Domain.load({ "id" => "domain_id" })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of Domain records (raises on error).
+domains = client.Domain.list
 ```
 
 #### Example: Create
@@ -2166,10 +2069,16 @@ Create an instance: `domain_route_response_dto = client.DomainRouteResponseDto`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentId` | `String` | Agent identifier; required when type is agent, ignored when type is webhook. |
-| `data` | `Hash` | Replaces route metadata when provided (max 10 keys, 500 characters total for keys+values). |
+| `address` | `String` |  |
+| `agentId` | `String` | Internal id of the destination agent. |
+| `createdAt` | `String` |  |
+| `data` | `Hash` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
+| `domainId` | `String` |  |
+| `environmentId` | `String` |  |
 | `id` | `String` |  |
+| `organizationId` | `String` |  |
 | `type` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Load
 
@@ -2183,6 +2092,13 @@ domain_route_response_dto = client.DomainRouteResponseDto.load({ "address" => "a
 ```ruby
 domain_route_response_dto = client.DomainRouteResponseDto.create({
   "id" => "example_id", # String
+  "address" => "example_address", # String
+  "createdAt" => "example_createdAt", # String
+  "domainId" => "example_domainId", # String
+  "environmentId" => "example_environmentId", # String
+  "organizationId" => "example_organizationId", # String
+  "type" => "example_type", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -2350,7 +2266,32 @@ Create an instance: `event = client.Event`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `actor` | `Object` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
+| `agentId` | `String` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
+| `bridgeUrl` | `String` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
+| `context` | `Hash` |  |
+| `name` | `String` | The trigger identifier of the workflow you wish to send. |
+| `overrides` | `Object` | This could be used to override provider specific configurations |
+| `payload` | `Hash` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
+| `tenant` | `Object` | It is used to specify a tenant context during trigger event. |
+| `to` | `Object` | The recipients list of people who will receive the notification. |
+| `transactionId` | `String` | A unique identifier for deduplication. |
+
+#### Example: Create
+
+```ruby
+event = client.Event.create({
+  "name" => "example_name", # String
+  "to" => "example_to", # Object
+})
+```
 
 
 ### GenerateChatOAuthUrlResponseDto
@@ -2752,144 +2693,6 @@ list_agent_integrations_response_dtos = client.ListAgentIntegrationsResponseDto.
 ```
 
 
-### ListAgentsResponseDto
-
-Create an instance: `list_agents_response_dto = client.ListAgentsResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `active` | `Boolean` |  |
-| `behavior` | `Hash` |  |
-| `bridgeUrl` | `String` | Production bridge URL |
-| `createdAt` | `String` |  |
-| `createdBy` | `String` | Mongo user id of the user who created the agent |
-| `description` | `String` |  |
-| `devBridgeActive` | `Boolean` | Whether the dev bridge override is active |
-| `devBridgeUrl` | `String` | Development bridge URL (set by npx novu dev) |
-| `environmentId` | `String` |  |
-| `exceedsPlanLimit` | `Boolean` | Cloud only. |
-| `id` | `String` |  |
-| `identifier` | `String` |  |
-| `integrations` | `Array` |  |
-| `managedRuntime` | `Object` | Present when runtime is "managed". |
-| `name` | `String` |  |
-| `organizationId` | `String` |  |
-| `runtime` | `String` | Whether the agent brain is self-hosted (bridge) or managed by a third-party provider |
-| `updatedAt` | `String` |  |
-| `visibility` | `String` | Discovery scope of the agent. |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListAgentsResponseDto records (raises on error).
-list_agents_response_dtos = client.ListAgentsResponseDto.list
-```
-
-
-### ListChannelConnectionsResponseDto
-
-Create an instance: `list_channel_connections_response_dto = client.ListChannelConnectionsResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `auth` | `Hash` |  |
-| `channel` | `String` | The channel type (email, sms, push, chat, etc.). |
-| `contextKeys` | `Array` | The context of the channel connection |
-| `createdAt` | `String` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `identifier` | `String` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `String` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `String` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `String` | The subscriber ID to which the channel connection is linked |
-| `updatedAt` | `String` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-| `workspace` | `Hash` |  |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListChannelConnectionsResponseDto records (raises on error).
-list_channel_connections_response_dtos = client.ListChannelConnectionsResponseDto.list
-```
-
-
-### ListChannelEndpointsResponseDto
-
-Create an instance: `list_channel_endpoints_response_dto = client.ListChannelEndpointsResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `channel` | `String` | The channel type (email, sms, push, chat, etc.). |
-| `connectionIdentifier` | `String` | The identifier of the channel connection used for this endpoint. |
-| `contextKeys` | `Array` | The context of the channel connection |
-| `createdAt` | `String` | The timestamp indicating when the channel endpoint was created, in ISO 8601 format. |
-| `endpoint` | `Object` | Endpoint data specific to the channel type |
-| `identifier` | `String` | The unique identifier of the channel endpoint. |
-| `integrationIdentifier` | `String` | The identifier of the integration to use for this channel endpoint. |
-| `providerId` | `String` | The provider identifier (e.g., sendgrid, twilio, slack, etc.). |
-| `subscriberId` | `String` | The subscriber ID to which the channel endpoint is linked |
-| `type` | `String` | Type of channel endpoint |
-| `updatedAt` | `String` | The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format. |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListChannelEndpointsResponseDto records (raises on error).
-list_channel_endpoints_response_dtos = client.ListChannelEndpointsResponseDto.list
-```
-
-
-### ListContextsResponseDto
-
-Create an instance: `list_contexts_response_dto = client.ListContextsResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `bridgeUrl` | `String` | Bridge URL override for agent connect, if configured on this context |
-| `createdAt` | `String` | Creation timestamp |
-| `data` | `Hash` | Custom data associated with this context |
-| `id` | `String` | Unique identifier for this context |
-| `type` | `String` | Context type (e.g., tenant, app, workspace) |
-| `updatedAt` | `String` | Last update timestamp |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListContextsResponseDto records (raises on error).
-list_contexts_response_dtos = client.ListContextsResponseDto.list
-```
-
-
 ### ListDomainRoutesResponseDto
 
 Create an instance: `list_domain_routes_response_dto = client.ListDomainRoutesResponseDto`
@@ -2923,83 +2726,6 @@ list_domain_routes_response_dtos = client.ListDomainRoutesResponseDto.list
 ```
 
 
-### ListDomainsResponseDto
-
-Create an instance: `list_domains_response_dto = client.ListDomainsResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `createdAt` | `String` |  |
-| `data` | `Hash` | String key-value metadata (max 10 keys, 500 characters total when set via API). |
-| `dnsProvider` | `String` |  |
-| `environmentId` | `String` |  |
-| `expectedDnsRecords` | `Array` |  |
-| `id` | `String` |  |
-| `mxRecordConfigured` | `Boolean` |  |
-| `name` | `String` |  |
-| `organizationId` | `String` |  |
-| `status` | `String` |  |
-| `updatedAt` | `String` |  |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListDomainsResponseDto records (raises on error).
-list_domains_response_dtos = client.ListDomainsResponseDto.list
-```
-
-
-### ListSubscribersResponseDto
-
-Create an instance: `list_subscribers_response_dto = client.ListSubscribersResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `String` | The URL of the subscriber's avatar image. |
-| `channels` | `Array` | An array of channel settings associated with the subscriber. |
-| `createdAt` | `String` | The timestamp indicating when the subscriber was created, in ISO 8601 format. |
-| `data` | `Hash` | Additional custom data for the subscriber |
-| `deleted` | `Boolean` | Indicates whether the subscriber has been deleted. |
-| `email` | `String` | The email address of the subscriber. |
-| `environmentId` | `String` | The unique identifier of the environment associated with this subscriber. |
-| `firstName` | `String` | The first name of the subscriber. |
-| `id` | `String` | The internal ID generated by Novu for your subscriber. |
-| `isOnline` | `Boolean` | Indicates whether the subscriber is currently online. |
-| `lastName` | `String` | The last name of the subscriber. |
-| `lastOnlineAt` | `String` | The timestamp indicating when the subscriber was last online, in ISO 8601 format. |
-| `locale` | `String` | The locale setting of the subscriber, indicating their preferred language or region. |
-| `organizationId` | `String` | The unique identifier of the organization to which the subscriber belongs. |
-| `phone` | `String` | The phone number of the subscriber. |
-| `subscriberId` | `String` | The identifier used to create this subscriber, which typically corresponds to the user ID in your system. |
-| `timezone` | `String` | Timezone of the subscriber |
-| `topics` | `Array` | An array of topics that the subscriber is subscribed to. |
-| `updatedAt` | `String` | The timestamp indicating when the subscriber was last updated, in ISO 8601 format. |
-| `v` | `Float` | The version of the subscriber document. |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListSubscribersResponseDto records (raises on error).
-list_subscribers_response_dtos = client.ListSubscribersResponseDto.list
-```
-
-
 ### ListTopicSubscriptionsResponseDto
 
 Create an instance: `list_topic_subscriptions_response_dto = client.ListTopicSubscriptionsResponseDto`
@@ -3027,35 +2753,6 @@ Create an instance: `list_topic_subscriptions_response_dto = client.ListTopicSub
 ```ruby
 # list returns an Array of ListTopicSubscriptionsResponseDto records (raises on error).
 list_topic_subscriptions_response_dtos = client.ListTopicSubscriptionsResponseDto.list
-```
-
-
-### ListTopicsResponseDto
-
-Create an instance: `list_topics_response_dto = client.ListTopicsResponseDto`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `createdAt` | `String` | The date the topic was created |
-| `data` | `Hash` | Additional custom data associated with the topic |
-| `id` | `String` | The identifier of the topic |
-| `key` | `String` | The unique key of the topic |
-| `name` | `String` | The name of the topic |
-| `updatedAt` | `String` | The date the topic was last updated |
-
-#### Example: List
-
-```ruby
-# list returns an Array of ListTopicsResponseDto records (raises on error).
-list_topics_response_dtos = client.ListTopicsResponseDto.list
 ```
 
 
@@ -3332,6 +3029,7 @@ Create an instance: `subscriber = client.Subscriber`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -3366,6 +3064,13 @@ Create an instance: `subscriber = client.Subscriber`
 ```ruby
 # load returns the ENTITY — call data_get for the Subscriber record (raises on error).
 subscriber = client.Subscriber.load({ "id" => "subscriber_id" })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of Subscriber records (raises on error).
+subscribers = client.Subscriber.list
 ```
 
 #### Example: Create
@@ -3534,6 +3239,7 @@ Create an instance: `topic = client.Topic`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -3542,10 +3248,12 @@ Create an instance: `topic = client.Topic`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `Hash` | Additional custom data associated with the topic. |
-| `id` | `String` |  |
-| `key` | `String` | The unique key identifier for the topic. |
-| `name` | `String` | The display name for the topic |
+| `createdAt` | `String` | The date the topic was created |
+| `data` | `Hash` | Additional custom data associated with the topic |
+| `id` | `String` | The identifier of the topic |
+| `key` | `String` | The unique key of the topic |
+| `name` | `String` | The name of the topic |
+| `updatedAt` | `String` | The date the topic was last updated |
 
 #### Example: Load
 
@@ -3554,10 +3262,18 @@ Create an instance: `topic = client.Topic`
 topic = client.Topic.load({ "id" => "topic_id" })
 ```
 
+#### Example: List
+
+```ruby
+# list returns an Array of Topic records (raises on error).
+topics = client.Topic.list
+```
+
 #### Example: Create
 
 ```ruby
 topic = client.Topic.create({
+  "id" => "example_id", # String
   "key" => "example_key", # String
 })
 ```
@@ -3620,10 +3336,12 @@ Create an instance: `translation = client.Translation`
 | Field | Type | Description |
 | --- | --- | --- |
 | `content` | `Hash` | Translation content as JSON object |
+| `createdAt` | `String` | Creation timestamp |
 | `id` | `String` |  |
-| `locale` | `String` | Locale code (e.g., en_US, es_ES) |
-| `resourceId` | `String` | The resource ID to associate translation with. |
-| `resourceType` | `String` | The resource type to associate translation with |
+| `locale` | `String` | Locale code |
+| `resourceId` | `String` | Resource identifier |
+| `resourceType` | `String` | Resource type |
+| `updatedAt` | `String` | Last update timestamp |
 
 #### Example: Load
 
@@ -3637,9 +3355,11 @@ translation = client.Translation.load({ "locale" => "locale", "resource_id" => "
 ```ruby
 translation = client.Translation.create({
   "content" => {}, # Hash
+  "createdAt" => "example_createdAt", # String
   "locale" => "example_locale", # String
   "resourceId" => "example_resourceId", # String
   "resourceType" => "example_resourceType", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -3672,41 +3392,6 @@ Create an instance: `translation_group_dto = client.TranslationGroupDto`
 ```ruby
 # load returns the ENTITY — call data_get for the TranslationGroupDto record (raises on error).
 translation_group_dto = client.TranslationGroupDto.load({ "resource_id" => "resource_id", "resource_type" => "resource_type" })
-```
-
-
-### Trigger
-
-Create an instance: `trigger = client.Trigger`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `actor` | `Object` | It is used to display the Avatar of the provided actor's subscriber id or actor object. |
-| `agentId` | `String` | Override the workflow-assigned agent for this trigger using the public agent identifier. |
-| `bridgeUrl` | `String` | Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. |
-| `context` | `Hash` |  |
-| `name` | `String` | The trigger identifier of the workflow you wish to send. |
-| `overrides` | `Object` | This could be used to override provider specific configurations |
-| `payload` | `Hash` | The payload object is used to pass additional custom information that could be used to render the workflow, or perform routing rules based on it. |
-| `tenant` | `Object` | It is used to specify a tenant context during trigger event. |
-| `to` | `Object` | The recipients list of people who will receive the notification. |
-| `transactionId` | `String` | A unique identifier for deduplication. |
-
-#### Example: Create
-
-```ruby
-trigger = client.Trigger.create({
-  "name" => "example_name", # String
-  "to" => "example_to", # Object
-})
 ```
 
 
@@ -4109,7 +3794,7 @@ activated earlier.
 
 ## Open types
 
-10 fields are carried as open values rather than typed structures.
+9 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -4120,13 +3805,12 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `channel_endpoint` | `endpoint` | 14 | 0 levels |
-| `list_channel_endpoints_response_dto` | `endpoint` | 14 | 0 levels |
 | `layout` | `controls` | 5 | 14 levels |
 | `step` | `controls` | 5 | 14 levels |
 | `workflow` | `steps` | 5 | 19 levels |
 | `workflow_response_dto` | `steps` | 5 | 19 levels |
+| `event` | `to` | 4 | 3 levels |
 | `message` | `template` | 4 | 10 levels |
-| `trigger` | `to` | 4 | 3 levels |
 | `trigger_event_response_dto` | `events` | 4 | 6 levels |
 | `create_subscriptions_response_dto` | `preferences` | 3 | 1 level |
 

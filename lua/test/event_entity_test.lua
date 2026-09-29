@@ -19,7 +19,7 @@ describe("EventEntity", function()
     local setup = event_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"create", "remove"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "event." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -34,13 +34,16 @@ describe("EventEntity", function()
     end
     local client = setup.client
 
-    -- Bootstrap entity data from existing test data.
-    local event_ref01_data_raw = vs.items(helpers.to_map(
-      vs.getpath(setup.data, "existing.event")))
-    local event_ref01_data = nil
-    if #event_ref01_data_raw > 0 then
-      event_ref01_data = helpers.to_map(event_ref01_data_raw[1][2])
-    end
+    -- CREATE
+    local event_ref01_ent = client:Event(nil)
+    local event_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.event"), "event_ref01"))
+
+    local event_ref01_data_result, err = event_ref01_ent:create(event_ref01_data, nil)
+    assert.is_nil(err)
+    event_ref01_data = helpers.to_map(type(event_ref01_data_result) == 'table' and event_ref01_data_result.data_get and event_ref01_data_result:data_get() or event_ref01_data_result)
+    assert.is_not_nil(event_ref01_data)
+
 
   end)
 end)
@@ -65,7 +68,7 @@ function event_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "event01", "event02", "event03", "trigger01", "trigger02", "trigger03" },
+    { "event01", "event02", "event03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

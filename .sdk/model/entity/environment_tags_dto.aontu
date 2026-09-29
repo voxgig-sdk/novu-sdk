@@ -34,7 +34,7 @@ main: kit: entity: environment_tags_dto: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -44,7 +44,7 @@ main: kit: entity: environment_tags_dto: {
                 ex: "6615943e7ace93b0540ae377"
                 k: "param"
                 n: "id"
-                or: "environment_id"
+                or: "environmentId"
                 r: true
                 t: "`$STRING`"
               }

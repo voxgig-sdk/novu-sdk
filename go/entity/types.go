@@ -48,6 +48,17 @@ type AgentLoadMatch struct {
 	Id string `json:"id"`
 }
 
+// AgentListMatch is the typed request payload for Agent.ListTyped.
+type AgentListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	Identifier *string `json:"identifier,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
+}
+
 // AgentCreateData is the typed request payload for Agent.CreateTyped.
 type AgentCreateData struct {
 	Active bool `json:"active"`
@@ -182,6 +193,22 @@ type ChannelConnectionLoadMatch struct {
 	Id string `json:"id"`
 }
 
+// ChannelConnectionListMatch is the typed request payload for ChannelConnection.ListTyped.
+type ChannelConnectionListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	Channel *string `json:"channel,omitempty"`
+	ConnectionMode *string `json:"connection_mode,omitempty"`
+	ContextKey *[]any `json:"context_key,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	IntegrationIdentifier *string `json:"integration_identifier,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
+	ProviderId *string `json:"provider_id,omitempty"`
+	SubscriberId *string `json:"subscriber_id,omitempty"`
+}
+
 // ChannelConnectionCreateData is the typed request payload for ChannelConnection.CreateTyped.
 type ChannelConnectionCreateData struct {
 	Auth map[string]any `json:"auth"`
@@ -228,6 +255,22 @@ type ChannelEndpoint struct {
 // ChannelEndpointLoadMatch is the typed request payload for ChannelEndpoint.LoadTyped.
 type ChannelEndpointLoadMatch struct {
 	Id string `json:"id"`
+}
+
+// ChannelEndpointListMatch is the typed request payload for ChannelEndpoint.ListTyped.
+type ChannelEndpointListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	Channel *string `json:"channel,omitempty"`
+	ConnectionIdentifier *string `json:"connection_identifier,omitempty"`
+	ContextKey *[]any `json:"context_key,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	IntegrationIdentifier *string `json:"integration_identifier,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
+	ProviderId *string `json:"provider_id,omitempty"`
+	SubscriberId *string `json:"subscriber_id,omitempty"`
 }
 
 // ChannelEndpointCreateData is the typed request payload for ChannelEndpoint.CreateTyped.
@@ -289,12 +332,26 @@ type ContextLoadMatch struct {
 	Type string `json:"type"`
 }
 
+// ContextListMatch is the typed request payload for Context.ListTyped.
+type ContextListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	Id *string `json:"id,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
+	Search *string `json:"search,omitempty"`
+}
+
 // ContextCreateData is the typed request payload for Context.CreateTyped.
 type ContextCreateData struct {
 	BridgeUrl *string `json:"bridgeUrl,omitempty"`
-	Data *map[string]any `json:"data,omitempty"`
+	CreatedAt string `json:"createdAt"`
+	Data map[string]any `json:"data"`
 	Id string `json:"id"`
 	Type string `json:"type"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 // ContextUpdateData is the typed request payload for Context.UpdateTyped.
@@ -302,7 +359,9 @@ type ContextUpdateData struct {
 	Id string `json:"id"`
 	Type string `json:"type"`
 	BridgeUrl *string `json:"bridgeUrl,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // ContextRemoveMatch is the typed request payload for Context.RemoveTyped.
@@ -345,6 +404,17 @@ type Domain struct {
 // DomainLoadMatch is the typed request payload for Domain.LoadTyped.
 type DomainLoadMatch struct {
 	Id string `json:"id"`
+}
+
+// DomainListMatch is the typed request payload for Domain.ListTyped.
+type DomainListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	Name *string `json:"name,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
 }
 
 // DomainCreateData is the typed request payload for Domain.CreateTyped.
@@ -434,9 +504,15 @@ type DomainRouteResponseDtoLoadMatch struct {
 // DomainRouteResponseDtoCreateData is the typed request payload for DomainRouteResponseDto.CreateTyped.
 type DomainRouteResponseDtoCreateData struct {
 	Id string `json:"id"`
+	Address string `json:"address"`
 	AgentId *string `json:"agentId,omitempty"`
+	CreatedAt string `json:"createdAt"`
 	Data *map[string]any `json:"data,omitempty"`
-	Type *string `json:"type,omitempty"`
+	DomainId string `json:"domainId"`
+	EnvironmentId string `json:"environmentId"`
+	OrganizationId string `json:"organizationId"`
+	Type string `json:"type"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 // DomainRouteResponseDtoUpdateData is the typed request payload for DomainRouteResponseDto.UpdateTyped.
@@ -444,9 +520,14 @@ type DomainRouteResponseDtoUpdateData struct {
 	Address string `json:"address"`
 	DomainId string `json:"domain_id"`
 	AgentId *string `json:"agentId,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
+	DomainId2 *string `json:"domainId,omitempty"`
+	EnvironmentId *string `json:"environmentId,omitempty"`
 	Id *string `json:"id,omitempty"`
+	OrganizationId *string `json:"organizationId,omitempty"`
 	Type *string `json:"type,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // Environment is the typed data model for the environment entity.
@@ -566,6 +647,20 @@ type EnvironmentVariableWorkflowInfoDtoListMatch struct {
 
 // Event is the typed data model for the event entity.
 type Event struct {
+}
+
+// EventCreateData is the typed request payload for Event.CreateTyped.
+type EventCreateData struct {
+	Actor *any `json:"actor,omitempty"`
+	AgentId *string `json:"agentId,omitempty"`
+	BridgeUrl *string `json:"bridgeUrl,omitempty"`
+	Context *map[string]any `json:"context,omitempty"`
+	Name string `json:"name"`
+	Overrides *any `json:"overrides,omitempty"`
+	Payload *map[string]any `json:"payload,omitempty"`
+	Tenant *any `json:"tenant,omitempty"`
+	To any `json:"to"`
+	TransactionId *string `json:"transactionId,omitempty"`
 }
 
 // EventRemoveMatch is the typed request payload for Event.RemoveTyped.
@@ -873,77 +968,6 @@ type ListAgentIntegrationsResponseDtoListMatch struct {
 	OrderDirection *string `json:"order_direction,omitempty"`
 }
 
-// ListAgentsResponseDto is the typed data model for the list_agents_response_dto entity.
-type ListAgentsResponseDto struct {
-}
-
-// ListAgentsResponseDtoListMatch is the typed request payload for ListAgentsResponseDto.ListTyped.
-type ListAgentsResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	Identifier *string `json:"identifier,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-}
-
-// ListChannelConnectionsResponseDto is the typed data model for the list_channel_connections_response_dto entity.
-type ListChannelConnectionsResponseDto struct {
-}
-
-// ListChannelConnectionsResponseDtoListMatch is the typed request payload for ListChannelConnectionsResponseDto.ListTyped.
-type ListChannelConnectionsResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	Channel *string `json:"channel,omitempty"`
-	ConnectionMode *string `json:"connection_mode,omitempty"`
-	ContextKey *[]any `json:"context_key,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	IntegrationIdentifier *string `json:"integration_identifier,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-	ProviderId *string `json:"provider_id,omitempty"`
-	SubscriberId *string `json:"subscriber_id,omitempty"`
-}
-
-// ListChannelEndpointsResponseDto is the typed data model for the list_channel_endpoints_response_dto entity.
-type ListChannelEndpointsResponseDto struct {
-}
-
-// ListChannelEndpointsResponseDtoListMatch is the typed request payload for ListChannelEndpointsResponseDto.ListTyped.
-type ListChannelEndpointsResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	Channel *string `json:"channel,omitempty"`
-	ConnectionIdentifier *string `json:"connection_identifier,omitempty"`
-	ContextKey *[]any `json:"context_key,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	IntegrationIdentifier *string `json:"integration_identifier,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-	ProviderId *string `json:"provider_id,omitempty"`
-	SubscriberId *string `json:"subscriber_id,omitempty"`
-}
-
-// ListContextsResponseDto is the typed data model for the list_contexts_response_dto entity.
-type ListContextsResponseDto struct {
-}
-
-// ListContextsResponseDtoListMatch is the typed request payload for ListContextsResponseDto.ListTyped.
-type ListContextsResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-	Search *string `json:"search,omitempty"`
-}
-
 // ListDomainRoutesResponseDto is the typed data model for the list_domain_routes_response_dto entity.
 type ListDomainRoutesResponseDto struct {
 }
@@ -960,39 +984,6 @@ type ListDomainRoutesResponseDtoListMatch struct {
 	OrderDirection *string `json:"order_direction,omitempty"`
 }
 
-// ListDomainsResponseDto is the typed data model for the list_domains_response_dto entity.
-type ListDomainsResponseDto struct {
-}
-
-// ListDomainsResponseDtoListMatch is the typed request payload for ListDomainsResponseDto.ListTyped.
-type ListDomainsResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	Name *string `json:"name,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-}
-
-// ListSubscribersResponseDto is the typed data model for the list_subscribers_response_dto entity.
-type ListSubscribersResponseDto struct {
-}
-
-// ListSubscribersResponseDtoListMatch is the typed request payload for ListSubscribersResponseDto.ListTyped.
-type ListSubscribersResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	Email *string `json:"email,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	Name *string `json:"name,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-	Phone *string `json:"phone,omitempty"`
-	SubscriberId *string `json:"subscriber_id,omitempty"`
-}
-
 // ListTopicSubscriptionsResponseDto is the typed data model for the list_topic_subscriptions_response_dto entity.
 type ListTopicSubscriptionsResponseDto struct {
 }
@@ -1006,22 +997,6 @@ type ListTopicSubscriptionsResponseDtoListMatch struct {
 	IncludeCursor *bool `json:"include_cursor,omitempty"`
 	Key *string `json:"key,omitempty"`
 	Limit *float64 `json:"limit,omitempty"`
-	OrderBy *string `json:"order_by,omitempty"`
-	OrderDirection *string `json:"order_direction,omitempty"`
-}
-
-// ListTopicsResponseDto is the typed data model for the list_topics_response_dto entity.
-type ListTopicsResponseDto struct {
-}
-
-// ListTopicsResponseDtoListMatch is the typed request payload for ListTopicsResponseDto.ListTyped.
-type ListTopicsResponseDtoListMatch struct {
-	After *string `json:"after,omitempty"`
-	Before *string `json:"before,omitempty"`
-	IncludeCursor *bool `json:"include_cursor,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Limit *float64 `json:"limit,omitempty"`
-	Name *string `json:"name,omitempty"`
 	OrderBy *string `json:"order_by,omitempty"`
 	OrderDirection *string `json:"order_direction,omitempty"`
 }
@@ -1134,6 +1109,20 @@ type Subscriber struct {
 // SubscriberLoadMatch is the typed request payload for Subscriber.LoadTyped.
 type SubscriberLoadMatch struct {
 	Id string `json:"id"`
+}
+
+// SubscriberListMatch is the typed request payload for Subscriber.ListTyped.
+type SubscriberListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	Email *string `json:"email,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	Name *string `json:"name,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
+	Phone *string `json:"phone,omitempty"`
+	SubscriberId *string `json:"subscriber_id,omitempty"`
 }
 
 // SubscriberCreateData is the typed request payload for Subscriber.CreateTyped.
@@ -1301,21 +1290,37 @@ type TopicLoadMatch struct {
 	Id string `json:"id"`
 }
 
+// TopicListMatch is the typed request payload for Topic.ListTyped.
+type TopicListMatch struct {
+	After *string `json:"after,omitempty"`
+	Before *string `json:"before,omitempty"`
+	IncludeCursor *bool `json:"include_cursor,omitempty"`
+	Key *string `json:"key,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	Name *string `json:"name,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	OrderDirection *string `json:"order_direction,omitempty"`
+}
+
 // TopicCreateData is the typed request payload for Topic.CreateTyped.
 type TopicCreateData struct {
 	FailIfExist *bool `json:"fail_if_exist,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	Key string `json:"key"`
 	Name *string `json:"name,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // TopicUpdateData is the typed request payload for Topic.UpdateTyped.
 type TopicUpdateData struct {
 	Id string `json:"id"`
+	CreatedAt *string `json:"createdAt,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
 	Key *string `json:"key,omitempty"`
 	Name *string `json:"name,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // TopicRemoveMatch is the typed request payload for Topic.RemoveTyped.
@@ -1356,10 +1361,12 @@ type TranslationLoadMatch struct {
 // TranslationCreateData is the typed request payload for Translation.CreateTyped.
 type TranslationCreateData struct {
 	Content map[string]any `json:"content"`
+	CreatedAt string `json:"createdAt"`
 	Id *string `json:"id,omitempty"`
 	Locale string `json:"locale"`
 	ResourceId string `json:"resourceId"`
 	ResourceType string `json:"resourceType"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 // TranslationRemoveMatch is the typed request payload for Translation.RemoveTyped.
@@ -1377,24 +1384,6 @@ type TranslationGroupDto struct {
 type TranslationGroupDtoLoadMatch struct {
 	ResourceId string `json:"resource_id"`
 	ResourceType string `json:"resource_type"`
-}
-
-// Trigger is the typed data model for the trigger entity.
-type Trigger struct {
-}
-
-// TriggerCreateData is the typed request payload for Trigger.CreateTyped.
-type TriggerCreateData struct {
-	Actor *any `json:"actor,omitempty"`
-	AgentId *string `json:"agentId,omitempty"`
-	BridgeUrl *string `json:"bridgeUrl,omitempty"`
-	Context *map[string]any `json:"context,omitempty"`
-	Name string `json:"name"`
-	Overrides *any `json:"overrides,omitempty"`
-	Payload *map[string]any `json:"payload,omitempty"`
-	Tenant *any `json:"tenant,omitempty"`
-	To any `json:"to"`
-	TransactionId *string `json:"transactionId,omitempty"`
 }
 
 // TriggerEventResponseDto is the typed data model for the trigger_event_response_dto entity.

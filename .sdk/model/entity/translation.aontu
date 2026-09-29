@@ -12,6 +12,13 @@ main: kit: entity: translation: {
       sh: "Translation content as JSON object"
       t: "`$OBJECT`"
     }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      sh: "Creation timestamp"
+      t: "`$STRING`"
+    }
     id: {
       h: "Id"
       n: "id"
@@ -22,21 +29,28 @@ main: kit: entity: translation: {
       h: "Locale"
       n: "locale"
       r: true
-      sh: "Locale code (e.g., en_US, es_ES)"
+      sh: "Locale code"
       t: "`$STRING`"
     }
     resourceId: {
       h: "Resource Id"
       n: "resourceId"
       r: true
-      sh: "The resource ID to associate translation with."
+      sh: "Resource identifier"
       t: "`$STRING`"
     }
     resourceType: {
       h: "Resource Type"
       n: "resourceType"
       r: true
-      sh: "The resource type to associate translation with"
+      sh: "Resource type"
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      sh: "Last update timestamp"
       t: "`$STRING`"
     }
   }
@@ -73,7 +87,7 @@ main: kit: entity: translation: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -96,7 +110,7 @@ main: kit: entity: translation: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.content`"
+            res: "`body`"
           }
         }
       ]
@@ -115,7 +129,7 @@ main: kit: entity: translation: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -133,14 +147,14 @@ main: kit: entity: translation: {
                 ex: "welcome-email"
                 k: "param"
                 n: "resource_id"
-                or: "resource_id"
+                or: "resourceId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "resource_type"
-                or: "resource_type"
+                or: "resourceType"
                 r: true
                 t: "`$STRING`"
               }
@@ -181,7 +195,7 @@ main: kit: entity: translation: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.content`"
+            res: "`body`"
           }
         }
       ]
@@ -200,7 +214,7 @@ main: kit: entity: translation: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -216,14 +230,14 @@ main: kit: entity: translation: {
               {
                 k: "param"
                 n: "resource_id"
-                or: "resource_id"
+                or: "resourceId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "resource_type"
-                or: "resource_type"
+                or: "resourceType"
                 r: true
                 t: "`$STRING`"
               }
@@ -278,7 +292,7 @@ main: kit: entity: translation: {
               {
                 k: "header"
                 n: "idempotency_key"
-                or: "idempotency_key"
+                or: "idempotency-key"
                 r: false
                 t: "`$STRING`"
               }
@@ -288,7 +302,7 @@ main: kit: entity: translation: {
                 ex: "welcome-email"
                 k: "param"
                 n: "resource_id"
-                or: "resource_id"
+                or: "resourceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -296,7 +310,7 @@ main: kit: entity: translation: {
                 ex: "workflow"
                 k: "param"
                 n: "resource_type"
-                or: "resource_type"
+                or: "resourceType"
                 r: true
                 t: "`$STRING`"
               }

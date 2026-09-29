@@ -493,58 +493,16 @@ class NovuSDK:
         return ListAgentIntegrationsResponseDtoEntity(self, data)
 
 
-    def ListAgentsResponseDto(self, data=None) -> "ListAgentsResponseDtoEntity":
-        """Entity factory: client.ListAgentsResponseDto().list() / client.ListAgentsResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_agents_response_dto_entity import ListAgentsResponseDtoEntity
-        return ListAgentsResponseDtoEntity(self, data)
-
-
-    def ListChannelConnectionsResponseDto(self, data=None) -> "ListChannelConnectionsResponseDtoEntity":
-        """Entity factory: client.ListChannelConnectionsResponseDto().list() / client.ListChannelConnectionsResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_channel_connections_response_dto_entity import ListChannelConnectionsResponseDtoEntity
-        return ListChannelConnectionsResponseDtoEntity(self, data)
-
-
-    def ListChannelEndpointsResponseDto(self, data=None) -> "ListChannelEndpointsResponseDtoEntity":
-        """Entity factory: client.ListChannelEndpointsResponseDto().list() / client.ListChannelEndpointsResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_channel_endpoints_response_dto_entity import ListChannelEndpointsResponseDtoEntity
-        return ListChannelEndpointsResponseDtoEntity(self, data)
-
-
-    def ListContextsResponseDto(self, data=None) -> "ListContextsResponseDtoEntity":
-        """Entity factory: client.ListContextsResponseDto().list() / client.ListContextsResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_contexts_response_dto_entity import ListContextsResponseDtoEntity
-        return ListContextsResponseDtoEntity(self, data)
-
-
     def ListDomainRoutesResponseDto(self, data=None) -> "ListDomainRoutesResponseDtoEntity":
         """Entity factory: client.ListDomainRoutesResponseDto().list() / client.ListDomainRoutesResponseDto().load({"id": ...})."""
         from novu_sdk.entity.list_domain_routes_response_dto_entity import ListDomainRoutesResponseDtoEntity
         return ListDomainRoutesResponseDtoEntity(self, data)
 
 
-    def ListDomainsResponseDto(self, data=None) -> "ListDomainsResponseDtoEntity":
-        """Entity factory: client.ListDomainsResponseDto().list() / client.ListDomainsResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_domains_response_dto_entity import ListDomainsResponseDtoEntity
-        return ListDomainsResponseDtoEntity(self, data)
-
-
-    def ListSubscribersResponseDto(self, data=None) -> "ListSubscribersResponseDtoEntity":
-        """Entity factory: client.ListSubscribersResponseDto().list() / client.ListSubscribersResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_subscribers_response_dto_entity import ListSubscribersResponseDtoEntity
-        return ListSubscribersResponseDtoEntity(self, data)
-
-
     def ListTopicSubscriptionsResponseDto(self, data=None) -> "ListTopicSubscriptionsResponseDtoEntity":
         """Entity factory: client.ListTopicSubscriptionsResponseDto().list() / client.ListTopicSubscriptionsResponseDto().load({"id": ...})."""
         from novu_sdk.entity.list_topic_subscriptions_response_dto_entity import ListTopicSubscriptionsResponseDtoEntity
         return ListTopicSubscriptionsResponseDtoEntity(self, data)
-
-
-    def ListTopicsResponseDto(self, data=None) -> "ListTopicsResponseDtoEntity":
-        """Entity factory: client.ListTopicsResponseDto().list() / client.ListTopicsResponseDto().load({"id": ...})."""
-        from novu_sdk.entity.list_topics_response_dto_entity import ListTopicsResponseDtoEntity
-        return ListTopicsResponseDtoEntity(self, data)
 
 
     def MasterJson(self, data=None) -> "MasterJsonEntity":
@@ -661,12 +619,6 @@ class NovuSDK:
         return TranslationGroupDtoEntity(self, data)
 
 
-    def Trigger(self, data=None) -> "TriggerEntity":
-        """Entity factory: client.Trigger().list() / client.Trigger().load({"id": ...})."""
-        from novu_sdk.entity.trigger_entity import TriggerEntity
-        return TriggerEntity(self, data)
-
-
     def TriggerEventResponseDto(self, data=None) -> "TriggerEventResponseDtoEntity":
         """Entity factory: client.TriggerEventResponseDto().list() / client.TriggerEventResponseDto().load({"id": ...})."""
         from novu_sdk.entity.trigger_event_response_dto_entity import TriggerEventResponseDtoEntity
@@ -767,15 +719,8 @@ if TYPE_CHECKING:
     from novu_sdk.entity.layout_response_dto_entity import LayoutResponseDtoEntity
     from novu_sdk.entity.link_entity import LinkEntity
     from novu_sdk.entity.list_agent_integrations_response_dto_entity import ListAgentIntegrationsResponseDtoEntity
-    from novu_sdk.entity.list_agents_response_dto_entity import ListAgentsResponseDtoEntity
-    from novu_sdk.entity.list_channel_connections_response_dto_entity import ListChannelConnectionsResponseDtoEntity
-    from novu_sdk.entity.list_channel_endpoints_response_dto_entity import ListChannelEndpointsResponseDtoEntity
-    from novu_sdk.entity.list_contexts_response_dto_entity import ListContextsResponseDtoEntity
     from novu_sdk.entity.list_domain_routes_response_dto_entity import ListDomainRoutesResponseDtoEntity
-    from novu_sdk.entity.list_domains_response_dto_entity import ListDomainsResponseDtoEntity
-    from novu_sdk.entity.list_subscribers_response_dto_entity import ListSubscribersResponseDtoEntity
     from novu_sdk.entity.list_topic_subscriptions_response_dto_entity import ListTopicSubscriptionsResponseDtoEntity
-    from novu_sdk.entity.list_topics_response_dto_entity import ListTopicsResponseDtoEntity
     from novu_sdk.entity.master_json_entity import MasterJsonEntity
     from novu_sdk.entity.message_entity import MessageEntity
     from novu_sdk.entity.message_response_dto_entity import MessageResponseDtoEntity
@@ -795,7 +740,6 @@ if TYPE_CHECKING:
     from novu_sdk.entity.topic_subscriptions_response_dto_entity import TopicSubscriptionsResponseDtoEntity
     from novu_sdk.entity.translation_entity import TranslationEntity
     from novu_sdk.entity.translation_group_dto_entity import TranslationGroupDtoEntity
-    from novu_sdk.entity.trigger_entity import TriggerEntity
     from novu_sdk.entity.trigger_event_response_dto_entity import TriggerEventResponseDtoEntity
     from novu_sdk.entity.unseen_entity import UnseenEntity
     from novu_sdk.entity.upload_entity import UploadEntity
