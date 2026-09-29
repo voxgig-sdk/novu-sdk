@@ -1,6 +1,6 @@
 # Novu: the Voxgig SDK and the Speakeasy SDK compared
 
-Vergleich: Speakeasy. Compared with novuhq/novu-ts (@novu/api 3.19.1, generated from spec 3.19.0). Spec: api.novu.co/openapi.sdk.yaml, 3.19.2 as fetched, OAS 3.0.0, 102 paths / 149 ops, MIT. Added 2026-09-28.
+Vergleich: Speakeasy. Compared with novuhq/novu-ts (@novu/api 3.19.1, generated from spec 3.19.0). Spec: api.novu.co/openapi.sdk.yaml, 3.19.2 as fetched, OAS 3.0.0, 102 paths / 149 ops, MIT. Added 2026-09-28. Rebuilt 2026-09-29 on sdkgen 4.32.1 and apidef 8.22.0.
 
 This repository is on the admin **vergleich** list. It is built only to be compared, and it is not published.
 
@@ -8,15 +8,15 @@ This repository is on the admin **vergleich** list. It is built only to be compa
 
 | | Voxgig | Speakeasy |
 |---|---|---|
-| SDK | this repository, commit `e70cfdf`: eight targets (go, go-cli, go-mcp, ts, py, rb, lua, php) | `@novu/api@3.19.1` (TypeScript) |
+| SDK | this repository, commit `2da1c53`: eight targets (go, go-cli, go-mcp, ts, py, rb, lua, php) | `@novu/api@3.19.1` (TypeScript) |
 | Input | `novu-openapi.yaml`: OAS 3.0.0, `info.version` 3.19.2, 102 paths, 149 operations | the vendor's own generation; the note above names the definition version it came from |
 | Operations callable | 148 of 149 (1 modelled as `patch` but not generated) | 149 operation methods |
-| Entities | 67 | not applicable |
-| ts package | 3.72 MB, 512 files | 9.26 MB, 3908 files |
+| Entities | 59 | not applicable |
+| ts package | 3.63 MB, 480 files | 9.26 MB, 3908 files |
 | Runtime dependencies | 0 | 1 |
-| Generated tests | ts 435 pass / 0 fail; py 424 pass; rb 448 runs / 0 fail; lua 422 pass / 0 fail; php 448 tests, 0 fail; go, go-cli, go-mcp build, vet and test | not run: a published package |
+| Generated tests | ts 548 pass / 0 fail / 8 skipped; py 408 pass / 57 skipped; rb 432 runs / 0 fail; lua 406 pass / 0 fail; php 432 tests / 0 fail; go, go-cli, go-mcp build, vet and test | not run: a published package |
 | Determinism | a second generation on the same toolchain is byte-identical | not measured |
-| Scenario against a mock | 4 of 4 steps right, 0 request violations (static) | 2 of 4 steps right, 0 request violations (static) |
+| Scenario against a mock | 4 of 4 steps right, 0 returned wrong data, 0 request violations (static) | 2 of 4 steps right, 0 request violations (static) |
 
 ## Features
 
@@ -92,10 +92,12 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 
 ## Voxgig toolchain findings
 
-- **Y1-Y3** (@tabnas/yaml 0.5.11 (used by apidef)). Three YAML parser defects. A quote inside a block scalar, comment or plain scalar inverts the flow scanner's quote parity (Lob fails at line 14557). A digit-first plain scalar is cut at its first colon (Novu's `09:00 AM`). Scalars resolve by YAML 1.1 rules, so SaladCloud's country code NO becomes false. Patch written and verified: all eight specs parse identically to js-yaml, 0 regressions over 259 local YAML files. Not applied: attaching tabnas/yaml with push access was refused. The three SDKs were built on the patched parser.
-- **TS-NAMES** (@voxgig/sdkgen 4.30.2). An entity named operation, context or control collided with the SDK types the ts entity file imports (TS2300: Neon, Novu). An entity named eval produced `const eval` in the README examples (TS1215: Vapi). Fixed in voxgig/sdkgen#210, released in 4.30.3. All eight SDKs are built on 4.30.3.
-- **PATCH-OP** (@voxgig/apidef 8.17.2 + @voxgig/sdkgen 4.30.3). apidef resolves a PATCH beside a PUT on the same entity as a sixth op, `patch`. sdkgen generates only load, list, create, update and remove, so those operations are modelled but have no method. The coverage gate counts entities, so it passes anyway. Here: novu: PATCH /v2/workflows/{workflowId}. Reported, not changed: a design decision across both tools.
-- **QUERY-ECHO** (@voxgig/sdkgen 4.30.3 (PrepareQuery: ts, js and rb read the field; other targets not checked)). Every match field, path parameters included, is also sent as a query parameter: GET /video/v1/assets/a1?id=a1 (Mux), GET /assistant/asst_1?id=asst_1 (Vapi), DELETE .../containers/web?id=web&organization_name=acme&project_id=demo (SaladCloud). prepareQuery excludes names in point.params, but the generated config carries path parameters in point.args.params (which prepareParams reads), so nothing is excluded. Harmless to a lenient server, rejected by a strict one. Prism logs paths without query strings, so its runs did not show it. Reported, not changed: the same exclusion exists per target.
+- **Y1-Y4** (@tabnas/yaml, used by apidef). Four YAML parser defects: a quote inside a block scalar, comment or plain scalar inverted the flow scanner's quote parity (Lob failed at line 14557); a digit-first plain scalar was cut at its first colon (Novu's `09:00 AM`); scalars resolve by YAML 1.1 rules, so SaladCloud's country code `no` becomes `false`; and a `#` straight after a leading number ended the scalar, so Lob's buckslip weight `80#` read as the number 80 and was typed as an integer. Y1 and Y2 are fixed in the published parser (apidef 8.18.0 requires @tabnas/yaml 0.5.12, and 0.5.13 parses Lob and Novu), and Y4 in 0.5.14 (tabnas/yaml#95), so this rebuild uses no overlay. Y3 is the parser's documented YAML 1.1 leniency, and SaladCloud's SDK comes out the same with and without a patched parser.
+- **TS-NAMES** (@voxgig/sdkgen). An entity named operation, context or control collided with the SDK types the ts entity file imports (TS2300: Neon, Novu), and an entity named eval produced `const eval` in the README examples (TS1215: Vapi). Fixed in voxgig/sdkgen#210, released in 4.30.3; this SDK is built on 4.32.1.
+- **PATCH-OP** (@voxgig/apidef + @voxgig/sdkgen). apidef resolves a PATCH beside a PUT on the same entity as a sixth op, `patch`, and sdkgen generates only load, list, create, update and remove, so those operations are modelled but have no method. Here: PATCH /v2/workflows/{workflowId}. Open: voxgig/sdkgen#211.
+- **QUERY-ECHO** (@voxgig/sdkgen, PrepareQuery). Every match field, path parameters included, was also sent as a query parameter, such as `?id=` on a load. Fixed in voxgig/sdkgen#222, released in 4.31.0: query parameters go out under the definition's names, and the rebuild's scenario requests carry no echoed parameter.
+- **HEADERS** (@voxgig/sdkgen, PrepareHeaders, 20 targets). A parameter the definition declares `in: header` was sent in the query or the body, never as a header. Here: Novu's `idempotency-key` went out as `?idempotency_key=`. Fixed in voxgig/sdkgen#223, released in 4.32.0, with a definition-suite check that each one arrives as a header. Cookie parameters have the same gap and stay open in voxgig/sdkgen#221.
+- **ERGONOMICS** (@voxgig/apidef). Subscribers were listed through an entity named after the list response. Subscriber carries all five operations in the rebuild. Other entities are still named after response wrappers, such as ListTopicSubscriptionsResponseDto. Open: voxgig/apidef#97.
 
 ## Speakeasy SDK notes
 
@@ -107,4 +109,6 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 - Package size and file count: `npm pack --dry-run` for the Voxgig ts target, and the registry's `dist.unpackedSize` and `dist.fileCount` for the compared package.
 - Tests: `admin/scripts/cedar-test-all.sh` runs each target's generated suite.
 - Features: read from the code of the published package, crediting a feature only for a mechanism, not a word in the API's own models.
-
+- Rebuild: 2026-09-29, on create-sdkgen 0.30.4, sdkgen 4.32.1, apidef 8.22.0, model 12.0.0 and @tabnas/yaml 0.5.14, all as published, with no overlay.
+- Tests on the rebuild: all eight targets, the lua suite under Lua 5.4 with busted 2.2.0.
+- Scenario on the rebuild: the Voxgig side was re-run on 2026-09-29; the compared SDK's run is from 2026-09-28, and its package is unchanged. The generated create input honours the definition's minimums, which the first run did not.
